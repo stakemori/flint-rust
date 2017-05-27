@@ -2,7 +2,7 @@ use bindings::*;
 use std;
 use libc::c_int;
 use std::ffi::CString;
-use std::{fmt};
+use std::fmt;
 
 #[derive(Debug)]
 pub struct Fmpz {
@@ -108,7 +108,8 @@ impl Fmpz {
 
     pub fn from_str(s: &str, base: usize) -> Result<Fmpz, ParseFmpzError> {
         // taken from rust-gmp (cf. https://crates.io/crates/rust-gmp)
-        let s = CString::new(s.to_string()).map_err(|_| ParseFmpzError { _priv: () })?;
+        let s = CString::new(s.to_string())
+            .map_err(|_| ParseFmpzError { _priv: () })?;
         unsafe {
             assert!(base == 0 || (base >= 2 && base <= 62));
             let mut n = Fmpz::new();
@@ -131,7 +132,7 @@ impl Fmpz {
 
 #[derive(Debug)]
 pub struct ParseFmpzError {
-    _priv: ()
+    _priv: (),
 }
 
 
@@ -141,7 +142,7 @@ pub struct FmpzFactor {
 
 impl Drop for FmpzFactor {
     fn drop(&mut self) {
-        unsafe{
+        unsafe {
             fmpz_factor_clear(&mut self.factor_struct);
         }
     }
@@ -149,31 +150,25 @@ impl Drop for FmpzFactor {
 
 impl FmpzFactor {
     pub fn new() -> FmpzFactor {
-        unsafe{
+        unsafe {
             let mut a = std::mem::uninitialized();
             fmpz_factor_init(&mut a);
-            FmpzFactor{factor_struct: a}
+            FmpzFactor { factor_struct: a }
         }
     }
 
     pub fn factor(&mut self, n: &Fmpz) {
-        unsafe{
-            fmpz_factor(&mut self.factor_struct, n.as_ptr())
-        };
+        unsafe { fmpz_factor(&mut self.factor_struct, n.as_ptr()) };
     }
 
-    pub fn to_vec(&self) ->  Vec<(Fmpz, mp_limb_signed_t)> {
+    pub fn to_vec(&self) -> Vec<(Fmpz, mp_limb_signed_t)> {
         let mut v: Vec<(Fmpz, mp_limb_signed_t)> = Vec::new();
         let n_p = self.factor_struct.p;
         let exp_p = self.factor_struct.exp;
         for i in 0..self.factor_struct.num {
             let j = i as isize;
-            let n = unsafe{
-                Fmpz{fmpz: [*n_p.offset(j)]}
-            };
-            let exp = unsafe{
-                *exp_p.offset(j) as mp_limb_signed_t
-            };
+            let n = unsafe { Fmpz { fmpz: [*n_p.offset(j)] } };
+            let exp = unsafe { *exp_p.offset(j) as mp_limb_signed_t };
             v.push((n, exp))
         }
         v
