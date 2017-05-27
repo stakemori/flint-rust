@@ -2,6 +2,7 @@ use bindings::*;
 use std;
 use libc::c_int;
 
+#[derive(Debug)]
 pub struct Fmpz {
     fmpz: fmpz_t,
 }
@@ -104,6 +105,51 @@ impl Fmpz {
     }
 }
 
+pub struct FmpzFactor {
+    factor_struct: fmpz_factor_struct,
+}
+
+impl Drop for FmpzFactor {
+    fn drop(&mut self) {
+        unsafe{
+            fmpz_factor_clear(&mut self.factor_struct);
+        }
+    }
+}
+
+impl FmpzFactor {
+    pub fn new() -> FmpzFactor {
+        unsafe{
+            let mut a = std::mem::uninitialized();
+            fmpz_factor_init(&mut a);
+            FmpzFactor{factor_struct: a}
+        }
+    }
+
+    pub fn factor(&mut self, n: &Fmpz) {
+        unsafe{
+            fmpz_factor(&mut self.factor_struct, n.as_ptr())
+        };
+    }
+
+    pub fn to_vec(&self) ->  Vec<(Fmpz, mp_limb_signed_t)> {
+        let mut v: Vec<(Fmpz, mp_limb_signed_t)> = Vec::new();
+        let n_p = self.factor_struct.p;
+        let exp_p = self.factor_struct.exp;
+        for i in 0..self.factor_struct.num {
+            let j = i as isize;
+            let n = unsafe{
+                Fmpz{fmpz: [*n_p.offset(j)]}
+            };
+            let exp = unsafe{
+                *exp_p.offset(j) as mp_limb_signed_t
+            };
+            v.push((n, exp))
+        }
+        v
+    }
+}
+
 
 #[cfg(test)]
 mod tests {
@@ -113,9 +159,12 @@ mod tests {
     fn it_works() {
         let mut res = Fmpz::new();
         let a = Fmpz::from_si(12);
-        let b = Fmpz::from_si(20);
+        let b = Fmpz::from_si(344349839938948);
         res.mul(&a, &b);
         println!("{}", res.get_str(10));
         res.pow_ui(&a, 120);
+        let mut fac = FmpzFactor::new();
+        fac.factor(&b);
+        println!("{:?}", fac.to_vec());
     }
 }
