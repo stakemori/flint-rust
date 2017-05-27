@@ -37,5 +37,6 @@ extern "C" {
     pub fn fmpz_factor(factor: *mut fmpz_factor_struct, n: fmpzptr);
     pub fn fmpz_factor_si(factor: *mut fmpz_factor_struct, n: mp_limb_signed_t);
     pub fn fmpz_set_str(f: fmpzmutptr, str: *const c_char, b: c_int) -> c_int;
-
+    pub fn fmpz_mul_si(f: fmpzmutptr, g: fmpzptr, x: mp_limb_signed_t);
+    pub fn fmpz_mul_ui(f: fmpzmutptr, g: fmpzptr, x: mp_limb_t);
 }

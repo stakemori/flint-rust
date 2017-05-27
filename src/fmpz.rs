@@ -17,6 +17,36 @@ impl Drop for Fmpz {
     }
 }
 
+
+trait Mult<T> {
+    fn mul_mut(&mut self, a: &Self, b: T);
+}
+
+
+impl<'a> Mult<&'a Fmpz> for Fmpz {
+    fn mul_mut(&mut self, a: &Fmpz, b: &Fmpz) {
+        unsafe {
+            fmpz_mul(self.as_mut_ptr(), a.as_ptr(), b.as_ptr());
+        }
+    }
+}
+
+impl Mult<mp_limb_signed_t> for Fmpz {
+    fn mul_mut(&mut self, a: &Fmpz, b: mp_limb_signed_t) {
+        unsafe {
+            fmpz_mul_si(self.as_mut_ptr(), a.as_ptr(), b);
+        }
+    }
+}
+
+impl Mult<mp_limb_t> for Fmpz {
+    fn mul_mut(&mut self, a: &Self, b: mp_limb_t) {
+        unsafe {
+            fmpz_mul_ui(self.as_mut_ptr(), a.as_ptr(), b);
+        }
+    }
+}
+
 impl Fmpz {
     fn as_mut_ptr(&mut self) -> fmpzmutptr {
         self.fmpz.as_mut_ptr()
@@ -190,10 +220,12 @@ mod tests {
         let mut res = Fmpz::new();
         let a = Fmpz::from_str("239023902390239032920930920", 10).unwrap();
         let b = Fmpz::from_si(344349839938948);
-        res.mul(&a, &b);
-        println!("{}", res);
+        res.mul_mut(&a, &b);
+        println!("res1={}", res);
+        res.mul_mut(&a, 10 as mp_limb_t);
+        println!("res2={}", res);
         res.pow_ui(&a, 12);
         println!("{}", res);
-        println!("{:?}", a.factor());
+        println!("{:?}", res.factor());
     }
 }
