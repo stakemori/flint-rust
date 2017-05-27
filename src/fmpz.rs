@@ -119,6 +119,13 @@ impl Fmpz {
             }
         }
     }
+
+    /// Prime factoriazation of self.
+    pub fn factor(&self) -> Vec<(Fmpz, mp_limb_signed_t)> {
+        let mut fac = FmpzFactor::new();
+        fac.factor(&self);
+        fac.to_vec()
+    }
 }
 
 #[derive(Debug)]
@@ -185,9 +192,7 @@ mod tests {
         res.mul(&a, &b);
         println!("{}", res.get_str(10));
         res.pow_ui(&a, 12);
-        let mut fac = FmpzFactor::new();
         println!("{}", res.get_str(10));
-        fac.factor(&b);
-        println!("{:?}", fac.to_vec());
+        println!("{:?}", a.factor());
     }
 }
