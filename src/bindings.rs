@@ -19,7 +19,7 @@ pub struct fmpz_factor_struct {
     pub num: mp_limb_signed_t,
 }
 
-#[link(name = "flint_wrapper")]
+#[link(name = "fmpz_wrapper")]
 extern "C" {
     pub fn fmpz_add(f: fmpzmutptr, g: fmpzptr, h: fmpzptr);
     pub fn wrapped_fmpz_clear(f: fmpzmutptr);
