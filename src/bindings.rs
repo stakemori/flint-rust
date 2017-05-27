@@ -22,4 +22,5 @@ extern "C" {
     pub fn fmpz_mul(f: fmpzptr, g: fmpzconstptr, h: fmpzconstptr);
     pub fn fmpz_get_str(str: *mut c_char, b: c_int, f: fmpzconstptr) -> *const c_char;
     pub fn fmpz_sizeinbase(f: fmpzconstptr, b: c_int) -> usize;
+    pub fn fmpz_pow_ui(f: fmpzptr, g: fmpzconstptr, exp: mp_limb_t);
 }

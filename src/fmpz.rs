@@ -59,15 +59,23 @@ impl Fmpz {
     }
 
     /// self = g + h
-    pub fn fmpz_add(&mut self, g: Fmpz, h: Fmpz) {
+    pub fn fmpz_add(&mut self, g: &Fmpz, h: &Fmpz) {
         unsafe {
             fmpz_add(self.as_mut_ptr(), g.as_ptr(), h.as_ptr());
         }
     }
     /// self = g * h
-    pub fn fmpz_mul(&mut self, g: Fmpz, h: Fmpz) {
+    pub fn fmpz_mul(&mut self, g: &Fmpz, h: &Fmpz) {
         unsafe {
             fmpz_mul(self.as_mut_ptr(), g.as_ptr(), h.as_ptr());
+        }
+    }
+
+
+    /// self = g^exp
+    pub fn fmpz_pow_ui(&mut self, g: &Fmpz, exp: mp_limb_t) {
+        unsafe{
+            fmpz_pow_ui(self.as_mut_ptr(), g.as_ptr(), exp);
         }
     }
 
@@ -103,7 +111,9 @@ mod tests {
         let mut res = Fmpz::new();
         let a = Fmpz::from_si(12);
         let b = Fmpz::from_si(20);
-        res.fmpz_mul(a, b);
+        res.fmpz_mul(&a, &b);
+        println!("{}", res.get_str(10));
+        res.fmpz_pow_ui(&a, 12);
         println!("{}", res.get_str(10));
     }
 }
