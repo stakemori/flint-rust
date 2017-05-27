@@ -15,11 +15,11 @@ impl Drop for Fmpz {
 }
 
 impl Fmpz {
-    fn as_mut_ptr(&mut self) -> *mut fmpz {
+    fn as_mut_ptr(&mut self) -> fmpzptr {
         self.fmpz.as_mut_ptr()
     }
 
-    fn as_ptr(&self) -> *const fmpz {
+    fn as_ptr(&self) -> fmpzconstptr {
         self.fmpz.as_ptr()
     }
 
