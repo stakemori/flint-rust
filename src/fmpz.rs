@@ -2,6 +2,7 @@ use bindings::*;
 use std;
 use libc::c_int;
 use std::ffi::CString;
+use std::{fmt};
 
 #[derive(Debug)]
 pub struct Fmpz {
@@ -179,6 +180,11 @@ impl FmpzFactor {
     }
 }
 
+impl fmt::Display for Fmpz {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{}", self.get_str(10))
+    }
+}
 
 #[cfg(test)]
 mod tests {
@@ -190,9 +196,9 @@ mod tests {
         let a = Fmpz::from_str("239023902390239032920930920", 10).unwrap();
         let b = Fmpz::from_si(344349839938948);
         res.mul(&a, &b);
-        println!("{}", res.get_str(10));
+        println!("{}", res);
         res.pow_ui(&a, 12);
-        println!("{}", res.get_str(10));
+        println!("{}", res);
         println!("{:?}", a.factor());
     }
 }
