@@ -30,6 +30,7 @@ impl Fmpz {
         }
     }
 
+    /// Return uninitialized Fmpz.
     pub fn new() -> Fmpz {
         unsafe {
             let mut a = Fmpz::uninitialized();
@@ -46,26 +47,28 @@ impl Fmpz {
         }
     }
 
-    pub fn fmpz_set_si(&mut self, val: mp_limb_signed_t) {
+    /// self = val
+    pub fn set_si(&mut self, val: mp_limb_signed_t) {
         unsafe {
             wrapped_fmpz_set_si(self.as_mut_ptr(), val);
         }
     }
 
-    pub fn fmpz_set_ui(&mut self, val: mp_limb_t) {
+    /// self = val
+    pub fn set_ui(&mut self, val: mp_limb_t) {
         unsafe {
             wrapped_fmpz_set_ui(self.as_mut_ptr(), val);
         }
     }
 
     /// self = g + h
-    pub fn fmpz_add(&mut self, g: &Fmpz, h: &Fmpz) {
+    pub fn add(&mut self, g: &Fmpz, h: &Fmpz) {
         unsafe {
             fmpz_add(self.as_mut_ptr(), g.as_ptr(), h.as_ptr());
         }
     }
     /// self = g * h
-    pub fn fmpz_mul(&mut self, g: &Fmpz, h: &Fmpz) {
+    pub fn mul(&mut self, g: &Fmpz, h: &Fmpz) {
         unsafe {
             fmpz_mul(self.as_mut_ptr(), g.as_ptr(), h.as_ptr());
         }
@@ -73,8 +76,8 @@ impl Fmpz {
 
 
     /// self = g^exp
-    pub fn fmpz_pow_ui(&mut self, g: &Fmpz, exp: mp_limb_t) {
-        unsafe{
+    pub fn pow_ui(&mut self, g: &Fmpz, exp: mp_limb_t) {
+        unsafe {
             fmpz_pow_ui(self.as_mut_ptr(), g.as_ptr(), exp);
         }
     }
@@ -111,9 +114,8 @@ mod tests {
         let mut res = Fmpz::new();
         let a = Fmpz::from_si(12);
         let b = Fmpz::from_si(20);
-        res.fmpz_mul(&a, &b);
+        res.mul(&a, &b);
         println!("{}", res.get_str(10));
-        res.fmpz_pow_ui(&a, 12);
-        println!("{}", res.get_str(10));
+        res.pow_ui(&a, 120);
     }
 }
