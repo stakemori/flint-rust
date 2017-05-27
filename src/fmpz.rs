@@ -1,6 +1,7 @@
 use bindings::*;
 use std;
 use libc::c_int;
+use std::ffi::CString;
 
 #[derive(Debug)]
 pub struct Fmpz {
@@ -103,7 +104,28 @@ impl Fmpz {
             }
         }
     }
+
+    pub fn from_str(s: &str, base: usize) -> Result<Fmpz, ParseFmpzError> {
+        // taken from rust-gmp (cf. https://crates.io/crates/rust-gmp)
+        let s = CString::new(s.to_string()).map_err(|_| ParseFmpzError { _priv: () })?;
+        unsafe {
+            assert!(base == 0 || (base >= 2 && base <= 62));
+            let mut n = Fmpz::new();
+            let r = fmpz_set_str(n.as_mut_ptr(), s.as_ptr(), base as c_int);
+            if r == 0 {
+                Ok(n)
+            } else {
+                Err(ParseFmpzError { _priv: () })
+            }
+        }
+    }
 }
+
+#[derive(Debug)]
+pub struct ParseFmpzError {
+    _priv: ()
+}
+
 
 pub struct FmpzFactor {
     factor_struct: fmpz_factor_struct,
@@ -158,12 +180,13 @@ mod tests {
     #[test]
     fn it_works() {
         let mut res = Fmpz::new();
-        let a = Fmpz::from_si(12);
+        let a = Fmpz::from_str("239023902390239032920930920", 10).unwrap();
         let b = Fmpz::from_si(344349839938948);
         res.mul(&a, &b);
         println!("{}", res.get_str(10));
-        res.pow_ui(&a, 120);
+        res.pow_ui(&a, 12);
         let mut fac = FmpzFactor::new();
+        println!("{}", res.get_str(10));
         fac.factor(&b);
         println!("{:?}", fac.to_vec());
     }
