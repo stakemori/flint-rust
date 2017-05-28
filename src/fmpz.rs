@@ -18,31 +18,31 @@ impl Drop for Fmpz {
 }
 
 
-pub trait Mult<T> {
-    fn mul_mut(&mut self, a: &Self, b: T);
+pub trait MulMut<T> {
+    fn mul_mut(&mut self, n: &Self, m: T);
 }
 
 
-impl<'a> Mult<&'a Fmpz> for Fmpz {
-    fn mul_mut(&mut self, a: &Fmpz, b: &Fmpz) {
+impl<'a> MulMut<&'a Fmpz> for Fmpz {
+    fn mul_mut(&mut self, n: &Fmpz, m: &Fmpz) {
         unsafe {
-            fmpz_mul(self.as_mut_ptr(), a.as_ptr(), b.as_ptr());
+            fmpz_mul(self.as_mut_ptr(), n.as_ptr(), m.as_ptr());
         }
     }
 }
 
-impl Mult<mp_limb_signed_t> for Fmpz {
-    fn mul_mut(&mut self, a: &Fmpz, b: mp_limb_signed_t) {
+impl MulMut<mp_limb_signed_t> for Fmpz {
+    fn mul_mut(&mut self, n: &Fmpz, m: mp_limb_signed_t) {
         unsafe {
-            fmpz_mul_si(self.as_mut_ptr(), a.as_ptr(), b);
+            fmpz_mul_si(self.as_mut_ptr(), n.as_ptr(), m);
         }
     }
 }
 
-impl Mult<mp_limb_t> for Fmpz {
-    fn mul_mut(&mut self, a: &Self, b: mp_limb_t) {
+impl MulMut<mp_limb_t> for Fmpz {
+    fn mul_mut(&mut self, n: &Self, m: mp_limb_t) {
         unsafe {
-            fmpz_mul_ui(self.as_mut_ptr(), a.as_ptr(), b);
+            fmpz_mul_ui(self.as_mut_ptr(), n.as_ptr(), m);
         }
     }
 }
