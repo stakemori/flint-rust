@@ -1,6 +1,29 @@
 extern crate flint;
+extern crate num;
+
+use num::FromPrimitive;
+use num::bigint::BigInt;
+
 use flint::bindings::{mp_limb_t};
-use flint::fmpz::*;
+use flint::fmpz::{Fmpz, MulMut};
+
+#[test]
+fn add_test() {
+    let mut res = Fmpz::new();
+    let mut a = Fmpz::new();
+    let mut b = Fmpz::new();
+    for i in 0..1000 {
+        let x: BigInt = FromPrimitive::from_u64(i).unwrap();
+        a.set_ui(i);
+        for j in 0..1000 {
+            let y: BigInt = FromPrimitive::from_u64(j).unwrap();
+            b.set_ui(j);
+            let z = &x + &y;
+            res.add(&a, &b);
+            assert!(z.to_str_radix(10) == res.get_str(10));
+        }
+    }
+}
 
 #[test]
 fn it_works() {
