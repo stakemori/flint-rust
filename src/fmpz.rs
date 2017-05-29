@@ -18,29 +18,29 @@ impl Drop for Fmpz {
 }
 
 
-pub trait MulMut<T> {
-    fn mul_mut(&mut self, n: &Self, m: T);
+pub trait MulSet<T> {
+    fn mul_set(&mut self, n: &Self, m: T);
 }
 
 
-impl<'a> MulMut<&'a Fmpz> for Fmpz {
-    fn mul_mut(&mut self, n: &Fmpz, m: &Fmpz) {
+impl<'a> MulSet<&'a Fmpz> for Fmpz {
+    fn mul_set(&mut self, n: &Fmpz, m: &Fmpz) {
         unsafe {
             fmpz_mul(self.as_mut_ptr(), n.as_ptr(), m.as_ptr());
         }
     }
 }
 
-impl MulMut<mp_limb_signed_t> for Fmpz {
-    fn mul_mut(&mut self, n: &Fmpz, m: mp_limb_signed_t) {
+impl MulSet<mp_limb_signed_t> for Fmpz {
+    fn mul_set(&mut self, n: &Fmpz, m: mp_limb_signed_t) {
         unsafe {
             fmpz_mul_si(self.as_mut_ptr(), n.as_ptr(), m);
         }
     }
 }
 
-impl MulMut<mp_limb_t> for Fmpz {
-    fn mul_mut(&mut self, n: &Self, m: mp_limb_t) {
+impl MulSet<mp_limb_t> for Fmpz {
+    fn mul_set(&mut self, n: &Self, m: mp_limb_t) {
         unsafe {
             fmpz_mul_ui(self.as_mut_ptr(), n.as_ptr(), m);
         }
