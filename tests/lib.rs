@@ -4,8 +4,7 @@ extern crate num;
 use num::FromPrimitive;
 use num::bigint::BigInt;
 
-use flint::bindings::{mp_limb_t};
-use flint::fmpz::{Fmpz, MulSet};
+use flint::fmpz::{Fmpz};
 
 #[test]
 fn add_test() {
@@ -21,9 +20,7 @@ fn add_test() {
             b.set_ui(j);
             let z = &x + &y;
             res.set_add(&a, &b);
-            res.mul_set(&a, &b);
             res1.set_add_ui(&a, j);
-            res1.mul_set(&a, j);
             assert!(z.to_str_radix(10) == res.get_str(10));
             assert!(z.to_str_radix(10) == res1.get_str(10));
         }
