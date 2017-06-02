@@ -22,6 +22,9 @@ pub struct fmpz_factor_struct {
 #[link(name = "fmpz_wrapper")]
 extern "C" {
     pub fn fmpz_add(f: fmpzmutptr, g: fmpzptr, h: fmpzptr);
+    pub fn fmpz_add_ui(f: fmpzmutptr, g: fmpzptr, x: mp_limb_t);
+    pub fn fmpz_sub(f: fmpzmutptr, g: fmpzptr, h: fmpzptr);
+    pub fn fmpz_sub_ui(f: fmpzmutptr, g: fmpzptr, x: mp_limb_t);
     pub fn wrapped_fmpz_clear(f: fmpzmutptr);
     pub fn wrapped_fmpz_init(f: fmpzmutptr);
     pub fn wrapped_fmpz_init_set(f: fmpzmutptr, g: fmpzptr);
@@ -39,4 +42,8 @@ extern "C" {
     pub fn fmpz_set_str(f: fmpzmutptr, str: *const c_char, b: c_int) -> c_int;
     pub fn fmpz_mul_si(f: fmpzmutptr, g: fmpzptr, x: mp_limb_signed_t);
     pub fn fmpz_mul_ui(f: fmpzmutptr, g: fmpzptr, x: mp_limb_t);
+    pub fn fmpz_addmul_ui(f: fmpzmutptr, g: fmpzptr, x: mp_limb_t);
+    pub fn fmpz_submul_ui(f: fmpzmutptr, g: fmpzptr, x: mp_limb_t);
+    pub fn fmpz_addmul(f: fmpzmutptr, g: fmpzptr, h: fmpzptr);
+    pub fn fmpz_submul(f: fmpzmutptr, g: fmpzptr, h: fmpzptr);
 }

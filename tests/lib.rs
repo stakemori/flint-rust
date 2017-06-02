@@ -10,6 +10,7 @@ use flint::fmpz::{Fmpz, MulSet};
 #[test]
 fn add_test() {
     let mut res = Fmpz::new();
+    let mut res1 = Fmpz::new();
     let mut a = Fmpz::new();
     let mut b = Fmpz::new();
     for i in 0..1000 {
@@ -19,23 +20,27 @@ fn add_test() {
             let y: BigInt = FromPrimitive::from_u64(j).unwrap();
             b.set_ui(j);
             let z = &x + &y;
-            res.add(&a, &b);
+            res.set_add(&a, &b);
+            res.mul_set(&a, &b);
+            res1.set_add_ui(&a, j);
+            res1.mul_set(&a, j);
             assert!(z.to_str_radix(10) == res.get_str(10));
+            assert!(z.to_str_radix(10) == res1.get_str(10));
         }
     }
 }
 
-#[test]
-fn it_works() {
-    let mut res = Fmpz::new();
-    let a = Fmpz::from_str("239023902390239032920930920", 10).unwrap();
-    let b = Fmpz::from_si(344349839938948);
-    res.mul_set(&a, &b);
-    println!("res1={}", res);
-    res.mul_set(&a, 10 as mp_limb_t);
-    println!("res2={}", res);
-    res.pow_ui(&a, 12);
-    println!("{}", res);
-    println!("{:?}", res.factor());
-}
+// #[test]
+// fn it_works() {
+//     let mut res = Fmpz::new();
+//     let a = Fmpz::from_str("239023902390239032920930920", 10).unwrap();
+//     let b = Fmpz::from_si(344349839938948);
+//     res.mul_set(&a, &b);
+//     println!("res1={}", res);
+//     res.mul_set(&a, 10 as mp_limb_t);
+//     println!("res2={}", res);
+//     res.pow_ui(&a, 12);
+//     println!("{}", res);
+//     println!("{:?}", res.factor());
+// }
 

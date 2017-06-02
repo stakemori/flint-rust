@@ -19,9 +19,14 @@ impl Drop for Fmpz {
 
 
 pub trait MulSet<T> {
+    /// self = n * m.
     fn mul_set(&mut self, n: &Self, m: T);
 }
 
+pub trait AddSet<T> {
+    /// self = n + m.
+    fn add_set(&mut self, n: &Self, m: T);
+}
 
 impl<'a> MulSet<&'a Fmpz> for Fmpz {
     fn mul_set(&mut self, n: &Fmpz, m: &Fmpz) {
@@ -46,6 +51,23 @@ impl MulSet<mp_limb_t> for Fmpz {
         }
     }
 }
+
+impl<'a> AddSet<&'a Fmpz> for Fmpz {
+    fn add_set(&mut self, n: &Fmpz, m: &Fmpz) {
+        unsafe {
+            fmpz_add(self.as_mut_ptr(), n.as_ptr(), m.as_ptr());
+        }
+    }
+}
+
+impl AddSet<mp_limb_t> for Fmpz {
+    fn add_set(&mut self, n: &Self, m: mp_limb_t) {
+        unsafe {
+            fmpz_add_ui(self.as_mut_ptr(), n.as_ptr(), m);
+        }
+    }
+}
+
 
 impl Fmpz {
     fn as_mut_ptr(&mut self) -> fmpzmutptr {
@@ -94,16 +116,31 @@ impl Fmpz {
         }
     }
 
-    /// self = g + h
-    pub fn add(&mut self, g: &Fmpz, h: &Fmpz) {
+    /// self = n + m
+    pub fn set_add(&mut self, n: &Fmpz, m: &Fmpz) {
         unsafe {
-            fmpz_add(self.as_mut_ptr(), g.as_ptr(), h.as_ptr());
+            fmpz_add(self.as_mut_ptr(), n.as_ptr(), m.as_ptr());
         }
     }
-    /// self = g * h
-    pub fn mul(&mut self, g: &Fmpz, h: &Fmpz) {
+
+    /// self = n + m
+    pub fn set_add_ui(&mut self, n: &Self, m: mp_limb_t) {
         unsafe {
-            fmpz_mul(self.as_mut_ptr(), g.as_ptr(), h.as_ptr());
+            fmpz_add_ui(self.as_mut_ptr(), n.as_ptr(), m);
+        }
+    }
+
+    /// self = n * m
+    pub fn set_mul(&mut self, n: &Fmpz, m: &Fmpz) {
+        unsafe {
+            fmpz_mul(self.as_mut_ptr(), n.as_ptr(), m.as_ptr());
+        }
+    }
+
+    /// self = n * m
+    pub fn set_mul_ui(&mut self, n: &Fmpz, m: mp_limb_signed_t) {
+        unsafe {
+            fmpz_mul_si(self.as_mut_ptr(), n.as_ptr(), m);
         }
     }
 
