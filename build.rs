@@ -10,6 +10,6 @@ fn main() {
     gcc::Config::new()
         .file("src/fmpz_wrapper.c")
         .flag("-lflint -lmpfr -lgmp -lpthread")
-        .include("/usr/local/include/flint")
+        // .include("/usr/local/include/flint")
         .compile("libfmpz_wrapper.a");
 }
