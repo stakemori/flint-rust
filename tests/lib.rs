@@ -15,7 +15,7 @@ fn add_test() {
     for i in 0..100 {
         let x: BigInt = FromPrimitive::from_u64(i).unwrap();
         a.set_ui(i);
-        for j in 0..1000 {
+        for j in 0..100 {
             let y: BigInt = FromPrimitive::from_u64(j).unwrap();
             b.set_ui(j);
             let z = &x + &y;
