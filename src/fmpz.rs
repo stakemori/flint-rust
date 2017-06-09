@@ -3,7 +3,7 @@ use std;
 use libc::{c_int, c_ulong, c_long};
 use std::ffi::CString;
 use std::fmt;
-use std::ops::{AddAssign, MulAssign, SubAssign};
+use std::ops::{AddAssign, MulAssign, SubAssign, DivAssign};
 extern crate test;
 
 #[derive(Debug)]
@@ -37,6 +37,7 @@ macro_rules! define_assign {
 define_assign!(AddAssign, add_assign, fmpz_add);
 define_assign!(MulAssign, mul_assign, fmpz_mul);
 define_assign!(SubAssign, sub_assign, fmpz_sub);
+define_assign!(DivAssign, div_assign, fmpz_cdiv_q);
 
 impl Fmpz {
     fn as_mut_ptr(&mut self) -> fmpzmutptr {
