@@ -1,6 +1,6 @@
 use bindings::*;
 use std;
-use libc::{c_int, c_ulong};
+use libc::{c_int};
 use std::ffi::CString;
 use std::fmt;
 use std::ops::{AddAssign, MulAssign, SubAssign};
@@ -189,13 +189,6 @@ impl Drop for FmpzFactor {
         }
     }
 }
-
-
-#[derive(Debug)]
-pub struct FactorFailError {
-    _priv: (),
-}
-
 
 
 impl FmpzFactor {
