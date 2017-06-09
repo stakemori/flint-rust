@@ -78,12 +78,12 @@ impl<'a> AddAssign<&'a Self> for Fmpz {
 }
 
 impl Fmpz {
-    pub fn as_mut_ptr(&mut self) -> fmpzmutptr {
-        self.fmpz.as_mut_ptr()
+    fn as_mut_ptr(&mut self) -> fmpzmutptr {
+        &mut self.fmpz[0] as fmpzmutptr
     }
 
     fn as_ptr(&self) -> fmpzptr {
-        self.fmpz.as_ptr()
+        &self.fmpz[0] as fmpzptr
     }
 
     fn uninitialized() -> fmpz_t {
