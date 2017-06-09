@@ -19,18 +19,11 @@ pub struct fmpz_factor_struct {
     pub num: mp_limb_signed_t,
 }
 
-#[link(name = "fmpz_wrapper")]
 extern "C" {
     pub fn fmpz_add(f: fmpzmutptr, g: fmpzptr, h: fmpzptr);
     pub fn fmpz_add_ui(f: fmpzmutptr, g: fmpzptr, x: mp_limb_t);
     pub fn fmpz_sub(f: fmpzmutptr, g: fmpzptr, h: fmpzptr);
     pub fn fmpz_sub_ui(f: fmpzmutptr, g: fmpzptr, x: mp_limb_t);
-    pub fn wrapped_fmpz_clear(f: fmpzmutptr);
-    pub fn wrapped_fmpz_init(f: fmpzmutptr);
-    pub fn wrapped_fmpz_init_set(f: fmpzmutptr, g: fmpzptr);
-    pub fn warpped_fmpz_init_set_si(f: fmpzmutptr, g: mp_limb_signed_t);
-    pub fn wrapped_fmpz_set_si(f: fmpzmutptr, val: mp_limb_signed_t);
-    pub fn wrapped_fmpz_set_ui(f: fmpzmutptr, val: mp_limb_t);
     pub fn fmpz_mul(f: fmpzmutptr, g: fmpzptr, h: fmpzptr);
     pub fn fmpz_get_str(str: *mut c_char, b: c_int, f: fmpzptr) -> *const c_char;
     pub fn fmpz_sizeinbase(f: fmpzptr, b: c_int) -> usize;
@@ -52,4 +45,15 @@ extern "C" {
     pub fn fmpz_cdiv_q(f: fmpzmutptr, g: fmpzptr, h: fmpzptr);
     pub fn fmpz_factor_pp1(factor: *mut fmpz_factor_struct, n: fmpzptr, B1: c_ulong,
                            B2_sqrt: c_ulong, c: c_ulong) -> c_int;
+}
+
+#[link(name = "fmpz_wrapper")]
+extern "C" {
+    pub fn wrapped_fmpz_clear(f: fmpzmutptr);
+    pub fn wrapped_fmpz_init(f: fmpzmutptr);
+    pub fn wrapped_fmpz_init_set(f: fmpzmutptr, g: fmpzptr);
+    pub fn warpped_fmpz_init_set_si(f: fmpzmutptr, g: mp_limb_signed_t);
+    pub fn wrapped_fmpz_set_si(f: fmpzmutptr, val: mp_limb_signed_t);
+    pub fn wrapped_fmpz_set_ui(f: fmpzmutptr, val: mp_limb_t);
+    pub fn square_sum_native(n: c_ulong);
 }

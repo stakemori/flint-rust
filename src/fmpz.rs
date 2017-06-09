@@ -4,6 +4,7 @@ use libc::{c_int, c_ulong};
 use std::ffi::CString;
 use std::fmt;
 use std::ops::AddAssign;
+extern crate test;
 
 #[derive(Debug)]
 pub struct Fmpz {
@@ -296,5 +297,34 @@ impl FmpzFactor {
 impl fmt::Display for Fmpz {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "{}", self.get_str(10))
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use self::test::Bencher;
+
+    fn square_sum(n: u64) {
+        let mut res = Fmpz::from_si(0);
+        let mut a = Fmpz::new();
+        let mut tmp = Fmpz::new();
+        for i in 1..n {
+            a.set_ui(i);
+            tmp.set_mul(&a, &a);
+            res += &tmp;
+        }
+    }
+
+    #[bench]
+    fn square_sum_bench(b: &mut Bencher) {
+        b.iter(|| square_sum(1000000))
+    }
+
+    #[bench]
+    fn square_sum_native_bench(b: &mut Bencher) {
+        b.iter(|| unsafe{
+            square_sum_native(1000000);
+        })
     }
 }

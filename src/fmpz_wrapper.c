@@ -101,3 +101,21 @@ void wrapped_fmpz_divexact2_uiui(fmpz_t f, const fmpz_t g, ulong h1, ulong h2)
 {
   fmpz_divexact2_uiui(f, g, h1, h2);
 }
+
+void square_sum_native(ulong n) {
+  fmpz_t a, tmp, res;
+
+  fmpz_init(a);
+  fmpz_init(tmp);
+  fmpz_init(res);
+  fmpz_set_ui(res, 0);
+  for (ulong i = 1; i < n; i++)
+    {
+      fmpz_set_ui(a, i);
+      fmpz_pow_ui(tmp, a, 2);
+      fmpz_add(res, res, tmp);
+    }
+  fmpz_clear(a);
+  fmpz_clear(tmp);
+  fmpz_clear(res);
+}
