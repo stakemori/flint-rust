@@ -123,11 +123,26 @@ impl Fmpz {
     }
 
     /// self = g/h. Rounds up towards infinity.
-    pub fn set_div(&mut self, g: &Fmpz, h: &Fmpz) {
+    pub fn set_cdiv(&mut self, g: &Fmpz, h: &Fmpz) {
         unsafe {
             fmpz_cdiv_q(self.as_mut_ptr(), g.as_ptr(), h.as_ptr());
         }
     }
+
+    /// self = g/h. Rounds up towards zero.
+    pub fn set_tdiv(&mut self, g: &Fmpz, h: &Fmpz) {
+        unsafe {
+            fmpz_tdiv_q(self.as_mut_ptr(), g.as_ptr(), h.as_ptr());
+        }
+    }
+
+    /// self = g/h. Rounds up towards -infinity.
+    pub fn set_fdiv(&mut self, g: &Fmpz, h: &Fmpz) {
+        unsafe {
+            fmpz_fdiv_q(self.as_mut_ptr(), g.as_ptr(), h.as_ptr());
+        }
+    }
+
 
     /// self = g^exp
     pub fn pow_ui(&mut self, g: &Fmpz, exp: c_ulong) {

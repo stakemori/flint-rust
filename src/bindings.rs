@@ -40,6 +40,8 @@ extern "C" {
     pub fn fmpz_addmul(f: fmpzmutptr, g: fmpzptr, h: fmpzptr);
     pub fn fmpz_submul(f: fmpzmutptr, g: fmpzptr, h: fmpzptr);
     pub fn fmpz_factor_expand_iterative(n: fmpzmutptr, factor: *const fmpz_factor_struct);
+    pub fn fmpz_fdiv_q(f: fmpzmutptr, g: fmpzptr, h: fmpzptr);
+    pub fn fmpz_tdiv_q(f: fmpzmutptr, g: fmpzptr, h: fmpzptr);
     pub fn fmpz_cdiv_q(f: fmpzmutptr, g: fmpzptr, h: fmpzptr);
 }
 
