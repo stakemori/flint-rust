@@ -211,22 +211,6 @@ impl FmpzFactor {
         unsafe { fmpz_factor(&mut self.factor_struct, n.as_ptr()) };
     }
 
-    /// factor using fmpz_factor_trial_range. Returns true if self is completely
-    /// factored, otherwise false.
-    pub fn factor_trial_range(&mut self, n: &Fmpz, start: c_ulong, num_primes: c_ulong) -> bool {
-        unsafe {
-            let res = fmpz_factor_trial_range(&mut self.factor_struct, n.as_ptr(), start, num_primes);
-            res == 1
-        }
-    }
-
-    pub fn factor_pp1(&mut self, n: &Fmpz, b1: c_ulong, b2_sqrt: c_ulong, c: c_ulong) -> bool {
-        unsafe{
-            let res = fmpz_factor_pp1(&mut self.factor_struct, n.as_ptr(), b1, b2_sqrt, c);
-            res == 1
-        }
-    }
-
     /// Evaluates an integer in factored form back to n.
     pub fn factor_expand_iterative(&self, n: &mut Fmpz) {
         unsafe{

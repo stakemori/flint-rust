@@ -39,12 +39,8 @@ extern "C" {
     pub fn fmpz_submul_ui(f: fmpzmutptr, g: fmpzptr, x: mp_limb_t);
     pub fn fmpz_addmul(f: fmpzmutptr, g: fmpzptr, h: fmpzptr);
     pub fn fmpz_submul(f: fmpzmutptr, g: fmpzptr, h: fmpzptr);
-    pub fn fmpz_factor_trial_range(factor: *mut fmpz_factor_struct,
-                                   n: fmpzptr, start: c_ulong, num_primes: c_ulong) -> c_int;
     pub fn fmpz_factor_expand_iterative(n: fmpzmutptr, factor: *const fmpz_factor_struct);
     pub fn fmpz_cdiv_q(f: fmpzmutptr, g: fmpzptr, h: fmpzptr);
-    pub fn fmpz_factor_pp1(factor: *mut fmpz_factor_struct, n: fmpzptr, B1: c_ulong,
-                           B2_sqrt: c_ulong, c: c_ulong) -> c_int;
 }
 
 #[link(name = "fmpz_wrapper")]
