@@ -2,7 +2,7 @@ extern crate flint;
 extern crate num;
 extern crate libc;
 
-use libc::{c_ulong};
+use libc::c_ulong;
 use num::FromPrimitive;
 use num::bigint::BigInt;
 use flint::fmpz::{Fmpz, FmpzFactor};

@@ -75,7 +75,7 @@ impl Fmpz {
         unsafe {
             let mut a = Fmpz::uninitialized();
             wrapped_fmpz_init_set_ui(a.as_mut_ptr(), g);
-            Fmpz { fmpz: a}
+            Fmpz { fmpz: a }
         }
     }
 
