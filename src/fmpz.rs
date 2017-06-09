@@ -1,6 +1,6 @@
 use bindings::*;
 use std;
-use libc::c_int;
+use libc::{c_int, c_ulong, c_long};
 use std::ffi::CString;
 use std::fmt;
 use std::ops::{AddAssign, MulAssign, SubAssign};
@@ -63,23 +63,31 @@ impl Fmpz {
         }
     }
 
-    pub fn from_si(g: mp_limb_signed_t) -> Fmpz {
+    pub fn from_si(g: c_long) -> Fmpz {
         unsafe {
             let mut a = Fmpz::uninitialized();
-            warpped_fmpz_init_set_si(a.as_mut_ptr(), g);
+            wrapped_fmpz_init_set_si(a.as_mut_ptr(), g);
             Fmpz { fmpz: a }
         }
     }
 
+    pub fn from_ui(g: c_ulong) -> Fmpz {
+        unsafe {
+            let mut a = Fmpz::uninitialized();
+            wrapped_fmpz_init_set_ui(a.as_mut_ptr(), g);
+            Fmpz { fmpz: a}
+        }
+    }
+
     /// self = val
-    pub fn set_si(&mut self, val: mp_limb_signed_t) {
+    pub fn set_si(&mut self, val: c_long) {
         unsafe {
             wrapped_fmpz_set_si(self.as_mut_ptr(), val);
         }
     }
 
     /// self = val
-    pub fn set_ui(&mut self, val: mp_limb_t) {
+    pub fn set_ui(&mut self, val: c_ulong) {
         unsafe {
             wrapped_fmpz_set_ui(self.as_mut_ptr(), val);
         }
@@ -93,7 +101,7 @@ impl Fmpz {
     }
 
     /// self = n + m
-    pub fn set_add_ui(&mut self, n: &Self, m: mp_limb_t) {
+    pub fn set_add_ui(&mut self, n: &Self, m: c_ulong) {
         unsafe {
             fmpz_add_ui(self.as_mut_ptr(), n.as_ptr(), m);
         }
@@ -107,7 +115,7 @@ impl Fmpz {
     }
 
     /// self = n * m
-    pub fn set_mul_ui(&mut self, n: &Fmpz, m: mp_limb_signed_t) {
+    pub fn set_mul_ui(&mut self, n: &Fmpz, m: c_long) {
         unsafe {
             fmpz_mul_si(self.as_mut_ptr(), n.as_ptr(), m);
         }
@@ -121,7 +129,7 @@ impl Fmpz {
     }
 
     /// self = g^exp
-    pub fn pow_ui(&mut self, g: &Fmpz, exp: mp_limb_t) {
+    pub fn pow_ui(&mut self, g: &Fmpz, exp: c_ulong) {
         unsafe {
             fmpz_pow_ui(self.as_mut_ptr(), g.as_ptr(), exp);
         }
@@ -165,10 +173,10 @@ impl Fmpz {
     }
 
     /// Prime factoriazation of self.
-    pub fn factor(&self) -> Vec<(Fmpz, mp_limb_signed_t)> {
+    pub fn to_factor(&self) -> FmpzFactor {
         let mut fac = FmpzFactor::new();
         fac.factor(&self);
-        fac.to_vec()
+        fac
     }
 }
 
@@ -211,14 +219,14 @@ impl FmpzFactor {
         }
     }
 
-    pub fn to_vec(&self) -> Vec<(Fmpz, mp_limb_signed_t)> {
-        let mut v: Vec<(Fmpz, mp_limb_signed_t)> = Vec::new();
+    pub fn to_vec(&self) -> Vec<(Fmpz, c_long)> {
+        let mut v: Vec<(Fmpz, c_long)> = Vec::new();
         let n_p = self.factor_struct.p;
         let exp_p = self.factor_struct.exp;
         for i in 0..self.factor_struct.num {
             let j = i as isize;
             let n = unsafe { Fmpz { fmpz: [*n_p.offset(j)] } };
-            let exp = unsafe { *exp_p.offset(j) as mp_limb_signed_t };
+            let exp = unsafe { *exp_p.offset(j) as c_long };
             v.push((n, exp))
         }
         v
@@ -237,7 +245,7 @@ mod tests {
     use self::test::Bencher;
 
     fn square_sum(n: u64) {
-        let mut res = Fmpz::from_si(0);
+        let mut res = Fmpz::from_ui(0);
         let mut a = Fmpz::new();
         let mut tmp = Fmpz::new();
         for i in 1..n {

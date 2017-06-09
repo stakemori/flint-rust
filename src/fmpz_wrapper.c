@@ -17,9 +17,14 @@ void wrapped_fmpz_init_set(fmpz_t f, const fmpz_t g)
   fmpz_init_set(f, g);
 }
 
-void warpped_fmpz_init_set_si(fmpz_t f, slong g)
+void wrapped_fmpz_init_set_si(fmpz_t f, slong g)
 {
   fmpz_init_set_si(f, g);
+}
+
+void wrapped_fmpz_init_set_ui(fmpz_t f, ulong g)
+{
+  fmpz_init_set_ui(f, g);
 }
 
 void wrapped_fmpz_set_si(fmpz_t f, slong val)
