@@ -1,6 +1,6 @@
 use bindings::*;
 use std;
-use libc::{c_int};
+use libc::c_int;
 use std::ffi::CString;
 use std::fmt;
 use std::ops::{AddAssign, MulAssign, SubAssign};
@@ -115,7 +115,7 @@ impl Fmpz {
 
     /// self = g/h. Rounds up towards infinity.
     pub fn set_div(&mut self, g: &Fmpz, h: &Fmpz) {
-        unsafe{
+        unsafe {
             fmpz_cdiv_q(self.as_mut_ptr(), g.as_ptr(), h.as_ptr());
         }
     }
@@ -206,7 +206,7 @@ impl FmpzFactor {
 
     /// Evaluates an integer in factored form back to n.
     pub fn factor_expand_iterative(&self, n: &mut Fmpz) {
-        unsafe{
+        unsafe {
             fmpz_factor_expand_iterative(n.as_mut_ptr(), &self.factor_struct);
         }
     }
@@ -254,8 +254,8 @@ mod tests {
 
     #[bench]
     fn square_sum_native_bench(b: &mut Bencher) {
-        b.iter(|| unsafe{
-            bench_square_sum_native(1000000);
-        })
+        b.iter(|| unsafe {
+                   bench_square_sum_native(1000000);
+               })
     }
 }
