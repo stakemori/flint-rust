@@ -3,7 +3,7 @@ use std;
 use libc::{c_int, c_ulong};
 use std::ffi::CString;
 use std::fmt;
-use std::ops::AddAssign;
+use std::ops::{AddAssign, MulAssign, SubAssign};
 extern crate test;
 
 #[derive(Debug)]
@@ -19,13 +19,24 @@ impl Drop for Fmpz {
     }
 }
 
-impl<'a> AddAssign<&'a Self> for Fmpz {
-    fn add_assign(&mut self, other: &Fmpz) {
-        unsafe {
-            fmpz_add(self.as_mut_ptr(), self.as_ptr(), other.as_ptr());
+macro_rules! define_assign {
+    ($trait:ident, $meth:ident, $func:ident) =>
+    {
+        impl<'a> $trait<&'a Self> for Fmpz {
+            fn $meth(&mut self, other: &Fmpz) {
+                unsafe {
+                    $func(self.as_mut_ptr(), self.as_ptr(), other.as_ptr());
+                }
+            }
         }
+
+
     }
 }
+
+define_assign!(AddAssign, add_assign, fmpz_add);
+define_assign!(MulAssign, mul_assign, fmpz_mul);
+define_assign!(SubAssign, sub_assign, fmpz_sub);
 
 impl Fmpz {
     fn as_mut_ptr(&mut self) -> fmpzmutptr {
