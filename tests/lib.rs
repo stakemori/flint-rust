@@ -39,7 +39,7 @@ fn fac_to_fmpz(f: &FmpzFactor) -> Fmpz {
 }
 
 #[test]
-fn it_works() {
+fn factor_test() {
     let mut a = Fmpz::from_str("1844674407370955161", 10).unwrap();
     let b = Fmpz::from_si(340394);
     a -= &b;
