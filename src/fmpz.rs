@@ -1,8 +1,9 @@
 use bindings::*;
 use std;
-use libc::c_int;
+use libc::{c_int, c_ulong};
 use std::ffi::CString;
 use std::fmt;
+use std::ops::AddAssign;
 
 #[derive(Debug)]
 pub struct Fmpz {
@@ -68,9 +69,16 @@ impl AddSet<mp_limb_t> for Fmpz {
     }
 }
 
+impl<'a> AddAssign<&'a Self> for Fmpz {
+    fn add_assign(&mut self, other: &Fmpz) {
+        unsafe {
+            fmpz_add(self.as_mut_ptr(), self.as_ptr(), other.as_ptr());
+        }
+    }
+}
 
 impl Fmpz {
-    fn as_mut_ptr(&mut self) -> fmpzmutptr {
+    pub fn as_mut_ptr(&mut self) -> fmpzmutptr {
         self.fmpz.as_mut_ptr()
     }
 
@@ -144,6 +152,18 @@ impl Fmpz {
         }
     }
 
+    /// self = g/h. Rounds up towards infinity.
+    pub fn set_div(&mut self, g: &Fmpz, h: &Fmpz) {
+        unsafe{
+            fmpz_cdiv_q(self.as_mut_ptr(), g.as_ptr(), h.as_ptr());
+        }
+    }
+
+    pub fn add_self(&mut self, f: &Fmpz) {
+        unsafe{
+            fmpz_add(self.as_mut_ptr(), self.as_ptr(), f.as_ptr());
+        }
+    }
 
     /// self = g^exp
     pub fn pow_ui(&mut self, g: &Fmpz, exp: mp_limb_t) {
@@ -215,6 +235,14 @@ impl Drop for FmpzFactor {
     }
 }
 
+
+#[derive(Debug)]
+pub struct FactorFailError {
+    _priv: (),
+}
+
+
+
 impl FmpzFactor {
     pub fn new() -> FmpzFactor {
         unsafe {
@@ -226,6 +254,29 @@ impl FmpzFactor {
 
     pub fn factor(&mut self, n: &Fmpz) {
         unsafe { fmpz_factor(&mut self.factor_struct, n.as_ptr()) };
+    }
+
+    /// factor using fmpz_factor_trial_range. Returns true if self is completely
+    /// factored, otherwise false.
+    pub fn factor_trial_range(&mut self, n: &Fmpz, start: c_ulong, num_primes: c_ulong) -> bool {
+        unsafe {
+            let res = fmpz_factor_trial_range(&mut self.factor_struct, n.as_ptr(), start, num_primes);
+            res == 1
+        }
+    }
+
+    pub fn factor_pp1(&mut self, n: &Fmpz, b1: c_ulong, b2_sqrt: c_ulong, c: c_ulong) -> bool {
+        unsafe{
+            let res = fmpz_factor_pp1(&mut self.factor_struct, n.as_ptr(), b1, b2_sqrt, c);
+            res == 1
+        }
+    }
+
+    /// Evaluates an integer in factored form back to n.
+    pub fn factor_expand_iterative(&self, n: &mut Fmpz) {
+        unsafe{
+            fmpz_factor_expand_iterative(n.as_mut_ptr(), &self.factor_struct);
+        }
     }
 
     pub fn to_vec(&self) -> Vec<(Fmpz, mp_limb_signed_t)> {
