@@ -267,7 +267,7 @@ mod tests {
     #[bench]
     fn square_sum_native_bench(b: &mut Bencher) {
         b.iter(|| unsafe{
-            square_sum_native(1000000);
+            bench_square_sum_native(1000000);
         })
     }
 }

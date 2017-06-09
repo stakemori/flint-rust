@@ -102,7 +102,7 @@ void wrapped_fmpz_divexact2_uiui(fmpz_t f, const fmpz_t g, ulong h1, ulong h2)
   fmpz_divexact2_uiui(f, g, h1, h2);
 }
 
-void square_sum_native(ulong n) {
+void bench_square_sum_native(ulong n) {
   fmpz_t a, tmp, res;
 
   fmpz_init(a);

@@ -55,5 +55,5 @@ extern "C" {
     pub fn warpped_fmpz_init_set_si(f: fmpzmutptr, g: mp_limb_signed_t);
     pub fn wrapped_fmpz_set_si(f: fmpzmutptr, val: mp_limb_signed_t);
     pub fn wrapped_fmpz_set_ui(f: fmpzmutptr, val: mp_limb_t);
-    pub fn square_sum_native(n: c_ulong);
+    pub fn bench_square_sum_native(n: c_ulong);
 }
