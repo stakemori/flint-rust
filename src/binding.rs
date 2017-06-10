@@ -4,229 +4,241 @@
 #![allow(non_snake_case)]
 #![allow(dead_code)]
 
-pub type wchar_t = ::std::os::raw::c_int;
+use std::os::raw::{c_ulong, c_long, c_char, c_int, c_void, c_double};
+pub type wchar_t = c_int;
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
-pub enum idtype_t { P_ALL = 0, P_PID = 1, P_PGID = 2, }
+pub enum idtype_t {
+    P_ALL = 0,
+    P_PID = 1,
+    P_PGID = 2,
+}
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct div_t {
-    pub quot: ::std::os::raw::c_int,
-    pub rem: ::std::os::raw::c_int,
+    pub quot: c_int,
+    pub rem: c_int,
 }
 #[test]
 fn bindgen_test_layout_div_t() {
-    assert_eq!(::std::mem::size_of::<div_t>() , 8usize , concat ! (
-               "Size of: " , stringify ! ( div_t ) ));
-    assert_eq! (::std::mem::align_of::<div_t>() , 4usize , concat ! (
-                "Alignment of " , stringify ! ( div_t ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const div_t ) ) . quot as * const _ as usize }
-                , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( div_t ) , "::" ,
-                stringify ! ( quot ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const div_t ) ) . rem as * const _ as usize } ,
-                4usize , concat ! (
-                "Alignment of field: " , stringify ! ( div_t ) , "::" ,
-                stringify ! ( rem ) ));
+    assert_eq!(::std::mem::size_of::<div_t>(),
+               8usize,
+               concat!("Size of: ", stringify!(div_t)));
+    assert_eq!(::std::mem::align_of::<div_t>(),
+               4usize,
+               concat!("Alignment of ", stringify!(div_t)));
+    assert_eq!(unsafe { &(*(0 as *const div_t)).quot as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(div_t),
+                       "::",
+                       stringify!(quot)));
+    assert_eq!(unsafe { &(*(0 as *const div_t)).rem as *const _ as usize },
+               4usize,
+               concat!("Alignment of field: ",
+                       stringify!(div_t),
+                       "::",
+                       stringify!(rem)));
 }
 impl Clone for div_t {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct ldiv_t {
-    pub quot: ::std::os::raw::c_long,
-    pub rem: ::std::os::raw::c_long,
+    pub quot: c_long,
+    pub rem: c_long,
 }
 #[test]
 fn bindgen_test_layout_ldiv_t() {
-    assert_eq!(::std::mem::size_of::<ldiv_t>() , 16usize , concat ! (
-               "Size of: " , stringify ! ( ldiv_t ) ));
-    assert_eq! (::std::mem::align_of::<ldiv_t>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( ldiv_t ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const ldiv_t ) ) . quot as * const _ as usize }
-                , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( ldiv_t ) , "::" ,
-                stringify ! ( quot ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const ldiv_t ) ) . rem as * const _ as usize }
-                , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( ldiv_t ) , "::" ,
-                stringify ! ( rem ) ));
+    assert_eq!(::std::mem::size_of::<ldiv_t>(),
+               16usize,
+               concat!("Size of: ", stringify!(ldiv_t)));
+    assert_eq!(::std::mem::align_of::<ldiv_t>(),
+               8usize,
+               concat!("Alignment of ", stringify!(ldiv_t)));
+    assert_eq!(unsafe { &(*(0 as *const ldiv_t)).quot as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(ldiv_t),
+                       "::",
+                       stringify!(quot)));
+    assert_eq!(unsafe { &(*(0 as *const ldiv_t)).rem as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(ldiv_t),
+                       "::",
+                       stringify!(rem)));
 }
 impl Clone for ldiv_t {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct lldiv_t {
-    pub quot: ::std::os::raw::c_longlong,
-    pub rem: ::std::os::raw::c_longlong,
+    pub quot: c_longlong,
+    pub rem: c_longlong,
 }
 #[test]
 fn bindgen_test_layout_lldiv_t() {
-    assert_eq!(::std::mem::size_of::<lldiv_t>() , 16usize , concat ! (
-               "Size of: " , stringify ! ( lldiv_t ) ));
-    assert_eq! (::std::mem::align_of::<lldiv_t>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( lldiv_t ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const lldiv_t ) ) . quot as * const _ as usize
-                } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( lldiv_t ) , "::" ,
-                stringify ! ( quot ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const lldiv_t ) ) . rem as * const _ as usize }
-                , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( lldiv_t ) , "::" ,
-                stringify ! ( rem ) ));
+    assert_eq!(::std::mem::size_of::<lldiv_t>(),
+               16usize,
+               concat!("Size of: ", stringify!(lldiv_t)));
+    assert_eq!(::std::mem::align_of::<lldiv_t>(),
+               8usize,
+               concat!("Alignment of ", stringify!(lldiv_t)));
+    assert_eq!(unsafe { &(*(0 as *const lldiv_t)).quot as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(lldiv_t),
+                       "::",
+                       stringify!(quot)));
+    assert_eq!(unsafe { &(*(0 as *const lldiv_t)).rem as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(lldiv_t),
+                       "::",
+                       stringify!(rem)));
 }
 impl Clone for lldiv_t {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 extern "C" {
     pub fn __ctype_get_mb_cur_max() -> usize;
 }
 extern "C" {
-    pub fn atof(__nptr: *const ::std::os::raw::c_char) -> f64;
+    pub fn atof(__nptr: *const c_char) -> f64;
 }
 extern "C" {
-    pub fn atoi(__nptr: *const ::std::os::raw::c_char)
-     -> ::std::os::raw::c_int;
+    pub fn atoi(__nptr: *const c_char) -> c_int;
 }
 extern "C" {
-    pub fn atol(__nptr: *const ::std::os::raw::c_char)
-     -> ::std::os::raw::c_long;
+    pub fn atol(__nptr: *const c_char) -> c_long;
 }
 extern "C" {
-    pub fn atoll(__nptr: *const ::std::os::raw::c_char)
-     -> ::std::os::raw::c_longlong;
+    pub fn atoll(__nptr: *const c_char) -> c_longlong;
 }
 extern "C" {
-    pub fn strtod(__nptr: *const ::std::os::raw::c_char,
-                  __endptr: *mut *mut ::std::os::raw::c_char) -> f64;
+    pub fn strtod(__nptr: *const c_char, __endptr: *mut *mut c_char) -> f64;
 }
 extern "C" {
-    pub fn strtof(__nptr: *const ::std::os::raw::c_char,
-                  __endptr: *mut *mut ::std::os::raw::c_char) -> f32;
+    pub fn strtof(__nptr: *const c_char, __endptr: *mut *mut c_char) -> f32;
 }
 extern "C" {
-    pub fn strtold(__nptr: *const ::std::os::raw::c_char,
-                   __endptr: *mut *mut ::std::os::raw::c_char) -> f64;
+    pub fn strtold(__nptr: *const c_char, __endptr: *mut *mut c_char) -> f64;
 }
 extern "C" {
-    pub fn strtol(__nptr: *const ::std::os::raw::c_char,
-                  __endptr: *mut *mut ::std::os::raw::c_char,
-                  __base: ::std::os::raw::c_int) -> ::std::os::raw::c_long;
+    pub fn strtol(__nptr: *const c_char, __endptr: *mut *mut c_char, __base: c_int) -> c_long;
 }
 extern "C" {
-    pub fn strtoul(__nptr: *const ::std::os::raw::c_char,
-                   __endptr: *mut *mut ::std::os::raw::c_char,
-                   __base: ::std::os::raw::c_int) -> ::std::os::raw::c_ulong;
+    pub fn strtoul(__nptr: *const c_char, __endptr: *mut *mut c_char, __base: c_int) -> c_ulong;
 }
 extern "C" {
-    pub fn strtoq(__nptr: *const ::std::os::raw::c_char,
-                  __endptr: *mut *mut ::std::os::raw::c_char,
-                  __base: ::std::os::raw::c_int)
-     -> ::std::os::raw::c_longlong;
+    pub fn strtoq(__nptr: *const c_char, __endptr: *mut *mut c_char, __base: c_int) -> c_longlong;
 }
 extern "C" {
-    pub fn strtouq(__nptr: *const ::std::os::raw::c_char,
-                   __endptr: *mut *mut ::std::os::raw::c_char,
-                   __base: ::std::os::raw::c_int)
-     -> ::std::os::raw::c_ulonglong;
+    pub fn strtouq(__nptr: *const c_char,
+                   __endptr: *mut *mut c_char,
+                   __base: c_int)
+                   -> c_ulonglong;
 }
 extern "C" {
-    pub fn strtoll(__nptr: *const ::std::os::raw::c_char,
-                   __endptr: *mut *mut ::std::os::raw::c_char,
-                   __base: ::std::os::raw::c_int)
-     -> ::std::os::raw::c_longlong;
+    pub fn strtoll(__nptr: *const c_char, __endptr: *mut *mut c_char, __base: c_int) -> c_longlong;
 }
 extern "C" {
-    pub fn strtoull(__nptr: *const ::std::os::raw::c_char,
-                    __endptr: *mut *mut ::std::os::raw::c_char,
-                    __base: ::std::os::raw::c_int)
-     -> ::std::os::raw::c_ulonglong;
+    pub fn strtoull(__nptr: *const c_char,
+                    __endptr: *mut *mut c_char,
+                    __base: c_int)
+                    -> c_ulonglong;
 }
 extern "C" {
-    pub fn l64a(__n: ::std::os::raw::c_long) -> *mut ::std::os::raw::c_char;
+    pub fn l64a(__n: c_long) -> *mut c_char;
 }
 extern "C" {
-    pub fn a64l(__s: *const ::std::os::raw::c_char) -> ::std::os::raw::c_long;
+    pub fn a64l(__s: *const c_char) -> c_long;
 }
-pub type __u_char = ::std::os::raw::c_uchar;
-pub type __u_short = ::std::os::raw::c_ushort;
-pub type __u_int = ::std::os::raw::c_uint;
-pub type __u_long = ::std::os::raw::c_ulong;
-pub type __int8_t = ::std::os::raw::c_schar;
-pub type __uint8_t = ::std::os::raw::c_uchar;
-pub type __int16_t = ::std::os::raw::c_short;
-pub type __uint16_t = ::std::os::raw::c_ushort;
-pub type __int32_t = ::std::os::raw::c_int;
-pub type __uint32_t = ::std::os::raw::c_uint;
-pub type __int64_t = ::std::os::raw::c_long;
-pub type __uint64_t = ::std::os::raw::c_ulong;
-pub type __quad_t = ::std::os::raw::c_long;
-pub type __u_quad_t = ::std::os::raw::c_ulong;
-pub type __dev_t = ::std::os::raw::c_ulong;
-pub type __uid_t = ::std::os::raw::c_uint;
-pub type __gid_t = ::std::os::raw::c_uint;
-pub type __ino_t = ::std::os::raw::c_ulong;
-pub type __ino64_t = ::std::os::raw::c_ulong;
-pub type __mode_t = ::std::os::raw::c_uint;
-pub type __nlink_t = ::std::os::raw::c_ulong;
-pub type __off_t = ::std::os::raw::c_long;
-pub type __off64_t = ::std::os::raw::c_long;
-pub type __pid_t = ::std::os::raw::c_int;
+pub type __u_char = c_uchar;
+pub type __u_short = c_ushort;
+pub type __u_int = c_uint;
+pub type __u_long = c_ulong;
+pub type __int8_t = c_schar;
+pub type __uint8_t = c_uchar;
+pub type __int16_t = c_short;
+pub type __uint16_t = c_ushort;
+pub type __int32_t = c_int;
+pub type __uint32_t = c_uint;
+pub type __int64_t = c_long;
+pub type __uint64_t = c_ulong;
+pub type __quad_t = c_long;
+pub type __u_quad_t = c_ulong;
+pub type __dev_t = c_ulong;
+pub type __uid_t = c_uint;
+pub type __gid_t = c_uint;
+pub type __ino_t = c_ulong;
+pub type __ino64_t = c_ulong;
+pub type __mode_t = c_uint;
+pub type __nlink_t = c_ulong;
+pub type __off_t = c_long;
+pub type __off64_t = c_long;
+pub type __pid_t = c_int;
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct __fsid_t {
-    pub __val: [::std::os::raw::c_int; 2usize],
+    pub __val: [c_int; 2usize],
 }
 #[test]
 fn bindgen_test_layout___fsid_t() {
-    assert_eq!(::std::mem::size_of::<__fsid_t>() , 8usize , concat ! (
-               "Size of: " , stringify ! ( __fsid_t ) ));
-    assert_eq! (::std::mem::align_of::<__fsid_t>() , 4usize , concat ! (
-                "Alignment of " , stringify ! ( __fsid_t ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const __fsid_t ) ) . __val as * const _ as
-                usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( __fsid_t ) , "::" ,
-                stringify ! ( __val ) ));
+    assert_eq!(::std::mem::size_of::<__fsid_t>(),
+               8usize,
+               concat!("Size of: ", stringify!(__fsid_t)));
+    assert_eq!(::std::mem::align_of::<__fsid_t>(),
+               4usize,
+               concat!("Alignment of ", stringify!(__fsid_t)));
+    assert_eq!(unsafe { &(*(0 as *const __fsid_t)).__val as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(__fsid_t),
+                       "::",
+                       stringify!(__val)));
 }
 impl Clone for __fsid_t {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
-pub type __clock_t = ::std::os::raw::c_long;
-pub type __rlim_t = ::std::os::raw::c_ulong;
-pub type __rlim64_t = ::std::os::raw::c_ulong;
-pub type __id_t = ::std::os::raw::c_uint;
-pub type __time_t = ::std::os::raw::c_long;
-pub type __useconds_t = ::std::os::raw::c_uint;
-pub type __suseconds_t = ::std::os::raw::c_long;
-pub type __daddr_t = ::std::os::raw::c_int;
-pub type __key_t = ::std::os::raw::c_int;
-pub type __clockid_t = ::std::os::raw::c_int;
-pub type __timer_t = *mut ::std::os::raw::c_void;
-pub type __blksize_t = ::std::os::raw::c_long;
-pub type __blkcnt_t = ::std::os::raw::c_long;
-pub type __blkcnt64_t = ::std::os::raw::c_long;
-pub type __fsblkcnt_t = ::std::os::raw::c_ulong;
-pub type __fsblkcnt64_t = ::std::os::raw::c_ulong;
-pub type __fsfilcnt_t = ::std::os::raw::c_ulong;
-pub type __fsfilcnt64_t = ::std::os::raw::c_ulong;
-pub type __fsword_t = ::std::os::raw::c_long;
-pub type __ssize_t = ::std::os::raw::c_long;
-pub type __syscall_slong_t = ::std::os::raw::c_long;
-pub type __syscall_ulong_t = ::std::os::raw::c_ulong;
+pub type __clock_t = c_long;
+pub type __rlim_t = c_ulong;
+pub type __rlim64_t = c_ulong;
+pub type __id_t = c_uint;
+pub type __time_t = c_long;
+pub type __useconds_t = c_uint;
+pub type __suseconds_t = c_long;
+pub type __daddr_t = c_int;
+pub type __key_t = c_int;
+pub type __clockid_t = c_int;
+pub type __timer_t = *mut c_void;
+pub type __blksize_t = c_long;
+pub type __blkcnt_t = c_long;
+pub type __blkcnt64_t = c_long;
+pub type __fsblkcnt_t = c_ulong;
+pub type __fsblkcnt64_t = c_ulong;
+pub type __fsfilcnt_t = c_ulong;
+pub type __fsfilcnt64_t = c_ulong;
+pub type __fsword_t = c_long;
+pub type __ssize_t = c_long;
+pub type __syscall_slong_t = c_long;
+pub type __syscall_ulong_t = c_ulong;
 pub type __loff_t = __off64_t;
 pub type __qaddr_t = *mut __quad_t;
-pub type __caddr_t = *mut ::std::os::raw::c_char;
-pub type __intptr_t = ::std::os::raw::c_long;
-pub type __socklen_t = ::std::os::raw::c_uint;
+pub type __caddr_t = *mut c_char;
+pub type __intptr_t = c_long;
+pub type __socklen_t = c_uint;
 pub type u_char = __u_char;
 pub type u_short = __u_short;
 pub type u_int = __u_int;
@@ -251,34 +263,39 @@ pub type clock_t = __clock_t;
 pub type time_t = __time_t;
 pub type clockid_t = __clockid_t;
 pub type timer_t = __timer_t;
-pub type ulongxx = ::std::os::raw::c_ulong;
-pub type ushort = ::std::os::raw::c_ushort;
-pub type uint = ::std::os::raw::c_uint;
-pub type u_int8_t = ::std::os::raw::c_uchar;
-pub type u_int16_t = ::std::os::raw::c_ushort;
-pub type u_int32_t = ::std::os::raw::c_uint;
-pub type u_int64_t = ::std::os::raw::c_ulong;
-pub type register_t = ::std::os::raw::c_long;
-pub type __sig_atomic_t = ::std::os::raw::c_int;
+pub type ulongxx = c_ulong;
+pub type ushort = c_ushort;
+pub type uint = c_uint;
+pub type u_int8_t = c_uchar;
+pub type u_int16_t = c_ushort;
+pub type u_int32_t = c_uint;
+pub type u_int64_t = c_ulong;
+pub type register_t = c_long;
+pub type __sig_atomic_t = c_int;
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct __sigset_t {
-    pub __val: [::std::os::raw::c_ulong; 16usize],
+    pub __val: [c_ulong; 16usize],
 }
 #[test]
 fn bindgen_test_layout___sigset_t() {
-    assert_eq!(::std::mem::size_of::<__sigset_t>() , 128usize , concat ! (
-               "Size of: " , stringify ! ( __sigset_t ) ));
-    assert_eq! (::std::mem::align_of::<__sigset_t>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( __sigset_t ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const __sigset_t ) ) . __val as * const _ as
-                usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( __sigset_t ) , "::" ,
-                stringify ! ( __val ) ));
+    assert_eq!(::std::mem::size_of::<__sigset_t>(),
+               128usize,
+               concat!("Size of: ", stringify!(__sigset_t)));
+    assert_eq!(::std::mem::align_of::<__sigset_t>(),
+               8usize,
+               concat!("Alignment of ", stringify!(__sigset_t)));
+    assert_eq!(unsafe { &(*(0 as *const __sigset_t)).__val as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(__sigset_t),
+                       "::",
+                       stringify!(__val)));
 }
 impl Clone for __sigset_t {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 pub type sigset_t = __sigset_t;
 #[repr(C)]
@@ -289,23 +306,29 @@ pub struct timespec {
 }
 #[test]
 fn bindgen_test_layout_timespec() {
-    assert_eq!(::std::mem::size_of::<timespec>() , 16usize , concat ! (
-               "Size of: " , stringify ! ( timespec ) ));
-    assert_eq! (::std::mem::align_of::<timespec>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( timespec ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const timespec ) ) . tv_sec as * const _ as
-                usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( timespec ) , "::" ,
-                stringify ! ( tv_sec ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const timespec ) ) . tv_nsec as * const _ as
-                usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( timespec ) , "::" ,
-                stringify ! ( tv_nsec ) ));
+    assert_eq!(::std::mem::size_of::<timespec>(),
+               16usize,
+               concat!("Size of: ", stringify!(timespec)));
+    assert_eq!(::std::mem::align_of::<timespec>(),
+               8usize,
+               concat!("Alignment of ", stringify!(timespec)));
+    assert_eq!(unsafe { &(*(0 as *const timespec)).tv_sec as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(timespec),
+                       "::",
+                       stringify!(tv_sec)));
+    assert_eq!(unsafe { &(*(0 as *const timespec)).tv_nsec as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(timespec),
+                       "::",
+                       stringify!(tv_nsec)));
 }
 impl Clone for timespec {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
@@ -315,26 +338,32 @@ pub struct timeval {
 }
 #[test]
 fn bindgen_test_layout_timeval() {
-    assert_eq!(::std::mem::size_of::<timeval>() , 16usize , concat ! (
-               "Size of: " , stringify ! ( timeval ) ));
-    assert_eq! (::std::mem::align_of::<timeval>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( timeval ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const timeval ) ) . tv_sec as * const _ as
-                usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( timeval ) , "::" ,
-                stringify ! ( tv_sec ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const timeval ) ) . tv_usec as * const _ as
-                usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( timeval ) , "::" ,
-                stringify ! ( tv_usec ) ));
+    assert_eq!(::std::mem::size_of::<timeval>(),
+               16usize,
+               concat!("Size of: ", stringify!(timeval)));
+    assert_eq!(::std::mem::align_of::<timeval>(),
+               8usize,
+               concat!("Alignment of ", stringify!(timeval)));
+    assert_eq!(unsafe { &(*(0 as *const timeval)).tv_sec as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(timeval),
+                       "::",
+                       stringify!(tv_sec)));
+    assert_eq!(unsafe { &(*(0 as *const timeval)).tv_usec as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(timeval),
+                       "::",
+                       stringify!(tv_usec)));
 }
 impl Clone for timeval {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 pub type suseconds_t = __suseconds_t;
-pub type __fd_mask = ::std::os::raw::c_long;
+pub type __fd_mask = c_long;
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct fd_set {
@@ -342,70 +371,81 @@ pub struct fd_set {
 }
 #[test]
 fn bindgen_test_layout_fd_set() {
-    assert_eq!(::std::mem::size_of::<fd_set>() , 128usize , concat ! (
-               "Size of: " , stringify ! ( fd_set ) ));
-    assert_eq! (::std::mem::align_of::<fd_set>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( fd_set ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const fd_set ) ) . __fds_bits as * const _ as
-                usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( fd_set ) , "::" ,
-                stringify ! ( __fds_bits ) ));
+    assert_eq!(::std::mem::size_of::<fd_set>(),
+               128usize,
+               concat!("Size of: ", stringify!(fd_set)));
+    assert_eq!(::std::mem::align_of::<fd_set>(),
+               8usize,
+               concat!("Alignment of ", stringify!(fd_set)));
+    assert_eq!(unsafe { &(*(0 as *const fd_set)).__fds_bits as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(fd_set),
+                       "::",
+                       stringify!(__fds_bits)));
 }
 impl Clone for fd_set {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 pub type fd_mask = __fd_mask;
 extern "C" {
-    pub fn select(__nfds: ::std::os::raw::c_int, __readfds: *mut fd_set,
-                  __writefds: *mut fd_set, __exceptfds: *mut fd_set,
-                  __timeout: *mut timeval) -> ::std::os::raw::c_int;
+    pub fn select(__nfds: c_int,
+                  __readfds: *mut fd_set,
+                  __writefds: *mut fd_set,
+                  __exceptfds: *mut fd_set,
+                  __timeout: *mut timeval)
+                  -> c_int;
 }
 extern "C" {
-    pub fn pselect(__nfds: ::std::os::raw::c_int, __readfds: *mut fd_set,
-                   __writefds: *mut fd_set, __exceptfds: *mut fd_set,
-                   __timeout: *const timespec, __sigmask: *const __sigset_t)
-     -> ::std::os::raw::c_int;
+    pub fn pselect(__nfds: c_int,
+                   __readfds: *mut fd_set,
+                   __writefds: *mut fd_set,
+                   __exceptfds: *mut fd_set,
+                   __timeout: *const timespec,
+                   __sigmask: *const __sigset_t)
+                   -> c_int;
 }
 extern "C" {
-    pub fn gnu_dev_major(__dev: ::std::os::raw::c_ulonglong)
-     -> ::std::os::raw::c_uint;
+    pub fn gnu_dev_major(__dev: c_ulonglong) -> c_uint;
 }
 extern "C" {
-    pub fn gnu_dev_minor(__dev: ::std::os::raw::c_ulonglong)
-     -> ::std::os::raw::c_uint;
+    pub fn gnu_dev_minor(__dev: c_ulonglong) -> c_uint;
 }
 extern "C" {
-    pub fn gnu_dev_makedev(__major: ::std::os::raw::c_uint,
-                           __minor: ::std::os::raw::c_uint)
-     -> ::std::os::raw::c_ulonglong;
+    pub fn gnu_dev_makedev(__major: c_uint, __minor: c_uint) -> c_ulonglong;
 }
 pub type blksize_t = __blksize_t;
 pub type blkcnt_t = __blkcnt_t;
 pub type fsblkcnt_t = __fsblkcnt_t;
 pub type fsfilcnt_t = __fsfilcnt_t;
-pub type pthread_t = ::std::os::raw::c_ulong;
+pub type pthread_t = c_ulong;
 #[repr(C)]
 pub union pthread_attr_t {
-    pub __size: [::std::os::raw::c_char; 56usize],
-    pub __align: ::std::os::raw::c_long,
+    pub __size: [c_char; 56usize],
+    pub __align: c_long,
 }
 #[test]
 fn bindgen_test_layout_pthread_attr_t() {
-    assert_eq!(::std::mem::size_of::<pthread_attr_t>() , 56usize , concat ! (
-               "Size of: " , stringify ! ( pthread_attr_t ) ));
-    assert_eq! (::std::mem::align_of::<pthread_attr_t>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( pthread_attr_t ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_attr_t ) ) . __size as * const _
-                as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( pthread_attr_t ) , "::"
-                , stringify ! ( __size ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_attr_t ) ) . __align as * const _
-                as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( pthread_attr_t ) , "::"
-                , stringify ! ( __align ) ));
+    assert_eq!(::std::mem::size_of::<pthread_attr_t>(),
+               56usize,
+               concat!("Size of: ", stringify!(pthread_attr_t)));
+    assert_eq!(::std::mem::align_of::<pthread_attr_t>(),
+               8usize,
+               concat!("Alignment of ", stringify!(pthread_attr_t)));
+    assert_eq!(unsafe { &(*(0 as *const pthread_attr_t)).__size as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_attr_t),
+                       "::",
+                       stringify!(__size)));
+    assert_eq!(unsafe { &(*(0 as *const pthread_attr_t)).__align as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_attr_t),
+                       "::",
+                       stringify!(__align)));
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
@@ -415,513 +455,618 @@ pub struct __pthread_internal_list {
 }
 #[test]
 fn bindgen_test_layout___pthread_internal_list() {
-    assert_eq!(::std::mem::size_of::<__pthread_internal_list>() , 16usize ,
-               concat ! (
-               "Size of: " , stringify ! ( __pthread_internal_list ) ));
-    assert_eq! (::std::mem::align_of::<__pthread_internal_list>() , 8usize ,
-                concat ! (
-                "Alignment of " , stringify ! ( __pthread_internal_list ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const __pthread_internal_list ) ) . __prev as *
-                const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( __pthread_internal_list
-                ) , "::" , stringify ! ( __prev ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const __pthread_internal_list ) ) . __next as *
-                const _ as usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( __pthread_internal_list
-                ) , "::" , stringify ! ( __next ) ));
+    assert_eq!(::std::mem::size_of::<__pthread_internal_list>(),
+               16usize,
+               concat!("Size of: ", stringify!(__pthread_internal_list)));
+    assert_eq!(::std::mem::align_of::<__pthread_internal_list>(),
+               8usize,
+               concat!("Alignment of ", stringify!(__pthread_internal_list)));
+    assert_eq!(unsafe { &(*(0 as *const __pthread_internal_list)).__prev as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(__pthread_internal_list),
+                       "::",
+                       stringify!(__prev)));
+    assert_eq!(unsafe { &(*(0 as *const __pthread_internal_list)).__next as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(__pthread_internal_list),
+                       "::",
+                       stringify!(__next)));
 }
 impl Clone for __pthread_internal_list {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 pub type __pthread_list_t = __pthread_internal_list;
 #[repr(C)]
 pub union pthread_mutex_t {
     pub __data: pthread_mutex_t___pthread_mutex_s,
-    pub __size: [::std::os::raw::c_char; 40usize],
-    pub __align: ::std::os::raw::c_long,
+    pub __size: [c_char; 40usize],
+    pub __align: c_long,
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct pthread_mutex_t___pthread_mutex_s {
-    pub __lock: ::std::os::raw::c_int,
-    pub __count: ::std::os::raw::c_uint,
-    pub __owner: ::std::os::raw::c_int,
-    pub __nusers: ::std::os::raw::c_uint,
-    pub __kind: ::std::os::raw::c_int,
-    pub __spins: ::std::os::raw::c_short,
-    pub __elision: ::std::os::raw::c_short,
+    pub __lock: c_int,
+    pub __count: c_uint,
+    pub __owner: c_int,
+    pub __nusers: c_uint,
+    pub __kind: c_int,
+    pub __spins: c_short,
+    pub __elision: c_short,
     pub __list: __pthread_list_t,
 }
 #[test]
 fn bindgen_test_layout_pthread_mutex_t___pthread_mutex_s() {
-    assert_eq!(::std::mem::size_of::<pthread_mutex_t___pthread_mutex_s>() ,
-               40usize , concat ! (
-               "Size of: " , stringify ! ( pthread_mutex_t___pthread_mutex_s )
-               ));
-    assert_eq! (::std::mem::align_of::<pthread_mutex_t___pthread_mutex_s>() ,
-                8usize , concat ! (
-                "Alignment of " , stringify ! (
-                pthread_mutex_t___pthread_mutex_s ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_mutex_t___pthread_mutex_s ) ) .
-                __lock as * const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                pthread_mutex_t___pthread_mutex_s ) , "::" , stringify ! (
-                __lock ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_mutex_t___pthread_mutex_s ) ) .
-                __count as * const _ as usize } , 4usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                pthread_mutex_t___pthread_mutex_s ) , "::" , stringify ! (
-                __count ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_mutex_t___pthread_mutex_s ) ) .
-                __owner as * const _ as usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                pthread_mutex_t___pthread_mutex_s ) , "::" , stringify ! (
-                __owner ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_mutex_t___pthread_mutex_s ) ) .
-                __nusers as * const _ as usize } , 12usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                pthread_mutex_t___pthread_mutex_s ) , "::" , stringify ! (
-                __nusers ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_mutex_t___pthread_mutex_s ) ) .
-                __kind as * const _ as usize } , 16usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                pthread_mutex_t___pthread_mutex_s ) , "::" , stringify ! (
-                __kind ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_mutex_t___pthread_mutex_s ) ) .
-                __spins as * const _ as usize } , 20usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                pthread_mutex_t___pthread_mutex_s ) , "::" , stringify ! (
-                __spins ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_mutex_t___pthread_mutex_s ) ) .
-                __elision as * const _ as usize } , 22usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                pthread_mutex_t___pthread_mutex_s ) , "::" , stringify ! (
-                __elision ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_mutex_t___pthread_mutex_s ) ) .
-                __list as * const _ as usize } , 24usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                pthread_mutex_t___pthread_mutex_s ) , "::" , stringify ! (
-                __list ) ));
+    assert_eq!(::std::mem::size_of::<pthread_mutex_t___pthread_mutex_s>(),
+               40usize,
+               concat!("Size of: ", stringify!(pthread_mutex_t___pthread_mutex_s)));
+    assert_eq!(::std::mem::align_of::<pthread_mutex_t___pthread_mutex_s>(),
+               8usize,
+               concat!("Alignment of ",
+                       stringify!(pthread_mutex_t___pthread_mutex_s)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const pthread_mutex_t___pthread_mutex_s)).__lock as *const _ as usize
+               },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_mutex_t___pthread_mutex_s),
+                       "::",
+                       stringify!(__lock)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const pthread_mutex_t___pthread_mutex_s)).__count as *const _ as usize
+               },
+               4usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_mutex_t___pthread_mutex_s),
+                       "::",
+                       stringify!(__count)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const pthread_mutex_t___pthread_mutex_s)).__owner as *const _ as usize
+               },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_mutex_t___pthread_mutex_s),
+                       "::",
+                       stringify!(__owner)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const pthread_mutex_t___pthread_mutex_s)).__nusers as *const _ as usize
+               },
+               12usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_mutex_t___pthread_mutex_s),
+                       "::",
+                       stringify!(__nusers)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const pthread_mutex_t___pthread_mutex_s)).__kind as *const _ as usize
+               },
+               16usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_mutex_t___pthread_mutex_s),
+                       "::",
+                       stringify!(__kind)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const pthread_mutex_t___pthread_mutex_s)).__spins as *const _ as usize
+               },
+               20usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_mutex_t___pthread_mutex_s),
+                       "::",
+                       stringify!(__spins)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const pthread_mutex_t___pthread_mutex_s)).__elision as *const _ as
+                   usize
+               },
+               22usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_mutex_t___pthread_mutex_s),
+                       "::",
+                       stringify!(__elision)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const pthread_mutex_t___pthread_mutex_s)).__list as *const _ as usize
+               },
+               24usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_mutex_t___pthread_mutex_s),
+                       "::",
+                       stringify!(__list)));
 }
 impl Clone for pthread_mutex_t___pthread_mutex_s {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[test]
 fn bindgen_test_layout_pthread_mutex_t() {
-    assert_eq!(::std::mem::size_of::<pthread_mutex_t>() , 40usize , concat ! (
-               "Size of: " , stringify ! ( pthread_mutex_t ) ));
-    assert_eq! (::std::mem::align_of::<pthread_mutex_t>() , 8usize , concat !
-                ( "Alignment of " , stringify ! ( pthread_mutex_t ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_mutex_t ) ) . __data as * const _
-                as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( pthread_mutex_t ) ,
-                "::" , stringify ! ( __data ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_mutex_t ) ) . __size as * const _
-                as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( pthread_mutex_t ) ,
-                "::" , stringify ! ( __size ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_mutex_t ) ) . __align as * const
-                _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( pthread_mutex_t ) ,
-                "::" , stringify ! ( __align ) ));
+    assert_eq!(::std::mem::size_of::<pthread_mutex_t>(),
+               40usize,
+               concat!("Size of: ", stringify!(pthread_mutex_t)));
+    assert_eq!(::std::mem::align_of::<pthread_mutex_t>(),
+               8usize,
+               concat!("Alignment of ", stringify!(pthread_mutex_t)));
+    assert_eq!(unsafe { &(*(0 as *const pthread_mutex_t)).__data as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_mutex_t),
+                       "::",
+                       stringify!(__data)));
+    assert_eq!(unsafe { &(*(0 as *const pthread_mutex_t)).__size as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_mutex_t),
+                       "::",
+                       stringify!(__size)));
+    assert_eq!(unsafe { &(*(0 as *const pthread_mutex_t)).__align as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_mutex_t),
+                       "::",
+                       stringify!(__align)));
 }
 #[repr(C)]
 #[derive(Copy)]
 pub union pthread_mutexattr_t {
-    pub __size: [::std::os::raw::c_char; 4usize],
-    pub __align: ::std::os::raw::c_int,
+    pub __size: [c_char; 4usize],
+    pub __align: c_int,
 }
 #[test]
 fn bindgen_test_layout_pthread_mutexattr_t() {
-    assert_eq!(::std::mem::size_of::<pthread_mutexattr_t>() , 4usize , concat
-               ! ( "Size of: " , stringify ! ( pthread_mutexattr_t ) ));
-    assert_eq! (::std::mem::align_of::<pthread_mutexattr_t>() , 4usize ,
-                concat ! (
-                "Alignment of " , stringify ! ( pthread_mutexattr_t ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_mutexattr_t ) ) . __size as *
-                const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( pthread_mutexattr_t ) ,
-                "::" , stringify ! ( __size ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_mutexattr_t ) ) . __align as *
-                const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( pthread_mutexattr_t ) ,
-                "::" , stringify ! ( __align ) ));
+    assert_eq!(::std::mem::size_of::<pthread_mutexattr_t>(),
+               4usize,
+               concat!("Size of: ", stringify!(pthread_mutexattr_t)));
+    assert_eq!(::std::mem::align_of::<pthread_mutexattr_t>(),
+               4usize,
+               concat!("Alignment of ", stringify!(pthread_mutexattr_t)));
+    assert_eq!(unsafe { &(*(0 as *const pthread_mutexattr_t)).__size as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_mutexattr_t),
+                       "::",
+                       stringify!(__size)));
+    assert_eq!(unsafe { &(*(0 as *const pthread_mutexattr_t)).__align as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_mutexattr_t),
+                       "::",
+                       stringify!(__align)));
 }
 impl Clone for pthread_mutexattr_t {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[repr(C)]
 pub union pthread_cond_t {
     pub __data: pthread_cond_t__bindgen_ty_1,
-    pub __size: [::std::os::raw::c_char; 48usize],
-    pub __align: ::std::os::raw::c_longlong,
+    pub __size: [c_char; 48usize],
+    pub __align: c_longlong,
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct pthread_cond_t__bindgen_ty_1 {
-    pub __lock: ::std::os::raw::c_int,
-    pub __futex: ::std::os::raw::c_uint,
-    pub __total_seq: ::std::os::raw::c_ulonglong,
-    pub __wakeup_seq: ::std::os::raw::c_ulonglong,
-    pub __woken_seq: ::std::os::raw::c_ulonglong,
-    pub __mutex: *mut ::std::os::raw::c_void,
-    pub __nwaiters: ::std::os::raw::c_uint,
-    pub __broadcast_seq: ::std::os::raw::c_uint,
+    pub __lock: c_int,
+    pub __futex: c_uint,
+    pub __total_seq: c_ulonglong,
+    pub __wakeup_seq: c_ulonglong,
+    pub __woken_seq: c_ulonglong,
+    pub __mutex: *mut c_void,
+    pub __nwaiters: c_uint,
+    pub __broadcast_seq: c_uint,
 }
 #[test]
 fn bindgen_test_layout_pthread_cond_t__bindgen_ty_1() {
-    assert_eq!(::std::mem::size_of::<pthread_cond_t__bindgen_ty_1>() , 48usize
-               , concat ! (
-               "Size of: " , stringify ! ( pthread_cond_t__bindgen_ty_1 ) ));
-    assert_eq! (::std::mem::align_of::<pthread_cond_t__bindgen_ty_1>() ,
-                8usize , concat ! (
-                "Alignment of " , stringify ! ( pthread_cond_t__bindgen_ty_1 )
-                ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_cond_t__bindgen_ty_1 ) ) . __lock
-                as * const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                pthread_cond_t__bindgen_ty_1 ) , "::" , stringify ! ( __lock )
-                ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_cond_t__bindgen_ty_1 ) ) .
-                __futex as * const _ as usize } , 4usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                pthread_cond_t__bindgen_ty_1 ) , "::" , stringify ! ( __futex
-                ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_cond_t__bindgen_ty_1 ) ) .
-                __total_seq as * const _ as usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                pthread_cond_t__bindgen_ty_1 ) , "::" , stringify ! (
-                __total_seq ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_cond_t__bindgen_ty_1 ) ) .
-                __wakeup_seq as * const _ as usize } , 16usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                pthread_cond_t__bindgen_ty_1 ) , "::" , stringify ! (
-                __wakeup_seq ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_cond_t__bindgen_ty_1 ) ) .
-                __woken_seq as * const _ as usize } , 24usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                pthread_cond_t__bindgen_ty_1 ) , "::" , stringify ! (
-                __woken_seq ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_cond_t__bindgen_ty_1 ) ) .
-                __mutex as * const _ as usize } , 32usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                pthread_cond_t__bindgen_ty_1 ) , "::" , stringify ! ( __mutex
-                ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_cond_t__bindgen_ty_1 ) ) .
-                __nwaiters as * const _ as usize } , 40usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                pthread_cond_t__bindgen_ty_1 ) , "::" , stringify ! (
-                __nwaiters ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_cond_t__bindgen_ty_1 ) ) .
-                __broadcast_seq as * const _ as usize } , 44usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                pthread_cond_t__bindgen_ty_1 ) , "::" , stringify ! (
-                __broadcast_seq ) ));
+    assert_eq!(::std::mem::size_of::<pthread_cond_t__bindgen_ty_1>(),
+               48usize,
+               concat!("Size of: ", stringify!(pthread_cond_t__bindgen_ty_1)));
+    assert_eq!(::std::mem::align_of::<pthread_cond_t__bindgen_ty_1>(),
+               8usize,
+               concat!("Alignment of ", stringify!(pthread_cond_t__bindgen_ty_1)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const pthread_cond_t__bindgen_ty_1)).__lock as *const _ as usize
+               },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_cond_t__bindgen_ty_1),
+                       "::",
+                       stringify!(__lock)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const pthread_cond_t__bindgen_ty_1)).__futex as *const _ as usize
+               },
+               4usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_cond_t__bindgen_ty_1),
+                       "::",
+                       stringify!(__futex)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const pthread_cond_t__bindgen_ty_1)).__total_seq as *const _ as usize
+               },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_cond_t__bindgen_ty_1),
+                       "::",
+                       stringify!(__total_seq)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const pthread_cond_t__bindgen_ty_1)).__wakeup_seq as *const _ as usize
+               },
+               16usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_cond_t__bindgen_ty_1),
+                       "::",
+                       stringify!(__wakeup_seq)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const pthread_cond_t__bindgen_ty_1)).__woken_seq as *const _ as usize
+               },
+               24usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_cond_t__bindgen_ty_1),
+                       "::",
+                       stringify!(__woken_seq)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const pthread_cond_t__bindgen_ty_1)).__mutex as *const _ as usize
+               },
+               32usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_cond_t__bindgen_ty_1),
+                       "::",
+                       stringify!(__mutex)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const pthread_cond_t__bindgen_ty_1)).__nwaiters as *const _ as usize
+               },
+               40usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_cond_t__bindgen_ty_1),
+                       "::",
+                       stringify!(__nwaiters)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const pthread_cond_t__bindgen_ty_1)).__broadcast_seq as *const _ as
+                   usize
+               },
+               44usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_cond_t__bindgen_ty_1),
+                       "::",
+                       stringify!(__broadcast_seq)));
 }
 impl Clone for pthread_cond_t__bindgen_ty_1 {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[test]
 fn bindgen_test_layout_pthread_cond_t() {
-    assert_eq!(::std::mem::size_of::<pthread_cond_t>() , 48usize , concat ! (
-               "Size of: " , stringify ! ( pthread_cond_t ) ));
-    assert_eq! (::std::mem::align_of::<pthread_cond_t>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( pthread_cond_t ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_cond_t ) ) . __data as * const _
-                as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( pthread_cond_t ) , "::"
-                , stringify ! ( __data ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_cond_t ) ) . __size as * const _
-                as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( pthread_cond_t ) , "::"
-                , stringify ! ( __size ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_cond_t ) ) . __align as * const _
-                as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( pthread_cond_t ) , "::"
-                , stringify ! ( __align ) ));
+    assert_eq!(::std::mem::size_of::<pthread_cond_t>(),
+               48usize,
+               concat!("Size of: ", stringify!(pthread_cond_t)));
+    assert_eq!(::std::mem::align_of::<pthread_cond_t>(),
+               8usize,
+               concat!("Alignment of ", stringify!(pthread_cond_t)));
+    assert_eq!(unsafe { &(*(0 as *const pthread_cond_t)).__data as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_cond_t),
+                       "::",
+                       stringify!(__data)));
+    assert_eq!(unsafe { &(*(0 as *const pthread_cond_t)).__size as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_cond_t),
+                       "::",
+                       stringify!(__size)));
+    assert_eq!(unsafe { &(*(0 as *const pthread_cond_t)).__align as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_cond_t),
+                       "::",
+                       stringify!(__align)));
 }
 #[repr(C)]
 #[derive(Copy)]
 pub union pthread_condattr_t {
-    pub __size: [::std::os::raw::c_char; 4usize],
-    pub __align: ::std::os::raw::c_int,
+    pub __size: [c_char; 4usize],
+    pub __align: c_int,
 }
 #[test]
 fn bindgen_test_layout_pthread_condattr_t() {
-    assert_eq!(::std::mem::size_of::<pthread_condattr_t>() , 4usize , concat !
-               ( "Size of: " , stringify ! ( pthread_condattr_t ) ));
-    assert_eq! (::std::mem::align_of::<pthread_condattr_t>() , 4usize , concat
-                ! ( "Alignment of " , stringify ! ( pthread_condattr_t ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_condattr_t ) ) . __size as *
-                const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( pthread_condattr_t ) ,
-                "::" , stringify ! ( __size ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_condattr_t ) ) . __align as *
-                const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( pthread_condattr_t ) ,
-                "::" , stringify ! ( __align ) ));
+    assert_eq!(::std::mem::size_of::<pthread_condattr_t>(),
+               4usize,
+               concat!("Size of: ", stringify!(pthread_condattr_t)));
+    assert_eq!(::std::mem::align_of::<pthread_condattr_t>(),
+               4usize,
+               concat!("Alignment of ", stringify!(pthread_condattr_t)));
+    assert_eq!(unsafe { &(*(0 as *const pthread_condattr_t)).__size as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_condattr_t),
+                       "::",
+                       stringify!(__size)));
+    assert_eq!(unsafe { &(*(0 as *const pthread_condattr_t)).__align as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_condattr_t),
+                       "::",
+                       stringify!(__align)));
 }
 impl Clone for pthread_condattr_t {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
-pub type pthread_key_t = ::std::os::raw::c_uint;
-pub type pthread_once_t = ::std::os::raw::c_int;
+pub type pthread_key_t = c_uint;
+pub type pthread_once_t = c_int;
 #[repr(C)]
 pub union pthread_rwlock_t {
     pub __data: pthread_rwlock_t__bindgen_ty_1,
-    pub __size: [::std::os::raw::c_char; 56usize],
-    pub __align: ::std::os::raw::c_long,
+    pub __size: [c_char; 56usize],
+    pub __align: c_long,
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct pthread_rwlock_t__bindgen_ty_1 {
-    pub __lock: ::std::os::raw::c_int,
-    pub __nr_readers: ::std::os::raw::c_uint,
-    pub __readers_wakeup: ::std::os::raw::c_uint,
-    pub __writer_wakeup: ::std::os::raw::c_uint,
-    pub __nr_readers_queued: ::std::os::raw::c_uint,
-    pub __nr_writers_queued: ::std::os::raw::c_uint,
-    pub __writer: ::std::os::raw::c_int,
-    pub __shared: ::std::os::raw::c_int,
-    pub __rwelision: ::std::os::raw::c_schar,
-    pub __pad1: [::std::os::raw::c_uchar; 7usize],
-    pub __pad2: ::std::os::raw::c_ulong,
-    pub __flags: ::std::os::raw::c_uint,
+    pub __lock: c_int,
+    pub __nr_readers: c_uint,
+    pub __readers_wakeup: c_uint,
+    pub __writer_wakeup: c_uint,
+    pub __nr_readers_queued: c_uint,
+    pub __nr_writers_queued: c_uint,
+    pub __writer: c_int,
+    pub __shared: c_int,
+    pub __rwelision: c_schar,
+    pub __pad1: [c_uchar; 7usize],
+    pub __pad2: c_ulong,
+    pub __flags: c_uint,
 }
 #[test]
 fn bindgen_test_layout_pthread_rwlock_t__bindgen_ty_1() {
-    assert_eq!(::std::mem::size_of::<pthread_rwlock_t__bindgen_ty_1>() ,
-               56usize , concat ! (
-               "Size of: " , stringify ! ( pthread_rwlock_t__bindgen_ty_1 )
-               ));
-    assert_eq! (::std::mem::align_of::<pthread_rwlock_t__bindgen_ty_1>() ,
-                8usize , concat ! (
-                "Alignment of " , stringify ! ( pthread_rwlock_t__bindgen_ty_1
-                ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_rwlock_t__bindgen_ty_1 ) ) .
-                __lock as * const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                pthread_rwlock_t__bindgen_ty_1 ) , "::" , stringify ! ( __lock
-                ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_rwlock_t__bindgen_ty_1 ) ) .
-                __nr_readers as * const _ as usize } , 4usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                pthread_rwlock_t__bindgen_ty_1 ) , "::" , stringify ! (
-                __nr_readers ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_rwlock_t__bindgen_ty_1 ) ) .
-                __readers_wakeup as * const _ as usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                pthread_rwlock_t__bindgen_ty_1 ) , "::" , stringify ! (
-                __readers_wakeup ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_rwlock_t__bindgen_ty_1 ) ) .
-                __writer_wakeup as * const _ as usize } , 12usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                pthread_rwlock_t__bindgen_ty_1 ) , "::" , stringify ! (
-                __writer_wakeup ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_rwlock_t__bindgen_ty_1 ) ) .
-                __nr_readers_queued as * const _ as usize } , 16usize , concat
-                ! (
-                "Alignment of field: " , stringify ! (
-                pthread_rwlock_t__bindgen_ty_1 ) , "::" , stringify ! (
-                __nr_readers_queued ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_rwlock_t__bindgen_ty_1 ) ) .
-                __nr_writers_queued as * const _ as usize } , 20usize , concat
-                ! (
-                "Alignment of field: " , stringify ! (
-                pthread_rwlock_t__bindgen_ty_1 ) , "::" , stringify ! (
-                __nr_writers_queued ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_rwlock_t__bindgen_ty_1 ) ) .
-                __writer as * const _ as usize } , 24usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                pthread_rwlock_t__bindgen_ty_1 ) , "::" , stringify ! (
-                __writer ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_rwlock_t__bindgen_ty_1 ) ) .
-                __shared as * const _ as usize } , 28usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                pthread_rwlock_t__bindgen_ty_1 ) , "::" , stringify ! (
-                __shared ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_rwlock_t__bindgen_ty_1 ) ) .
-                __rwelision as * const _ as usize } , 32usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                pthread_rwlock_t__bindgen_ty_1 ) , "::" , stringify ! (
-                __rwelision ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_rwlock_t__bindgen_ty_1 ) ) .
-                __pad1 as * const _ as usize } , 33usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                pthread_rwlock_t__bindgen_ty_1 ) , "::" , stringify ! ( __pad1
-                ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_rwlock_t__bindgen_ty_1 ) ) .
-                __pad2 as * const _ as usize } , 40usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                pthread_rwlock_t__bindgen_ty_1 ) , "::" , stringify ! ( __pad2
-                ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_rwlock_t__bindgen_ty_1 ) ) .
-                __flags as * const _ as usize } , 48usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                pthread_rwlock_t__bindgen_ty_1 ) , "::" , stringify ! (
-                __flags ) ));
+    assert_eq!(::std::mem::size_of::<pthread_rwlock_t__bindgen_ty_1>(),
+               56usize,
+               concat!("Size of: ", stringify!(pthread_rwlock_t__bindgen_ty_1)));
+    assert_eq!(::std::mem::align_of::<pthread_rwlock_t__bindgen_ty_1>(),
+               8usize,
+               concat!("Alignment of ", stringify!(pthread_rwlock_t__bindgen_ty_1)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const pthread_rwlock_t__bindgen_ty_1)).__lock as *const _ as usize
+               },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_rwlock_t__bindgen_ty_1),
+                       "::",
+                       stringify!(__lock)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const pthread_rwlock_t__bindgen_ty_1)).__nr_readers as *const _ as
+                   usize
+               },
+               4usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_rwlock_t__bindgen_ty_1),
+                       "::",
+                       stringify!(__nr_readers)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const pthread_rwlock_t__bindgen_ty_1)).__readers_wakeup as *const _ as
+                   usize
+               },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_rwlock_t__bindgen_ty_1),
+                       "::",
+                       stringify!(__readers_wakeup)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const pthread_rwlock_t__bindgen_ty_1)).__writer_wakeup as *const _ as
+                   usize
+               },
+               12usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_rwlock_t__bindgen_ty_1),
+                       "::",
+                       stringify!(__writer_wakeup)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const pthread_rwlock_t__bindgen_ty_1)).__nr_readers_queued as
+                   *const _ as usize
+               },
+               16usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_rwlock_t__bindgen_ty_1),
+                       "::",
+                       stringify!(__nr_readers_queued)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const pthread_rwlock_t__bindgen_ty_1)).__nr_writers_queued as
+                   *const _ as usize
+               },
+               20usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_rwlock_t__bindgen_ty_1),
+                       "::",
+                       stringify!(__nr_writers_queued)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const pthread_rwlock_t__bindgen_ty_1)).__writer as *const _ as usize
+               },
+               24usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_rwlock_t__bindgen_ty_1),
+                       "::",
+                       stringify!(__writer)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const pthread_rwlock_t__bindgen_ty_1)).__shared as *const _ as usize
+               },
+               28usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_rwlock_t__bindgen_ty_1),
+                       "::",
+                       stringify!(__shared)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const pthread_rwlock_t__bindgen_ty_1)).__rwelision as *const _ as usize
+               },
+               32usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_rwlock_t__bindgen_ty_1),
+                       "::",
+                       stringify!(__rwelision)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const pthread_rwlock_t__bindgen_ty_1)).__pad1 as *const _ as usize
+               },
+               33usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_rwlock_t__bindgen_ty_1),
+                       "::",
+                       stringify!(__pad1)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const pthread_rwlock_t__bindgen_ty_1)).__pad2 as *const _ as usize
+               },
+               40usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_rwlock_t__bindgen_ty_1),
+                       "::",
+                       stringify!(__pad2)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const pthread_rwlock_t__bindgen_ty_1)).__flags as *const _ as usize
+               },
+               48usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_rwlock_t__bindgen_ty_1),
+                       "::",
+                       stringify!(__flags)));
 }
 impl Clone for pthread_rwlock_t__bindgen_ty_1 {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[test]
 fn bindgen_test_layout_pthread_rwlock_t() {
-    assert_eq!(::std::mem::size_of::<pthread_rwlock_t>() , 56usize , concat !
-               ( "Size of: " , stringify ! ( pthread_rwlock_t ) ));
-    assert_eq! (::std::mem::align_of::<pthread_rwlock_t>() , 8usize , concat !
-                ( "Alignment of " , stringify ! ( pthread_rwlock_t ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_rwlock_t ) ) . __data as * const
-                _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( pthread_rwlock_t ) ,
-                "::" , stringify ! ( __data ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_rwlock_t ) ) . __size as * const
-                _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( pthread_rwlock_t ) ,
-                "::" , stringify ! ( __size ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_rwlock_t ) ) . __align as * const
-                _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( pthread_rwlock_t ) ,
-                "::" , stringify ! ( __align ) ));
+    assert_eq!(::std::mem::size_of::<pthread_rwlock_t>(),
+               56usize,
+               concat!("Size of: ", stringify!(pthread_rwlock_t)));
+    assert_eq!(::std::mem::align_of::<pthread_rwlock_t>(),
+               8usize,
+               concat!("Alignment of ", stringify!(pthread_rwlock_t)));
+    assert_eq!(unsafe { &(*(0 as *const pthread_rwlock_t)).__data as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_rwlock_t),
+                       "::",
+                       stringify!(__data)));
+    assert_eq!(unsafe { &(*(0 as *const pthread_rwlock_t)).__size as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_rwlock_t),
+                       "::",
+                       stringify!(__size)));
+    assert_eq!(unsafe { &(*(0 as *const pthread_rwlock_t)).__align as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_rwlock_t),
+                       "::",
+                       stringify!(__align)));
 }
 #[repr(C)]
 #[derive(Copy)]
 pub union pthread_rwlockattr_t {
-    pub __size: [::std::os::raw::c_char; 8usize],
-    pub __align: ::std::os::raw::c_long,
+    pub __size: [c_char; 8usize],
+    pub __align: c_long,
 }
 #[test]
 fn bindgen_test_layout_pthread_rwlockattr_t() {
-    assert_eq!(::std::mem::size_of::<pthread_rwlockattr_t>() , 8usize , concat
-               ! ( "Size of: " , stringify ! ( pthread_rwlockattr_t ) ));
-    assert_eq! (::std::mem::align_of::<pthread_rwlockattr_t>() , 8usize ,
-                concat ! (
-                "Alignment of " , stringify ! ( pthread_rwlockattr_t ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_rwlockattr_t ) ) . __size as *
-                const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( pthread_rwlockattr_t )
-                , "::" , stringify ! ( __size ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_rwlockattr_t ) ) . __align as *
-                const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( pthread_rwlockattr_t )
-                , "::" , stringify ! ( __align ) ));
+    assert_eq!(::std::mem::size_of::<pthread_rwlockattr_t>(),
+               8usize,
+               concat!("Size of: ", stringify!(pthread_rwlockattr_t)));
+    assert_eq!(::std::mem::align_of::<pthread_rwlockattr_t>(),
+               8usize,
+               concat!("Alignment of ", stringify!(pthread_rwlockattr_t)));
+    assert_eq!(unsafe { &(*(0 as *const pthread_rwlockattr_t)).__size as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_rwlockattr_t),
+                       "::",
+                       stringify!(__size)));
+    assert_eq!(unsafe { &(*(0 as *const pthread_rwlockattr_t)).__align as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_rwlockattr_t),
+                       "::",
+                       stringify!(__align)));
 }
 impl Clone for pthread_rwlockattr_t {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
-pub type pthread_spinlock_t = ::std::os::raw::c_int;
+pub type pthread_spinlock_t = c_int;
 #[repr(C)]
 #[derive(Copy)]
 pub union pthread_barrier_t {
-    pub __size: [::std::os::raw::c_char; 32usize],
-    pub __align: ::std::os::raw::c_long,
+    pub __size: [c_char; 32usize],
+    pub __align: c_long,
 }
 #[test]
 fn bindgen_test_layout_pthread_barrier_t() {
-    assert_eq!(::std::mem::size_of::<pthread_barrier_t>() , 32usize , concat !
-               ( "Size of: " , stringify ! ( pthread_barrier_t ) ));
-    assert_eq! (::std::mem::align_of::<pthread_barrier_t>() , 8usize , concat
-                ! ( "Alignment of " , stringify ! ( pthread_barrier_t ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_barrier_t ) ) . __size as * const
-                _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( pthread_barrier_t ) ,
-                "::" , stringify ! ( __size ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_barrier_t ) ) . __align as *
-                const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( pthread_barrier_t ) ,
-                "::" , stringify ! ( __align ) ));
+    assert_eq!(::std::mem::size_of::<pthread_barrier_t>(),
+               32usize,
+               concat!("Size of: ", stringify!(pthread_barrier_t)));
+    assert_eq!(::std::mem::align_of::<pthread_barrier_t>(),
+               8usize,
+               concat!("Alignment of ", stringify!(pthread_barrier_t)));
+    assert_eq!(unsafe { &(*(0 as *const pthread_barrier_t)).__size as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_barrier_t),
+                       "::",
+                       stringify!(__size)));
+    assert_eq!(unsafe { &(*(0 as *const pthread_barrier_t)).__align as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_barrier_t),
+                       "::",
+                       stringify!(__align)));
 }
 impl Clone for pthread_barrier_t {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[repr(C)]
 #[derive(Copy)]
 pub union pthread_barrierattr_t {
-    pub __size: [::std::os::raw::c_char; 4usize],
-    pub __align: ::std::os::raw::c_int,
+    pub __size: [c_char; 4usize],
+    pub __align: c_int,
 }
 #[test]
 fn bindgen_test_layout_pthread_barrierattr_t() {
-    assert_eq!(::std::mem::size_of::<pthread_barrierattr_t>() , 4usize ,
-               concat ! ( "Size of: " , stringify ! ( pthread_barrierattr_t )
-               ));
-    assert_eq! (::std::mem::align_of::<pthread_barrierattr_t>() , 4usize ,
-                concat ! (
-                "Alignment of " , stringify ! ( pthread_barrierattr_t ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_barrierattr_t ) ) . __size as *
-                const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( pthread_barrierattr_t )
-                , "::" , stringify ! ( __size ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pthread_barrierattr_t ) ) . __align as *
-                const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( pthread_barrierattr_t )
-                , "::" , stringify ! ( __align ) ));
+    assert_eq!(::std::mem::size_of::<pthread_barrierattr_t>(),
+               4usize,
+               concat!("Size of: ", stringify!(pthread_barrierattr_t)));
+    assert_eq!(::std::mem::align_of::<pthread_barrierattr_t>(),
+               4usize,
+               concat!("Alignment of ", stringify!(pthread_barrierattr_t)));
+    assert_eq!(unsafe { &(*(0 as *const pthread_barrierattr_t)).__size as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_barrierattr_t),
+                       "::",
+                       stringify!(__size)));
+    assert_eq!(unsafe { &(*(0 as *const pthread_barrierattr_t)).__align as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(pthread_barrierattr_t),
+                       "::",
+                       stringify!(__align)));
 }
 impl Clone for pthread_barrierattr_t {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 extern "C" {
-    pub fn random() -> ::std::os::raw::c_long;
+    pub fn random() -> c_long;
 }
 extern "C" {
-    pub fn srandom(__seed: ::std::os::raw::c_uint);
+    pub fn srandom(__seed: c_uint);
 }
 extern "C" {
-    pub fn initstate(__seed: ::std::os::raw::c_uint,
-                     __statebuf: *mut ::std::os::raw::c_char,
-                     __statelen: usize) -> *mut ::std::os::raw::c_char;
+    pub fn initstate(__seed: c_uint, __statebuf: *mut c_char, __statelen: usize) -> *mut c_char;
 }
 extern "C" {
-    pub fn setstate(__statebuf: *mut ::std::os::raw::c_char)
-     -> *mut ::std::os::raw::c_char;
+    pub fn setstate(__statebuf: *mut c_char) -> *mut c_char;
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
@@ -929,688 +1074,707 @@ pub struct random_data {
     pub fptr: *mut i32,
     pub rptr: *mut i32,
     pub state: *mut i32,
-    pub rand_type: ::std::os::raw::c_int,
-    pub rand_deg: ::std::os::raw::c_int,
-    pub rand_sep: ::std::os::raw::c_int,
+    pub rand_type: c_int,
+    pub rand_deg: c_int,
+    pub rand_sep: c_int,
     pub end_ptr: *mut i32,
 }
 #[test]
 fn bindgen_test_layout_random_data() {
-    assert_eq!(::std::mem::size_of::<random_data>() , 48usize , concat ! (
-               "Size of: " , stringify ! ( random_data ) ));
-    assert_eq! (::std::mem::align_of::<random_data>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( random_data ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const random_data ) ) . fptr as * const _ as
-                usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( random_data ) , "::" ,
-                stringify ! ( fptr ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const random_data ) ) . rptr as * const _ as
-                usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( random_data ) , "::" ,
-                stringify ! ( rptr ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const random_data ) ) . state as * const _ as
-                usize } , 16usize , concat ! (
-                "Alignment of field: " , stringify ! ( random_data ) , "::" ,
-                stringify ! ( state ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const random_data ) ) . rand_type as * const _
-                as usize } , 24usize , concat ! (
-                "Alignment of field: " , stringify ! ( random_data ) , "::" ,
-                stringify ! ( rand_type ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const random_data ) ) . rand_deg as * const _
-                as usize } , 28usize , concat ! (
-                "Alignment of field: " , stringify ! ( random_data ) , "::" ,
-                stringify ! ( rand_deg ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const random_data ) ) . rand_sep as * const _
-                as usize } , 32usize , concat ! (
-                "Alignment of field: " , stringify ! ( random_data ) , "::" ,
-                stringify ! ( rand_sep ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const random_data ) ) . end_ptr as * const _ as
-                usize } , 40usize , concat ! (
-                "Alignment of field: " , stringify ! ( random_data ) , "::" ,
-                stringify ! ( end_ptr ) ));
+    assert_eq!(::std::mem::size_of::<random_data>(),
+               48usize,
+               concat!("Size of: ", stringify!(random_data)));
+    assert_eq!(::std::mem::align_of::<random_data>(),
+               8usize,
+               concat!("Alignment of ", stringify!(random_data)));
+    assert_eq!(unsafe { &(*(0 as *const random_data)).fptr as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(random_data),
+                       "::",
+                       stringify!(fptr)));
+    assert_eq!(unsafe { &(*(0 as *const random_data)).rptr as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(random_data),
+                       "::",
+                       stringify!(rptr)));
+    assert_eq!(unsafe { &(*(0 as *const random_data)).state as *const _ as usize },
+               16usize,
+               concat!("Alignment of field: ",
+                       stringify!(random_data),
+                       "::",
+                       stringify!(state)));
+    assert_eq!(unsafe { &(*(0 as *const random_data)).rand_type as *const _ as usize },
+               24usize,
+               concat!("Alignment of field: ",
+                       stringify!(random_data),
+                       "::",
+                       stringify!(rand_type)));
+    assert_eq!(unsafe { &(*(0 as *const random_data)).rand_deg as *const _ as usize },
+               28usize,
+               concat!("Alignment of field: ",
+                       stringify!(random_data),
+                       "::",
+                       stringify!(rand_deg)));
+    assert_eq!(unsafe { &(*(0 as *const random_data)).rand_sep as *const _ as usize },
+               32usize,
+               concat!("Alignment of field: ",
+                       stringify!(random_data),
+                       "::",
+                       stringify!(rand_sep)));
+    assert_eq!(unsafe { &(*(0 as *const random_data)).end_ptr as *const _ as usize },
+               40usize,
+               concat!("Alignment of field: ",
+                       stringify!(random_data),
+                       "::",
+                       stringify!(end_ptr)));
 }
 impl Clone for random_data {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 extern "C" {
-    pub fn random_r(__buf: *mut random_data, __result: *mut i32)
-     -> ::std::os::raw::c_int;
+    pub fn random_r(__buf: *mut random_data, __result: *mut i32) -> c_int;
 }
 extern "C" {
-    pub fn srandom_r(__seed: ::std::os::raw::c_uint, __buf: *mut random_data)
-     -> ::std::os::raw::c_int;
+    pub fn srandom_r(__seed: c_uint, __buf: *mut random_data) -> c_int;
 }
 extern "C" {
-    pub fn initstate_r(__seed: ::std::os::raw::c_uint,
-                       __statebuf: *mut ::std::os::raw::c_char,
-                       __statelen: usize, __buf: *mut random_data)
-     -> ::std::os::raw::c_int;
+    pub fn initstate_r(__seed: c_uint,
+                       __statebuf: *mut c_char,
+                       __statelen: usize,
+                       __buf: *mut random_data)
+                       -> c_int;
 }
 extern "C" {
-    pub fn setstate_r(__statebuf: *mut ::std::os::raw::c_char,
-                      __buf: *mut random_data) -> ::std::os::raw::c_int;
+    pub fn setstate_r(__statebuf: *mut c_char, __buf: *mut random_data) -> c_int;
 }
 extern "C" {
-    pub fn rand() -> ::std::os::raw::c_int;
+    pub fn rand() -> c_int;
 }
 extern "C" {
-    pub fn srand(__seed: ::std::os::raw::c_uint);
+    pub fn srand(__seed: c_uint);
 }
 extern "C" {
-    pub fn rand_r(__seed: *mut ::std::os::raw::c_uint)
-     -> ::std::os::raw::c_int;
+    pub fn rand_r(__seed: *mut c_uint) -> c_int;
 }
 extern "C" {
     pub fn drand48() -> f64;
 }
 extern "C" {
-    pub fn erand48(__xsubi: *mut ::std::os::raw::c_ushort) -> f64;
+    pub fn erand48(__xsubi: *mut c_ushort) -> f64;
 }
 extern "C" {
-    pub fn lrand48() -> ::std::os::raw::c_long;
+    pub fn lrand48() -> c_long;
 }
 extern "C" {
-    pub fn nrand48(__xsubi: *mut ::std::os::raw::c_ushort)
-     -> ::std::os::raw::c_long;
+    pub fn nrand48(__xsubi: *mut c_ushort) -> c_long;
 }
 extern "C" {
-    pub fn mrand48() -> ::std::os::raw::c_long;
+    pub fn mrand48() -> c_long;
 }
 extern "C" {
-    pub fn jrand48(__xsubi: *mut ::std::os::raw::c_ushort)
-     -> ::std::os::raw::c_long;
+    pub fn jrand48(__xsubi: *mut c_ushort) -> c_long;
 }
 extern "C" {
-    pub fn srand48(__seedval: ::std::os::raw::c_long);
+    pub fn srand48(__seedval: c_long);
 }
 extern "C" {
-    pub fn seed48(__seed16v: *mut ::std::os::raw::c_ushort)
-     -> *mut ::std::os::raw::c_ushort;
+    pub fn seed48(__seed16v: *mut c_ushort) -> *mut c_ushort;
 }
 extern "C" {
-    pub fn lcong48(__param: *mut ::std::os::raw::c_ushort);
+    pub fn lcong48(__param: *mut c_ushort);
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct drand48_data {
-    pub __x: [::std::os::raw::c_ushort; 3usize],
-    pub __old_x: [::std::os::raw::c_ushort; 3usize],
-    pub __c: ::std::os::raw::c_ushort,
-    pub __init: ::std::os::raw::c_ushort,
-    pub __a: ::std::os::raw::c_ulonglong,
+    pub __x: [c_ushort; 3usize],
+    pub __old_x: [c_ushort; 3usize],
+    pub __c: c_ushort,
+    pub __init: c_ushort,
+    pub __a: c_ulonglong,
 }
 #[test]
 fn bindgen_test_layout_drand48_data() {
-    assert_eq!(::std::mem::size_of::<drand48_data>() , 24usize , concat ! (
-               "Size of: " , stringify ! ( drand48_data ) ));
-    assert_eq! (::std::mem::align_of::<drand48_data>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( drand48_data ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const drand48_data ) ) . __x as * const _ as
-                usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( drand48_data ) , "::" ,
-                stringify ! ( __x ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const drand48_data ) ) . __old_x as * const _
-                as usize } , 6usize , concat ! (
-                "Alignment of field: " , stringify ! ( drand48_data ) , "::" ,
-                stringify ! ( __old_x ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const drand48_data ) ) . __c as * const _ as
-                usize } , 12usize , concat ! (
-                "Alignment of field: " , stringify ! ( drand48_data ) , "::" ,
-                stringify ! ( __c ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const drand48_data ) ) . __init as * const _ as
-                usize } , 14usize , concat ! (
-                "Alignment of field: " , stringify ! ( drand48_data ) , "::" ,
-                stringify ! ( __init ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const drand48_data ) ) . __a as * const _ as
-                usize } , 16usize , concat ! (
-                "Alignment of field: " , stringify ! ( drand48_data ) , "::" ,
-                stringify ! ( __a ) ));
+    assert_eq!(::std::mem::size_of::<drand48_data>(),
+               24usize,
+               concat!("Size of: ", stringify!(drand48_data)));
+    assert_eq!(::std::mem::align_of::<drand48_data>(),
+               8usize,
+               concat!("Alignment of ", stringify!(drand48_data)));
+    assert_eq!(unsafe { &(*(0 as *const drand48_data)).__x as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(drand48_data),
+                       "::",
+                       stringify!(__x)));
+    assert_eq!(unsafe { &(*(0 as *const drand48_data)).__old_x as *const _ as usize },
+               6usize,
+               concat!("Alignment of field: ",
+                       stringify!(drand48_data),
+                       "::",
+                       stringify!(__old_x)));
+    assert_eq!(unsafe { &(*(0 as *const drand48_data)).__c as *const _ as usize },
+               12usize,
+               concat!("Alignment of field: ",
+                       stringify!(drand48_data),
+                       "::",
+                       stringify!(__c)));
+    assert_eq!(unsafe { &(*(0 as *const drand48_data)).__init as *const _ as usize },
+               14usize,
+               concat!("Alignment of field: ",
+                       stringify!(drand48_data),
+                       "::",
+                       stringify!(__init)));
+    assert_eq!(unsafe { &(*(0 as *const drand48_data)).__a as *const _ as usize },
+               16usize,
+               concat!("Alignment of field: ",
+                       stringify!(drand48_data),
+                       "::",
+                       stringify!(__a)));
 }
 impl Clone for drand48_data {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 extern "C" {
-    pub fn drand48_r(__buffer: *mut drand48_data, __result: *mut f64)
-     -> ::std::os::raw::c_int;
+    pub fn drand48_r(__buffer: *mut drand48_data, __result: *mut f64) -> c_int;
 }
 extern "C" {
-    pub fn erand48_r(__xsubi: *mut ::std::os::raw::c_ushort,
-                     __buffer: *mut drand48_data, __result: *mut f64)
-     -> ::std::os::raw::c_int;
-}
-extern "C" {
-    pub fn lrand48_r(__buffer: *mut drand48_data,
-                     __result: *mut ::std::os::raw::c_long)
-     -> ::std::os::raw::c_int;
-}
-extern "C" {
-    pub fn nrand48_r(__xsubi: *mut ::std::os::raw::c_ushort,
+    pub fn erand48_r(__xsubi: *mut c_ushort,
                      __buffer: *mut drand48_data,
-                     __result: *mut ::std::os::raw::c_long)
-     -> ::std::os::raw::c_int;
+                     __result: *mut f64)
+                     -> c_int;
 }
 extern "C" {
-    pub fn mrand48_r(__buffer: *mut drand48_data,
-                     __result: *mut ::std::os::raw::c_long)
-     -> ::std::os::raw::c_int;
+    pub fn lrand48_r(__buffer: *mut drand48_data, __result: *mut c_long) -> c_int;
 }
 extern "C" {
-    pub fn jrand48_r(__xsubi: *mut ::std::os::raw::c_ushort,
+    pub fn nrand48_r(__xsubi: *mut c_ushort,
                      __buffer: *mut drand48_data,
-                     __result: *mut ::std::os::raw::c_long)
-     -> ::std::os::raw::c_int;
+                     __result: *mut c_long)
+                     -> c_int;
 }
 extern "C" {
-    pub fn srand48_r(__seedval: ::std::os::raw::c_long,
-                     __buffer: *mut drand48_data) -> ::std::os::raw::c_int;
+    pub fn mrand48_r(__buffer: *mut drand48_data, __result: *mut c_long) -> c_int;
 }
 extern "C" {
-    pub fn seed48_r(__seed16v: *mut ::std::os::raw::c_ushort,
-                    __buffer: *mut drand48_data) -> ::std::os::raw::c_int;
+    pub fn jrand48_r(__xsubi: *mut c_ushort,
+                     __buffer: *mut drand48_data,
+                     __result: *mut c_long)
+                     -> c_int;
 }
 extern "C" {
-    pub fn lcong48_r(__param: *mut ::std::os::raw::c_ushort,
-                     __buffer: *mut drand48_data) -> ::std::os::raw::c_int;
+    pub fn srand48_r(__seedval: c_long, __buffer: *mut drand48_data) -> c_int;
 }
 extern "C" {
-    pub fn malloc(__size: usize) -> *mut ::std::os::raw::c_void;
+    pub fn seed48_r(__seed16v: *mut c_ushort, __buffer: *mut drand48_data) -> c_int;
 }
 extern "C" {
-    pub fn calloc(__nmemb: usize, __size: usize)
-     -> *mut ::std::os::raw::c_void;
+    pub fn lcong48_r(__param: *mut c_ushort, __buffer: *mut drand48_data) -> c_int;
 }
 extern "C" {
-    pub fn realloc(__ptr: *mut ::std::os::raw::c_void, __size: usize)
-     -> *mut ::std::os::raw::c_void;
+    pub fn malloc(__size: usize) -> *mut c_void;
 }
 extern "C" {
-    pub fn free(__ptr: *mut ::std::os::raw::c_void);
+    pub fn calloc(__nmemb: usize, __size: usize) -> *mut c_void;
 }
 extern "C" {
-    pub fn cfree(__ptr: *mut ::std::os::raw::c_void);
+    pub fn realloc(__ptr: *mut c_void, __size: usize) -> *mut c_void;
 }
 extern "C" {
-    pub fn alloca(__size: usize) -> *mut ::std::os::raw::c_void;
+    pub fn free(__ptr: *mut c_void);
 }
 extern "C" {
-    pub fn valloc(__size: usize) -> *mut ::std::os::raw::c_void;
+    pub fn cfree(__ptr: *mut c_void);
 }
 extern "C" {
-    pub fn posix_memalign(__memptr: *mut *mut ::std::os::raw::c_void,
-                          __alignment: usize, __size: usize)
-     -> ::std::os::raw::c_int;
+    pub fn alloca(__size: usize) -> *mut c_void;
 }
 extern "C" {
-    pub fn aligned_alloc(__alignment: usize, __size: usize)
-     -> *mut ::std::os::raw::c_void;
+    pub fn valloc(__size: usize) -> *mut c_void;
+}
+extern "C" {
+    pub fn posix_memalign(__memptr: *mut *mut c_void, __alignment: usize, __size: usize) -> c_int;
+}
+extern "C" {
+    pub fn aligned_alloc(__alignment: usize, __size: usize) -> *mut c_void;
 }
 extern "C" {
     pub fn abort();
 }
 extern "C" {
-    pub fn atexit(__func: ::std::option::Option<unsafe extern "C" fn()>)
-     -> ::std::os::raw::c_int;
+    pub fn atexit(__func: ::std::option::Option<unsafe extern "C" fn()>) -> c_int;
 }
 extern "C" {
-    pub fn at_quick_exit(__func:
-                             ::std::option::Option<unsafe extern "C" fn()>)
-     -> ::std::os::raw::c_int;
+    pub fn at_quick_exit(__func: ::std::option::Option<unsafe extern "C" fn()>) -> c_int;
 }
 extern "C" {
-    pub fn on_exit(__func:
-                       ::std::option::Option<unsafe extern "C" fn(__status:
-                                                                      ::std::os::raw::c_int,
-                                                                  __arg:
-                                                                      *mut ::std::os::raw::c_void)>,
-                   __arg: *mut ::std::os::raw::c_void)
-     -> ::std::os::raw::c_int;
+    pub fn on_exit(__func: ::std::option::Option<unsafe extern "C" fn(__status: c_int,
+                                                                      __arg: *mut c_void)>,
+                   __arg: *mut c_void)
+                   -> c_int;
 }
 extern "C" {
-    pub fn exit(__status: ::std::os::raw::c_int);
+    pub fn exit(__status: c_int);
 }
 extern "C" {
-    pub fn quick_exit(__status: ::std::os::raw::c_int);
+    pub fn quick_exit(__status: c_int);
 }
 extern "C" {
-    pub fn _Exit(__status: ::std::os::raw::c_int);
+    pub fn _Exit(__status: c_int);
 }
 extern "C" {
-    pub fn getenv(__name: *const ::std::os::raw::c_char)
-     -> *mut ::std::os::raw::c_char;
+    pub fn getenv(__name: *const c_char) -> *mut c_char;
 }
 extern "C" {
-    pub fn putenv(__string: *mut ::std::os::raw::c_char)
-     -> ::std::os::raw::c_int;
+    pub fn putenv(__string: *mut c_char) -> c_int;
 }
 extern "C" {
-    pub fn setenv(__name: *const ::std::os::raw::c_char,
-                  __value: *const ::std::os::raw::c_char,
-                  __replace: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
+    pub fn setenv(__name: *const c_char, __value: *const c_char, __replace: c_int) -> c_int;
 }
 extern "C" {
-    pub fn unsetenv(__name: *const ::std::os::raw::c_char)
-     -> ::std::os::raw::c_int;
+    pub fn unsetenv(__name: *const c_char) -> c_int;
 }
 extern "C" {
-    pub fn clearenv() -> ::std::os::raw::c_int;
+    pub fn clearenv() -> c_int;
 }
 extern "C" {
-    pub fn mktemp(__template: *mut ::std::os::raw::c_char)
-     -> *mut ::std::os::raw::c_char;
+    pub fn mktemp(__template: *mut c_char) -> *mut c_char;
 }
 extern "C" {
-    pub fn mkstemp(__template: *mut ::std::os::raw::c_char)
-     -> ::std::os::raw::c_int;
+    pub fn mkstemp(__template: *mut c_char) -> c_int;
 }
 extern "C" {
-    pub fn mkstemps(__template: *mut ::std::os::raw::c_char,
-                    __suffixlen: ::std::os::raw::c_int)
-     -> ::std::os::raw::c_int;
+    pub fn mkstemps(__template: *mut c_char, __suffixlen: c_int) -> c_int;
 }
 extern "C" {
-    pub fn mkdtemp(__template: *mut ::std::os::raw::c_char)
-     -> *mut ::std::os::raw::c_char;
+    pub fn mkdtemp(__template: *mut c_char) -> *mut c_char;
 }
 extern "C" {
-    pub fn system(__command: *const ::std::os::raw::c_char)
-     -> ::std::os::raw::c_int;
+    pub fn system(__command: *const c_char) -> c_int;
 }
 extern "C" {
-    pub fn realpath(__name: *const ::std::os::raw::c_char,
-                    __resolved: *mut ::std::os::raw::c_char)
-     -> *mut ::std::os::raw::c_char;
+    pub fn realpath(__name: *const c_char, __resolved: *mut c_char) -> *mut c_char;
 }
-pub type __compar_fn_t =
-    ::std::option::Option<unsafe extern "C" fn(arg1:
-                                                   *const ::std::os::raw::c_void,
-                                               arg2:
-                                                   *const ::std::os::raw::c_void)
-                              -> ::std::os::raw::c_int>;
+pub type __compar_fn_t = ::std::option::Option<unsafe extern "C" fn(arg1: *const c_void,
+                                                                    arg2: *const c_void)
+                                                                    -> c_int>;
 extern "C" {
-    pub fn bsearch(__key: *const ::std::os::raw::c_void,
-                   __base: *const ::std::os::raw::c_void, __nmemb: usize,
-                   __size: usize, __compar: __compar_fn_t)
-     -> *mut ::std::os::raw::c_void;
+    pub fn bsearch(__key: *const c_void,
+                   __base: *const c_void,
+                   __nmemb: usize,
+                   __size: usize,
+                   __compar: __compar_fn_t)
+                   -> *mut c_void;
 }
 extern "C" {
-    pub fn qsort(__base: *mut ::std::os::raw::c_void, __nmemb: usize,
-                 __size: usize, __compar: __compar_fn_t);
+    pub fn qsort(__base: *mut c_void, __nmemb: usize, __size: usize, __compar: __compar_fn_t);
 }
 extern "C" {
-    pub fn abs(__x: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
+    pub fn abs(__x: c_int) -> c_int;
 }
 extern "C" {
-    pub fn labs(__x: ::std::os::raw::c_long) -> ::std::os::raw::c_long;
+    pub fn labs(__x: c_long) -> c_long;
 }
 extern "C" {
-    pub fn llabs(__x: ::std::os::raw::c_longlong)
-     -> ::std::os::raw::c_longlong;
+    pub fn llabs(__x: c_longlong) -> c_longlong;
 }
 extern "C" {
-    pub fn div(__numer: ::std::os::raw::c_int, __denom: ::std::os::raw::c_int)
-     -> div_t;
+    pub fn div(__numer: c_int, __denom: c_int) -> div_t;
 }
 extern "C" {
-    pub fn ldiv(__numer: ::std::os::raw::c_long,
-                __denom: ::std::os::raw::c_long) -> ldiv_t;
+    pub fn ldiv(__numer: c_long, __denom: c_long) -> ldiv_t;
 }
 extern "C" {
-    pub fn lldiv(__numer: ::std::os::raw::c_longlong,
-                 __denom: ::std::os::raw::c_longlong) -> lldiv_t;
+    pub fn lldiv(__numer: c_longlong, __denom: c_longlong) -> lldiv_t;
 }
 extern "C" {
-    pub fn ecvt(__value: f64, __ndigit: ::std::os::raw::c_int,
-                __decpt: *mut ::std::os::raw::c_int,
-                __sign: *mut ::std::os::raw::c_int)
-     -> *mut ::std::os::raw::c_char;
+    pub fn ecvt(__value: f64,
+                __ndigit: c_int,
+                __decpt: *mut c_int,
+                __sign: *mut c_int)
+                -> *mut c_char;
 }
 extern "C" {
-    pub fn fcvt(__value: f64, __ndigit: ::std::os::raw::c_int,
-                __decpt: *mut ::std::os::raw::c_int,
-                __sign: *mut ::std::os::raw::c_int)
-     -> *mut ::std::os::raw::c_char;
+    pub fn fcvt(__value: f64,
+                __ndigit: c_int,
+                __decpt: *mut c_int,
+                __sign: *mut c_int)
+                -> *mut c_char;
 }
 extern "C" {
-    pub fn gcvt(__value: f64, __ndigit: ::std::os::raw::c_int,
-                __buf: *mut ::std::os::raw::c_char)
-     -> *mut ::std::os::raw::c_char;
+    pub fn gcvt(__value: f64, __ndigit: c_int, __buf: *mut c_char) -> *mut c_char;
 }
 extern "C" {
-    pub fn qecvt(__value: f64, __ndigit: ::std::os::raw::c_int,
-                 __decpt: *mut ::std::os::raw::c_int,
-                 __sign: *mut ::std::os::raw::c_int)
-     -> *mut ::std::os::raw::c_char;
+    pub fn qecvt(__value: f64,
+                 __ndigit: c_int,
+                 __decpt: *mut c_int,
+                 __sign: *mut c_int)
+                 -> *mut c_char;
 }
 extern "C" {
-    pub fn qfcvt(__value: f64, __ndigit: ::std::os::raw::c_int,
-                 __decpt: *mut ::std::os::raw::c_int,
-                 __sign: *mut ::std::os::raw::c_int)
-     -> *mut ::std::os::raw::c_char;
+    pub fn qfcvt(__value: f64,
+                 __ndigit: c_int,
+                 __decpt: *mut c_int,
+                 __sign: *mut c_int)
+                 -> *mut c_char;
 }
 extern "C" {
-    pub fn qgcvt(__value: f64, __ndigit: ::std::os::raw::c_int,
-                 __buf: *mut ::std::os::raw::c_char)
-     -> *mut ::std::os::raw::c_char;
+    pub fn qgcvt(__value: f64, __ndigit: c_int, __buf: *mut c_char) -> *mut c_char;
 }
 extern "C" {
-    pub fn ecvt_r(__value: f64, __ndigit: ::std::os::raw::c_int,
-                  __decpt: *mut ::std::os::raw::c_int,
-                  __sign: *mut ::std::os::raw::c_int,
-                  __buf: *mut ::std::os::raw::c_char, __len: usize)
-     -> ::std::os::raw::c_int;
+    pub fn ecvt_r(__value: f64,
+                  __ndigit: c_int,
+                  __decpt: *mut c_int,
+                  __sign: *mut c_int,
+                  __buf: *mut c_char,
+                  __len: usize)
+                  -> c_int;
 }
 extern "C" {
-    pub fn fcvt_r(__value: f64, __ndigit: ::std::os::raw::c_int,
-                  __decpt: *mut ::std::os::raw::c_int,
-                  __sign: *mut ::std::os::raw::c_int,
-                  __buf: *mut ::std::os::raw::c_char, __len: usize)
-     -> ::std::os::raw::c_int;
+    pub fn fcvt_r(__value: f64,
+                  __ndigit: c_int,
+                  __decpt: *mut c_int,
+                  __sign: *mut c_int,
+                  __buf: *mut c_char,
+                  __len: usize)
+                  -> c_int;
 }
 extern "C" {
-    pub fn qecvt_r(__value: f64, __ndigit: ::std::os::raw::c_int,
-                   __decpt: *mut ::std::os::raw::c_int,
-                   __sign: *mut ::std::os::raw::c_int,
-                   __buf: *mut ::std::os::raw::c_char, __len: usize)
-     -> ::std::os::raw::c_int;
+    pub fn qecvt_r(__value: f64,
+                   __ndigit: c_int,
+                   __decpt: *mut c_int,
+                   __sign: *mut c_int,
+                   __buf: *mut c_char,
+                   __len: usize)
+                   -> c_int;
 }
 extern "C" {
-    pub fn qfcvt_r(__value: f64, __ndigit: ::std::os::raw::c_int,
-                   __decpt: *mut ::std::os::raw::c_int,
-                   __sign: *mut ::std::os::raw::c_int,
-                   __buf: *mut ::std::os::raw::c_char, __len: usize)
-     -> ::std::os::raw::c_int;
+    pub fn qfcvt_r(__value: f64,
+                   __ndigit: c_int,
+                   __decpt: *mut c_int,
+                   __sign: *mut c_int,
+                   __buf: *mut c_char,
+                   __len: usize)
+                   -> c_int;
 }
 extern "C" {
-    pub fn mblen(__s: *const ::std::os::raw::c_char, __n: usize)
-     -> ::std::os::raw::c_int;
+    pub fn mblen(__s: *const c_char, __n: usize) -> c_int;
 }
 extern "C" {
-    pub fn mbtowc(__pwc: *mut wchar_t, __s: *const ::std::os::raw::c_char,
-                  __n: usize) -> ::std::os::raw::c_int;
+    pub fn mbtowc(__pwc: *mut wchar_t, __s: *const c_char, __n: usize) -> c_int;
 }
 extern "C" {
-    pub fn wctomb(__s: *mut ::std::os::raw::c_char, __wchar: wchar_t)
-     -> ::std::os::raw::c_int;
+    pub fn wctomb(__s: *mut c_char, __wchar: wchar_t) -> c_int;
 }
 extern "C" {
-    pub fn mbstowcs(__pwcs: *mut wchar_t, __s: *const ::std::os::raw::c_char,
-                    __n: usize) -> usize;
+    pub fn mbstowcs(__pwcs: *mut wchar_t, __s: *const c_char, __n: usize) -> usize;
 }
 extern "C" {
-    pub fn wcstombs(__s: *mut ::std::os::raw::c_char, __pwcs: *const wchar_t,
-                    __n: usize) -> usize;
+    pub fn wcstombs(__s: *mut c_char, __pwcs: *const wchar_t, __n: usize) -> usize;
 }
 extern "C" {
-    pub fn rpmatch(__response: *const ::std::os::raw::c_char)
-     -> ::std::os::raw::c_int;
+    pub fn rpmatch(__response: *const c_char) -> c_int;
 }
 extern "C" {
-    pub fn getsubopt(__optionp: *mut *mut ::std::os::raw::c_char,
-                     __tokens: *const *const ::std::os::raw::c_char,
-                     __valuep: *mut *mut ::std::os::raw::c_char)
-     -> ::std::os::raw::c_int;
+    pub fn getsubopt(__optionp: *mut *mut c_char,
+                     __tokens: *const *const c_char,
+                     __valuep: *mut *mut c_char)
+                     -> c_int;
 }
 extern "C" {
-    pub fn getloadavg(__loadavg: *mut f64, __nelem: ::std::os::raw::c_int)
-     -> ::std::os::raw::c_int;
+    pub fn getloadavg(__loadavg: *mut f64, __nelem: c_int) -> c_int;
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct _IO_FILE {
-    pub _flags: ::std::os::raw::c_int,
-    pub _IO_read_ptr: *mut ::std::os::raw::c_char,
-    pub _IO_read_end: *mut ::std::os::raw::c_char,
-    pub _IO_read_base: *mut ::std::os::raw::c_char,
-    pub _IO_write_base: *mut ::std::os::raw::c_char,
-    pub _IO_write_ptr: *mut ::std::os::raw::c_char,
-    pub _IO_write_end: *mut ::std::os::raw::c_char,
-    pub _IO_buf_base: *mut ::std::os::raw::c_char,
-    pub _IO_buf_end: *mut ::std::os::raw::c_char,
-    pub _IO_save_base: *mut ::std::os::raw::c_char,
-    pub _IO_backup_base: *mut ::std::os::raw::c_char,
-    pub _IO_save_end: *mut ::std::os::raw::c_char,
+    pub _flags: c_int,
+    pub _IO_read_ptr: *mut c_char,
+    pub _IO_read_end: *mut c_char,
+    pub _IO_read_base: *mut c_char,
+    pub _IO_write_base: *mut c_char,
+    pub _IO_write_ptr: *mut c_char,
+    pub _IO_write_end: *mut c_char,
+    pub _IO_buf_base: *mut c_char,
+    pub _IO_buf_end: *mut c_char,
+    pub _IO_save_base: *mut c_char,
+    pub _IO_backup_base: *mut c_char,
+    pub _IO_save_end: *mut c_char,
     pub _markers: *mut _IO_marker,
     pub _chain: *mut _IO_FILE,
-    pub _fileno: ::std::os::raw::c_int,
-    pub _flags2: ::std::os::raw::c_int,
+    pub _fileno: c_int,
+    pub _flags2: c_int,
     pub _old_offset: __off_t,
-    pub _cur_column: ::std::os::raw::c_ushort,
-    pub _vtable_offset: ::std::os::raw::c_schar,
-    pub _shortbuf: [::std::os::raw::c_char; 1usize],
+    pub _cur_column: c_ushort,
+    pub _vtable_offset: c_schar,
+    pub _shortbuf: [c_char; 1usize],
     pub _lock: *mut _IO_lock_t,
     pub _offset: __off64_t,
-    pub __pad1: *mut ::std::os::raw::c_void,
-    pub __pad2: *mut ::std::os::raw::c_void,
-    pub __pad3: *mut ::std::os::raw::c_void,
-    pub __pad4: *mut ::std::os::raw::c_void,
+    pub __pad1: *mut c_void,
+    pub __pad2: *mut c_void,
+    pub __pad3: *mut c_void,
+    pub __pad4: *mut c_void,
     pub __pad5: usize,
-    pub _mode: ::std::os::raw::c_int,
-    pub _unused2: [::std::os::raw::c_char; 20usize],
+    pub _mode: c_int,
+    pub _unused2: [c_char; 20usize],
 }
 #[test]
 fn bindgen_test_layout__IO_FILE() {
-    assert_eq!(::std::mem::size_of::<_IO_FILE>() , 216usize , concat ! (
-               "Size of: " , stringify ! ( _IO_FILE ) ));
-    assert_eq! (::std::mem::align_of::<_IO_FILE>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( _IO_FILE ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_FILE ) ) . _flags as * const _ as
-                usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_FILE ) , "::" ,
-                stringify ! ( _flags ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_FILE ) ) . _IO_read_ptr as * const _
-                as usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_FILE ) , "::" ,
-                stringify ! ( _IO_read_ptr ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_FILE ) ) . _IO_read_end as * const _
-                as usize } , 16usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_FILE ) , "::" ,
-                stringify ! ( _IO_read_end ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_FILE ) ) . _IO_read_base as * const _
-                as usize } , 24usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_FILE ) , "::" ,
-                stringify ! ( _IO_read_base ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_FILE ) ) . _IO_write_base as * const
-                _ as usize } , 32usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_FILE ) , "::" ,
-                stringify ! ( _IO_write_base ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_FILE ) ) . _IO_write_ptr as * const _
-                as usize } , 40usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_FILE ) , "::" ,
-                stringify ! ( _IO_write_ptr ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_FILE ) ) . _IO_write_end as * const _
-                as usize } , 48usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_FILE ) , "::" ,
-                stringify ! ( _IO_write_end ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_FILE ) ) . _IO_buf_base as * const _
-                as usize } , 56usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_FILE ) , "::" ,
-                stringify ! ( _IO_buf_base ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_FILE ) ) . _IO_buf_end as * const _
-                as usize } , 64usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_FILE ) , "::" ,
-                stringify ! ( _IO_buf_end ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_FILE ) ) . _IO_save_base as * const _
-                as usize } , 72usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_FILE ) , "::" ,
-                stringify ! ( _IO_save_base ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_FILE ) ) . _IO_backup_base as * const
-                _ as usize } , 80usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_FILE ) , "::" ,
-                stringify ! ( _IO_backup_base ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_FILE ) ) . _IO_save_end as * const _
-                as usize } , 88usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_FILE ) , "::" ,
-                stringify ! ( _IO_save_end ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_FILE ) ) . _markers as * const _ as
-                usize } , 96usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_FILE ) , "::" ,
-                stringify ! ( _markers ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_FILE ) ) . _chain as * const _ as
-                usize } , 104usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_FILE ) , "::" ,
-                stringify ! ( _chain ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_FILE ) ) . _fileno as * const _ as
-                usize } , 112usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_FILE ) , "::" ,
-                stringify ! ( _fileno ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_FILE ) ) . _flags2 as * const _ as
-                usize } , 116usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_FILE ) , "::" ,
-                stringify ! ( _flags2 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_FILE ) ) . _old_offset as * const _
-                as usize } , 120usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_FILE ) , "::" ,
-                stringify ! ( _old_offset ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_FILE ) ) . _cur_column as * const _
-                as usize } , 128usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_FILE ) , "::" ,
-                stringify ! ( _cur_column ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_FILE ) ) . _vtable_offset as * const
-                _ as usize } , 130usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_FILE ) , "::" ,
-                stringify ! ( _vtable_offset ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_FILE ) ) . _shortbuf as * const _ as
-                usize } , 131usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_FILE ) , "::" ,
-                stringify ! ( _shortbuf ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_FILE ) ) . _lock as * const _ as
-                usize } , 136usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_FILE ) , "::" ,
-                stringify ! ( _lock ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_FILE ) ) . _offset as * const _ as
-                usize } , 144usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_FILE ) , "::" ,
-                stringify ! ( _offset ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_FILE ) ) . __pad1 as * const _ as
-                usize } , 152usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_FILE ) , "::" ,
-                stringify ! ( __pad1 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_FILE ) ) . __pad2 as * const _ as
-                usize } , 160usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_FILE ) , "::" ,
-                stringify ! ( __pad2 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_FILE ) ) . __pad3 as * const _ as
-                usize } , 168usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_FILE ) , "::" ,
-                stringify ! ( __pad3 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_FILE ) ) . __pad4 as * const _ as
-                usize } , 176usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_FILE ) , "::" ,
-                stringify ! ( __pad4 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_FILE ) ) . __pad5 as * const _ as
-                usize } , 184usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_FILE ) , "::" ,
-                stringify ! ( __pad5 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_FILE ) ) . _mode as * const _ as
-                usize } , 192usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_FILE ) , "::" ,
-                stringify ! ( _mode ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_FILE ) ) . _unused2 as * const _ as
-                usize } , 196usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_FILE ) , "::" ,
-                stringify ! ( _unused2 ) ));
+    assert_eq!(::std::mem::size_of::<_IO_FILE>(),
+               216usize,
+               concat!("Size of: ", stringify!(_IO_FILE)));
+    assert_eq!(::std::mem::align_of::<_IO_FILE>(),
+               8usize,
+               concat!("Alignment of ", stringify!(_IO_FILE)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_FILE))._flags as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_FILE),
+                       "::",
+                       stringify!(_flags)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_FILE))._IO_read_ptr as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_FILE),
+                       "::",
+                       stringify!(_IO_read_ptr)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_FILE))._IO_read_end as *const _ as usize },
+               16usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_FILE),
+                       "::",
+                       stringify!(_IO_read_end)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_FILE))._IO_read_base as *const _ as usize },
+               24usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_FILE),
+                       "::",
+                       stringify!(_IO_read_base)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_FILE))._IO_write_base as *const _ as usize },
+               32usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_FILE),
+                       "::",
+                       stringify!(_IO_write_base)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_FILE))._IO_write_ptr as *const _ as usize },
+               40usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_FILE),
+                       "::",
+                       stringify!(_IO_write_ptr)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_FILE))._IO_write_end as *const _ as usize },
+               48usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_FILE),
+                       "::",
+                       stringify!(_IO_write_end)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_FILE))._IO_buf_base as *const _ as usize },
+               56usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_FILE),
+                       "::",
+                       stringify!(_IO_buf_base)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_FILE))._IO_buf_end as *const _ as usize },
+               64usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_FILE),
+                       "::",
+                       stringify!(_IO_buf_end)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_FILE))._IO_save_base as *const _ as usize },
+               72usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_FILE),
+                       "::",
+                       stringify!(_IO_save_base)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_FILE))._IO_backup_base as *const _ as usize },
+               80usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_FILE),
+                       "::",
+                       stringify!(_IO_backup_base)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_FILE))._IO_save_end as *const _ as usize },
+               88usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_FILE),
+                       "::",
+                       stringify!(_IO_save_end)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_FILE))._markers as *const _ as usize },
+               96usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_FILE),
+                       "::",
+                       stringify!(_markers)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_FILE))._chain as *const _ as usize },
+               104usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_FILE),
+                       "::",
+                       stringify!(_chain)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_FILE))._fileno as *const _ as usize },
+               112usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_FILE),
+                       "::",
+                       stringify!(_fileno)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_FILE))._flags2 as *const _ as usize },
+               116usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_FILE),
+                       "::",
+                       stringify!(_flags2)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_FILE))._old_offset as *const _ as usize },
+               120usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_FILE),
+                       "::",
+                       stringify!(_old_offset)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_FILE))._cur_column as *const _ as usize },
+               128usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_FILE),
+                       "::",
+                       stringify!(_cur_column)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_FILE))._vtable_offset as *const _ as usize },
+               130usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_FILE),
+                       "::",
+                       stringify!(_vtable_offset)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_FILE))._shortbuf as *const _ as usize },
+               131usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_FILE),
+                       "::",
+                       stringify!(_shortbuf)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_FILE))._lock as *const _ as usize },
+               136usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_FILE),
+                       "::",
+                       stringify!(_lock)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_FILE))._offset as *const _ as usize },
+               144usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_FILE),
+                       "::",
+                       stringify!(_offset)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_FILE)).__pad1 as *const _ as usize },
+               152usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_FILE),
+                       "::",
+                       stringify!(__pad1)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_FILE)).__pad2 as *const _ as usize },
+               160usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_FILE),
+                       "::",
+                       stringify!(__pad2)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_FILE)).__pad3 as *const _ as usize },
+               168usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_FILE),
+                       "::",
+                       stringify!(__pad3)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_FILE)).__pad4 as *const _ as usize },
+               176usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_FILE),
+                       "::",
+                       stringify!(__pad4)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_FILE)).__pad5 as *const _ as usize },
+               184usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_FILE),
+                       "::",
+                       stringify!(__pad5)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_FILE))._mode as *const _ as usize },
+               192usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_FILE),
+                       "::",
+                       stringify!(_mode)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_FILE))._unused2 as *const _ as usize },
+               196usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_FILE),
+                       "::",
+                       stringify!(_unused2)));
 }
 impl Clone for _IO_FILE {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 pub type FILE = _IO_FILE;
 pub type __FILE = _IO_FILE;
 #[repr(C)]
 #[derive(Copy)]
 pub struct __mbstate_t {
-    pub __count: ::std::os::raw::c_int,
+    pub __count: c_int,
     pub __value: __mbstate_t__bindgen_ty_1,
 }
 #[repr(C)]
 #[derive(Copy)]
 pub union __mbstate_t__bindgen_ty_1 {
-    pub __wch: ::std::os::raw::c_uint,
-    pub __wchb: [::std::os::raw::c_char; 4usize],
+    pub __wch: c_uint,
+    pub __wchb: [c_char; 4usize],
 }
 #[test]
 fn bindgen_test_layout___mbstate_t__bindgen_ty_1() {
-    assert_eq!(::std::mem::size_of::<__mbstate_t__bindgen_ty_1>() , 4usize ,
-               concat ! (
-               "Size of: " , stringify ! ( __mbstate_t__bindgen_ty_1 ) ));
-    assert_eq! (::std::mem::align_of::<__mbstate_t__bindgen_ty_1>() , 4usize ,
-                concat ! (
-                "Alignment of " , stringify ! ( __mbstate_t__bindgen_ty_1 )
-                ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const __mbstate_t__bindgen_ty_1 ) ) . __wch as
-                * const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                __mbstate_t__bindgen_ty_1 ) , "::" , stringify ! ( __wch ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const __mbstate_t__bindgen_ty_1 ) ) . __wchb as
-                * const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                __mbstate_t__bindgen_ty_1 ) , "::" , stringify ! ( __wchb )
-                ));
+    assert_eq!(::std::mem::size_of::<__mbstate_t__bindgen_ty_1>(),
+               4usize,
+               concat!("Size of: ", stringify!(__mbstate_t__bindgen_ty_1)));
+    assert_eq!(::std::mem::align_of::<__mbstate_t__bindgen_ty_1>(),
+               4usize,
+               concat!("Alignment of ", stringify!(__mbstate_t__bindgen_ty_1)));
+    assert_eq!(unsafe { &(*(0 as *const __mbstate_t__bindgen_ty_1)).__wch as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(__mbstate_t__bindgen_ty_1),
+                       "::",
+                       stringify!(__wch)));
+    assert_eq!(unsafe { &(*(0 as *const __mbstate_t__bindgen_ty_1)).__wchb as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(__mbstate_t__bindgen_ty_1),
+                       "::",
+                       stringify!(__wchb)));
 }
 impl Clone for __mbstate_t__bindgen_ty_1 {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[test]
 fn bindgen_test_layout___mbstate_t() {
-    assert_eq!(::std::mem::size_of::<__mbstate_t>() , 8usize , concat ! (
-               "Size of: " , stringify ! ( __mbstate_t ) ));
-    assert_eq! (::std::mem::align_of::<__mbstate_t>() , 4usize , concat ! (
-                "Alignment of " , stringify ! ( __mbstate_t ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const __mbstate_t ) ) . __count as * const _ as
-                usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( __mbstate_t ) , "::" ,
-                stringify ! ( __count ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const __mbstate_t ) ) . __value as * const _ as
-                usize } , 4usize , concat ! (
-                "Alignment of field: " , stringify ! ( __mbstate_t ) , "::" ,
-                stringify ! ( __value ) ));
+    assert_eq!(::std::mem::size_of::<__mbstate_t>(),
+               8usize,
+               concat!("Size of: ", stringify!(__mbstate_t)));
+    assert_eq!(::std::mem::align_of::<__mbstate_t>(),
+               4usize,
+               concat!("Alignment of ", stringify!(__mbstate_t)));
+    assert_eq!(unsafe { &(*(0 as *const __mbstate_t)).__count as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(__mbstate_t),
+                       "::",
+                       stringify!(__count)));
+    assert_eq!(unsafe { &(*(0 as *const __mbstate_t)).__value as *const _ as usize },
+               4usize,
+               concat!("Alignment of field: ",
+                       stringify!(__mbstate_t),
+                       "::",
+                       stringify!(__value)));
 }
 impl Clone for __mbstate_t {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[repr(C)]
 #[derive(Copy)]
@@ -1620,23 +1784,29 @@ pub struct _G_fpos_t {
 }
 #[test]
 fn bindgen_test_layout__G_fpos_t() {
-    assert_eq!(::std::mem::size_of::<_G_fpos_t>() , 16usize , concat ! (
-               "Size of: " , stringify ! ( _G_fpos_t ) ));
-    assert_eq! (::std::mem::align_of::<_G_fpos_t>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( _G_fpos_t ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _G_fpos_t ) ) . __pos as * const _ as
-                usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( _G_fpos_t ) , "::" ,
-                stringify ! ( __pos ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _G_fpos_t ) ) . __state as * const _ as
-                usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( _G_fpos_t ) , "::" ,
-                stringify ! ( __state ) ));
+    assert_eq!(::std::mem::size_of::<_G_fpos_t>(),
+               16usize,
+               concat!("Size of: ", stringify!(_G_fpos_t)));
+    assert_eq!(::std::mem::align_of::<_G_fpos_t>(),
+               8usize,
+               concat!("Alignment of ", stringify!(_G_fpos_t)));
+    assert_eq!(unsafe { &(*(0 as *const _G_fpos_t)).__pos as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(_G_fpos_t),
+                       "::",
+                       stringify!(__pos)));
+    assert_eq!(unsafe { &(*(0 as *const _G_fpos_t)).__state as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(_G_fpos_t),
+                       "::",
+                       stringify!(__state)));
 }
 impl Clone for _G_fpos_t {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[repr(C)]
 #[derive(Copy)]
@@ -1646,23 +1816,29 @@ pub struct _G_fpos64_t {
 }
 #[test]
 fn bindgen_test_layout__G_fpos64_t() {
-    assert_eq!(::std::mem::size_of::<_G_fpos64_t>() , 16usize , concat ! (
-               "Size of: " , stringify ! ( _G_fpos64_t ) ));
-    assert_eq! (::std::mem::align_of::<_G_fpos64_t>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( _G_fpos64_t ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _G_fpos64_t ) ) . __pos as * const _ as
-                usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( _G_fpos64_t ) , "::" ,
-                stringify ! ( __pos ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _G_fpos64_t ) ) . __state as * const _ as
-                usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( _G_fpos64_t ) , "::" ,
-                stringify ! ( __state ) ));
+    assert_eq!(::std::mem::size_of::<_G_fpos64_t>(),
+               16usize,
+               concat!("Size of: ", stringify!(_G_fpos64_t)));
+    assert_eq!(::std::mem::align_of::<_G_fpos64_t>(),
+               8usize,
+               concat!("Alignment of ", stringify!(_G_fpos64_t)));
+    assert_eq!(unsafe { &(*(0 as *const _G_fpos64_t)).__pos as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(_G_fpos64_t),
+                       "::",
+                       stringify!(__pos)));
+    assert_eq!(unsafe { &(*(0 as *const _G_fpos64_t)).__state as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(_G_fpos64_t),
+                       "::",
+                       stringify!(__state)));
 }
 impl Clone for _G_fpos64_t {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 pub type va_list = __builtin_va_list;
 pub type __gnuc_va_list = __builtin_va_list;
@@ -1671,38 +1847,45 @@ pub type __gnuc_va_list = __builtin_va_list;
 pub struct _IO_jump_t {
     _unused: [u8; 0],
 }
-pub type _IO_lock_t = ::std::os::raw::c_void;
+pub type _IO_lock_t = c_void;
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct _IO_marker {
     pub _next: *mut _IO_marker,
     pub _sbuf: *mut _IO_FILE,
-    pub _pos: ::std::os::raw::c_int,
+    pub _pos: c_int,
 }
 #[test]
 fn bindgen_test_layout__IO_marker() {
-    assert_eq!(::std::mem::size_of::<_IO_marker>() , 24usize , concat ! (
-               "Size of: " , stringify ! ( _IO_marker ) ));
-    assert_eq! (::std::mem::align_of::<_IO_marker>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( _IO_marker ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_marker ) ) . _next as * const _ as
-                usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_marker ) , "::" ,
-                stringify ! ( _next ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_marker ) ) . _sbuf as * const _ as
-                usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_marker ) , "::" ,
-                stringify ! ( _sbuf ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _IO_marker ) ) . _pos as * const _ as
-                usize } , 16usize , concat ! (
-                "Alignment of field: " , stringify ! ( _IO_marker ) , "::" ,
-                stringify ! ( _pos ) ));
+    assert_eq!(::std::mem::size_of::<_IO_marker>(),
+               24usize,
+               concat!("Size of: ", stringify!(_IO_marker)));
+    assert_eq!(::std::mem::align_of::<_IO_marker>(),
+               8usize,
+               concat!("Alignment of ", stringify!(_IO_marker)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_marker))._next as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_marker),
+                       "::",
+                       stringify!(_next)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_marker))._sbuf as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_marker),
+                       "::",
+                       stringify!(_sbuf)));
+    assert_eq!(unsafe { &(*(0 as *const _IO_marker))._pos as *const _ as usize },
+               16usize,
+               concat!("Alignment of field: ",
+                       stringify!(_IO_marker),
+                       "::",
+                       stringify!(_pos)));
 }
 impl Clone for _IO_marker {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -1729,53 +1912,42 @@ extern "C" {
     #[link_name = "_IO_2_1_stderr_"]
     pub static mut _IO_2_1_stderr_: _IO_FILE_plus;
 }
-pub type __io_read_fn =
-    ::std::option::Option<unsafe extern "C" fn(__cookie:
-                                                   *mut ::std::os::raw::c_void,
-                                               __buf:
-                                                   *mut ::std::os::raw::c_char,
-                                               __nbytes: usize) -> __ssize_t>;
-pub type __io_write_fn =
-    ::std::option::Option<unsafe extern "C" fn(__cookie:
-                                                   *mut ::std::os::raw::c_void,
-                                               __buf:
-                                                   *const ::std::os::raw::c_char,
-                                               __n: usize) -> __ssize_t>;
-pub type __io_seek_fn =
-    ::std::option::Option<unsafe extern "C" fn(__cookie:
-                                                   *mut ::std::os::raw::c_void,
-                                               __pos: *mut __off64_t,
-                                               __w: ::std::os::raw::c_int)
-                              -> ::std::os::raw::c_int>;
-pub type __io_close_fn =
-    ::std::option::Option<unsafe extern "C" fn(__cookie:
-                                                   *mut ::std::os::raw::c_void)
-                              -> ::std::os::raw::c_int>;
+pub type __io_read_fn = ::std::option::Option<unsafe extern "C" fn(__cookie: *mut c_void,
+                                                                   __buf: *mut c_char,
+                                                                   __nbytes: usize)
+                                                                   -> __ssize_t>;
+pub type __io_write_fn = ::std::option::Option<unsafe extern "C" fn(__cookie: *mut c_void,
+                                                                    __buf: *const c_char,
+                                                                    __n: usize)
+                                                                    -> __ssize_t>;
+pub type __io_seek_fn = ::std::option::Option<unsafe extern "C" fn(__cookie: *mut c_void,
+                                                                   __pos: *mut __off64_t,
+                                                                   __w: c_int)
+                                                                   -> c_int>;
+pub type __io_close_fn = ::std::option::Option<unsafe extern "C" fn(__cookie: *mut c_void) -> c_int>;
 extern "C" {
-    pub fn __underflow(arg1: *mut _IO_FILE) -> ::std::os::raw::c_int;
+    pub fn __underflow(arg1: *mut _IO_FILE) -> c_int;
 }
 extern "C" {
-    pub fn __uflow(arg1: *mut _IO_FILE) -> ::std::os::raw::c_int;
+    pub fn __uflow(arg1: *mut _IO_FILE) -> c_int;
 }
 extern "C" {
-    pub fn __overflow(arg1: *mut _IO_FILE, arg2: ::std::os::raw::c_int)
-     -> ::std::os::raw::c_int;
+    pub fn __overflow(arg1: *mut _IO_FILE, arg2: c_int) -> c_int;
 }
 extern "C" {
-    pub fn _IO_getc(__fp: *mut _IO_FILE) -> ::std::os::raw::c_int;
+    pub fn _IO_getc(__fp: *mut _IO_FILE) -> c_int;
 }
 extern "C" {
-    pub fn _IO_putc(__c: ::std::os::raw::c_int, __fp: *mut _IO_FILE)
-     -> ::std::os::raw::c_int;
+    pub fn _IO_putc(__c: c_int, __fp: *mut _IO_FILE) -> c_int;
 }
 extern "C" {
-    pub fn _IO_feof(__fp: *mut _IO_FILE) -> ::std::os::raw::c_int;
+    pub fn _IO_feof(__fp: *mut _IO_FILE) -> c_int;
 }
 extern "C" {
-    pub fn _IO_ferror(__fp: *mut _IO_FILE) -> ::std::os::raw::c_int;
+    pub fn _IO_ferror(__fp: *mut _IO_FILE) -> c_int;
 }
 extern "C" {
-    pub fn _IO_peekc_locked(__fp: *mut _IO_FILE) -> ::std::os::raw::c_int;
+    pub fn _IO_peekc_locked(__fp: *mut _IO_FILE) -> c_int;
 }
 extern "C" {
     pub fn _IO_flockfile(arg1: *mut _IO_FILE);
@@ -1784,36 +1956,36 @@ extern "C" {
     pub fn _IO_funlockfile(arg1: *mut _IO_FILE);
 }
 extern "C" {
-    pub fn _IO_ftrylockfile(arg1: *mut _IO_FILE) -> ::std::os::raw::c_int;
+    pub fn _IO_ftrylockfile(arg1: *mut _IO_FILE) -> c_int;
 }
 extern "C" {
     pub fn _IO_vfscanf(arg1: *mut _IO_FILE,
-                       arg2: *const ::std::os::raw::c_char,
+                       arg2: *const c_char,
                        arg3: *mut __va_list_tag,
-                       arg4: *mut ::std::os::raw::c_int)
-     -> ::std::os::raw::c_int;
+                       arg4: *mut c_int)
+                       -> c_int;
 }
 extern "C" {
     pub fn _IO_vfprintf(arg1: *mut _IO_FILE,
-                        arg2: *const ::std::os::raw::c_char,
-                        arg3: *mut __va_list_tag) -> ::std::os::raw::c_int;
+                        arg2: *const c_char,
+                        arg3: *mut __va_list_tag)
+                        -> c_int;
 }
 extern "C" {
-    pub fn _IO_padn(arg1: *mut _IO_FILE, arg2: ::std::os::raw::c_int,
-                    arg3: __ssize_t) -> __ssize_t;
+    pub fn _IO_padn(arg1: *mut _IO_FILE, arg2: c_int, arg3: __ssize_t) -> __ssize_t;
 }
 extern "C" {
-    pub fn _IO_sgetn(arg1: *mut _IO_FILE, arg2: *mut ::std::os::raw::c_void,
-                     arg3: usize) -> usize;
+    pub fn _IO_sgetn(arg1: *mut _IO_FILE, arg2: *mut c_void, arg3: usize) -> usize;
 }
 extern "C" {
-    pub fn _IO_seekoff(arg1: *mut _IO_FILE, arg2: __off64_t,
-                       arg3: ::std::os::raw::c_int,
-                       arg4: ::std::os::raw::c_int) -> __off64_t;
+    pub fn _IO_seekoff(arg1: *mut _IO_FILE,
+                       arg2: __off64_t,
+                       arg3: c_int,
+                       arg4: c_int)
+                       -> __off64_t;
 }
 extern "C" {
-    pub fn _IO_seekpos(arg1: *mut _IO_FILE, arg2: __off64_t,
-                       arg3: ::std::os::raw::c_int) -> __off64_t;
+    pub fn _IO_seekpos(arg1: *mut _IO_FILE, arg2: __off64_t, arg3: c_int) -> __off64_t;
 }
 extern "C" {
     pub fn _IO_free_backup_area(arg1: *mut _IO_FILE);
@@ -1832,359 +2004,312 @@ extern "C" {
     pub static mut stderr: *mut _IO_FILE;
 }
 extern "C" {
-    pub fn remove(__filename: *const ::std::os::raw::c_char)
-     -> ::std::os::raw::c_int;
+    pub fn remove(__filename: *const c_char) -> c_int;
 }
 extern "C" {
-    pub fn rename(__old: *const ::std::os::raw::c_char,
-                  __new: *const ::std::os::raw::c_char)
-     -> ::std::os::raw::c_int;
+    pub fn rename(__old: *const c_char, __new: *const c_char) -> c_int;
 }
 extern "C" {
-    pub fn renameat(__oldfd: ::std::os::raw::c_int,
-                    __old: *const ::std::os::raw::c_char,
-                    __newfd: ::std::os::raw::c_int,
-                    __new: *const ::std::os::raw::c_char)
-     -> ::std::os::raw::c_int;
+    pub fn renameat(__oldfd: c_int,
+                    __old: *const c_char,
+                    __newfd: c_int,
+                    __new: *const c_char)
+                    -> c_int;
 }
 extern "C" {
     pub fn tmpfile() -> *mut FILE;
 }
 extern "C" {
-    pub fn tmpnam(__s: *mut ::std::os::raw::c_char)
-     -> *mut ::std::os::raw::c_char;
+    pub fn tmpnam(__s: *mut c_char) -> *mut c_char;
 }
 extern "C" {
-    pub fn tmpnam_r(__s: *mut ::std::os::raw::c_char)
-     -> *mut ::std::os::raw::c_char;
+    pub fn tmpnam_r(__s: *mut c_char) -> *mut c_char;
 }
 extern "C" {
-    pub fn tempnam(__dir: *const ::std::os::raw::c_char,
-                   __pfx: *const ::std::os::raw::c_char)
-     -> *mut ::std::os::raw::c_char;
+    pub fn tempnam(__dir: *const c_char, __pfx: *const c_char) -> *mut c_char;
 }
 extern "C" {
-    pub fn fclose(__stream: *mut FILE) -> ::std::os::raw::c_int;
+    pub fn fclose(__stream: *mut FILE) -> c_int;
 }
 extern "C" {
-    pub fn fflush(__stream: *mut FILE) -> ::std::os::raw::c_int;
+    pub fn fflush(__stream: *mut FILE) -> c_int;
 }
 extern "C" {
-    pub fn fflush_unlocked(__stream: *mut FILE) -> ::std::os::raw::c_int;
+    pub fn fflush_unlocked(__stream: *mut FILE) -> c_int;
 }
 extern "C" {
-    pub fn fopen(__filename: *const ::std::os::raw::c_char,
-                 __modes: *const ::std::os::raw::c_char) -> *mut FILE;
+    pub fn fopen(__filename: *const c_char, __modes: *const c_char) -> *mut FILE;
 }
 extern "C" {
-    pub fn freopen(__filename: *const ::std::os::raw::c_char,
-                   __modes: *const ::std::os::raw::c_char,
-                   __stream: *mut FILE) -> *mut FILE;
+    pub fn freopen(__filename: *const c_char,
+                   __modes: *const c_char,
+                   __stream: *mut FILE)
+                   -> *mut FILE;
 }
 extern "C" {
-    pub fn fdopen(__fd: ::std::os::raw::c_int,
-                  __modes: *const ::std::os::raw::c_char) -> *mut FILE;
+    pub fn fdopen(__fd: c_int, __modes: *const c_char) -> *mut FILE;
 }
 extern "C" {
-    pub fn fmemopen(__s: *mut ::std::os::raw::c_void, __len: usize,
-                    __modes: *const ::std::os::raw::c_char) -> *mut FILE;
+    pub fn fmemopen(__s: *mut c_void, __len: usize, __modes: *const c_char) -> *mut FILE;
 }
 extern "C" {
-    pub fn open_memstream(__bufloc: *mut *mut ::std::os::raw::c_char,
-                          __sizeloc: *mut usize) -> *mut FILE;
+    pub fn open_memstream(__bufloc: *mut *mut c_char, __sizeloc: *mut usize) -> *mut FILE;
 }
 extern "C" {
-    pub fn setbuf(__stream: *mut FILE, __buf: *mut ::std::os::raw::c_char);
+    pub fn setbuf(__stream: *mut FILE, __buf: *mut c_char);
 }
 extern "C" {
-    pub fn setvbuf(__stream: *mut FILE, __buf: *mut ::std::os::raw::c_char,
-                   __modes: ::std::os::raw::c_int, __n: usize)
-     -> ::std::os::raw::c_int;
+    pub fn setvbuf(__stream: *mut FILE, __buf: *mut c_char, __modes: c_int, __n: usize) -> c_int;
 }
 extern "C" {
-    pub fn setbuffer(__stream: *mut FILE, __buf: *mut ::std::os::raw::c_char,
-                     __size: usize);
+    pub fn setbuffer(__stream: *mut FILE, __buf: *mut c_char, __size: usize);
 }
 extern "C" {
     pub fn setlinebuf(__stream: *mut FILE);
 }
 extern "C" {
-    pub fn fprintf(__stream: *mut FILE,
-                   __format: *const ::std::os::raw::c_char, ...)
-     -> ::std::os::raw::c_int;
+    pub fn fprintf(__stream: *mut FILE, __format: *const c_char, ...) -> c_int;
 }
 extern "C" {
-    pub fn printf(__format: *const ::std::os::raw::c_char, ...)
-     -> ::std::os::raw::c_int;
+    pub fn printf(__format: *const c_char, ...) -> c_int;
 }
 extern "C" {
-    pub fn sprintf(__s: *mut ::std::os::raw::c_char,
-                   __format: *const ::std::os::raw::c_char, ...)
-     -> ::std::os::raw::c_int;
+    pub fn sprintf(__s: *mut c_char, __format: *const c_char, ...) -> c_int;
 }
 extern "C" {
-    pub fn vfprintf(__s: *mut FILE, __format: *const ::std::os::raw::c_char,
-                    __arg: *mut __va_list_tag) -> ::std::os::raw::c_int;
+    pub fn vfprintf(__s: *mut FILE, __format: *const c_char, __arg: *mut __va_list_tag) -> c_int;
 }
 extern "C" {
-    pub fn vprintf(__format: *const ::std::os::raw::c_char,
-                   __arg: *mut __va_list_tag) -> ::std::os::raw::c_int;
+    pub fn vprintf(__format: *const c_char, __arg: *mut __va_list_tag) -> c_int;
 }
 extern "C" {
-    pub fn vsprintf(__s: *mut ::std::os::raw::c_char,
-                    __format: *const ::std::os::raw::c_char,
-                    __arg: *mut __va_list_tag) -> ::std::os::raw::c_int;
+    pub fn vsprintf(__s: *mut c_char, __format: *const c_char, __arg: *mut __va_list_tag) -> c_int;
 }
 extern "C" {
-    pub fn snprintf(__s: *mut ::std::os::raw::c_char, __maxlen: usize,
-                    __format: *const ::std::os::raw::c_char, ...)
-     -> ::std::os::raw::c_int;
+    pub fn snprintf(__s: *mut c_char, __maxlen: usize, __format: *const c_char, ...) -> c_int;
 }
 extern "C" {
-    pub fn vsnprintf(__s: *mut ::std::os::raw::c_char, __maxlen: usize,
-                     __format: *const ::std::os::raw::c_char,
-                     __arg: *mut __va_list_tag) -> ::std::os::raw::c_int;
+    pub fn vsnprintf(__s: *mut c_char,
+                     __maxlen: usize,
+                     __format: *const c_char,
+                     __arg: *mut __va_list_tag)
+                     -> c_int;
 }
 extern "C" {
-    pub fn vdprintf(__fd: ::std::os::raw::c_int,
-                    __fmt: *const ::std::os::raw::c_char,
-                    __arg: *mut __va_list_tag) -> ::std::os::raw::c_int;
+    pub fn vdprintf(__fd: c_int, __fmt: *const c_char, __arg: *mut __va_list_tag) -> c_int;
 }
 extern "C" {
-    pub fn dprintf(__fd: ::std::os::raw::c_int,
-                   __fmt: *const ::std::os::raw::c_char, ...)
-     -> ::std::os::raw::c_int;
+    pub fn dprintf(__fd: c_int, __fmt: *const c_char, ...) -> c_int;
 }
 extern "C" {
-    pub fn fscanf(__stream: *mut FILE,
-                  __format: *const ::std::os::raw::c_char, ...)
-     -> ::std::os::raw::c_int;
+    pub fn fscanf(__stream: *mut FILE, __format: *const c_char, ...) -> c_int;
 }
 extern "C" {
-    pub fn scanf(__format: *const ::std::os::raw::c_char, ...)
-     -> ::std::os::raw::c_int;
+    pub fn scanf(__format: *const c_char, ...) -> c_int;
 }
 extern "C" {
-    pub fn sscanf(__s: *const ::std::os::raw::c_char,
-                  __format: *const ::std::os::raw::c_char, ...)
-     -> ::std::os::raw::c_int;
+    pub fn sscanf(__s: *const c_char, __format: *const c_char, ...) -> c_int;
 }
 extern "C" {
     #[link_name = "__isoc99_fscanf"]
-    pub fn fscanf1(__stream: *mut FILE,
-                   __format: *const ::std::os::raw::c_char, ...)
-     -> ::std::os::raw::c_int;
+    pub fn fscanf1(__stream: *mut FILE, __format: *const c_char, ...) -> c_int;
 }
 extern "C" {
     #[link_name = "__isoc99_scanf"]
-    pub fn scanf1(__format: *const ::std::os::raw::c_char, ...)
-     -> ::std::os::raw::c_int;
+    pub fn scanf1(__format: *const c_char, ...) -> c_int;
 }
 extern "C" {
     #[link_name = "__isoc99_sscanf"]
-    pub fn sscanf1(__s: *const ::std::os::raw::c_char,
-                   __format: *const ::std::os::raw::c_char, ...)
-     -> ::std::os::raw::c_int;
+    pub fn sscanf1(__s: *const c_char, __format: *const c_char, ...) -> c_int;
 }
 extern "C" {
-    pub fn vfscanf(__s: *mut FILE, __format: *const ::std::os::raw::c_char,
-                   __arg: *mut __va_list_tag) -> ::std::os::raw::c_int;
+    pub fn vfscanf(__s: *mut FILE, __format: *const c_char, __arg: *mut __va_list_tag) -> c_int;
 }
 extern "C" {
-    pub fn vscanf(__format: *const ::std::os::raw::c_char,
-                  __arg: *mut __va_list_tag) -> ::std::os::raw::c_int;
+    pub fn vscanf(__format: *const c_char, __arg: *mut __va_list_tag) -> c_int;
 }
 extern "C" {
-    pub fn vsscanf(__s: *const ::std::os::raw::c_char,
-                   __format: *const ::std::os::raw::c_char,
-                   __arg: *mut __va_list_tag) -> ::std::os::raw::c_int;
+    pub fn vsscanf(__s: *const c_char,
+                   __format: *const c_char,
+                   __arg: *mut __va_list_tag)
+                   -> c_int;
 }
 extern "C" {
     #[link_name = "__isoc99_vfscanf"]
-    pub fn vfscanf1(__s: *mut FILE, __format: *const ::std::os::raw::c_char,
-                    __arg: *mut __va_list_tag) -> ::std::os::raw::c_int;
+    pub fn vfscanf1(__s: *mut FILE, __format: *const c_char, __arg: *mut __va_list_tag) -> c_int;
 }
 extern "C" {
     #[link_name = "__isoc99_vscanf"]
-    pub fn vscanf1(__format: *const ::std::os::raw::c_char,
-                   __arg: *mut __va_list_tag) -> ::std::os::raw::c_int;
+    pub fn vscanf1(__format: *const c_char, __arg: *mut __va_list_tag) -> c_int;
 }
 extern "C" {
     #[link_name = "__isoc99_vsscanf"]
-    pub fn vsscanf1(__s: *const ::std::os::raw::c_char,
-                    __format: *const ::std::os::raw::c_char,
-                    __arg: *mut __va_list_tag) -> ::std::os::raw::c_int;
+    pub fn vsscanf1(__s: *const c_char,
+                    __format: *const c_char,
+                    __arg: *mut __va_list_tag)
+                    -> c_int;
 }
 extern "C" {
-    pub fn fgetc(__stream: *mut FILE) -> ::std::os::raw::c_int;
+    pub fn fgetc(__stream: *mut FILE) -> c_int;
 }
 extern "C" {
-    pub fn getc(__stream: *mut FILE) -> ::std::os::raw::c_int;
+    pub fn getc(__stream: *mut FILE) -> c_int;
 }
 extern "C" {
-    pub fn getchar() -> ::std::os::raw::c_int;
+    pub fn getchar() -> c_int;
 }
 extern "C" {
-    pub fn getc_unlocked(__stream: *mut FILE) -> ::std::os::raw::c_int;
+    pub fn getc_unlocked(__stream: *mut FILE) -> c_int;
 }
 extern "C" {
-    pub fn getchar_unlocked() -> ::std::os::raw::c_int;
+    pub fn getchar_unlocked() -> c_int;
 }
 extern "C" {
-    pub fn fgetc_unlocked(__stream: *mut FILE) -> ::std::os::raw::c_int;
+    pub fn fgetc_unlocked(__stream: *mut FILE) -> c_int;
 }
 extern "C" {
-    pub fn fputc(__c: ::std::os::raw::c_int, __stream: *mut FILE)
-     -> ::std::os::raw::c_int;
+    pub fn fputc(__c: c_int, __stream: *mut FILE) -> c_int;
 }
 extern "C" {
-    pub fn putc(__c: ::std::os::raw::c_int, __stream: *mut FILE)
-     -> ::std::os::raw::c_int;
+    pub fn putc(__c: c_int, __stream: *mut FILE) -> c_int;
 }
 extern "C" {
-    pub fn putchar(__c: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
+    pub fn putchar(__c: c_int) -> c_int;
 }
 extern "C" {
-    pub fn fputc_unlocked(__c: ::std::os::raw::c_int, __stream: *mut FILE)
-     -> ::std::os::raw::c_int;
+    pub fn fputc_unlocked(__c: c_int, __stream: *mut FILE) -> c_int;
 }
 extern "C" {
-    pub fn putc_unlocked(__c: ::std::os::raw::c_int, __stream: *mut FILE)
-     -> ::std::os::raw::c_int;
+    pub fn putc_unlocked(__c: c_int, __stream: *mut FILE) -> c_int;
 }
 extern "C" {
-    pub fn putchar_unlocked(__c: ::std::os::raw::c_int)
-     -> ::std::os::raw::c_int;
+    pub fn putchar_unlocked(__c: c_int) -> c_int;
 }
 extern "C" {
-    pub fn getw(__stream: *mut FILE) -> ::std::os::raw::c_int;
+    pub fn getw(__stream: *mut FILE) -> c_int;
 }
 extern "C" {
-    pub fn putw(__w: ::std::os::raw::c_int, __stream: *mut FILE)
-     -> ::std::os::raw::c_int;
+    pub fn putw(__w: c_int, __stream: *mut FILE) -> c_int;
 }
 extern "C" {
-    pub fn fgets(__s: *mut ::std::os::raw::c_char, __n: ::std::os::raw::c_int,
-                 __stream: *mut FILE) -> *mut ::std::os::raw::c_char;
+    pub fn fgets(__s: *mut c_char, __n: c_int, __stream: *mut FILE) -> *mut c_char;
 }
 extern "C" {
-    pub fn __getdelim(__lineptr: *mut *mut ::std::os::raw::c_char,
-                      __n: *mut usize, __delimiter: ::std::os::raw::c_int,
-                      __stream: *mut FILE) -> __ssize_t;
+    pub fn __getdelim(__lineptr: *mut *mut c_char,
+                      __n: *mut usize,
+                      __delimiter: c_int,
+                      __stream: *mut FILE)
+                      -> __ssize_t;
 }
 extern "C" {
-    pub fn getdelim(__lineptr: *mut *mut ::std::os::raw::c_char,
-                    __n: *mut usize, __delimiter: ::std::os::raw::c_int,
-                    __stream: *mut FILE) -> __ssize_t;
+    pub fn getdelim(__lineptr: *mut *mut c_char,
+                    __n: *mut usize,
+                    __delimiter: c_int,
+                    __stream: *mut FILE)
+                    -> __ssize_t;
 }
 extern "C" {
-    pub fn getline(__lineptr: *mut *mut ::std::os::raw::c_char,
-                   __n: *mut usize, __stream: *mut FILE) -> __ssize_t;
+    pub fn getline(__lineptr: *mut *mut c_char, __n: *mut usize, __stream: *mut FILE) -> __ssize_t;
 }
 extern "C" {
-    pub fn fputs(__s: *const ::std::os::raw::c_char, __stream: *mut FILE)
-     -> ::std::os::raw::c_int;
+    pub fn fputs(__s: *const c_char, __stream: *mut FILE) -> c_int;
 }
 extern "C" {
-    pub fn puts(__s: *const ::std::os::raw::c_char) -> ::std::os::raw::c_int;
+    pub fn puts(__s: *const c_char) -> c_int;
 }
 extern "C" {
-    pub fn ungetc(__c: ::std::os::raw::c_int, __stream: *mut FILE)
-     -> ::std::os::raw::c_int;
+    pub fn ungetc(__c: c_int, __stream: *mut FILE) -> c_int;
 }
 extern "C" {
-    pub fn fread(__ptr: *mut ::std::os::raw::c_void, __size: usize,
-                 __n: usize, __stream: *mut FILE) -> usize;
+    pub fn fread(__ptr: *mut c_void, __size: usize, __n: usize, __stream: *mut FILE) -> usize;
 }
 extern "C" {
-    pub fn fwrite(__ptr: *const ::std::os::raw::c_void, __size: usize,
-                  __n: usize, __s: *mut FILE) -> usize;
+    pub fn fwrite(__ptr: *const c_void, __size: usize, __n: usize, __s: *mut FILE) -> usize;
 }
 extern "C" {
-    pub fn fread_unlocked(__ptr: *mut ::std::os::raw::c_void, __size: usize,
-                          __n: usize, __stream: *mut FILE) -> usize;
+    pub fn fread_unlocked(__ptr: *mut c_void,
+                          __size: usize,
+                          __n: usize,
+                          __stream: *mut FILE)
+                          -> usize;
 }
 extern "C" {
-    pub fn fwrite_unlocked(__ptr: *const ::std::os::raw::c_void,
-                           __size: usize, __n: usize, __stream: *mut FILE)
-     -> usize;
+    pub fn fwrite_unlocked(__ptr: *const c_void,
+                           __size: usize,
+                           __n: usize,
+                           __stream: *mut FILE)
+                           -> usize;
 }
 extern "C" {
-    pub fn fseek(__stream: *mut FILE, __off: ::std::os::raw::c_long,
-                 __whence: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
+    pub fn fseek(__stream: *mut FILE, __off: c_long, __whence: c_int) -> c_int;
 }
 extern "C" {
-    pub fn ftell(__stream: *mut FILE) -> ::std::os::raw::c_long;
+    pub fn ftell(__stream: *mut FILE) -> c_long;
 }
 extern "C" {
     pub fn rewind(__stream: *mut FILE);
 }
 extern "C" {
-    pub fn fseeko(__stream: *mut FILE, __off: __off_t,
-                  __whence: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
+    pub fn fseeko(__stream: *mut FILE, __off: __off_t, __whence: c_int) -> c_int;
 }
 extern "C" {
     pub fn ftello(__stream: *mut FILE) -> __off_t;
 }
 extern "C" {
-    pub fn fgetpos(__stream: *mut FILE, __pos: *mut fpos_t)
-     -> ::std::os::raw::c_int;
+    pub fn fgetpos(__stream: *mut FILE, __pos: *mut fpos_t) -> c_int;
 }
 extern "C" {
-    pub fn fsetpos(__stream: *mut FILE, __pos: *const fpos_t)
-     -> ::std::os::raw::c_int;
+    pub fn fsetpos(__stream: *mut FILE, __pos: *const fpos_t) -> c_int;
 }
 extern "C" {
     pub fn clearerr(__stream: *mut FILE);
 }
 extern "C" {
-    pub fn feof(__stream: *mut FILE) -> ::std::os::raw::c_int;
+    pub fn feof(__stream: *mut FILE) -> c_int;
 }
 extern "C" {
-    pub fn ferror(__stream: *mut FILE) -> ::std::os::raw::c_int;
+    pub fn ferror(__stream: *mut FILE) -> c_int;
 }
 extern "C" {
     pub fn clearerr_unlocked(__stream: *mut FILE);
 }
 extern "C" {
-    pub fn feof_unlocked(__stream: *mut FILE) -> ::std::os::raw::c_int;
+    pub fn feof_unlocked(__stream: *mut FILE) -> c_int;
 }
 extern "C" {
-    pub fn ferror_unlocked(__stream: *mut FILE) -> ::std::os::raw::c_int;
+    pub fn ferror_unlocked(__stream: *mut FILE) -> c_int;
 }
 extern "C" {
-    pub fn perror(__s: *const ::std::os::raw::c_char);
+    pub fn perror(__s: *const c_char);
 }
 extern "C" {
     #[link_name = "sys_nerr"]
-    pub static mut sys_nerr: ::std::os::raw::c_int;
+    pub static mut sys_nerr: c_int;
 }
 extern "C" {
     #[link_name = "sys_errlist"]
-    pub static mut sys_errlist: [*const ::std::os::raw::c_char; 0usize];
+    pub static mut sys_errlist: [*const c_char; 0usize];
 }
 extern "C" {
-    pub fn fileno(__stream: *mut FILE) -> ::std::os::raw::c_int;
+    pub fn fileno(__stream: *mut FILE) -> c_int;
 }
 extern "C" {
-    pub fn fileno_unlocked(__stream: *mut FILE) -> ::std::os::raw::c_int;
+    pub fn fileno_unlocked(__stream: *mut FILE) -> c_int;
 }
 extern "C" {
-    pub fn popen(__command: *const ::std::os::raw::c_char,
-                 __modes: *const ::std::os::raw::c_char) -> *mut FILE;
+    pub fn popen(__command: *const c_char, __modes: *const c_char) -> *mut FILE;
 }
 extern "C" {
-    pub fn pclose(__stream: *mut FILE) -> ::std::os::raw::c_int;
+    pub fn pclose(__stream: *mut FILE) -> c_int;
 }
 extern "C" {
-    pub fn ctermid(__s: *mut ::std::os::raw::c_char)
-     -> *mut ::std::os::raw::c_char;
+    pub fn ctermid(__s: *mut c_char) -> *mut c_char;
 }
 extern "C" {
     pub fn flockfile(__stream: *mut FILE);
 }
 extern "C" {
-    pub fn ftrylockfile(__stream: *mut FILE) -> ::std::os::raw::c_int;
+    pub fn ftrylockfile(__stream: *mut FILE) -> c_int;
 }
 extern "C" {
     pub fn funlockfile(__stream: *mut FILE);
@@ -2192,71 +2317,85 @@ extern "C" {
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct max_align_t {
-    pub __clang_max_align_nonce1: ::std::os::raw::c_longlong,
+    pub __clang_max_align_nonce1: c_longlong,
     pub __bindgen_padding_0: u64,
     pub __clang_max_align_nonce2: f64,
 }
 #[test]
 fn bindgen_test_layout_max_align_t() {
-    assert_eq!(::std::mem::size_of::<max_align_t>() , 32usize , concat ! (
-               "Size of: " , stringify ! ( max_align_t ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const max_align_t ) ) .
-                __clang_max_align_nonce1 as * const _ as usize } , 0usize ,
-                concat ! (
-                "Alignment of field: " , stringify ! ( max_align_t ) , "::" ,
-                stringify ! ( __clang_max_align_nonce1 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const max_align_t ) ) .
-                __clang_max_align_nonce2 as * const _ as usize } , 16usize ,
-                concat ! (
-                "Alignment of field: " , stringify ! ( max_align_t ) , "::" ,
-                stringify ! ( __clang_max_align_nonce2 ) ));
+    assert_eq!(::std::mem::size_of::<max_align_t>(),
+               32usize,
+               concat!("Size of: ", stringify!(max_align_t)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const max_align_t)).__clang_max_align_nonce1 as *const _ as usize
+               },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(max_align_t),
+                       "::",
+                       stringify!(__clang_max_align_nonce1)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const max_align_t)).__clang_max_align_nonce2 as *const _ as usize
+               },
+               16usize,
+               concat!("Alignment of field: ",
+                       stringify!(max_align_t),
+                       "::",
+                       stringify!(__clang_max_align_nonce2)));
 }
 impl Clone for max_align_t {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
-pub type mp_limb_t = ::std::os::raw::c_ulong;
-pub type mp_limb_signed_t = ::std::os::raw::c_long;
-pub type mp_bitcnt_t = ::std::os::raw::c_ulong;
+pub type mp_limb_t = c_ulong;
+pub type mp_limb_signed_t = c_long;
+pub type mp_bitcnt_t = c_ulong;
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct __mpz_struct {
-    pub _mp_alloc: ::std::os::raw::c_int,
-    pub _mp_size: ::std::os::raw::c_int,
+    pub _mp_alloc: c_int,
+    pub _mp_size: c_int,
     pub _mp_d: *mut mp_limb_t,
 }
 #[test]
 fn bindgen_test_layout___mpz_struct() {
-    assert_eq!(::std::mem::size_of::<__mpz_struct>() , 16usize , concat ! (
-               "Size of: " , stringify ! ( __mpz_struct ) ));
-    assert_eq! (::std::mem::align_of::<__mpz_struct>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( __mpz_struct ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const __mpz_struct ) ) . _mp_alloc as * const _
-                as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( __mpz_struct ) , "::" ,
-                stringify ! ( _mp_alloc ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const __mpz_struct ) ) . _mp_size as * const _
-                as usize } , 4usize , concat ! (
-                "Alignment of field: " , stringify ! ( __mpz_struct ) , "::" ,
-                stringify ! ( _mp_size ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const __mpz_struct ) ) . _mp_d as * const _ as
-                usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( __mpz_struct ) , "::" ,
-                stringify ! ( _mp_d ) ));
+    assert_eq!(::std::mem::size_of::<__mpz_struct>(),
+               16usize,
+               concat!("Size of: ", stringify!(__mpz_struct)));
+    assert_eq!(::std::mem::align_of::<__mpz_struct>(),
+               8usize,
+               concat!("Alignment of ", stringify!(__mpz_struct)));
+    assert_eq!(unsafe { &(*(0 as *const __mpz_struct))._mp_alloc as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(__mpz_struct),
+                       "::",
+                       stringify!(_mp_alloc)));
+    assert_eq!(unsafe { &(*(0 as *const __mpz_struct))._mp_size as *const _ as usize },
+               4usize,
+               concat!("Alignment of field: ",
+                       stringify!(__mpz_struct),
+                       "::",
+                       stringify!(_mp_size)));
+    assert_eq!(unsafe { &(*(0 as *const __mpz_struct))._mp_d as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(__mpz_struct),
+                       "::",
+                       stringify!(_mp_d)));
 }
 impl Clone for __mpz_struct {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 pub type MP_INT = __mpz_struct;
 pub type mpz_t = [__mpz_struct; 1usize];
 pub type mp_ptr = *mut mp_limb_t;
 pub type mp_srcptr = *const mp_limb_t;
-pub type mp_size_t = ::std::os::raw::c_long;
-pub type mp_exp_t = ::std::os::raw::c_long;
+pub type mp_size_t = c_long;
+pub type mp_exp_t = c_long;
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct __mpq_struct {
@@ -2265,70 +2404,85 @@ pub struct __mpq_struct {
 }
 #[test]
 fn bindgen_test_layout___mpq_struct() {
-    assert_eq!(::std::mem::size_of::<__mpq_struct>() , 32usize , concat ! (
-               "Size of: " , stringify ! ( __mpq_struct ) ));
-    assert_eq! (::std::mem::align_of::<__mpq_struct>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( __mpq_struct ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const __mpq_struct ) ) . _mp_num as * const _
-                as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( __mpq_struct ) , "::" ,
-                stringify ! ( _mp_num ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const __mpq_struct ) ) . _mp_den as * const _
-                as usize } , 16usize , concat ! (
-                "Alignment of field: " , stringify ! ( __mpq_struct ) , "::" ,
-                stringify ! ( _mp_den ) ));
+    assert_eq!(::std::mem::size_of::<__mpq_struct>(),
+               32usize,
+               concat!("Size of: ", stringify!(__mpq_struct)));
+    assert_eq!(::std::mem::align_of::<__mpq_struct>(),
+               8usize,
+               concat!("Alignment of ", stringify!(__mpq_struct)));
+    assert_eq!(unsafe { &(*(0 as *const __mpq_struct))._mp_num as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(__mpq_struct),
+                       "::",
+                       stringify!(_mp_num)));
+    assert_eq!(unsafe { &(*(0 as *const __mpq_struct))._mp_den as *const _ as usize },
+               16usize,
+               concat!("Alignment of field: ",
+                       stringify!(__mpq_struct),
+                       "::",
+                       stringify!(_mp_den)));
 }
 impl Clone for __mpq_struct {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 pub type MP_RAT = __mpq_struct;
 pub type mpq_t = [__mpq_struct; 1usize];
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct __mpf_struct {
-    pub _mp_prec: ::std::os::raw::c_int,
-    pub _mp_size: ::std::os::raw::c_int,
+    pub _mp_prec: c_int,
+    pub _mp_size: c_int,
     pub _mp_exp: mp_exp_t,
     pub _mp_d: *mut mp_limb_t,
 }
 #[test]
 fn bindgen_test_layout___mpf_struct() {
-    assert_eq!(::std::mem::size_of::<__mpf_struct>() , 24usize , concat ! (
-               "Size of: " , stringify ! ( __mpf_struct ) ));
-    assert_eq! (::std::mem::align_of::<__mpf_struct>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( __mpf_struct ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const __mpf_struct ) ) . _mp_prec as * const _
-                as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( __mpf_struct ) , "::" ,
-                stringify ! ( _mp_prec ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const __mpf_struct ) ) . _mp_size as * const _
-                as usize } , 4usize , concat ! (
-                "Alignment of field: " , stringify ! ( __mpf_struct ) , "::" ,
-                stringify ! ( _mp_size ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const __mpf_struct ) ) . _mp_exp as * const _
-                as usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( __mpf_struct ) , "::" ,
-                stringify ! ( _mp_exp ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const __mpf_struct ) ) . _mp_d as * const _ as
-                usize } , 16usize , concat ! (
-                "Alignment of field: " , stringify ! ( __mpf_struct ) , "::" ,
-                stringify ! ( _mp_d ) ));
+    assert_eq!(::std::mem::size_of::<__mpf_struct>(),
+               24usize,
+               concat!("Size of: ", stringify!(__mpf_struct)));
+    assert_eq!(::std::mem::align_of::<__mpf_struct>(),
+               8usize,
+               concat!("Alignment of ", stringify!(__mpf_struct)));
+    assert_eq!(unsafe { &(*(0 as *const __mpf_struct))._mp_prec as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(__mpf_struct),
+                       "::",
+                       stringify!(_mp_prec)));
+    assert_eq!(unsafe { &(*(0 as *const __mpf_struct))._mp_size as *const _ as usize },
+               4usize,
+               concat!("Alignment of field: ",
+                       stringify!(__mpf_struct),
+                       "::",
+                       stringify!(_mp_size)));
+    assert_eq!(unsafe { &(*(0 as *const __mpf_struct))._mp_exp as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(__mpf_struct),
+                       "::",
+                       stringify!(_mp_exp)));
+    assert_eq!(unsafe { &(*(0 as *const __mpf_struct))._mp_d as *const _ as usize },
+               16usize,
+               concat!("Alignment of field: ",
+                       stringify!(__mpf_struct),
+                       "::",
+                       stringify!(_mp_d)));
 }
 impl Clone for __mpf_struct {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 pub type mpf_t = [__mpf_struct; 1usize];
-pub const gmp_randalg_t_GMP_RAND_ALG_LC: gmp_randalg_t =
-    gmp_randalg_t::GMP_RAND_ALG_DEFAULT;
+pub const gmp_randalg_t_GMP_RAND_ALG_LC: gmp_randalg_t = gmp_randalg_t::GMP_RAND_ALG_DEFAULT;
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
-pub enum gmp_randalg_t { GMP_RAND_ALG_DEFAULT = 0, }
+pub enum gmp_randalg_t {
+    GMP_RAND_ALG_DEFAULT = 0,
+}
 #[repr(C)]
 #[derive(Copy)]
 pub struct __gmp_randstate_struct {
@@ -2339,54 +2493,66 @@ pub struct __gmp_randstate_struct {
 #[repr(C)]
 #[derive(Copy)]
 pub union __gmp_randstate_struct__bindgen_ty_1 {
-    pub _mp_lc: *mut ::std::os::raw::c_void,
+    pub _mp_lc: *mut c_void,
 }
 #[test]
 fn bindgen_test_layout___gmp_randstate_struct__bindgen_ty_1() {
-    assert_eq!(::std::mem::size_of::<__gmp_randstate_struct__bindgen_ty_1>() ,
-               8usize , concat ! (
-               "Size of: " , stringify ! (
-               __gmp_randstate_struct__bindgen_ty_1 ) ));
-    assert_eq! (::std::mem::align_of::<__gmp_randstate_struct__bindgen_ty_1>()
-                , 8usize , concat ! (
-                "Alignment of " , stringify ! (
-                __gmp_randstate_struct__bindgen_ty_1 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const __gmp_randstate_struct__bindgen_ty_1 ) )
-                . _mp_lc as * const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                __gmp_randstate_struct__bindgen_ty_1 ) , "::" , stringify ! (
-                _mp_lc ) ));
+    assert_eq!(::std::mem::size_of::<__gmp_randstate_struct__bindgen_ty_1>(),
+               8usize,
+               concat!("Size of: ",
+                       stringify!(__gmp_randstate_struct__bindgen_ty_1)));
+    assert_eq!(::std::mem::align_of::<__gmp_randstate_struct__bindgen_ty_1>(),
+               8usize,
+               concat!("Alignment of ",
+                       stringify!(__gmp_randstate_struct__bindgen_ty_1)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const __gmp_randstate_struct__bindgen_ty_1))._mp_lc as *const _ as
+                   usize
+               },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(__gmp_randstate_struct__bindgen_ty_1),
+                       "::",
+                       stringify!(_mp_lc)));
 }
 impl Clone for __gmp_randstate_struct__bindgen_ty_1 {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[test]
 fn bindgen_test_layout___gmp_randstate_struct() {
-    assert_eq!(::std::mem::size_of::<__gmp_randstate_struct>() , 32usize ,
-               concat ! ( "Size of: " , stringify ! ( __gmp_randstate_struct )
-               ));
-    assert_eq! (::std::mem::align_of::<__gmp_randstate_struct>() , 8usize ,
-                concat ! (
-                "Alignment of " , stringify ! ( __gmp_randstate_struct ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const __gmp_randstate_struct ) ) . _mp_seed as
-                * const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( __gmp_randstate_struct
-                ) , "::" , stringify ! ( _mp_seed ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const __gmp_randstate_struct ) ) . _mp_alg as *
-                const _ as usize } , 16usize , concat ! (
-                "Alignment of field: " , stringify ! ( __gmp_randstate_struct
-                ) , "::" , stringify ! ( _mp_alg ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const __gmp_randstate_struct ) ) . _mp_algdata
-                as * const _ as usize } , 24usize , concat ! (
-                "Alignment of field: " , stringify ! ( __gmp_randstate_struct
-                ) , "::" , stringify ! ( _mp_algdata ) ));
+    assert_eq!(::std::mem::size_of::<__gmp_randstate_struct>(),
+               32usize,
+               concat!("Size of: ", stringify!(__gmp_randstate_struct)));
+    assert_eq!(::std::mem::align_of::<__gmp_randstate_struct>(),
+               8usize,
+               concat!("Alignment of ", stringify!(__gmp_randstate_struct)));
+    assert_eq!(unsafe { &(*(0 as *const __gmp_randstate_struct))._mp_seed as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(__gmp_randstate_struct),
+                       "::",
+                       stringify!(_mp_seed)));
+    assert_eq!(unsafe { &(*(0 as *const __gmp_randstate_struct))._mp_alg as *const _ as usize },
+               16usize,
+               concat!("Alignment of field: ",
+                       stringify!(__gmp_randstate_struct),
+                       "::",
+                       stringify!(_mp_alg)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const __gmp_randstate_struct))._mp_algdata as *const _ as usize
+               },
+               24usize,
+               concat!("Alignment of field: ",
+                       stringify!(__gmp_randstate_struct),
+                       "::",
+                       stringify!(_mp_algdata)));
 }
 impl Clone for __gmp_randstate_struct {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 pub type gmp_randstate_t = [__gmp_randstate_struct; 1usize];
 pub type mpz_srcptr = *const __mpz_struct;
@@ -2400,58 +2566,57 @@ extern "C" {
                                           ::std::option::Option<unsafe extern "C" fn(arg1:
                                                                                          usize)
                                                                     ->
-                                                                        *mut ::std::os::raw::c_void>,
+                                                                        *mut c_void>,
                                       arg2:
                                           ::std::option::Option<unsafe extern "C" fn(arg1:
-                                                                                         *mut ::std::os::raw::c_void,
+                                                                                         *mut c_void,
                                                                                      arg2:
                                                                                          usize,
                                                                                      arg3:
                                                                                          usize)
                                                                     ->
-                                                                        *mut ::std::os::raw::c_void>,
+                                                                        *mut c_void>,
                                       arg3:
                                           ::std::option::Option<unsafe extern "C" fn(arg1:
-                                                                                         *mut ::std::os::raw::c_void,
+                                                                                         *mut c_void,
                                                                                      arg2:
-                                                                                         usize)>);
+usize)>);
 }
 extern "C" {
     pub fn __gmp_get_memory_functions(arg1:
                                           *mut ::std::option::Option<unsafe extern "C" fn(arg1:
                                                                                               usize)
                                                                          ->
-                                                                             *mut ::std::os::raw::c_void>,
+                                                                             *mut c_void>,
                                       arg2:
                                           *mut ::std::option::Option<unsafe extern "C" fn(arg1:
-                                                                                              *mut ::std::os::raw::c_void,
+                                                                                              *mut c_void,
                                                                                           arg2:
                                                                                               usize,
                                                                                           arg3:
                                                                                               usize)
                                                                          ->
-                                                                             *mut ::std::os::raw::c_void>,
+                                                                             *mut c_void>,
                                       arg3:
                                           *mut ::std::option::Option<unsafe extern "C" fn(arg1:
-                                                                                              *mut ::std::os::raw::c_void,
+                                                                                              *mut c_void,
                                                                                           arg2:
-                                                                                              usize)>);
+usize)>);
 }
 extern "C" {
     #[link_name = "__gmp_bits_per_limb"]
-    pub static __gmp_bits_per_limb: ::std::os::raw::c_int;
+    pub static __gmp_bits_per_limb: c_int;
 }
 extern "C" {
     #[link_name = "__gmp_errno"]
-    pub static mut __gmp_errno: ::std::os::raw::c_int;
+    pub static mut __gmp_errno: c_int;
 }
 extern "C" {
     #[link_name = "__gmp_version"]
-    pub static __gmp_version: *const ::std::os::raw::c_char;
+    pub static __gmp_version: *const c_char;
 }
 extern "C" {
-    pub fn __gmp_randinit(arg1: *mut __gmp_randstate_struct,
-                          arg2: gmp_randalg_t, ...);
+    pub fn __gmp_randinit(arg1: *mut __gmp_randstate_struct, arg2: gmp_randalg_t, ...);
 }
 extern "C" {
     pub fn __gmp_randinit_default(arg1: *mut __gmp_randstate_struct);
@@ -2459,13 +2624,13 @@ extern "C" {
 extern "C" {
     pub fn __gmp_randinit_lc_2exp(arg1: *mut __gmp_randstate_struct,
                                   arg2: mpz_srcptr,
-                                  arg3: ::std::os::raw::c_ulong,
+                                  arg3: c_ulong,
                                   arg4: mp_bitcnt_t);
 }
 extern "C" {
     pub fn __gmp_randinit_lc_2exp_size(arg1: *mut __gmp_randstate_struct,
                                        arg2: mp_bitcnt_t)
-     -> ::std::os::raw::c_int;
+                                       -> c_int;
 }
 extern "C" {
     pub fn __gmp_randinit_mt(arg1: *mut __gmp_randstate_struct);
@@ -2475,104 +2640,83 @@ extern "C" {
                               arg2: *const __gmp_randstate_struct);
 }
 extern "C" {
-    pub fn __gmp_randseed(arg1: *mut __gmp_randstate_struct,
-                          arg2: mpz_srcptr);
+    pub fn __gmp_randseed(arg1: *mut __gmp_randstate_struct, arg2: mpz_srcptr);
 }
 extern "C" {
-    pub fn __gmp_randseed_ui(arg1: *mut __gmp_randstate_struct,
-                             arg2: ::std::os::raw::c_ulong);
+    pub fn __gmp_randseed_ui(arg1: *mut __gmp_randstate_struct, arg2: c_ulong);
 }
 extern "C" {
     pub fn __gmp_randclear(arg1: *mut __gmp_randstate_struct);
 }
 extern "C" {
-    pub fn __gmp_urandomb_ui(arg1: *mut __gmp_randstate_struct,
-                             arg2: ::std::os::raw::c_ulong)
-     -> ::std::os::raw::c_ulong;
+    pub fn __gmp_urandomb_ui(arg1: *mut __gmp_randstate_struct, arg2: c_ulong) -> c_ulong;
 }
 extern "C" {
-    pub fn __gmp_urandomm_ui(arg1: *mut __gmp_randstate_struct,
-                             arg2: ::std::os::raw::c_ulong)
-     -> ::std::os::raw::c_ulong;
+    pub fn __gmp_urandomm_ui(arg1: *mut __gmp_randstate_struct, arg2: c_ulong) -> c_ulong;
 }
 extern "C" {
-    pub fn __gmp_asprintf(arg1: *mut *mut ::std::os::raw::c_char,
-                          arg2: *const ::std::os::raw::c_char, ...)
-     -> ::std::os::raw::c_int;
+    pub fn __gmp_asprintf(arg1: *mut *mut c_char, arg2: *const c_char, ...) -> c_int;
 }
 extern "C" {
-    pub fn __gmp_fprintf(arg1: *mut FILE,
-                         arg2: *const ::std::os::raw::c_char, ...)
-     -> ::std::os::raw::c_int;
+    pub fn __gmp_fprintf(arg1: *mut FILE, arg2: *const c_char, ...) -> c_int;
 }
 extern "C" {
-    pub fn __gmp_printf(arg1: *const ::std::os::raw::c_char, ...)
-     -> ::std::os::raw::c_int;
+    pub fn __gmp_printf(arg1: *const c_char, ...) -> c_int;
 }
 extern "C" {
-    pub fn __gmp_snprintf(arg1: *mut ::std::os::raw::c_char, arg2: usize,
-                          arg3: *const ::std::os::raw::c_char, ...)
-     -> ::std::os::raw::c_int;
+    pub fn __gmp_snprintf(arg1: *mut c_char, arg2: usize, arg3: *const c_char, ...) -> c_int;
 }
 extern "C" {
-    pub fn __gmp_sprintf(arg1: *mut ::std::os::raw::c_char,
-                         arg2: *const ::std::os::raw::c_char, ...)
-     -> ::std::os::raw::c_int;
+    pub fn __gmp_sprintf(arg1: *mut c_char, arg2: *const c_char, ...) -> c_int;
 }
 extern "C" {
-    pub fn __gmp_vasprintf(arg1: *mut *mut ::std::os::raw::c_char,
-                           arg2: *const ::std::os::raw::c_char,
-                           arg3: *mut __va_list_tag) -> ::std::os::raw::c_int;
+    pub fn __gmp_vasprintf(arg1: *mut *mut c_char,
+                           arg2: *const c_char,
+                           arg3: *mut __va_list_tag)
+                           -> c_int;
 }
 extern "C" {
-    pub fn __gmp_vfprintf(arg1: *mut FILE,
-                          arg2: *const ::std::os::raw::c_char,
-                          arg3: *mut __va_list_tag) -> ::std::os::raw::c_int;
+    pub fn __gmp_vfprintf(arg1: *mut FILE, arg2: *const c_char, arg3: *mut __va_list_tag) -> c_int;
 }
 extern "C" {
-    pub fn __gmp_vprintf(arg1: *const ::std::os::raw::c_char,
-                         arg2: *mut __va_list_tag) -> ::std::os::raw::c_int;
+    pub fn __gmp_vprintf(arg1: *const c_char, arg2: *mut __va_list_tag) -> c_int;
 }
 extern "C" {
-    pub fn __gmp_vsnprintf(arg1: *mut ::std::os::raw::c_char, arg2: usize,
-                           arg3: *const ::std::os::raw::c_char,
-                           arg4: *mut __va_list_tag) -> ::std::os::raw::c_int;
+    pub fn __gmp_vsnprintf(arg1: *mut c_char,
+                           arg2: usize,
+                           arg3: *const c_char,
+                           arg4: *mut __va_list_tag)
+                           -> c_int;
 }
 extern "C" {
-    pub fn __gmp_vsprintf(arg1: *mut ::std::os::raw::c_char,
-                          arg2: *const ::std::os::raw::c_char,
-                          arg3: *mut __va_list_tag) -> ::std::os::raw::c_int;
+    pub fn __gmp_vsprintf(arg1: *mut c_char,
+                          arg2: *const c_char,
+                          arg3: *mut __va_list_tag)
+                          -> c_int;
 }
 extern "C" {
-    pub fn __gmp_fscanf(arg1: *mut FILE,
-                        arg2: *const ::std::os::raw::c_char, ...)
-     -> ::std::os::raw::c_int;
+    pub fn __gmp_fscanf(arg1: *mut FILE, arg2: *const c_char, ...) -> c_int;
 }
 extern "C" {
-    pub fn __gmp_scanf(arg1: *const ::std::os::raw::c_char, ...)
-     -> ::std::os::raw::c_int;
+    pub fn __gmp_scanf(arg1: *const c_char, ...) -> c_int;
 }
 extern "C" {
-    pub fn __gmp_sscanf(arg1: *const ::std::os::raw::c_char,
-                        arg2: *const ::std::os::raw::c_char, ...)
-     -> ::std::os::raw::c_int;
+    pub fn __gmp_sscanf(arg1: *const c_char, arg2: *const c_char, ...) -> c_int;
 }
 extern "C" {
-    pub fn __gmp_vfscanf(arg1: *mut FILE, arg2: *const ::std::os::raw::c_char,
-                         arg3: *mut __va_list_tag) -> ::std::os::raw::c_int;
+    pub fn __gmp_vfscanf(arg1: *mut FILE, arg2: *const c_char, arg3: *mut __va_list_tag) -> c_int;
 }
 extern "C" {
-    pub fn __gmp_vscanf(arg1: *const ::std::os::raw::c_char,
-                        arg2: *mut __va_list_tag) -> ::std::os::raw::c_int;
+    pub fn __gmp_vscanf(arg1: *const c_char, arg2: *mut __va_list_tag) -> c_int;
 }
 extern "C" {
-    pub fn __gmp_vsscanf(arg1: *const ::std::os::raw::c_char,
-                         arg2: *const ::std::os::raw::c_char,
-                         arg3: *mut __va_list_tag) -> ::std::os::raw::c_int;
+    pub fn __gmp_vsscanf(arg1: *const c_char,
+                         arg2: *const c_char,
+                         arg3: *mut __va_list_tag)
+                         -> c_int;
 }
 extern "C" {
-    pub fn __gmpz_realloc(arg1: mpz_ptr, arg2: mp_size_t)
-     -> *mut ::std::os::raw::c_void;
+    pub fn __gmpz_realloc(arg1: mpz_ptr, arg2: mp_size_t) -> *mut c_void;
 }
 extern "C" {
     pub fn __gmpz_abs(arg1: mpz_ptr, arg2: mpz_srcptr);
@@ -2581,15 +2725,13 @@ extern "C" {
     pub fn __gmpz_add(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mpz_srcptr);
 }
 extern "C" {
-    pub fn __gmpz_add_ui(arg1: mpz_ptr, arg2: mpz_srcptr,
-                         arg3: ::std::os::raw::c_ulong);
+    pub fn __gmpz_add_ui(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: c_ulong);
 }
 extern "C" {
     pub fn __gmpz_addmul(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mpz_srcptr);
 }
 extern "C" {
-    pub fn __gmpz_addmul_ui(arg1: mpz_ptr, arg2: mpz_srcptr,
-                            arg3: ::std::os::raw::c_ulong);
+    pub fn __gmpz_addmul_ui(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: c_ulong);
 }
 extern "C" {
     pub fn __gmpz_and(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mpz_srcptr);
@@ -2598,49 +2740,41 @@ extern "C" {
     pub fn __gmpz_array_init(arg1: mpz_ptr, arg2: mp_size_t, arg3: mp_size_t);
 }
 extern "C" {
-    pub fn __gmpz_bin_ui(arg1: mpz_ptr, arg2: mpz_srcptr,
-                         arg3: ::std::os::raw::c_ulong);
+    pub fn __gmpz_bin_ui(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: c_ulong);
 }
 extern "C" {
-    pub fn __gmpz_bin_uiui(arg1: mpz_ptr, arg2: ::std::os::raw::c_ulong,
-                           arg3: ::std::os::raw::c_ulong);
+    pub fn __gmpz_bin_uiui(arg1: mpz_ptr, arg2: c_ulong, arg3: c_ulong);
 }
 extern "C" {
     pub fn __gmpz_cdiv_q(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mpz_srcptr);
 }
 extern "C" {
-    pub fn __gmpz_cdiv_q_2exp(arg1: mpz_ptr, arg2: mpz_srcptr,
-                              arg3: mp_bitcnt_t);
+    pub fn __gmpz_cdiv_q_2exp(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mp_bitcnt_t);
 }
 extern "C" {
-    pub fn __gmpz_cdiv_q_ui(arg1: mpz_ptr, arg2: mpz_srcptr,
-                            arg3: ::std::os::raw::c_ulong)
-     -> ::std::os::raw::c_ulong;
+    pub fn __gmpz_cdiv_q_ui(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: c_ulong) -> c_ulong;
 }
 extern "C" {
-    pub fn __gmpz_cdiv_qr(arg1: mpz_ptr, arg2: mpz_ptr, arg3: mpz_srcptr,
-                          arg4: mpz_srcptr);
+    pub fn __gmpz_cdiv_qr(arg1: mpz_ptr, arg2: mpz_ptr, arg3: mpz_srcptr, arg4: mpz_srcptr);
 }
 extern "C" {
-    pub fn __gmpz_cdiv_qr_ui(arg1: mpz_ptr, arg2: mpz_ptr, arg3: mpz_srcptr,
-                             arg4: ::std::os::raw::c_ulong)
-     -> ::std::os::raw::c_ulong;
+    pub fn __gmpz_cdiv_qr_ui(arg1: mpz_ptr,
+                             arg2: mpz_ptr,
+                             arg3: mpz_srcptr,
+                             arg4: c_ulong)
+                             -> c_ulong;
 }
 extern "C" {
     pub fn __gmpz_cdiv_r(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mpz_srcptr);
 }
 extern "C" {
-    pub fn __gmpz_cdiv_r_2exp(arg1: mpz_ptr, arg2: mpz_srcptr,
-                              arg3: mp_bitcnt_t);
+    pub fn __gmpz_cdiv_r_2exp(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mp_bitcnt_t);
 }
 extern "C" {
-    pub fn __gmpz_cdiv_r_ui(arg1: mpz_ptr, arg2: mpz_srcptr,
-                            arg3: ::std::os::raw::c_ulong)
-     -> ::std::os::raw::c_ulong;
+    pub fn __gmpz_cdiv_r_ui(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: c_ulong) -> c_ulong;
 }
 extern "C" {
-    pub fn __gmpz_cdiv_ui(arg1: mpz_srcptr, arg2: ::std::os::raw::c_ulong)
-     -> ::std::os::raw::c_ulong;
+    pub fn __gmpz_cdiv_ui(arg1: mpz_srcptr, arg2: c_ulong) -> c_ulong;
 }
 extern "C" {
     pub fn __gmpz_clear(arg1: mpz_ptr);
@@ -2652,31 +2786,25 @@ extern "C" {
     pub fn __gmpz_clrbit(arg1: mpz_ptr, arg2: mp_bitcnt_t);
 }
 extern "C" {
-    pub fn __gmpz_cmp(arg1: mpz_srcptr, arg2: mpz_srcptr)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpz_cmp(arg1: mpz_srcptr, arg2: mpz_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn __gmpz_cmp_d(arg1: mpz_srcptr, arg2: f64) -> ::std::os::raw::c_int;
+    pub fn __gmpz_cmp_d(arg1: mpz_srcptr, arg2: f64) -> c_int;
 }
 extern "C" {
-    pub fn __gmpz_cmp_si(arg1: mpz_srcptr, arg2: ::std::os::raw::c_long)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpz_cmp_si(arg1: mpz_srcptr, arg2: c_long) -> c_int;
 }
 extern "C" {
-    pub fn __gmpz_cmp_ui(arg1: mpz_srcptr, arg2: ::std::os::raw::c_ulong)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpz_cmp_ui(arg1: mpz_srcptr, arg2: c_ulong) -> c_int;
 }
 extern "C" {
-    pub fn __gmpz_cmpabs(arg1: mpz_srcptr, arg2: mpz_srcptr)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpz_cmpabs(arg1: mpz_srcptr, arg2: mpz_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn __gmpz_cmpabs_d(arg1: mpz_srcptr, arg2: f64)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpz_cmpabs_d(arg1: mpz_srcptr, arg2: f64) -> c_int;
 }
 extern "C" {
-    pub fn __gmpz_cmpabs_ui(arg1: mpz_srcptr, arg2: ::std::os::raw::c_ulong)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpz_cmpabs_ui(arg1: mpz_srcptr, arg2: c_ulong) -> c_int;
 }
 extern "C" {
     pub fn __gmpz_com(arg1: mpz_ptr, arg2: mpz_srcptr);
@@ -2685,153 +2813,136 @@ extern "C" {
     pub fn __gmpz_combit(arg1: mpz_ptr, arg2: mp_bitcnt_t);
 }
 extern "C" {
-    pub fn __gmpz_congruent_p(arg1: mpz_srcptr, arg2: mpz_srcptr,
-                              arg3: mpz_srcptr) -> ::std::os::raw::c_int;
+    pub fn __gmpz_congruent_p(arg1: mpz_srcptr, arg2: mpz_srcptr, arg3: mpz_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn __gmpz_congruent_2exp_p(arg1: mpz_srcptr, arg2: mpz_srcptr,
-                                   arg3: mp_bitcnt_t)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpz_congruent_2exp_p(arg1: mpz_srcptr, arg2: mpz_srcptr, arg3: mp_bitcnt_t) -> c_int;
 }
 extern "C" {
-    pub fn __gmpz_congruent_ui_p(arg1: mpz_srcptr,
-                                 arg2: ::std::os::raw::c_ulong,
-                                 arg3: ::std::os::raw::c_ulong)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpz_congruent_ui_p(arg1: mpz_srcptr, arg2: c_ulong, arg3: c_ulong) -> c_int;
 }
 extern "C" {
     pub fn __gmpz_divexact(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mpz_srcptr);
 }
 extern "C" {
-    pub fn __gmpz_divexact_ui(arg1: mpz_ptr, arg2: mpz_srcptr,
-                              arg3: ::std::os::raw::c_ulong);
+    pub fn __gmpz_divexact_ui(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: c_ulong);
 }
 extern "C" {
-    pub fn __gmpz_divisible_p(arg1: mpz_srcptr, arg2: mpz_srcptr)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpz_divisible_p(arg1: mpz_srcptr, arg2: mpz_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn __gmpz_divisible_ui_p(arg1: mpz_srcptr,
-                                 arg2: ::std::os::raw::c_ulong)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpz_divisible_ui_p(arg1: mpz_srcptr, arg2: c_ulong) -> c_int;
 }
 extern "C" {
-    pub fn __gmpz_divisible_2exp_p(arg1: mpz_srcptr, arg2: mp_bitcnt_t)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpz_divisible_2exp_p(arg1: mpz_srcptr, arg2: mp_bitcnt_t) -> c_int;
 }
 extern "C" {
     pub fn __gmpz_dump(arg1: mpz_srcptr);
 }
 extern "C" {
-    pub fn __gmpz_export(arg1: *mut ::std::os::raw::c_void, arg2: *mut usize,
-                         arg3: ::std::os::raw::c_int, arg4: usize,
-                         arg5: ::std::os::raw::c_int, arg6: usize,
-                         arg7: mpz_srcptr) -> *mut ::std::os::raw::c_void;
+    pub fn __gmpz_export(arg1: *mut c_void,
+                         arg2: *mut usize,
+                         arg3: c_int,
+                         arg4: usize,
+                         arg5: c_int,
+                         arg6: usize,
+                         arg7: mpz_srcptr)
+                         -> *mut c_void;
 }
 extern "C" {
-    pub fn __gmpz_fac_ui(arg1: mpz_ptr, arg2: ::std::os::raw::c_ulong);
+    pub fn __gmpz_fac_ui(arg1: mpz_ptr, arg2: c_ulong);
 }
 extern "C" {
-    pub fn __gmpz_2fac_ui(arg1: mpz_ptr, arg2: ::std::os::raw::c_ulong);
+    pub fn __gmpz_2fac_ui(arg1: mpz_ptr, arg2: c_ulong);
 }
 extern "C" {
-    pub fn __gmpz_mfac_uiui(arg1: mpz_ptr, arg2: ::std::os::raw::c_ulong,
-                            arg3: ::std::os::raw::c_ulong);
+    pub fn __gmpz_mfac_uiui(arg1: mpz_ptr, arg2: c_ulong, arg3: c_ulong);
 }
 extern "C" {
-    pub fn __gmpz_primorial_ui(arg1: mpz_ptr, arg2: ::std::os::raw::c_ulong);
+    pub fn __gmpz_primorial_ui(arg1: mpz_ptr, arg2: c_ulong);
 }
 extern "C" {
     pub fn __gmpz_fdiv_q(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mpz_srcptr);
 }
 extern "C" {
-    pub fn __gmpz_fdiv_q_2exp(arg1: mpz_ptr, arg2: mpz_srcptr,
-                              arg3: mp_bitcnt_t);
+    pub fn __gmpz_fdiv_q_2exp(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mp_bitcnt_t);
 }
 extern "C" {
-    pub fn __gmpz_fdiv_q_ui(arg1: mpz_ptr, arg2: mpz_srcptr,
-                            arg3: ::std::os::raw::c_ulong)
-     -> ::std::os::raw::c_ulong;
+    pub fn __gmpz_fdiv_q_ui(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: c_ulong) -> c_ulong;
 }
 extern "C" {
-    pub fn __gmpz_fdiv_qr(arg1: mpz_ptr, arg2: mpz_ptr, arg3: mpz_srcptr,
-                          arg4: mpz_srcptr);
+    pub fn __gmpz_fdiv_qr(arg1: mpz_ptr, arg2: mpz_ptr, arg3: mpz_srcptr, arg4: mpz_srcptr);
 }
 extern "C" {
-    pub fn __gmpz_fdiv_qr_ui(arg1: mpz_ptr, arg2: mpz_ptr, arg3: mpz_srcptr,
-                             arg4: ::std::os::raw::c_ulong)
-     -> ::std::os::raw::c_ulong;
+    pub fn __gmpz_fdiv_qr_ui(arg1: mpz_ptr,
+                             arg2: mpz_ptr,
+                             arg3: mpz_srcptr,
+                             arg4: c_ulong)
+                             -> c_ulong;
 }
 extern "C" {
     pub fn __gmpz_fdiv_r(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mpz_srcptr);
 }
 extern "C" {
-    pub fn __gmpz_fdiv_r_2exp(arg1: mpz_ptr, arg2: mpz_srcptr,
-                              arg3: mp_bitcnt_t);
+    pub fn __gmpz_fdiv_r_2exp(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mp_bitcnt_t);
 }
 extern "C" {
-    pub fn __gmpz_fdiv_r_ui(arg1: mpz_ptr, arg2: mpz_srcptr,
-                            arg3: ::std::os::raw::c_ulong)
-     -> ::std::os::raw::c_ulong;
+    pub fn __gmpz_fdiv_r_ui(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: c_ulong) -> c_ulong;
 }
 extern "C" {
-    pub fn __gmpz_fdiv_ui(arg1: mpz_srcptr, arg2: ::std::os::raw::c_ulong)
-     -> ::std::os::raw::c_ulong;
+    pub fn __gmpz_fdiv_ui(arg1: mpz_srcptr, arg2: c_ulong) -> c_ulong;
 }
 extern "C" {
-    pub fn __gmpz_fib_ui(arg1: mpz_ptr, arg2: ::std::os::raw::c_ulong);
+    pub fn __gmpz_fib_ui(arg1: mpz_ptr, arg2: c_ulong);
 }
 extern "C" {
-    pub fn __gmpz_fib2_ui(arg1: mpz_ptr, arg2: mpz_ptr,
-                          arg3: ::std::os::raw::c_ulong);
+    pub fn __gmpz_fib2_ui(arg1: mpz_ptr, arg2: mpz_ptr, arg3: c_ulong);
 }
 extern "C" {
-    pub fn __gmpz_fits_sint_p(arg1: mpz_srcptr) -> ::std::os::raw::c_int;
+    pub fn __gmpz_fits_sint_p(arg1: mpz_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn __gmpz_fits_slong_p(arg1: mpz_srcptr) -> ::std::os::raw::c_int;
+    pub fn __gmpz_fits_slong_p(arg1: mpz_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn __gmpz_fits_sshort_p(arg1: mpz_srcptr) -> ::std::os::raw::c_int;
+    pub fn __gmpz_fits_sshort_p(arg1: mpz_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn __gmpz_fits_uint_p(arg1: mpz_srcptr) -> ::std::os::raw::c_int;
+    pub fn __gmpz_fits_uint_p(arg1: mpz_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn __gmpz_fits_ulong_p(arg1: mpz_srcptr) -> ::std::os::raw::c_int;
+    pub fn __gmpz_fits_ulong_p(arg1: mpz_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn __gmpz_fits_ushort_p(arg1: mpz_srcptr) -> ::std::os::raw::c_int;
+    pub fn __gmpz_fits_ushort_p(arg1: mpz_srcptr) -> c_int;
 }
 extern "C" {
     pub fn __gmpz_gcd(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mpz_srcptr);
 }
 extern "C" {
-    pub fn __gmpz_gcd_ui(arg1: mpz_ptr, arg2: mpz_srcptr,
-                         arg3: ::std::os::raw::c_ulong)
-     -> ::std::os::raw::c_ulong;
+    pub fn __gmpz_gcd_ui(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: c_ulong) -> c_ulong;
 }
 extern "C" {
-    pub fn __gmpz_gcdext(arg1: mpz_ptr, arg2: mpz_ptr, arg3: mpz_ptr,
-                         arg4: mpz_srcptr, arg5: mpz_srcptr);
+    pub fn __gmpz_gcdext(arg1: mpz_ptr,
+                         arg2: mpz_ptr,
+                         arg3: mpz_ptr,
+                         arg4: mpz_srcptr,
+                         arg5: mpz_srcptr);
 }
 extern "C" {
     pub fn __gmpz_get_d(arg1: mpz_srcptr) -> f64;
 }
 extern "C" {
-    pub fn __gmpz_get_d_2exp(arg1: *mut ::std::os::raw::c_long,
-                             arg2: mpz_srcptr) -> f64;
+    pub fn __gmpz_get_d_2exp(arg1: *mut c_long, arg2: mpz_srcptr) -> f64;
 }
 extern "C" {
-    pub fn __gmpz_get_si(arg1: mpz_srcptr) -> ::std::os::raw::c_long;
+    pub fn __gmpz_get_si(arg1: mpz_srcptr) -> c_long;
 }
 extern "C" {
-    pub fn __gmpz_get_str(arg1: *mut ::std::os::raw::c_char,
-                          arg2: ::std::os::raw::c_int, arg3: mpz_srcptr)
-     -> *mut ::std::os::raw::c_char;
+    pub fn __gmpz_get_str(arg1: *mut c_char, arg2: c_int, arg3: mpz_srcptr) -> *mut c_char;
 }
 extern "C" {
-    pub fn __gmpz_get_ui(arg1: mpz_srcptr) -> ::std::os::raw::c_ulong;
+    pub fn __gmpz_get_ui(arg1: mpz_srcptr) -> c_ulong;
 }
 extern "C" {
     pub fn __gmpz_getlimbn(arg1: mpz_srcptr, arg2: mp_size_t) -> mp_limb_t;
@@ -2840,10 +2951,13 @@ extern "C" {
     pub fn __gmpz_hamdist(arg1: mpz_srcptr, arg2: mpz_srcptr) -> mp_bitcnt_t;
 }
 extern "C" {
-    pub fn __gmpz_import(arg1: mpz_ptr, arg2: usize,
-                         arg3: ::std::os::raw::c_int, arg4: usize,
-                         arg5: ::std::os::raw::c_int, arg6: usize,
-                         arg7: *const ::std::os::raw::c_void);
+    pub fn __gmpz_import(arg1: mpz_ptr,
+                         arg2: usize,
+                         arg3: c_int,
+                         arg4: usize,
+                         arg5: c_int,
+                         arg6: usize,
+                         arg7: *const c_void);
 }
 extern "C" {
     pub fn __gmpz_init(arg1: mpz_ptr);
@@ -2861,69 +2975,55 @@ extern "C" {
     pub fn __gmpz_init_set_d(arg1: mpz_ptr, arg2: f64);
 }
 extern "C" {
-    pub fn __gmpz_init_set_si(arg1: mpz_ptr, arg2: ::std::os::raw::c_long);
+    pub fn __gmpz_init_set_si(arg1: mpz_ptr, arg2: c_long);
 }
 extern "C" {
-    pub fn __gmpz_init_set_str(arg1: mpz_ptr,
-                               arg2: *const ::std::os::raw::c_char,
-                               arg3: ::std::os::raw::c_int)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpz_init_set_str(arg1: mpz_ptr, arg2: *const c_char, arg3: c_int) -> c_int;
 }
 extern "C" {
-    pub fn __gmpz_init_set_ui(arg1: mpz_ptr, arg2: ::std::os::raw::c_ulong);
+    pub fn __gmpz_init_set_ui(arg1: mpz_ptr, arg2: c_ulong);
 }
 extern "C" {
     pub fn __gmpz_inp_raw(arg1: mpz_ptr, arg2: *mut FILE) -> usize;
 }
 extern "C" {
-    pub fn __gmpz_inp_str(arg1: mpz_ptr, arg2: *mut FILE,
-                          arg3: ::std::os::raw::c_int) -> usize;
+    pub fn __gmpz_inp_str(arg1: mpz_ptr, arg2: *mut FILE, arg3: c_int) -> usize;
 }
 extern "C" {
-    pub fn __gmpz_invert(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mpz_srcptr)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpz_invert(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mpz_srcptr) -> c_int;
 }
 extern "C" {
     pub fn __gmpz_ior(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mpz_srcptr);
 }
 extern "C" {
-    pub fn __gmpz_jacobi(arg1: mpz_srcptr, arg2: mpz_srcptr)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpz_jacobi(arg1: mpz_srcptr, arg2: mpz_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn __gmpz_kronecker_si(arg1: mpz_srcptr, arg2: ::std::os::raw::c_long)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpz_kronecker_si(arg1: mpz_srcptr, arg2: c_long) -> c_int;
 }
 extern "C" {
-    pub fn __gmpz_kronecker_ui(arg1: mpz_srcptr,
-                               arg2: ::std::os::raw::c_ulong)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpz_kronecker_ui(arg1: mpz_srcptr, arg2: c_ulong) -> c_int;
 }
 extern "C" {
-    pub fn __gmpz_si_kronecker(arg1: ::std::os::raw::c_long, arg2: mpz_srcptr)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpz_si_kronecker(arg1: c_long, arg2: mpz_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn __gmpz_ui_kronecker(arg1: ::std::os::raw::c_ulong,
-                               arg2: mpz_srcptr) -> ::std::os::raw::c_int;
+    pub fn __gmpz_ui_kronecker(arg1: c_ulong, arg2: mpz_srcptr) -> c_int;
 }
 extern "C" {
     pub fn __gmpz_lcm(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mpz_srcptr);
 }
 extern "C" {
-    pub fn __gmpz_lcm_ui(arg1: mpz_ptr, arg2: mpz_srcptr,
-                         arg3: ::std::os::raw::c_ulong);
+    pub fn __gmpz_lcm_ui(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: c_ulong);
 }
 extern "C" {
-    pub fn __gmpz_lucnum_ui(arg1: mpz_ptr, arg2: ::std::os::raw::c_ulong);
+    pub fn __gmpz_lucnum_ui(arg1: mpz_ptr, arg2: c_ulong);
 }
 extern "C" {
-    pub fn __gmpz_lucnum2_ui(arg1: mpz_ptr, arg2: mpz_ptr,
-                             arg3: ::std::os::raw::c_ulong);
+    pub fn __gmpz_lucnum2_ui(arg1: mpz_ptr, arg2: mpz_ptr, arg3: c_ulong);
 }
 extern "C" {
-    pub fn __gmpz_millerrabin(arg1: mpz_srcptr, arg2: ::std::os::raw::c_int)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpz_millerrabin(arg1: mpz_srcptr, arg2: c_int) -> c_int;
 }
 extern "C" {
     pub fn __gmpz_mod(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mpz_srcptr);
@@ -2932,16 +3032,13 @@ extern "C" {
     pub fn __gmpz_mul(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mpz_srcptr);
 }
 extern "C" {
-    pub fn __gmpz_mul_2exp(arg1: mpz_ptr, arg2: mpz_srcptr,
-                           arg3: mp_bitcnt_t);
+    pub fn __gmpz_mul_2exp(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mp_bitcnt_t);
 }
 extern "C" {
-    pub fn __gmpz_mul_si(arg1: mpz_ptr, arg2: mpz_srcptr,
-                         arg3: ::std::os::raw::c_long);
+    pub fn __gmpz_mul_si(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: c_long);
 }
 extern "C" {
-    pub fn __gmpz_mul_ui(arg1: mpz_ptr, arg2: mpz_srcptr,
-                         arg3: ::std::os::raw::c_ulong);
+    pub fn __gmpz_mul_ui(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: c_ulong);
 }
 extern "C" {
     pub fn __gmpz_neg(arg1: mpz_ptr, arg2: mpz_srcptr);
@@ -2953,38 +3050,31 @@ extern "C" {
     pub fn __gmpz_out_raw(arg1: *mut FILE, arg2: mpz_srcptr) -> usize;
 }
 extern "C" {
-    pub fn __gmpz_out_str(arg1: *mut FILE, arg2: ::std::os::raw::c_int,
-                          arg3: mpz_srcptr) -> usize;
+    pub fn __gmpz_out_str(arg1: *mut FILE, arg2: c_int, arg3: mpz_srcptr) -> usize;
 }
 extern "C" {
-    pub fn __gmpz_perfect_power_p(arg1: mpz_srcptr) -> ::std::os::raw::c_int;
+    pub fn __gmpz_perfect_power_p(arg1: mpz_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn __gmpz_perfect_square_p(arg1: mpz_srcptr) -> ::std::os::raw::c_int;
+    pub fn __gmpz_perfect_square_p(arg1: mpz_srcptr) -> c_int;
 }
 extern "C" {
     pub fn __gmpz_popcount(arg1: mpz_srcptr) -> mp_bitcnt_t;
 }
 extern "C" {
-    pub fn __gmpz_pow_ui(arg1: mpz_ptr, arg2: mpz_srcptr,
-                         arg3: ::std::os::raw::c_ulong);
+    pub fn __gmpz_pow_ui(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: c_ulong);
 }
 extern "C" {
-    pub fn __gmpz_powm(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mpz_srcptr,
-                       arg4: mpz_srcptr);
+    pub fn __gmpz_powm(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mpz_srcptr, arg4: mpz_srcptr);
 }
 extern "C" {
-    pub fn __gmpz_powm_sec(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mpz_srcptr,
-                           arg4: mpz_srcptr);
+    pub fn __gmpz_powm_sec(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mpz_srcptr, arg4: mpz_srcptr);
 }
 extern "C" {
-    pub fn __gmpz_powm_ui(arg1: mpz_ptr, arg2: mpz_srcptr,
-                          arg3: ::std::os::raw::c_ulong, arg4: mpz_srcptr);
+    pub fn __gmpz_powm_ui(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: c_ulong, arg4: mpz_srcptr);
 }
 extern "C" {
-    pub fn __gmpz_probab_prime_p(arg1: mpz_srcptr,
-                                 arg2: ::std::os::raw::c_int)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpz_probab_prime_p(arg1: mpz_srcptr, arg2: c_int) -> c_int;
 }
 extern "C" {
     pub fn __gmpz_random(arg1: mpz_ptr, arg2: mp_size_t);
@@ -2996,21 +3086,16 @@ extern "C" {
     pub fn __gmpz_realloc2(arg1: mpz_ptr, arg2: mp_bitcnt_t);
 }
 extern "C" {
-    pub fn __gmpz_remove(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mpz_srcptr)
-     -> mp_bitcnt_t;
+    pub fn __gmpz_remove(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mpz_srcptr) -> mp_bitcnt_t;
 }
 extern "C" {
-    pub fn __gmpz_root(arg1: mpz_ptr, arg2: mpz_srcptr,
-                       arg3: ::std::os::raw::c_ulong)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpz_root(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: c_ulong) -> c_int;
 }
 extern "C" {
-    pub fn __gmpz_rootrem(arg1: mpz_ptr, arg2: mpz_ptr, arg3: mpz_srcptr,
-                          arg4: ::std::os::raw::c_ulong);
+    pub fn __gmpz_rootrem(arg1: mpz_ptr, arg2: mpz_ptr, arg3: mpz_srcptr, arg4: c_ulong);
 }
 extern "C" {
-    pub fn __gmpz_rrandomb(arg1: mpz_ptr, arg2: *mut __gmp_randstate_struct,
-                           arg3: mp_bitcnt_t);
+    pub fn __gmpz_rrandomb(arg1: mpz_ptr, arg2: *mut __gmp_randstate_struct, arg3: mp_bitcnt_t);
 }
 extern "C" {
     pub fn __gmpz_scan0(arg1: mpz_srcptr, arg2: mp_bitcnt_t) -> mp_bitcnt_t;
@@ -3031,15 +3116,13 @@ extern "C" {
     pub fn __gmpz_set_q(arg1: mpz_ptr, arg2: mpq_srcptr);
 }
 extern "C" {
-    pub fn __gmpz_set_si(arg1: mpz_ptr, arg2: ::std::os::raw::c_long);
+    pub fn __gmpz_set_si(arg1: mpz_ptr, arg2: c_long);
 }
 extern "C" {
-    pub fn __gmpz_set_str(arg1: mpz_ptr, arg2: *const ::std::os::raw::c_char,
-                          arg3: ::std::os::raw::c_int)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpz_set_str(arg1: mpz_ptr, arg2: *const c_char, arg3: c_int) -> c_int;
 }
 extern "C" {
-    pub fn __gmpz_set_ui(arg1: mpz_ptr, arg2: ::std::os::raw::c_ulong);
+    pub fn __gmpz_set_ui(arg1: mpz_ptr, arg2: c_ulong);
 }
 extern "C" {
     pub fn __gmpz_setbit(arg1: mpz_ptr, arg2: mp_bitcnt_t);
@@ -3048,8 +3131,7 @@ extern "C" {
     pub fn __gmpz_size(arg1: mpz_srcptr) -> usize;
 }
 extern "C" {
-    pub fn __gmpz_sizeinbase(arg1: mpz_srcptr, arg2: ::std::os::raw::c_int)
-     -> usize;
+    pub fn __gmpz_sizeinbase(arg1: mpz_srcptr, arg2: c_int) -> usize;
 }
 extern "C" {
     pub fn __gmpz_sqrt(arg1: mpz_ptr, arg2: mpz_srcptr);
@@ -3061,75 +3143,62 @@ extern "C" {
     pub fn __gmpz_sub(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mpz_srcptr);
 }
 extern "C" {
-    pub fn __gmpz_sub_ui(arg1: mpz_ptr, arg2: mpz_srcptr,
-                         arg3: ::std::os::raw::c_ulong);
+    pub fn __gmpz_sub_ui(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: c_ulong);
 }
 extern "C" {
-    pub fn __gmpz_ui_sub(arg1: mpz_ptr, arg2: ::std::os::raw::c_ulong,
-                         arg3: mpz_srcptr);
+    pub fn __gmpz_ui_sub(arg1: mpz_ptr, arg2: c_ulong, arg3: mpz_srcptr);
 }
 extern "C" {
     pub fn __gmpz_submul(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mpz_srcptr);
 }
 extern "C" {
-    pub fn __gmpz_submul_ui(arg1: mpz_ptr, arg2: mpz_srcptr,
-                            arg3: ::std::os::raw::c_ulong);
+    pub fn __gmpz_submul_ui(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: c_ulong);
 }
 extern "C" {
     pub fn __gmpz_swap(arg1: mpz_ptr, arg2: mpz_ptr);
 }
 extern "C" {
-    pub fn __gmpz_tdiv_ui(arg1: mpz_srcptr, arg2: ::std::os::raw::c_ulong)
-     -> ::std::os::raw::c_ulong;
+    pub fn __gmpz_tdiv_ui(arg1: mpz_srcptr, arg2: c_ulong) -> c_ulong;
 }
 extern "C" {
     pub fn __gmpz_tdiv_q(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mpz_srcptr);
 }
 extern "C" {
-    pub fn __gmpz_tdiv_q_2exp(arg1: mpz_ptr, arg2: mpz_srcptr,
-                              arg3: mp_bitcnt_t);
+    pub fn __gmpz_tdiv_q_2exp(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mp_bitcnt_t);
 }
 extern "C" {
-    pub fn __gmpz_tdiv_q_ui(arg1: mpz_ptr, arg2: mpz_srcptr,
-                            arg3: ::std::os::raw::c_ulong)
-     -> ::std::os::raw::c_ulong;
+    pub fn __gmpz_tdiv_q_ui(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: c_ulong) -> c_ulong;
 }
 extern "C" {
-    pub fn __gmpz_tdiv_qr(arg1: mpz_ptr, arg2: mpz_ptr, arg3: mpz_srcptr,
-                          arg4: mpz_srcptr);
+    pub fn __gmpz_tdiv_qr(arg1: mpz_ptr, arg2: mpz_ptr, arg3: mpz_srcptr, arg4: mpz_srcptr);
 }
 extern "C" {
-    pub fn __gmpz_tdiv_qr_ui(arg1: mpz_ptr, arg2: mpz_ptr, arg3: mpz_srcptr,
-                             arg4: ::std::os::raw::c_ulong)
-     -> ::std::os::raw::c_ulong;
+    pub fn __gmpz_tdiv_qr_ui(arg1: mpz_ptr,
+                             arg2: mpz_ptr,
+                             arg3: mpz_srcptr,
+                             arg4: c_ulong)
+                             -> c_ulong;
 }
 extern "C" {
     pub fn __gmpz_tdiv_r(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mpz_srcptr);
 }
 extern "C" {
-    pub fn __gmpz_tdiv_r_2exp(arg1: mpz_ptr, arg2: mpz_srcptr,
-                              arg3: mp_bitcnt_t);
+    pub fn __gmpz_tdiv_r_2exp(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mp_bitcnt_t);
 }
 extern "C" {
-    pub fn __gmpz_tdiv_r_ui(arg1: mpz_ptr, arg2: mpz_srcptr,
-                            arg3: ::std::os::raw::c_ulong)
-     -> ::std::os::raw::c_ulong;
+    pub fn __gmpz_tdiv_r_ui(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: c_ulong) -> c_ulong;
 }
 extern "C" {
-    pub fn __gmpz_tstbit(arg1: mpz_srcptr, arg2: mp_bitcnt_t)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpz_tstbit(arg1: mpz_srcptr, arg2: mp_bitcnt_t) -> c_int;
 }
 extern "C" {
-    pub fn __gmpz_ui_pow_ui(arg1: mpz_ptr, arg2: ::std::os::raw::c_ulong,
-                            arg3: ::std::os::raw::c_ulong);
+    pub fn __gmpz_ui_pow_ui(arg1: mpz_ptr, arg2: c_ulong, arg3: c_ulong);
 }
 extern "C" {
-    pub fn __gmpz_urandomb(arg1: mpz_ptr, arg2: *mut __gmp_randstate_struct,
-                           arg3: mp_bitcnt_t);
+    pub fn __gmpz_urandomb(arg1: mpz_ptr, arg2: *mut __gmp_randstate_struct, arg3: mp_bitcnt_t);
 }
 extern "C" {
-    pub fn __gmpz_urandomm(arg1: mpz_ptr, arg2: *mut __gmp_randstate_struct,
-                           arg3: mpz_srcptr);
+    pub fn __gmpz_urandomm(arg1: mpz_ptr, arg2: *mut __gmp_randstate_struct, arg3: mpz_srcptr);
 }
 extern "C" {
     pub fn __gmpz_xor(arg1: mpz_ptr, arg2: mpz_srcptr, arg3: mpz_srcptr);
@@ -3147,8 +3216,7 @@ extern "C" {
     pub fn __gmpz_limbs_finish(arg1: mpz_ptr, arg2: mp_size_t);
 }
 extern "C" {
-    pub fn __gmpz_roinit_n(arg1: mpz_ptr, arg2: mp_srcptr, arg3: mp_size_t)
-     -> mpz_srcptr;
+    pub fn __gmpz_roinit_n(arg1: mpz_ptr, arg2: mp_srcptr, arg3: mp_size_t) -> mpz_srcptr;
 }
 extern "C" {
     pub fn __gmpq_abs(arg1: mpq_ptr, arg2: mpq_srcptr);
@@ -3166,33 +3234,25 @@ extern "C" {
     pub fn __gmpq_clears(arg1: mpq_ptr, ...);
 }
 extern "C" {
-    pub fn __gmpq_cmp(arg1: mpq_srcptr, arg2: mpq_srcptr)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpq_cmp(arg1: mpq_srcptr, arg2: mpq_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn __gmpq_cmp_si(arg1: mpq_srcptr, arg2: ::std::os::raw::c_long,
-                         arg3: ::std::os::raw::c_ulong)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpq_cmp_si(arg1: mpq_srcptr, arg2: c_long, arg3: c_ulong) -> c_int;
 }
 extern "C" {
-    pub fn __gmpq_cmp_ui(arg1: mpq_srcptr, arg2: ::std::os::raw::c_ulong,
-                         arg3: ::std::os::raw::c_ulong)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpq_cmp_ui(arg1: mpq_srcptr, arg2: c_ulong, arg3: c_ulong) -> c_int;
 }
 extern "C" {
-    pub fn __gmpq_cmp_z(arg1: mpq_srcptr, arg2: mpz_srcptr)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpq_cmp_z(arg1: mpq_srcptr, arg2: mpz_srcptr) -> c_int;
 }
 extern "C" {
     pub fn __gmpq_div(arg1: mpq_ptr, arg2: mpq_srcptr, arg3: mpq_srcptr);
 }
 extern "C" {
-    pub fn __gmpq_div_2exp(arg1: mpq_ptr, arg2: mpq_srcptr,
-                           arg3: mp_bitcnt_t);
+    pub fn __gmpq_div_2exp(arg1: mpq_ptr, arg2: mpq_srcptr, arg3: mp_bitcnt_t);
 }
 extern "C" {
-    pub fn __gmpq_equal(arg1: mpq_srcptr, arg2: mpq_srcptr)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpq_equal(arg1: mpq_srcptr, arg2: mpq_srcptr) -> c_int;
 }
 extern "C" {
     pub fn __gmpq_get_num(arg1: mpz_ptr, arg2: mpq_srcptr);
@@ -3204,9 +3264,7 @@ extern "C" {
     pub fn __gmpq_get_d(arg1: mpq_srcptr) -> f64;
 }
 extern "C" {
-    pub fn __gmpq_get_str(arg1: *mut ::std::os::raw::c_char,
-                          arg2: ::std::os::raw::c_int, arg3: mpq_srcptr)
-     -> *mut ::std::os::raw::c_char;
+    pub fn __gmpq_get_str(arg1: *mut c_char, arg2: c_int, arg3: mpq_srcptr) -> *mut c_char;
 }
 extern "C" {
     pub fn __gmpq_init(arg1: mpq_ptr);
@@ -3215,8 +3273,7 @@ extern "C" {
     pub fn __gmpq_inits(arg1: mpq_ptr, ...);
 }
 extern "C" {
-    pub fn __gmpq_inp_str(arg1: mpq_ptr, arg2: *mut FILE,
-                          arg3: ::std::os::raw::c_int) -> usize;
+    pub fn __gmpq_inp_str(arg1: mpq_ptr, arg2: *mut FILE, arg3: c_int) -> usize;
 }
 extern "C" {
     pub fn __gmpq_inv(arg1: mpq_ptr, arg2: mpq_srcptr);
@@ -3225,15 +3282,13 @@ extern "C" {
     pub fn __gmpq_mul(arg1: mpq_ptr, arg2: mpq_srcptr, arg3: mpq_srcptr);
 }
 extern "C" {
-    pub fn __gmpq_mul_2exp(arg1: mpq_ptr, arg2: mpq_srcptr,
-                           arg3: mp_bitcnt_t);
+    pub fn __gmpq_mul_2exp(arg1: mpq_ptr, arg2: mpq_srcptr, arg3: mp_bitcnt_t);
 }
 extern "C" {
     pub fn __gmpq_neg(arg1: mpq_ptr, arg2: mpq_srcptr);
 }
 extern "C" {
-    pub fn __gmpq_out_str(arg1: *mut FILE, arg2: ::std::os::raw::c_int,
-                          arg3: mpq_srcptr) -> usize;
+    pub fn __gmpq_out_str(arg1: *mut FILE, arg2: c_int, arg3: mpq_srcptr) -> usize;
 }
 extern "C" {
     pub fn __gmpq_set(arg1: mpq_ptr, arg2: mpq_srcptr);
@@ -3251,17 +3306,13 @@ extern "C" {
     pub fn __gmpq_set_num(arg1: mpq_ptr, arg2: mpz_srcptr);
 }
 extern "C" {
-    pub fn __gmpq_set_si(arg1: mpq_ptr, arg2: ::std::os::raw::c_long,
-                         arg3: ::std::os::raw::c_ulong);
+    pub fn __gmpq_set_si(arg1: mpq_ptr, arg2: c_long, arg3: c_ulong);
 }
 extern "C" {
-    pub fn __gmpq_set_str(arg1: mpq_ptr, arg2: *const ::std::os::raw::c_char,
-                          arg3: ::std::os::raw::c_int)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpq_set_str(arg1: mpq_ptr, arg2: *const c_char, arg3: c_int) -> c_int;
 }
 extern "C" {
-    pub fn __gmpq_set_ui(arg1: mpq_ptr, arg2: ::std::os::raw::c_ulong,
-                         arg3: ::std::os::raw::c_ulong);
+    pub fn __gmpq_set_ui(arg1: mpq_ptr, arg2: c_ulong, arg3: c_ulong);
 }
 extern "C" {
     pub fn __gmpq_set_z(arg1: mpq_ptr, arg2: mpz_srcptr);
@@ -3279,8 +3330,7 @@ extern "C" {
     pub fn __gmpf_add(arg1: mpf_ptr, arg2: mpf_srcptr, arg3: mpf_srcptr);
 }
 extern "C" {
-    pub fn __gmpf_add_ui(arg1: mpf_ptr, arg2: mpf_srcptr,
-                         arg3: ::std::os::raw::c_ulong);
+    pub fn __gmpf_add_ui(arg1: mpf_ptr, arg2: mpf_srcptr, arg3: c_ulong);
 }
 extern "C" {
     pub fn __gmpf_ceil(arg1: mpf_ptr, arg2: mpf_srcptr);
@@ -3292,59 +3342,52 @@ extern "C" {
     pub fn __gmpf_clears(arg1: mpf_ptr, ...);
 }
 extern "C" {
-    pub fn __gmpf_cmp(arg1: mpf_srcptr, arg2: mpf_srcptr)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpf_cmp(arg1: mpf_srcptr, arg2: mpf_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn __gmpf_cmp_z(arg1: mpf_srcptr, arg2: mpz_srcptr)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpf_cmp_z(arg1: mpf_srcptr, arg2: mpz_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn __gmpf_cmp_d(arg1: mpf_srcptr, arg2: f64) -> ::std::os::raw::c_int;
+    pub fn __gmpf_cmp_d(arg1: mpf_srcptr, arg2: f64) -> c_int;
 }
 extern "C" {
-    pub fn __gmpf_cmp_si(arg1: mpf_srcptr, arg2: ::std::os::raw::c_long)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpf_cmp_si(arg1: mpf_srcptr, arg2: c_long) -> c_int;
 }
 extern "C" {
-    pub fn __gmpf_cmp_ui(arg1: mpf_srcptr, arg2: ::std::os::raw::c_ulong)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpf_cmp_ui(arg1: mpf_srcptr, arg2: c_ulong) -> c_int;
 }
 extern "C" {
     pub fn __gmpf_div(arg1: mpf_ptr, arg2: mpf_srcptr, arg3: mpf_srcptr);
 }
 extern "C" {
-    pub fn __gmpf_div_2exp(arg1: mpf_ptr, arg2: mpf_srcptr,
-                           arg3: mp_bitcnt_t);
+    pub fn __gmpf_div_2exp(arg1: mpf_ptr, arg2: mpf_srcptr, arg3: mp_bitcnt_t);
 }
 extern "C" {
-    pub fn __gmpf_div_ui(arg1: mpf_ptr, arg2: mpf_srcptr,
-                         arg3: ::std::os::raw::c_ulong);
+    pub fn __gmpf_div_ui(arg1: mpf_ptr, arg2: mpf_srcptr, arg3: c_ulong);
 }
 extern "C" {
     pub fn __gmpf_dump(arg1: mpf_srcptr);
 }
 extern "C" {
-    pub fn __gmpf_eq(arg1: mpf_srcptr, arg2: mpf_srcptr, arg3: mp_bitcnt_t)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpf_eq(arg1: mpf_srcptr, arg2: mpf_srcptr, arg3: mp_bitcnt_t) -> c_int;
 }
 extern "C" {
-    pub fn __gmpf_fits_sint_p(arg1: mpf_srcptr) -> ::std::os::raw::c_int;
+    pub fn __gmpf_fits_sint_p(arg1: mpf_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn __gmpf_fits_slong_p(arg1: mpf_srcptr) -> ::std::os::raw::c_int;
+    pub fn __gmpf_fits_slong_p(arg1: mpf_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn __gmpf_fits_sshort_p(arg1: mpf_srcptr) -> ::std::os::raw::c_int;
+    pub fn __gmpf_fits_sshort_p(arg1: mpf_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn __gmpf_fits_uint_p(arg1: mpf_srcptr) -> ::std::os::raw::c_int;
+    pub fn __gmpf_fits_uint_p(arg1: mpf_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn __gmpf_fits_ulong_p(arg1: mpf_srcptr) -> ::std::os::raw::c_int;
+    pub fn __gmpf_fits_ulong_p(arg1: mpf_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn __gmpf_fits_ushort_p(arg1: mpf_srcptr) -> ::std::os::raw::c_int;
+    pub fn __gmpf_fits_ushort_p(arg1: mpf_srcptr) -> c_int;
 }
 extern "C" {
     pub fn __gmpf_floor(arg1: mpf_ptr, arg2: mpf_srcptr);
@@ -3353,8 +3396,7 @@ extern "C" {
     pub fn __gmpf_get_d(arg1: mpf_srcptr) -> f64;
 }
 extern "C" {
-    pub fn __gmpf_get_d_2exp(arg1: *mut ::std::os::raw::c_long,
-                             arg2: mpf_srcptr) -> f64;
+    pub fn __gmpf_get_d_2exp(arg1: *mut c_long, arg2: mpf_srcptr) -> f64;
 }
 extern "C" {
     pub fn __gmpf_get_default_prec() -> mp_bitcnt_t;
@@ -3363,16 +3405,18 @@ extern "C" {
     pub fn __gmpf_get_prec(arg1: mpf_srcptr) -> mp_bitcnt_t;
 }
 extern "C" {
-    pub fn __gmpf_get_si(arg1: mpf_srcptr) -> ::std::os::raw::c_long;
+    pub fn __gmpf_get_si(arg1: mpf_srcptr) -> c_long;
 }
 extern "C" {
-    pub fn __gmpf_get_str(arg1: *mut ::std::os::raw::c_char,
-                          arg2: *mut mp_exp_t, arg3: ::std::os::raw::c_int,
-                          arg4: usize, arg5: mpf_srcptr)
-     -> *mut ::std::os::raw::c_char;
+    pub fn __gmpf_get_str(arg1: *mut c_char,
+                          arg2: *mut mp_exp_t,
+                          arg3: c_int,
+                          arg4: usize,
+                          arg5: mpf_srcptr)
+                          -> *mut c_char;
 }
 extern "C" {
-    pub fn __gmpf_get_ui(arg1: mpf_srcptr) -> ::std::os::raw::c_ulong;
+    pub fn __gmpf_get_ui(arg1: mpf_srcptr) -> c_ulong;
 }
 extern "C" {
     pub fn __gmpf_init(arg1: mpf_ptr);
@@ -3390,45 +3434,37 @@ extern "C" {
     pub fn __gmpf_init_set_d(arg1: mpf_ptr, arg2: f64);
 }
 extern "C" {
-    pub fn __gmpf_init_set_si(arg1: mpf_ptr, arg2: ::std::os::raw::c_long);
+    pub fn __gmpf_init_set_si(arg1: mpf_ptr, arg2: c_long);
 }
 extern "C" {
-    pub fn __gmpf_init_set_str(arg1: mpf_ptr,
-                               arg2: *const ::std::os::raw::c_char,
-                               arg3: ::std::os::raw::c_int)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpf_init_set_str(arg1: mpf_ptr, arg2: *const c_char, arg3: c_int) -> c_int;
 }
 extern "C" {
-    pub fn __gmpf_init_set_ui(arg1: mpf_ptr, arg2: ::std::os::raw::c_ulong);
+    pub fn __gmpf_init_set_ui(arg1: mpf_ptr, arg2: c_ulong);
 }
 extern "C" {
-    pub fn __gmpf_inp_str(arg1: mpf_ptr, arg2: *mut FILE,
-                          arg3: ::std::os::raw::c_int) -> usize;
+    pub fn __gmpf_inp_str(arg1: mpf_ptr, arg2: *mut FILE, arg3: c_int) -> usize;
 }
 extern "C" {
-    pub fn __gmpf_integer_p(arg1: mpf_srcptr) -> ::std::os::raw::c_int;
+    pub fn __gmpf_integer_p(arg1: mpf_srcptr) -> c_int;
 }
 extern "C" {
     pub fn __gmpf_mul(arg1: mpf_ptr, arg2: mpf_srcptr, arg3: mpf_srcptr);
 }
 extern "C" {
-    pub fn __gmpf_mul_2exp(arg1: mpf_ptr, arg2: mpf_srcptr,
-                           arg3: mp_bitcnt_t);
+    pub fn __gmpf_mul_2exp(arg1: mpf_ptr, arg2: mpf_srcptr, arg3: mp_bitcnt_t);
 }
 extern "C" {
-    pub fn __gmpf_mul_ui(arg1: mpf_ptr, arg2: mpf_srcptr,
-                         arg3: ::std::os::raw::c_ulong);
+    pub fn __gmpf_mul_ui(arg1: mpf_ptr, arg2: mpf_srcptr, arg3: c_ulong);
 }
 extern "C" {
     pub fn __gmpf_neg(arg1: mpf_ptr, arg2: mpf_srcptr);
 }
 extern "C" {
-    pub fn __gmpf_out_str(arg1: *mut FILE, arg2: ::std::os::raw::c_int,
-                          arg3: usize, arg4: mpf_srcptr) -> usize;
+    pub fn __gmpf_out_str(arg1: *mut FILE, arg2: c_int, arg3: usize, arg4: mpf_srcptr) -> usize;
 }
 extern "C" {
-    pub fn __gmpf_pow_ui(arg1: mpf_ptr, arg2: mpf_srcptr,
-                         arg3: ::std::os::raw::c_ulong);
+    pub fn __gmpf_pow_ui(arg1: mpf_ptr, arg2: mpf_srcptr, arg3: c_ulong);
 }
 extern "C" {
     pub fn __gmpf_random2(arg1: mpf_ptr, arg2: mp_size_t, arg3: mp_exp_t);
@@ -3455,15 +3491,13 @@ extern "C" {
     pub fn __gmpf_set_q(arg1: mpf_ptr, arg2: mpq_srcptr);
 }
 extern "C" {
-    pub fn __gmpf_set_si(arg1: mpf_ptr, arg2: ::std::os::raw::c_long);
+    pub fn __gmpf_set_si(arg1: mpf_ptr, arg2: c_long);
 }
 extern "C" {
-    pub fn __gmpf_set_str(arg1: mpf_ptr, arg2: *const ::std::os::raw::c_char,
-                          arg3: ::std::os::raw::c_int)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpf_set_str(arg1: mpf_ptr, arg2: *const c_char, arg3: c_int) -> c_int;
 }
 extern "C" {
-    pub fn __gmpf_set_ui(arg1: mpf_ptr, arg2: ::std::os::raw::c_ulong);
+    pub fn __gmpf_set_ui(arg1: mpf_ptr, arg2: c_ulong);
 }
 extern "C" {
     pub fn __gmpf_set_z(arg1: mpf_ptr, arg2: mpz_srcptr);
@@ -3475,14 +3509,13 @@ extern "C" {
     pub fn __gmpf_sqrt(arg1: mpf_ptr, arg2: mpf_srcptr);
 }
 extern "C" {
-    pub fn __gmpf_sqrt_ui(arg1: mpf_ptr, arg2: ::std::os::raw::c_ulong);
+    pub fn __gmpf_sqrt_ui(arg1: mpf_ptr, arg2: c_ulong);
 }
 extern "C" {
     pub fn __gmpf_sub(arg1: mpf_ptr, arg2: mpf_srcptr, arg3: mpf_srcptr);
 }
 extern "C" {
-    pub fn __gmpf_sub_ui(arg1: mpf_ptr, arg2: mpf_srcptr,
-                         arg3: ::std::os::raw::c_ulong);
+    pub fn __gmpf_sub_ui(arg1: mpf_ptr, arg2: mpf_srcptr, arg3: c_ulong);
 }
 extern "C" {
     pub fn __gmpf_swap(arg1: mpf_ptr, arg2: mpf_ptr);
@@ -3491,12 +3524,10 @@ extern "C" {
     pub fn __gmpf_trunc(arg1: mpf_ptr, arg2: mpf_srcptr);
 }
 extern "C" {
-    pub fn __gmpf_ui_div(arg1: mpf_ptr, arg2: ::std::os::raw::c_ulong,
-                         arg3: mpf_srcptr);
+    pub fn __gmpf_ui_div(arg1: mpf_ptr, arg2: c_ulong, arg3: mpf_srcptr);
 }
 extern "C" {
-    pub fn __gmpf_ui_sub(arg1: mpf_ptr, arg2: ::std::os::raw::c_ulong,
-                         arg3: mpf_srcptr);
+    pub fn __gmpf_ui_sub(arg1: mpf_ptr, arg2: c_ulong, arg3: mpf_srcptr);
 }
 extern "C" {
     pub fn __gmpf_urandomb(arg1: *mut __mpf_struct,
@@ -3504,135 +3535,185 @@ extern "C" {
                            arg3: mp_bitcnt_t);
 }
 extern "C" {
-    pub fn __gmpn_add(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_size_t,
-                      arg4: mp_srcptr, arg5: mp_size_t) -> mp_limb_t;
+    pub fn __gmpn_add(arg1: mp_ptr,
+                      arg2: mp_srcptr,
+                      arg3: mp_size_t,
+                      arg4: mp_srcptr,
+                      arg5: mp_size_t)
+                      -> mp_limb_t;
 }
 extern "C" {
-    pub fn __gmpn_add_1(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_size_t,
-                        arg4: mp_limb_t) -> mp_limb_t;
+    pub fn __gmpn_add_1(arg1: mp_ptr,
+                        arg2: mp_srcptr,
+                        arg3: mp_size_t,
+                        arg4: mp_limb_t)
+                        -> mp_limb_t;
 }
 extern "C" {
-    pub fn __gmpn_add_n(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_srcptr,
-                        arg4: mp_size_t) -> mp_limb_t;
+    pub fn __gmpn_add_n(arg1: mp_ptr,
+                        arg2: mp_srcptr,
+                        arg3: mp_srcptr,
+                        arg4: mp_size_t)
+                        -> mp_limb_t;
 }
 extern "C" {
-    pub fn __gmpn_addmul_1(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_size_t,
-                           arg4: mp_limb_t) -> mp_limb_t;
+    pub fn __gmpn_addmul_1(arg1: mp_ptr,
+                           arg2: mp_srcptr,
+                           arg3: mp_size_t,
+                           arg4: mp_limb_t)
+                           -> mp_limb_t;
 }
 extern "C" {
-    pub fn __gmpn_cmp(arg1: mp_srcptr, arg2: mp_srcptr, arg3: mp_size_t)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpn_cmp(arg1: mp_srcptr, arg2: mp_srcptr, arg3: mp_size_t) -> c_int;
 }
 extern "C" {
-    pub fn __gmpn_zero_p(arg1: mp_srcptr, arg2: mp_size_t)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpn_zero_p(arg1: mp_srcptr, arg2: mp_size_t) -> c_int;
 }
 extern "C" {
-    pub fn __gmpn_divexact_1(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_size_t,
-                             arg4: mp_limb_t);
+    pub fn __gmpn_divexact_1(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_size_t, arg4: mp_limb_t);
 }
 extern "C" {
-    pub fn __gmpn_divexact_by3c(arg1: mp_ptr, arg2: mp_srcptr,
-                                arg3: mp_size_t, arg4: mp_limb_t)
-     -> mp_limb_t;
+    pub fn __gmpn_divexact_by3c(arg1: mp_ptr,
+                                arg2: mp_srcptr,
+                                arg3: mp_size_t,
+                                arg4: mp_limb_t)
+                                -> mp_limb_t;
 }
 extern "C" {
-    pub fn __gmpn_divrem(arg1: mp_ptr, arg2: mp_size_t, arg3: mp_ptr,
-                         arg4: mp_size_t, arg5: mp_srcptr, arg6: mp_size_t)
-     -> mp_limb_t;
+    pub fn __gmpn_divrem(arg1: mp_ptr,
+                         arg2: mp_size_t,
+                         arg3: mp_ptr,
+                         arg4: mp_size_t,
+                         arg5: mp_srcptr,
+                         arg6: mp_size_t)
+                         -> mp_limb_t;
 }
 extern "C" {
-    pub fn __gmpn_divrem_1(arg1: mp_ptr, arg2: mp_size_t, arg3: mp_srcptr,
-                           arg4: mp_size_t, arg5: mp_limb_t) -> mp_limb_t;
+    pub fn __gmpn_divrem_1(arg1: mp_ptr,
+                           arg2: mp_size_t,
+                           arg3: mp_srcptr,
+                           arg4: mp_size_t,
+                           arg5: mp_limb_t)
+                           -> mp_limb_t;
 }
 extern "C" {
-    pub fn __gmpn_divrem_2(arg1: mp_ptr, arg2: mp_size_t, arg3: mp_ptr,
-                           arg4: mp_size_t, arg5: mp_srcptr) -> mp_limb_t;
+    pub fn __gmpn_divrem_2(arg1: mp_ptr,
+                           arg2: mp_size_t,
+                           arg3: mp_ptr,
+                           arg4: mp_size_t,
+                           arg5: mp_srcptr)
+                           -> mp_limb_t;
 }
 extern "C" {
-    pub fn __gmpn_div_qr_1(arg1: mp_ptr, arg2: *mut mp_limb_t,
-                           arg3: mp_srcptr, arg4: mp_size_t, arg5: mp_limb_t)
-     -> mp_limb_t;
+    pub fn __gmpn_div_qr_1(arg1: mp_ptr,
+                           arg2: *mut mp_limb_t,
+                           arg3: mp_srcptr,
+                           arg4: mp_size_t,
+                           arg5: mp_limb_t)
+                           -> mp_limb_t;
 }
 extern "C" {
-    pub fn __gmpn_div_qr_2(arg1: mp_ptr, arg2: mp_ptr, arg3: mp_srcptr,
-                           arg4: mp_size_t, arg5: mp_srcptr) -> mp_limb_t;
+    pub fn __gmpn_div_qr_2(arg1: mp_ptr,
+                           arg2: mp_ptr,
+                           arg3: mp_srcptr,
+                           arg4: mp_size_t,
+                           arg5: mp_srcptr)
+                           -> mp_limb_t;
 }
 extern "C" {
-    pub fn __gmpn_gcd(arg1: mp_ptr, arg2: mp_ptr, arg3: mp_size_t,
-                      arg4: mp_ptr, arg5: mp_size_t) -> mp_size_t;
+    pub fn __gmpn_gcd(arg1: mp_ptr,
+                      arg2: mp_ptr,
+                      arg3: mp_size_t,
+                      arg4: mp_ptr,
+                      arg5: mp_size_t)
+                      -> mp_size_t;
 }
 extern "C" {
-    pub fn __gmpn_gcd_1(arg1: mp_srcptr, arg2: mp_size_t, arg3: mp_limb_t)
-     -> mp_limb_t;
+    pub fn __gmpn_gcd_1(arg1: mp_srcptr, arg2: mp_size_t, arg3: mp_limb_t) -> mp_limb_t;
 }
 extern "C" {
     pub fn __gmpn_gcdext_1(arg1: *mut mp_limb_signed_t,
-                           arg2: *mut mp_limb_signed_t, arg3: mp_limb_t,
-                           arg4: mp_limb_t) -> mp_limb_t;
+                           arg2: *mut mp_limb_signed_t,
+                           arg3: mp_limb_t,
+                           arg4: mp_limb_t)
+                           -> mp_limb_t;
 }
 extern "C" {
-    pub fn __gmpn_gcdext(arg1: mp_ptr, arg2: mp_ptr, arg3: *mut mp_size_t,
-                         arg4: mp_ptr, arg5: mp_size_t, arg6: mp_ptr,
-                         arg7: mp_size_t) -> mp_size_t;
+    pub fn __gmpn_gcdext(arg1: mp_ptr,
+                         arg2: mp_ptr,
+                         arg3: *mut mp_size_t,
+                         arg4: mp_ptr,
+                         arg5: mp_size_t,
+                         arg6: mp_ptr,
+                         arg7: mp_size_t)
+                         -> mp_size_t;
 }
 extern "C" {
-    pub fn __gmpn_get_str(arg1: *mut ::std::os::raw::c_uchar,
-                          arg2: ::std::os::raw::c_int, arg3: mp_ptr,
-                          arg4: mp_size_t) -> usize;
+    pub fn __gmpn_get_str(arg1: *mut c_uchar, arg2: c_int, arg3: mp_ptr, arg4: mp_size_t) -> usize;
 }
 extern "C" {
-    pub fn __gmpn_hamdist(arg1: mp_srcptr, arg2: mp_srcptr, arg3: mp_size_t)
-     -> mp_bitcnt_t;
+    pub fn __gmpn_hamdist(arg1: mp_srcptr, arg2: mp_srcptr, arg3: mp_size_t) -> mp_bitcnt_t;
 }
 extern "C" {
-    pub fn __gmpn_lshift(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_size_t,
-                         arg4: ::std::os::raw::c_uint) -> mp_limb_t;
+    pub fn __gmpn_lshift(arg1: mp_ptr,
+                         arg2: mp_srcptr,
+                         arg3: mp_size_t,
+                         arg4: c_uint)
+                         -> mp_limb_t;
 }
 extern "C" {
-    pub fn __gmpn_mod_1(arg1: mp_srcptr, arg2: mp_size_t, arg3: mp_limb_t)
-     -> mp_limb_t;
+    pub fn __gmpn_mod_1(arg1: mp_srcptr, arg2: mp_size_t, arg3: mp_limb_t) -> mp_limb_t;
 }
 extern "C" {
-    pub fn __gmpn_mul(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_size_t,
-                      arg4: mp_srcptr, arg5: mp_size_t) -> mp_limb_t;
+    pub fn __gmpn_mul(arg1: mp_ptr,
+                      arg2: mp_srcptr,
+                      arg3: mp_size_t,
+                      arg4: mp_srcptr,
+                      arg5: mp_size_t)
+                      -> mp_limb_t;
 }
 extern "C" {
-    pub fn __gmpn_mul_1(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_size_t,
-                        arg4: mp_limb_t) -> mp_limb_t;
+    pub fn __gmpn_mul_1(arg1: mp_ptr,
+                        arg2: mp_srcptr,
+                        arg3: mp_size_t,
+                        arg4: mp_limb_t)
+                        -> mp_limb_t;
 }
 extern "C" {
-    pub fn __gmpn_mul_n(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_srcptr,
-                        arg4: mp_size_t);
+    pub fn __gmpn_mul_n(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_srcptr, arg4: mp_size_t);
 }
 extern "C" {
     pub fn __gmpn_sqr(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_size_t);
 }
 extern "C" {
-    pub fn __gmpn_neg(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_size_t)
-     -> mp_limb_t;
+    pub fn __gmpn_neg(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_size_t) -> mp_limb_t;
 }
 extern "C" {
     pub fn __gmpn_com(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_size_t);
 }
 extern "C" {
-    pub fn __gmpn_perfect_square_p(arg1: mp_srcptr, arg2: mp_size_t)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpn_perfect_square_p(arg1: mp_srcptr, arg2: mp_size_t) -> c_int;
 }
 extern "C" {
-    pub fn __gmpn_perfect_power_p(arg1: mp_srcptr, arg2: mp_size_t)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpn_perfect_power_p(arg1: mp_srcptr, arg2: mp_size_t) -> c_int;
 }
 extern "C" {
     pub fn __gmpn_popcount(arg1: mp_srcptr, arg2: mp_size_t) -> mp_bitcnt_t;
 }
 extern "C" {
-    pub fn __gmpn_pow_1(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_size_t,
-                        arg4: mp_limb_t, arg5: mp_ptr) -> mp_size_t;
+    pub fn __gmpn_pow_1(arg1: mp_ptr,
+                        arg2: mp_srcptr,
+                        arg3: mp_size_t,
+                        arg4: mp_limb_t,
+                        arg5: mp_ptr)
+                        -> mp_size_t;
 }
 extern "C" {
-    pub fn __gmpn_preinv_mod_1(arg1: mp_srcptr, arg2: mp_size_t,
-                               arg3: mp_limb_t, arg4: mp_limb_t) -> mp_limb_t;
+    pub fn __gmpn_preinv_mod_1(arg1: mp_srcptr,
+                               arg2: mp_size_t,
+                               arg3: mp_limb_t,
+                               arg4: mp_limb_t)
+                               -> mp_limb_t;
 }
 extern "C" {
     pub fn __gmpn_random(arg1: mp_ptr, arg2: mp_size_t);
@@ -3641,8 +3722,11 @@ extern "C" {
     pub fn __gmpn_random2(arg1: mp_ptr, arg2: mp_size_t);
 }
 extern "C" {
-    pub fn __gmpn_rshift(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_size_t,
-                         arg4: ::std::os::raw::c_uint) -> mp_limb_t;
+    pub fn __gmpn_rshift(arg1: mp_ptr,
+                         arg2: mp_srcptr,
+                         arg3: mp_size_t,
+                         arg4: c_uint)
+                         -> mp_limb_t;
 }
 extern "C" {
     pub fn __gmpn_scan0(arg1: mp_srcptr, arg2: mp_bitcnt_t) -> mp_bitcnt_t;
@@ -3651,70 +3735,83 @@ extern "C" {
     pub fn __gmpn_scan1(arg1: mp_srcptr, arg2: mp_bitcnt_t) -> mp_bitcnt_t;
 }
 extern "C" {
-    pub fn __gmpn_set_str(arg1: mp_ptr, arg2: *const ::std::os::raw::c_uchar,
-                          arg3: usize, arg4: ::std::os::raw::c_int)
-     -> mp_size_t;
+    pub fn __gmpn_set_str(arg1: mp_ptr,
+                          arg2: *const c_uchar,
+                          arg3: usize,
+                          arg4: c_int)
+                          -> mp_size_t;
 }
 extern "C" {
-    pub fn __gmpn_sizeinbase(arg1: mp_srcptr, arg2: mp_size_t,
-                             arg3: ::std::os::raw::c_int) -> usize;
+    pub fn __gmpn_sizeinbase(arg1: mp_srcptr, arg2: mp_size_t, arg3: c_int) -> usize;
 }
 extern "C" {
-    pub fn __gmpn_sqrtrem(arg1: mp_ptr, arg2: mp_ptr, arg3: mp_srcptr,
-                          arg4: mp_size_t) -> mp_size_t;
+    pub fn __gmpn_sqrtrem(arg1: mp_ptr,
+                          arg2: mp_ptr,
+                          arg3: mp_srcptr,
+                          arg4: mp_size_t)
+                          -> mp_size_t;
 }
 extern "C" {
-    pub fn __gmpn_sub(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_size_t,
-                      arg4: mp_srcptr, arg5: mp_size_t) -> mp_limb_t;
+    pub fn __gmpn_sub(arg1: mp_ptr,
+                      arg2: mp_srcptr,
+                      arg3: mp_size_t,
+                      arg4: mp_srcptr,
+                      arg5: mp_size_t)
+                      -> mp_limb_t;
 }
 extern "C" {
-    pub fn __gmpn_sub_1(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_size_t,
-                        arg4: mp_limb_t) -> mp_limb_t;
+    pub fn __gmpn_sub_1(arg1: mp_ptr,
+                        arg2: mp_srcptr,
+                        arg3: mp_size_t,
+                        arg4: mp_limb_t)
+                        -> mp_limb_t;
 }
 extern "C" {
-    pub fn __gmpn_sub_n(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_srcptr,
-                        arg4: mp_size_t) -> mp_limb_t;
+    pub fn __gmpn_sub_n(arg1: mp_ptr,
+                        arg2: mp_srcptr,
+                        arg3: mp_srcptr,
+                        arg4: mp_size_t)
+                        -> mp_limb_t;
 }
 extern "C" {
-    pub fn __gmpn_submul_1(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_size_t,
-                           arg4: mp_limb_t) -> mp_limb_t;
+    pub fn __gmpn_submul_1(arg1: mp_ptr,
+                           arg2: mp_srcptr,
+                           arg3: mp_size_t,
+                           arg4: mp_limb_t)
+                           -> mp_limb_t;
 }
 extern "C" {
-    pub fn __gmpn_tdiv_qr(arg1: mp_ptr, arg2: mp_ptr, arg3: mp_size_t,
-                          arg4: mp_srcptr, arg5: mp_size_t, arg6: mp_srcptr,
+    pub fn __gmpn_tdiv_qr(arg1: mp_ptr,
+                          arg2: mp_ptr,
+                          arg3: mp_size_t,
+                          arg4: mp_srcptr,
+                          arg5: mp_size_t,
+                          arg6: mp_srcptr,
                           arg7: mp_size_t);
 }
 extern "C" {
-    pub fn __gmpn_and_n(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_srcptr,
-                        arg4: mp_size_t);
+    pub fn __gmpn_and_n(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_srcptr, arg4: mp_size_t);
 }
 extern "C" {
-    pub fn __gmpn_andn_n(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_srcptr,
-                         arg4: mp_size_t);
+    pub fn __gmpn_andn_n(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_srcptr, arg4: mp_size_t);
 }
 extern "C" {
-    pub fn __gmpn_nand_n(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_srcptr,
-                         arg4: mp_size_t);
+    pub fn __gmpn_nand_n(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_srcptr, arg4: mp_size_t);
 }
 extern "C" {
-    pub fn __gmpn_ior_n(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_srcptr,
-                        arg4: mp_size_t);
+    pub fn __gmpn_ior_n(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_srcptr, arg4: mp_size_t);
 }
 extern "C" {
-    pub fn __gmpn_iorn_n(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_srcptr,
-                         arg4: mp_size_t);
+    pub fn __gmpn_iorn_n(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_srcptr, arg4: mp_size_t);
 }
 extern "C" {
-    pub fn __gmpn_nior_n(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_srcptr,
-                         arg4: mp_size_t);
+    pub fn __gmpn_nior_n(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_srcptr, arg4: mp_size_t);
 }
 extern "C" {
-    pub fn __gmpn_xor_n(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_srcptr,
-                        arg4: mp_size_t);
+    pub fn __gmpn_xor_n(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_srcptr, arg4: mp_size_t);
 }
 extern "C" {
-    pub fn __gmpn_xnor_n(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_srcptr,
-                         arg4: mp_size_t);
+    pub fn __gmpn_xnor_n(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_srcptr, arg4: mp_size_t);
 }
 extern "C" {
     pub fn __gmpn_copyi(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_size_t);
@@ -3726,80 +3823,116 @@ extern "C" {
     pub fn __gmpn_zero(arg1: mp_ptr, arg2: mp_size_t);
 }
 extern "C" {
-    pub fn __gmpn_cnd_add_n(arg1: mp_limb_t, arg2: mp_ptr, arg3: mp_srcptr,
-                            arg4: mp_srcptr, arg5: mp_size_t) -> mp_limb_t;
+    pub fn __gmpn_cnd_add_n(arg1: mp_limb_t,
+                            arg2: mp_ptr,
+                            arg3: mp_srcptr,
+                            arg4: mp_srcptr,
+                            arg5: mp_size_t)
+                            -> mp_limb_t;
 }
 extern "C" {
-    pub fn __gmpn_cnd_sub_n(arg1: mp_limb_t, arg2: mp_ptr, arg3: mp_srcptr,
-                            arg4: mp_srcptr, arg5: mp_size_t) -> mp_limb_t;
+    pub fn __gmpn_cnd_sub_n(arg1: mp_limb_t,
+                            arg2: mp_ptr,
+                            arg3: mp_srcptr,
+                            arg4: mp_srcptr,
+                            arg5: mp_size_t)
+                            -> mp_limb_t;
 }
 extern "C" {
-    pub fn __gmpn_sec_add_1(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_size_t,
-                            arg4: mp_limb_t, arg5: mp_ptr) -> mp_limb_t;
+    pub fn __gmpn_sec_add_1(arg1: mp_ptr,
+                            arg2: mp_srcptr,
+                            arg3: mp_size_t,
+                            arg4: mp_limb_t,
+                            arg5: mp_ptr)
+                            -> mp_limb_t;
 }
 extern "C" {
     pub fn __gmpn_sec_add_1_itch(arg1: mp_size_t) -> mp_size_t;
 }
 extern "C" {
-    pub fn __gmpn_sec_sub_1(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_size_t,
-                            arg4: mp_limb_t, arg5: mp_ptr) -> mp_limb_t;
+    pub fn __gmpn_sec_sub_1(arg1: mp_ptr,
+                            arg2: mp_srcptr,
+                            arg3: mp_size_t,
+                            arg4: mp_limb_t,
+                            arg5: mp_ptr)
+                            -> mp_limb_t;
 }
 extern "C" {
     pub fn __gmpn_sec_sub_1_itch(arg1: mp_size_t) -> mp_size_t;
 }
 extern "C" {
-    pub fn __gmpn_cnd_swap(arg1: mp_limb_t, arg2: *mut mp_limb_t,
-                           arg3: *mut mp_limb_t, arg4: mp_size_t);
+    pub fn __gmpn_cnd_swap(arg1: mp_limb_t,
+                           arg2: *mut mp_limb_t,
+                           arg3: *mut mp_limb_t,
+                           arg4: mp_size_t);
 }
 extern "C" {
-    pub fn __gmpn_sec_mul(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_size_t,
-                          arg4: mp_srcptr, arg5: mp_size_t, arg6: mp_ptr);
+    pub fn __gmpn_sec_mul(arg1: mp_ptr,
+                          arg2: mp_srcptr,
+                          arg3: mp_size_t,
+                          arg4: mp_srcptr,
+                          arg5: mp_size_t,
+                          arg6: mp_ptr);
 }
 extern "C" {
     pub fn __gmpn_sec_mul_itch(arg1: mp_size_t, arg2: mp_size_t) -> mp_size_t;
 }
 extern "C" {
-    pub fn __gmpn_sec_sqr(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_size_t,
-                          arg4: mp_ptr);
+    pub fn __gmpn_sec_sqr(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_size_t, arg4: mp_ptr);
 }
 extern "C" {
     pub fn __gmpn_sec_sqr_itch(arg1: mp_size_t) -> mp_size_t;
 }
 extern "C" {
-    pub fn __gmpn_sec_powm(arg1: mp_ptr, arg2: mp_srcptr, arg3: mp_size_t,
-                           arg4: mp_srcptr, arg5: mp_bitcnt_t,
-                           arg6: mp_srcptr, arg7: mp_size_t, arg8: mp_ptr);
+    pub fn __gmpn_sec_powm(arg1: mp_ptr,
+                           arg2: mp_srcptr,
+                           arg3: mp_size_t,
+                           arg4: mp_srcptr,
+                           arg5: mp_bitcnt_t,
+                           arg6: mp_srcptr,
+                           arg7: mp_size_t,
+                           arg8: mp_ptr);
 }
 extern "C" {
-    pub fn __gmpn_sec_powm_itch(arg1: mp_size_t, arg2: mp_bitcnt_t,
-                                arg3: mp_size_t) -> mp_size_t;
+    pub fn __gmpn_sec_powm_itch(arg1: mp_size_t, arg2: mp_bitcnt_t, arg3: mp_size_t) -> mp_size_t;
 }
 extern "C" {
-    pub fn __gmpn_sec_tabselect(arg1: *mut mp_limb_t, arg2: *const mp_limb_t,
-                                arg3: mp_size_t, arg4: mp_size_t,
+    pub fn __gmpn_sec_tabselect(arg1: *mut mp_limb_t,
+                                arg2: *const mp_limb_t,
+                                arg3: mp_size_t,
+                                arg4: mp_size_t,
                                 arg5: mp_size_t);
 }
 extern "C" {
-    pub fn __gmpn_sec_div_qr(arg1: mp_ptr, arg2: mp_ptr, arg3: mp_size_t,
-                             arg4: mp_srcptr, arg5: mp_size_t, arg6: mp_ptr)
-     -> mp_limb_t;
+    pub fn __gmpn_sec_div_qr(arg1: mp_ptr,
+                             arg2: mp_ptr,
+                             arg3: mp_size_t,
+                             arg4: mp_srcptr,
+                             arg5: mp_size_t,
+                             arg6: mp_ptr)
+                             -> mp_limb_t;
 }
 extern "C" {
-    pub fn __gmpn_sec_div_qr_itch(arg1: mp_size_t, arg2: mp_size_t)
-     -> mp_size_t;
+    pub fn __gmpn_sec_div_qr_itch(arg1: mp_size_t, arg2: mp_size_t) -> mp_size_t;
 }
 extern "C" {
-    pub fn __gmpn_sec_div_r(arg1: mp_ptr, arg2: mp_size_t, arg3: mp_srcptr,
-                            arg4: mp_size_t, arg5: mp_ptr);
+    pub fn __gmpn_sec_div_r(arg1: mp_ptr,
+                            arg2: mp_size_t,
+                            arg3: mp_srcptr,
+                            arg4: mp_size_t,
+                            arg5: mp_ptr);
 }
 extern "C" {
-    pub fn __gmpn_sec_div_r_itch(arg1: mp_size_t, arg2: mp_size_t)
-     -> mp_size_t;
+    pub fn __gmpn_sec_div_r_itch(arg1: mp_size_t, arg2: mp_size_t) -> mp_size_t;
 }
 extern "C" {
-    pub fn __gmpn_sec_invert(arg1: mp_ptr, arg2: mp_ptr, arg3: mp_srcptr,
-                             arg4: mp_size_t, arg5: mp_bitcnt_t, arg6: mp_ptr)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpn_sec_invert(arg1: mp_ptr,
+                             arg2: mp_ptr,
+                             arg3: mp_srcptr,
+                             arg4: mp_size_t,
+                             arg5: mp_bitcnt_t,
+                             arg6: mp_ptr)
+                             -> c_int;
 }
 extern "C" {
     pub fn __gmpn_sec_invert_itch(arg1: mp_size_t) -> mp_size_t;
@@ -3807,12 +3940,9 @@ extern "C" {
 pub const GMP_ERROR_NONE: _bindgen_ty_1 = _bindgen_ty_1::GMP_ERROR_NONE;
 pub const GMP_ERROR_UNSUPPORTED_ARGUMENT: _bindgen_ty_1 =
     _bindgen_ty_1::GMP_ERROR_UNSUPPORTED_ARGUMENT;
-pub const GMP_ERROR_DIVISION_BY_ZERO: _bindgen_ty_1 =
-    _bindgen_ty_1::GMP_ERROR_DIVISION_BY_ZERO;
-pub const GMP_ERROR_SQRT_OF_NEGATIVE: _bindgen_ty_1 =
-    _bindgen_ty_1::GMP_ERROR_SQRT_OF_NEGATIVE;
-pub const GMP_ERROR_INVALID_ARGUMENT: _bindgen_ty_1 =
-    _bindgen_ty_1::GMP_ERROR_INVALID_ARGUMENT;
+pub const GMP_ERROR_DIVISION_BY_ZERO: _bindgen_ty_1 = _bindgen_ty_1::GMP_ERROR_DIVISION_BY_ZERO;
+pub const GMP_ERROR_SQRT_OF_NEGATIVE: _bindgen_ty_1 = _bindgen_ty_1::GMP_ERROR_SQRT_OF_NEGATIVE;
+pub const GMP_ERROR_INVALID_ARGUMENT: _bindgen_ty_1 = _bindgen_ty_1::GMP_ERROR_INVALID_ARGUMENT;
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum _bindgen_ty_1 {
@@ -3823,58 +3953,61 @@ pub enum _bindgen_ty_1 {
     GMP_ERROR_INVALID_ARGUMENT = 8,
 }
 extern "C" {
-    pub fn __sigismember(arg1: *const __sigset_t, arg2: ::std::os::raw::c_int)
-     -> ::std::os::raw::c_int;
+    pub fn __sigismember(arg1: *const __sigset_t, arg2: c_int) -> c_int;
 }
 extern "C" {
-    pub fn __sigaddset(arg1: *mut __sigset_t, arg2: ::std::os::raw::c_int)
-     -> ::std::os::raw::c_int;
+    pub fn __sigaddset(arg1: *mut __sigset_t, arg2: c_int) -> c_int;
 }
 extern "C" {
-    pub fn __sigdelset(arg1: *mut __sigset_t, arg2: ::std::os::raw::c_int)
-     -> ::std::os::raw::c_int;
+    pub fn __sigdelset(arg1: *mut __sigset_t, arg2: c_int) -> c_int;
 }
 pub type sig_atomic_t = __sig_atomic_t;
 #[repr(C)]
 #[derive(Copy)]
 pub union sigval {
-    pub sival_int: ::std::os::raw::c_int,
-    pub sival_ptr: *mut ::std::os::raw::c_void,
+    pub sival_int: c_int,
+    pub sival_ptr: *mut c_void,
 }
 #[test]
 fn bindgen_test_layout_sigval() {
-    assert_eq!(::std::mem::size_of::<sigval>() , 8usize , concat ! (
-               "Size of: " , stringify ! ( sigval ) ));
-    assert_eq! (::std::mem::align_of::<sigval>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( sigval ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigval ) ) . sival_int as * const _ as
-                usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigval ) , "::" ,
-                stringify ! ( sival_int ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigval ) ) . sival_ptr as * const _ as
-                usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigval ) , "::" ,
-                stringify ! ( sival_ptr ) ));
+    assert_eq!(::std::mem::size_of::<sigval>(),
+               8usize,
+               concat!("Size of: ", stringify!(sigval)));
+    assert_eq!(::std::mem::align_of::<sigval>(),
+               8usize,
+               concat!("Alignment of ", stringify!(sigval)));
+    assert_eq!(unsafe { &(*(0 as *const sigval)).sival_int as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigval),
+                       "::",
+                       stringify!(sival_int)));
+    assert_eq!(unsafe { &(*(0 as *const sigval)).sival_ptr as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigval),
+                       "::",
+                       stringify!(sival_ptr)));
 }
 impl Clone for sigval {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 pub type sigval_t = sigval;
 pub type __sigchld_clock_t = __clock_t;
 #[repr(C)]
 #[derive(Copy)]
 pub struct siginfo_t {
-    pub si_signo: ::std::os::raw::c_int,
-    pub si_errno: ::std::os::raw::c_int,
-    pub si_code: ::std::os::raw::c_int,
+    pub si_signo: c_int,
+    pub si_errno: c_int,
+    pub si_code: c_int,
     pub _sifields: siginfo_t__bindgen_ty_1,
 }
 #[repr(C)]
 #[derive(Copy)]
 pub union siginfo_t__bindgen_ty_1 {
-    pub _pad: [::std::os::raw::c_int; 28usize],
+    pub _pad: [c_int; 28usize],
     pub _kill: siginfo_t__bindgen_ty_1__bindgen_ty_1,
     pub _timer: siginfo_t__bindgen_ty_1__bindgen_ty_2,
     pub _rt: siginfo_t__bindgen_ty_1__bindgen_ty_3,
@@ -3891,68 +4024,87 @@ pub struct siginfo_t__bindgen_ty_1__bindgen_ty_1 {
 }
 #[test]
 fn bindgen_test_layout_siginfo_t__bindgen_ty_1__bindgen_ty_1() {
-    assert_eq!(::std::mem::size_of::<siginfo_t__bindgen_ty_1__bindgen_ty_1>()
-               , 8usize , concat ! (
-               "Size of: " , stringify ! (
-               siginfo_t__bindgen_ty_1__bindgen_ty_1 ) ));
-    assert_eq! (::std::mem::align_of::<siginfo_t__bindgen_ty_1__bindgen_ty_1>()
-                , 4usize , concat ! (
-                "Alignment of " , stringify ! (
-                siginfo_t__bindgen_ty_1__bindgen_ty_1 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t__bindgen_ty_1__bindgen_ty_1 ) )
-                . si_pid as * const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                siginfo_t__bindgen_ty_1__bindgen_ty_1 ) , "::" , stringify ! (
-                si_pid ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t__bindgen_ty_1__bindgen_ty_1 ) )
-                . si_uid as * const _ as usize } , 4usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                siginfo_t__bindgen_ty_1__bindgen_ty_1 ) , "::" , stringify ! (
-                si_uid ) ));
+    assert_eq!(::std::mem::size_of::<siginfo_t__bindgen_ty_1__bindgen_ty_1>(),
+               8usize,
+               concat!("Size of: ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_1)));
+    assert_eq!(::std::mem::align_of::<siginfo_t__bindgen_ty_1__bindgen_ty_1>(),
+               4usize,
+               concat!("Alignment of ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_1)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const siginfo_t__bindgen_ty_1__bindgen_ty_1)).si_pid as *const _ as
+                   usize
+               },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_1),
+                       "::",
+                       stringify!(si_pid)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const siginfo_t__bindgen_ty_1__bindgen_ty_1)).si_uid as *const _ as
+                   usize
+               },
+               4usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_1),
+                       "::",
+                       stringify!(si_uid)));
 }
 impl Clone for siginfo_t__bindgen_ty_1__bindgen_ty_1 {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[repr(C)]
 #[derive(Copy)]
 pub struct siginfo_t__bindgen_ty_1__bindgen_ty_2 {
-    pub si_tid: ::std::os::raw::c_int,
-    pub si_overrun: ::std::os::raw::c_int,
+    pub si_tid: c_int,
+    pub si_overrun: c_int,
     pub si_sigval: sigval_t,
 }
 #[test]
 fn bindgen_test_layout_siginfo_t__bindgen_ty_1__bindgen_ty_2() {
-    assert_eq!(::std::mem::size_of::<siginfo_t__bindgen_ty_1__bindgen_ty_2>()
-               , 16usize , concat ! (
-               "Size of: " , stringify ! (
-               siginfo_t__bindgen_ty_1__bindgen_ty_2 ) ));
-    assert_eq! (::std::mem::align_of::<siginfo_t__bindgen_ty_1__bindgen_ty_2>()
-                , 8usize , concat ! (
-                "Alignment of " , stringify ! (
-                siginfo_t__bindgen_ty_1__bindgen_ty_2 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t__bindgen_ty_1__bindgen_ty_2 ) )
-                . si_tid as * const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                siginfo_t__bindgen_ty_1__bindgen_ty_2 ) , "::" , stringify ! (
-                si_tid ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t__bindgen_ty_1__bindgen_ty_2 ) )
-                . si_overrun as * const _ as usize } , 4usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                siginfo_t__bindgen_ty_1__bindgen_ty_2 ) , "::" , stringify ! (
-                si_overrun ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t__bindgen_ty_1__bindgen_ty_2 ) )
-                . si_sigval as * const _ as usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                siginfo_t__bindgen_ty_1__bindgen_ty_2 ) , "::" , stringify ! (
-                si_sigval ) ));
+    assert_eq!(::std::mem::size_of::<siginfo_t__bindgen_ty_1__bindgen_ty_2>(),
+               16usize,
+               concat!("Size of: ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_2)));
+    assert_eq!(::std::mem::align_of::<siginfo_t__bindgen_ty_1__bindgen_ty_2>(),
+               8usize,
+               concat!("Alignment of ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_2)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const siginfo_t__bindgen_ty_1__bindgen_ty_2)).si_tid as *const _ as
+                   usize
+               },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_2),
+                       "::",
+                       stringify!(si_tid)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const siginfo_t__bindgen_ty_1__bindgen_ty_2)).si_overrun as
+                   *const _ as usize
+               },
+               4usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_2),
+                       "::",
+                       stringify!(si_overrun)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const siginfo_t__bindgen_ty_1__bindgen_ty_2)).si_sigval as *const _ as
+                   usize
+               },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_2),
+                       "::",
+                       stringify!(si_sigval)));
 }
 impl Clone for siginfo_t__bindgen_ty_1__bindgen_ty_2 {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[repr(C)]
 #[derive(Copy)]
@@ -3963,318 +4115,396 @@ pub struct siginfo_t__bindgen_ty_1__bindgen_ty_3 {
 }
 #[test]
 fn bindgen_test_layout_siginfo_t__bindgen_ty_1__bindgen_ty_3() {
-    assert_eq!(::std::mem::size_of::<siginfo_t__bindgen_ty_1__bindgen_ty_3>()
-               , 16usize , concat ! (
-               "Size of: " , stringify ! (
-               siginfo_t__bindgen_ty_1__bindgen_ty_3 ) ));
-    assert_eq! (::std::mem::align_of::<siginfo_t__bindgen_ty_1__bindgen_ty_3>()
-                , 8usize , concat ! (
-                "Alignment of " , stringify ! (
-                siginfo_t__bindgen_ty_1__bindgen_ty_3 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t__bindgen_ty_1__bindgen_ty_3 ) )
-                . si_pid as * const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                siginfo_t__bindgen_ty_1__bindgen_ty_3 ) , "::" , stringify ! (
-                si_pid ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t__bindgen_ty_1__bindgen_ty_3 ) )
-                . si_uid as * const _ as usize } , 4usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                siginfo_t__bindgen_ty_1__bindgen_ty_3 ) , "::" , stringify ! (
-                si_uid ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t__bindgen_ty_1__bindgen_ty_3 ) )
-                . si_sigval as * const _ as usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                siginfo_t__bindgen_ty_1__bindgen_ty_3 ) , "::" , stringify ! (
-                si_sigval ) ));
+    assert_eq!(::std::mem::size_of::<siginfo_t__bindgen_ty_1__bindgen_ty_3>(),
+               16usize,
+               concat!("Size of: ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_3)));
+    assert_eq!(::std::mem::align_of::<siginfo_t__bindgen_ty_1__bindgen_ty_3>(),
+               8usize,
+               concat!("Alignment of ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_3)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const siginfo_t__bindgen_ty_1__bindgen_ty_3)).si_pid as *const _ as
+                   usize
+               },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_3),
+                       "::",
+                       stringify!(si_pid)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const siginfo_t__bindgen_ty_1__bindgen_ty_3)).si_uid as *const _ as
+                   usize
+               },
+               4usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_3),
+                       "::",
+                       stringify!(si_uid)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const siginfo_t__bindgen_ty_1__bindgen_ty_3)).si_sigval as *const _ as
+                   usize
+               },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_3),
+                       "::",
+                       stringify!(si_sigval)));
 }
 impl Clone for siginfo_t__bindgen_ty_1__bindgen_ty_3 {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct siginfo_t__bindgen_ty_1__bindgen_ty_4 {
     pub si_pid: __pid_t,
     pub si_uid: __uid_t,
-    pub si_status: ::std::os::raw::c_int,
+    pub si_status: c_int,
     pub si_utime: __sigchld_clock_t,
     pub si_stime: __sigchld_clock_t,
 }
 #[test]
 fn bindgen_test_layout_siginfo_t__bindgen_ty_1__bindgen_ty_4() {
-    assert_eq!(::std::mem::size_of::<siginfo_t__bindgen_ty_1__bindgen_ty_4>()
-               , 32usize , concat ! (
-               "Size of: " , stringify ! (
-               siginfo_t__bindgen_ty_1__bindgen_ty_4 ) ));
-    assert_eq! (::std::mem::align_of::<siginfo_t__bindgen_ty_1__bindgen_ty_4>()
-                , 8usize , concat ! (
-                "Alignment of " , stringify ! (
-                siginfo_t__bindgen_ty_1__bindgen_ty_4 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t__bindgen_ty_1__bindgen_ty_4 ) )
-                . si_pid as * const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                siginfo_t__bindgen_ty_1__bindgen_ty_4 ) , "::" , stringify ! (
-                si_pid ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t__bindgen_ty_1__bindgen_ty_4 ) )
-                . si_uid as * const _ as usize } , 4usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                siginfo_t__bindgen_ty_1__bindgen_ty_4 ) , "::" , stringify ! (
-                si_uid ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t__bindgen_ty_1__bindgen_ty_4 ) )
-                . si_status as * const _ as usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                siginfo_t__bindgen_ty_1__bindgen_ty_4 ) , "::" , stringify ! (
-                si_status ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t__bindgen_ty_1__bindgen_ty_4 ) )
-                . si_utime as * const _ as usize } , 16usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                siginfo_t__bindgen_ty_1__bindgen_ty_4 ) , "::" , stringify ! (
-                si_utime ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t__bindgen_ty_1__bindgen_ty_4 ) )
-                . si_stime as * const _ as usize } , 24usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                siginfo_t__bindgen_ty_1__bindgen_ty_4 ) , "::" , stringify ! (
-                si_stime ) ));
+    assert_eq!(::std::mem::size_of::<siginfo_t__bindgen_ty_1__bindgen_ty_4>(),
+               32usize,
+               concat!("Size of: ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_4)));
+    assert_eq!(::std::mem::align_of::<siginfo_t__bindgen_ty_1__bindgen_ty_4>(),
+               8usize,
+               concat!("Alignment of ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_4)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const siginfo_t__bindgen_ty_1__bindgen_ty_4)).si_pid as *const _ as
+                   usize
+               },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_4),
+                       "::",
+                       stringify!(si_pid)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const siginfo_t__bindgen_ty_1__bindgen_ty_4)).si_uid as *const _ as
+                   usize
+               },
+               4usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_4),
+                       "::",
+                       stringify!(si_uid)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const siginfo_t__bindgen_ty_1__bindgen_ty_4)).si_status as *const _ as
+                   usize
+               },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_4),
+                       "::",
+                       stringify!(si_status)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const siginfo_t__bindgen_ty_1__bindgen_ty_4)).si_utime as *const _ as
+                   usize
+               },
+               16usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_4),
+                       "::",
+                       stringify!(si_utime)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const siginfo_t__bindgen_ty_1__bindgen_ty_4)).si_stime as *const _ as
+                   usize
+               },
+               24usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_4),
+                       "::",
+                       stringify!(si_stime)));
 }
 impl Clone for siginfo_t__bindgen_ty_1__bindgen_ty_4 {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct siginfo_t__bindgen_ty_1__bindgen_ty_5 {
-    pub si_addr: *mut ::std::os::raw::c_void,
-    pub si_addr_lsb: ::std::os::raw::c_short,
+    pub si_addr: *mut c_void,
+    pub si_addr_lsb: c_short,
     pub si_addr_bnd: siginfo_t__bindgen_ty_1__bindgen_ty_5__bindgen_ty_1,
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct siginfo_t__bindgen_ty_1__bindgen_ty_5__bindgen_ty_1 {
-    pub _lower: *mut ::std::os::raw::c_void,
-    pub _upper: *mut ::std::os::raw::c_void,
+    pub _lower: *mut c_void,
+    pub _upper: *mut c_void,
 }
 #[test]
 fn bindgen_test_layout_siginfo_t__bindgen_ty_1__bindgen_ty_5__bindgen_ty_1() {
-    assert_eq!(::std::mem::size_of::<siginfo_t__bindgen_ty_1__bindgen_ty_5__bindgen_ty_1>()
-               , 16usize , concat ! (
-               "Size of: " , stringify ! (
-               siginfo_t__bindgen_ty_1__bindgen_ty_5__bindgen_ty_1 ) ));
-    assert_eq! (::std::mem::align_of::<siginfo_t__bindgen_ty_1__bindgen_ty_5__bindgen_ty_1>()
-                , 8usize , concat ! (
-                "Alignment of " , stringify ! (
-                siginfo_t__bindgen_ty_1__bindgen_ty_5__bindgen_ty_1 ) ));
-    assert_eq! (unsafe {
-                & (
-                * (
-                0 as * const
-                siginfo_t__bindgen_ty_1__bindgen_ty_5__bindgen_ty_1 ) ) .
-                _lower as * const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                siginfo_t__bindgen_ty_1__bindgen_ty_5__bindgen_ty_1 ) , "::" ,
-                stringify ! ( _lower ) ));
-    assert_eq! (unsafe {
-                & (
-                * (
-                0 as * const
-                siginfo_t__bindgen_ty_1__bindgen_ty_5__bindgen_ty_1 ) ) .
-                _upper as * const _ as usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                siginfo_t__bindgen_ty_1__bindgen_ty_5__bindgen_ty_1 ) , "::" ,
-                stringify ! ( _upper ) ));
+    assert_eq!(::std::mem::size_of::<siginfo_t__bindgen_ty_1__bindgen_ty_5__bindgen_ty_1>(),
+               16usize,
+               concat!("Size of: ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_5__bindgen_ty_1)));
+    assert_eq!(::std::mem::align_of::<siginfo_t__bindgen_ty_1__bindgen_ty_5__bindgen_ty_1>(),
+               8usize,
+               concat!("Alignment of ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_5__bindgen_ty_1)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const siginfo_t__bindgen_ty_1__bindgen_ty_5__bindgen_ty_1))
+                        ._lower as *const _ as usize
+               },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_5__bindgen_ty_1),
+                       "::",
+                       stringify!(_lower)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const siginfo_t__bindgen_ty_1__bindgen_ty_5__bindgen_ty_1))
+                        ._upper as *const _ as usize
+               },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_5__bindgen_ty_1),
+                       "::",
+                       stringify!(_upper)));
 }
 impl Clone for siginfo_t__bindgen_ty_1__bindgen_ty_5__bindgen_ty_1 {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[test]
 fn bindgen_test_layout_siginfo_t__bindgen_ty_1__bindgen_ty_5() {
-    assert_eq!(::std::mem::size_of::<siginfo_t__bindgen_ty_1__bindgen_ty_5>()
-               , 32usize , concat ! (
-               "Size of: " , stringify ! (
-               siginfo_t__bindgen_ty_1__bindgen_ty_5 ) ));
-    assert_eq! (::std::mem::align_of::<siginfo_t__bindgen_ty_1__bindgen_ty_5>()
-                , 8usize , concat ! (
-                "Alignment of " , stringify ! (
-                siginfo_t__bindgen_ty_1__bindgen_ty_5 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t__bindgen_ty_1__bindgen_ty_5 ) )
-                . si_addr as * const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                siginfo_t__bindgen_ty_1__bindgen_ty_5 ) , "::" , stringify ! (
-                si_addr ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t__bindgen_ty_1__bindgen_ty_5 ) )
-                . si_addr_lsb as * const _ as usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                siginfo_t__bindgen_ty_1__bindgen_ty_5 ) , "::" , stringify ! (
-                si_addr_lsb ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t__bindgen_ty_1__bindgen_ty_5 ) )
-                . si_addr_bnd as * const _ as usize } , 16usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                siginfo_t__bindgen_ty_1__bindgen_ty_5 ) , "::" , stringify ! (
-                si_addr_bnd ) ));
+    assert_eq!(::std::mem::size_of::<siginfo_t__bindgen_ty_1__bindgen_ty_5>(),
+               32usize,
+               concat!("Size of: ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_5)));
+    assert_eq!(::std::mem::align_of::<siginfo_t__bindgen_ty_1__bindgen_ty_5>(),
+               8usize,
+               concat!("Alignment of ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_5)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const siginfo_t__bindgen_ty_1__bindgen_ty_5)).si_addr as *const _ as
+                   usize
+               },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_5),
+                       "::",
+                       stringify!(si_addr)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const siginfo_t__bindgen_ty_1__bindgen_ty_5)).si_addr_lsb as
+                   *const _ as usize
+               },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_5),
+                       "::",
+                       stringify!(si_addr_lsb)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const siginfo_t__bindgen_ty_1__bindgen_ty_5)).si_addr_bnd as
+                   *const _ as usize
+               },
+               16usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_5),
+                       "::",
+                       stringify!(si_addr_bnd)));
 }
 impl Clone for siginfo_t__bindgen_ty_1__bindgen_ty_5 {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct siginfo_t__bindgen_ty_1__bindgen_ty_6 {
-    pub si_band: ::std::os::raw::c_long,
-    pub si_fd: ::std::os::raw::c_int,
+    pub si_band: c_long,
+    pub si_fd: c_int,
 }
 #[test]
 fn bindgen_test_layout_siginfo_t__bindgen_ty_1__bindgen_ty_6() {
-    assert_eq!(::std::mem::size_of::<siginfo_t__bindgen_ty_1__bindgen_ty_6>()
-               , 16usize , concat ! (
-               "Size of: " , stringify ! (
-               siginfo_t__bindgen_ty_1__bindgen_ty_6 ) ));
-    assert_eq! (::std::mem::align_of::<siginfo_t__bindgen_ty_1__bindgen_ty_6>()
-                , 8usize , concat ! (
-                "Alignment of " , stringify ! (
-                siginfo_t__bindgen_ty_1__bindgen_ty_6 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t__bindgen_ty_1__bindgen_ty_6 ) )
-                . si_band as * const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                siginfo_t__bindgen_ty_1__bindgen_ty_6 ) , "::" , stringify ! (
-                si_band ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t__bindgen_ty_1__bindgen_ty_6 ) )
-                . si_fd as * const _ as usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                siginfo_t__bindgen_ty_1__bindgen_ty_6 ) , "::" , stringify ! (
-                si_fd ) ));
+    assert_eq!(::std::mem::size_of::<siginfo_t__bindgen_ty_1__bindgen_ty_6>(),
+               16usize,
+               concat!("Size of: ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_6)));
+    assert_eq!(::std::mem::align_of::<siginfo_t__bindgen_ty_1__bindgen_ty_6>(),
+               8usize,
+               concat!("Alignment of ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_6)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const siginfo_t__bindgen_ty_1__bindgen_ty_6)).si_band as *const _ as
+                   usize
+               },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_6),
+                       "::",
+                       stringify!(si_band)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const siginfo_t__bindgen_ty_1__bindgen_ty_6)).si_fd as *const _ as
+                   usize
+               },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_6),
+                       "::",
+                       stringify!(si_fd)));
 }
 impl Clone for siginfo_t__bindgen_ty_1__bindgen_ty_6 {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct siginfo_t__bindgen_ty_1__bindgen_ty_7 {
-    pub _call_addr: *mut ::std::os::raw::c_void,
-    pub _syscall: ::std::os::raw::c_int,
-    pub _arch: ::std::os::raw::c_uint,
+    pub _call_addr: *mut c_void,
+    pub _syscall: c_int,
+    pub _arch: c_uint,
 }
 #[test]
 fn bindgen_test_layout_siginfo_t__bindgen_ty_1__bindgen_ty_7() {
-    assert_eq!(::std::mem::size_of::<siginfo_t__bindgen_ty_1__bindgen_ty_7>()
-               , 16usize , concat ! (
-               "Size of: " , stringify ! (
-               siginfo_t__bindgen_ty_1__bindgen_ty_7 ) ));
-    assert_eq! (::std::mem::align_of::<siginfo_t__bindgen_ty_1__bindgen_ty_7>()
-                , 8usize , concat ! (
-                "Alignment of " , stringify ! (
-                siginfo_t__bindgen_ty_1__bindgen_ty_7 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t__bindgen_ty_1__bindgen_ty_7 ) )
-                . _call_addr as * const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                siginfo_t__bindgen_ty_1__bindgen_ty_7 ) , "::" , stringify ! (
-                _call_addr ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t__bindgen_ty_1__bindgen_ty_7 ) )
-                . _syscall as * const _ as usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                siginfo_t__bindgen_ty_1__bindgen_ty_7 ) , "::" , stringify ! (
-                _syscall ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t__bindgen_ty_1__bindgen_ty_7 ) )
-                . _arch as * const _ as usize } , 12usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                siginfo_t__bindgen_ty_1__bindgen_ty_7 ) , "::" , stringify ! (
-                _arch ) ));
+    assert_eq!(::std::mem::size_of::<siginfo_t__bindgen_ty_1__bindgen_ty_7>(),
+               16usize,
+               concat!("Size of: ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_7)));
+    assert_eq!(::std::mem::align_of::<siginfo_t__bindgen_ty_1__bindgen_ty_7>(),
+               8usize,
+               concat!("Alignment of ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_7)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const siginfo_t__bindgen_ty_1__bindgen_ty_7))._call_addr as
+                   *const _ as usize
+               },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_7),
+                       "::",
+                       stringify!(_call_addr)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const siginfo_t__bindgen_ty_1__bindgen_ty_7))._syscall as *const _ as
+                   usize
+               },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_7),
+                       "::",
+                       stringify!(_syscall)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const siginfo_t__bindgen_ty_1__bindgen_ty_7))._arch as *const _ as
+                   usize
+               },
+               12usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t__bindgen_ty_1__bindgen_ty_7),
+                       "::",
+                       stringify!(_arch)));
 }
 impl Clone for siginfo_t__bindgen_ty_1__bindgen_ty_7 {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[test]
 fn bindgen_test_layout_siginfo_t__bindgen_ty_1() {
-    assert_eq!(::std::mem::size_of::<siginfo_t__bindgen_ty_1>() , 112usize ,
-               concat ! (
-               "Size of: " , stringify ! ( siginfo_t__bindgen_ty_1 ) ));
-    assert_eq! (::std::mem::align_of::<siginfo_t__bindgen_ty_1>() , 8usize ,
-                concat ! (
-                "Alignment of " , stringify ! ( siginfo_t__bindgen_ty_1 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t__bindgen_ty_1 ) ) . _pad as *
-                const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( siginfo_t__bindgen_ty_1
-                ) , "::" , stringify ! ( _pad ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t__bindgen_ty_1 ) ) . _kill as *
-                const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( siginfo_t__bindgen_ty_1
-                ) , "::" , stringify ! ( _kill ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t__bindgen_ty_1 ) ) . _timer as *
-                const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( siginfo_t__bindgen_ty_1
-                ) , "::" , stringify ! ( _timer ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t__bindgen_ty_1 ) ) . _rt as *
-                const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( siginfo_t__bindgen_ty_1
-                ) , "::" , stringify ! ( _rt ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t__bindgen_ty_1 ) ) . _sigchld as
-                * const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( siginfo_t__bindgen_ty_1
-                ) , "::" , stringify ! ( _sigchld ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t__bindgen_ty_1 ) ) . _sigfault
-                as * const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( siginfo_t__bindgen_ty_1
-                ) , "::" , stringify ! ( _sigfault ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t__bindgen_ty_1 ) ) . _sigpoll as
-                * const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( siginfo_t__bindgen_ty_1
-                ) , "::" , stringify ! ( _sigpoll ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t__bindgen_ty_1 ) ) . _sigsys as
-                * const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( siginfo_t__bindgen_ty_1
-                ) , "::" , stringify ! ( _sigsys ) ));
+    assert_eq!(::std::mem::size_of::<siginfo_t__bindgen_ty_1>(),
+               112usize,
+               concat!("Size of: ", stringify!(siginfo_t__bindgen_ty_1)));
+    assert_eq!(::std::mem::align_of::<siginfo_t__bindgen_ty_1>(),
+               8usize,
+               concat!("Alignment of ", stringify!(siginfo_t__bindgen_ty_1)));
+    assert_eq!(unsafe { &(*(0 as *const siginfo_t__bindgen_ty_1))._pad as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t__bindgen_ty_1),
+                       "::",
+                       stringify!(_pad)));
+    assert_eq!(unsafe { &(*(0 as *const siginfo_t__bindgen_ty_1))._kill as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t__bindgen_ty_1),
+                       "::",
+                       stringify!(_kill)));
+    assert_eq!(unsafe { &(*(0 as *const siginfo_t__bindgen_ty_1))._timer as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t__bindgen_ty_1),
+                       "::",
+                       stringify!(_timer)));
+    assert_eq!(unsafe { &(*(0 as *const siginfo_t__bindgen_ty_1))._rt as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t__bindgen_ty_1),
+                       "::",
+                       stringify!(_rt)));
+    assert_eq!(unsafe { &(*(0 as *const siginfo_t__bindgen_ty_1))._sigchld as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t__bindgen_ty_1),
+                       "::",
+                       stringify!(_sigchld)));
+    assert_eq!(unsafe { &(*(0 as *const siginfo_t__bindgen_ty_1))._sigfault as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t__bindgen_ty_1),
+                       "::",
+                       stringify!(_sigfault)));
+    assert_eq!(unsafe { &(*(0 as *const siginfo_t__bindgen_ty_1))._sigpoll as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t__bindgen_ty_1),
+                       "::",
+                       stringify!(_sigpoll)));
+    assert_eq!(unsafe { &(*(0 as *const siginfo_t__bindgen_ty_1))._sigsys as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t__bindgen_ty_1),
+                       "::",
+                       stringify!(_sigsys)));
 }
 impl Clone for siginfo_t__bindgen_ty_1 {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[test]
 fn bindgen_test_layout_siginfo_t() {
-    assert_eq!(::std::mem::size_of::<siginfo_t>() , 128usize , concat ! (
-               "Size of: " , stringify ! ( siginfo_t ) ));
-    assert_eq! (::std::mem::align_of::<siginfo_t>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( siginfo_t ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t ) ) . si_signo as * const _ as
-                usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( siginfo_t ) , "::" ,
-                stringify ! ( si_signo ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t ) ) . si_errno as * const _ as
-                usize } , 4usize , concat ! (
-                "Alignment of field: " , stringify ! ( siginfo_t ) , "::" ,
-                stringify ! ( si_errno ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t ) ) . si_code as * const _ as
-                usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( siginfo_t ) , "::" ,
-                stringify ! ( si_code ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const siginfo_t ) ) . _sifields as * const _ as
-                usize } , 16usize , concat ! (
-                "Alignment of field: " , stringify ! ( siginfo_t ) , "::" ,
-                stringify ! ( _sifields ) ));
+    assert_eq!(::std::mem::size_of::<siginfo_t>(),
+               128usize,
+               concat!("Size of: ", stringify!(siginfo_t)));
+    assert_eq!(::std::mem::align_of::<siginfo_t>(),
+               8usize,
+               concat!("Alignment of ", stringify!(siginfo_t)));
+    assert_eq!(unsafe { &(*(0 as *const siginfo_t)).si_signo as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t),
+                       "::",
+                       stringify!(si_signo)));
+    assert_eq!(unsafe { &(*(0 as *const siginfo_t)).si_errno as *const _ as usize },
+               4usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t),
+                       "::",
+                       stringify!(si_errno)));
+    assert_eq!(unsafe { &(*(0 as *const siginfo_t)).si_code as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t),
+                       "::",
+                       stringify!(si_code)));
+    assert_eq!(unsafe { &(*(0 as *const siginfo_t))._sifields as *const _ as usize },
+               16usize,
+               concat!("Alignment of field: ",
+                       stringify!(siginfo_t),
+                       "::",
+                       stringify!(_sifields)));
 }
 impl Clone for siginfo_t {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 pub const SI_ASYNCNL: _bindgen_ty_2 = _bindgen_ty_2::SI_ASYNCNL;
 pub const SI_TKILL: _bindgen_ty_2 = _bindgen_ty_2::SI_TKILL;
@@ -4342,7 +4572,10 @@ pub const SEGV_MAPERR: _bindgen_ty_5 = _bindgen_ty_5::SEGV_MAPERR;
 pub const SEGV_ACCERR: _bindgen_ty_5 = _bindgen_ty_5::SEGV_ACCERR;
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
-pub enum _bindgen_ty_5 { SEGV_MAPERR = 1, SEGV_ACCERR = 2, }
+pub enum _bindgen_ty_5 {
+    SEGV_MAPERR = 1,
+    SEGV_ACCERR = 2,
+}
 pub const BUS_ADRALN: _bindgen_ty_6 = _bindgen_ty_6::BUS_ADRALN;
 pub const BUS_ADRERR: _bindgen_ty_6 = _bindgen_ty_6::BUS_ADRERR;
 pub const BUS_OBJERR: _bindgen_ty_6 = _bindgen_ty_6::BUS_OBJERR;
@@ -4393,106 +4626,128 @@ pub enum _bindgen_ty_8 {
 #[derive(Copy)]
 pub struct sigevent {
     pub sigev_value: sigval_t,
-    pub sigev_signo: ::std::os::raw::c_int,
-    pub sigev_notify: ::std::os::raw::c_int,
+    pub sigev_signo: c_int,
+    pub sigev_notify: c_int,
     pub _sigev_un: sigevent__bindgen_ty_1,
 }
 #[repr(C)]
 #[derive(Copy)]
 pub union sigevent__bindgen_ty_1 {
-    pub _pad: [::std::os::raw::c_int; 12usize],
+    pub _pad: [c_int; 12usize],
     pub _tid: __pid_t,
     pub _sigev_thread: sigevent__bindgen_ty_1__bindgen_ty_1,
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct sigevent__bindgen_ty_1__bindgen_ty_1 {
-    pub _function: ::std::option::Option<unsafe extern "C" fn(arg1:
-                                                                  sigval_t)>,
+    pub _function: ::std::option::Option<unsafe extern "C" fn(arg1: sigval_t)>,
     pub _attribute: *mut pthread_attr_t,
 }
 #[test]
 fn bindgen_test_layout_sigevent__bindgen_ty_1__bindgen_ty_1() {
-    assert_eq!(::std::mem::size_of::<sigevent__bindgen_ty_1__bindgen_ty_1>() ,
-               16usize , concat ! (
-               "Size of: " , stringify ! (
-               sigevent__bindgen_ty_1__bindgen_ty_1 ) ));
-    assert_eq! (::std::mem::align_of::<sigevent__bindgen_ty_1__bindgen_ty_1>()
-                , 8usize , concat ! (
-                "Alignment of " , stringify ! (
-                sigevent__bindgen_ty_1__bindgen_ty_1 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigevent__bindgen_ty_1__bindgen_ty_1 ) )
-                . _function as * const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                sigevent__bindgen_ty_1__bindgen_ty_1 ) , "::" , stringify ! (
-                _function ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigevent__bindgen_ty_1__bindgen_ty_1 ) )
-                . _attribute as * const _ as usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                sigevent__bindgen_ty_1__bindgen_ty_1 ) , "::" , stringify ! (
-                _attribute ) ));
+    assert_eq!(::std::mem::size_of::<sigevent__bindgen_ty_1__bindgen_ty_1>(),
+               16usize,
+               concat!("Size of: ",
+                       stringify!(sigevent__bindgen_ty_1__bindgen_ty_1)));
+    assert_eq!(::std::mem::align_of::<sigevent__bindgen_ty_1__bindgen_ty_1>(),
+               8usize,
+               concat!("Alignment of ",
+                       stringify!(sigevent__bindgen_ty_1__bindgen_ty_1)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const sigevent__bindgen_ty_1__bindgen_ty_1))._function as *const _ as
+                   usize
+               },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigevent__bindgen_ty_1__bindgen_ty_1),
+                       "::",
+                       stringify!(_function)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const sigevent__bindgen_ty_1__bindgen_ty_1))._attribute as *const _ as
+                   usize
+               },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigevent__bindgen_ty_1__bindgen_ty_1),
+                       "::",
+                       stringify!(_attribute)));
 }
 impl Clone for sigevent__bindgen_ty_1__bindgen_ty_1 {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[test]
 fn bindgen_test_layout_sigevent__bindgen_ty_1() {
-    assert_eq!(::std::mem::size_of::<sigevent__bindgen_ty_1>() , 48usize ,
-               concat ! ( "Size of: " , stringify ! ( sigevent__bindgen_ty_1 )
-               ));
-    assert_eq! (::std::mem::align_of::<sigevent__bindgen_ty_1>() , 8usize ,
-                concat ! (
-                "Alignment of " , stringify ! ( sigevent__bindgen_ty_1 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigevent__bindgen_ty_1 ) ) . _pad as *
-                const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigevent__bindgen_ty_1
-                ) , "::" , stringify ! ( _pad ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigevent__bindgen_ty_1 ) ) . _tid as *
-                const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigevent__bindgen_ty_1
-                ) , "::" , stringify ! ( _tid ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigevent__bindgen_ty_1 ) ) .
-                _sigev_thread as * const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigevent__bindgen_ty_1
-                ) , "::" , stringify ! ( _sigev_thread ) ));
+    assert_eq!(::std::mem::size_of::<sigevent__bindgen_ty_1>(),
+               48usize,
+               concat!("Size of: ", stringify!(sigevent__bindgen_ty_1)));
+    assert_eq!(::std::mem::align_of::<sigevent__bindgen_ty_1>(),
+               8usize,
+               concat!("Alignment of ", stringify!(sigevent__bindgen_ty_1)));
+    assert_eq!(unsafe { &(*(0 as *const sigevent__bindgen_ty_1))._pad as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigevent__bindgen_ty_1),
+                       "::",
+                       stringify!(_pad)));
+    assert_eq!(unsafe { &(*(0 as *const sigevent__bindgen_ty_1))._tid as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigevent__bindgen_ty_1),
+                       "::",
+                       stringify!(_tid)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const sigevent__bindgen_ty_1))._sigev_thread as *const _ as usize
+               },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigevent__bindgen_ty_1),
+                       "::",
+                       stringify!(_sigev_thread)));
 }
 impl Clone for sigevent__bindgen_ty_1 {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[test]
 fn bindgen_test_layout_sigevent() {
-    assert_eq!(::std::mem::size_of::<sigevent>() , 64usize , concat ! (
-               "Size of: " , stringify ! ( sigevent ) ));
-    assert_eq! (::std::mem::align_of::<sigevent>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( sigevent ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigevent ) ) . sigev_value as * const _
-                as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigevent ) , "::" ,
-                stringify ! ( sigev_value ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigevent ) ) . sigev_signo as * const _
-                as usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigevent ) , "::" ,
-                stringify ! ( sigev_signo ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigevent ) ) . sigev_notify as * const _
-                as usize } , 12usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigevent ) , "::" ,
-                stringify ! ( sigev_notify ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigevent ) ) . _sigev_un as * const _ as
-                usize } , 16usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigevent ) , "::" ,
-                stringify ! ( _sigev_un ) ));
+    assert_eq!(::std::mem::size_of::<sigevent>(),
+               64usize,
+               concat!("Size of: ", stringify!(sigevent)));
+    assert_eq!(::std::mem::align_of::<sigevent>(),
+               8usize,
+               concat!("Alignment of ", stringify!(sigevent)));
+    assert_eq!(unsafe { &(*(0 as *const sigevent)).sigev_value as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigevent),
+                       "::",
+                       stringify!(sigev_value)));
+    assert_eq!(unsafe { &(*(0 as *const sigevent)).sigev_signo as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigevent),
+                       "::",
+                       stringify!(sigev_signo)));
+    assert_eq!(unsafe { &(*(0 as *const sigevent)).sigev_notify as *const _ as usize },
+               12usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigevent),
+                       "::",
+                       stringify!(sigev_notify)));
+    assert_eq!(unsafe { &(*(0 as *const sigevent))._sigev_un as *const _ as usize },
+               16usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigevent),
+                       "::",
+                       stringify!(_sigev_un)));
 }
 impl Clone for sigevent {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 pub type sigevent_t = sigevent;
 pub const SIGEV_SIGNAL: _bindgen_ty_9 = _bindgen_ty_9::SIGEV_SIGNAL;
@@ -4507,76 +4762,65 @@ pub enum _bindgen_ty_9 {
     SIGEV_THREAD = 2,
     SIGEV_THREAD_ID = 4,
 }
-pub type __sighandler_t =
-    ::std::option::Option<unsafe extern "C" fn(arg1: ::std::os::raw::c_int)>;
+pub type __sighandler_t = ::std::option::Option<unsafe extern "C" fn(arg1: c_int)>;
 extern "C" {
-    pub fn __sysv_signal(__sig: ::std::os::raw::c_int,
-                         __handler: __sighandler_t) -> __sighandler_t;
+    pub fn __sysv_signal(__sig: c_int, __handler: __sighandler_t) -> __sighandler_t;
 }
 extern "C" {
-    pub fn signal(__sig: ::std::os::raw::c_int, __handler: __sighandler_t)
-     -> __sighandler_t;
+    pub fn signal(__sig: c_int, __handler: __sighandler_t) -> __sighandler_t;
 }
 extern "C" {
-    pub fn kill(__pid: __pid_t, __sig: ::std::os::raw::c_int)
-     -> ::std::os::raw::c_int;
+    pub fn kill(__pid: __pid_t, __sig: c_int) -> c_int;
 }
 extern "C" {
-    pub fn killpg(__pgrp: __pid_t, __sig: ::std::os::raw::c_int)
-     -> ::std::os::raw::c_int;
+    pub fn killpg(__pgrp: __pid_t, __sig: c_int) -> c_int;
 }
 extern "C" {
-    pub fn raise(__sig: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
+    pub fn raise(__sig: c_int) -> c_int;
 }
 extern "C" {
-    pub fn ssignal(__sig: ::std::os::raw::c_int, __handler: __sighandler_t)
-     -> __sighandler_t;
+    pub fn ssignal(__sig: c_int, __handler: __sighandler_t) -> __sighandler_t;
 }
 extern "C" {
-    pub fn gsignal(__sig: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
+    pub fn gsignal(__sig: c_int) -> c_int;
 }
 extern "C" {
-    pub fn psignal(__sig: ::std::os::raw::c_int,
-                   __s: *const ::std::os::raw::c_char);
+    pub fn psignal(__sig: c_int, __s: *const c_char);
 }
 extern "C" {
-    pub fn psiginfo(__pinfo: *const siginfo_t,
-                    __s: *const ::std::os::raw::c_char);
+    pub fn psiginfo(__pinfo: *const siginfo_t, __s: *const c_char);
 }
 extern "C" {
-    pub fn sigblock(__mask: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
+    pub fn sigblock(__mask: c_int) -> c_int;
 }
 extern "C" {
-    pub fn sigsetmask(__mask: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
+    pub fn sigsetmask(__mask: c_int) -> c_int;
 }
 extern "C" {
-    pub fn siggetmask() -> ::std::os::raw::c_int;
+    pub fn siggetmask() -> c_int;
 }
 pub type sig_t = __sighandler_t;
 extern "C" {
-    pub fn sigemptyset(__set: *mut sigset_t) -> ::std::os::raw::c_int;
+    pub fn sigemptyset(__set: *mut sigset_t) -> c_int;
 }
 extern "C" {
-    pub fn sigfillset(__set: *mut sigset_t) -> ::std::os::raw::c_int;
+    pub fn sigfillset(__set: *mut sigset_t) -> c_int;
 }
 extern "C" {
-    pub fn sigaddset(__set: *mut sigset_t, __signo: ::std::os::raw::c_int)
-     -> ::std::os::raw::c_int;
+    pub fn sigaddset(__set: *mut sigset_t, __signo: c_int) -> c_int;
 }
 extern "C" {
-    pub fn sigdelset(__set: *mut sigset_t, __signo: ::std::os::raw::c_int)
-     -> ::std::os::raw::c_int;
+    pub fn sigdelset(__set: *mut sigset_t, __signo: c_int) -> c_int;
 }
 extern "C" {
-    pub fn sigismember(__set: *const sigset_t, __signo: ::std::os::raw::c_int)
-     -> ::std::os::raw::c_int;
+    pub fn sigismember(__set: *const sigset_t, __signo: c_int) -> c_int;
 }
 #[repr(C)]
 #[derive(Copy)]
 pub struct sigaction {
     pub __sigaction_handler: sigaction__bindgen_ty_1,
     pub sa_mask: __sigset_t,
-    pub sa_flags: ::std::os::raw::c_int,
+    pub sa_flags: c_int,
     pub sa_restorer: ::std::option::Option<unsafe extern "C" fn()>,
 }
 #[repr(C)]
@@ -4584,101 +4828,114 @@ pub struct sigaction {
 pub union sigaction__bindgen_ty_1 {
     pub sa_handler: __sighandler_t,
     pub sa_sigaction: ::std::option::Option<unsafe extern "C" fn(arg1:
-                                                                     ::std::os::raw::c_int,
+                                                                     c_int,
                                                                  arg2:
                                                                      *mut siginfo_t,
                                                                  arg3:
-                                                                     *mut ::std::os::raw::c_void)>,
+                                                                     *mut c_void)>,
 }
 #[test]
 fn bindgen_test_layout_sigaction__bindgen_ty_1() {
-    assert_eq!(::std::mem::size_of::<sigaction__bindgen_ty_1>() , 8usize ,
-               concat ! (
-               "Size of: " , stringify ! ( sigaction__bindgen_ty_1 ) ));
-    assert_eq! (::std::mem::align_of::<sigaction__bindgen_ty_1>() , 8usize ,
-                concat ! (
-                "Alignment of " , stringify ! ( sigaction__bindgen_ty_1 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigaction__bindgen_ty_1 ) ) . sa_handler
-                as * const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigaction__bindgen_ty_1
-                ) , "::" , stringify ! ( sa_handler ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigaction__bindgen_ty_1 ) ) .
-                sa_sigaction as * const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigaction__bindgen_ty_1
-                ) , "::" , stringify ! ( sa_sigaction ) ));
+    assert_eq!(::std::mem::size_of::<sigaction__bindgen_ty_1>(),
+               8usize,
+               concat!("Size of: ", stringify!(sigaction__bindgen_ty_1)));
+    assert_eq!(::std::mem::align_of::<sigaction__bindgen_ty_1>(),
+               8usize,
+               concat!("Alignment of ", stringify!(sigaction__bindgen_ty_1)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const sigaction__bindgen_ty_1)).sa_handler as *const _ as usize
+               },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigaction__bindgen_ty_1),
+                       "::",
+                       stringify!(sa_handler)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const sigaction__bindgen_ty_1)).sa_sigaction as *const _ as usize
+               },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigaction__bindgen_ty_1),
+                       "::",
+                       stringify!(sa_sigaction)));
 }
 impl Clone for sigaction__bindgen_ty_1 {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[test]
 fn bindgen_test_layout_sigaction() {
-    assert_eq!(::std::mem::size_of::<sigaction>() , 152usize , concat ! (
-               "Size of: " , stringify ! ( sigaction ) ));
-    assert_eq! (::std::mem::align_of::<sigaction>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( sigaction ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigaction ) ) . __sigaction_handler as *
-                const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigaction ) , "::" ,
-                stringify ! ( __sigaction_handler ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigaction ) ) . sa_mask as * const _ as
-                usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigaction ) , "::" ,
-                stringify ! ( sa_mask ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigaction ) ) . sa_flags as * const _ as
-                usize } , 136usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigaction ) , "::" ,
-                stringify ! ( sa_flags ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigaction ) ) . sa_restorer as * const _
-                as usize } , 144usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigaction ) , "::" ,
-                stringify ! ( sa_restorer ) ));
+    assert_eq!(::std::mem::size_of::<sigaction>(),
+               152usize,
+               concat!("Size of: ", stringify!(sigaction)));
+    assert_eq!(::std::mem::align_of::<sigaction>(),
+               8usize,
+               concat!("Alignment of ", stringify!(sigaction)));
+    assert_eq!(unsafe { &(*(0 as *const sigaction)).__sigaction_handler as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigaction),
+                       "::",
+                       stringify!(__sigaction_handler)));
+    assert_eq!(unsafe { &(*(0 as *const sigaction)).sa_mask as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigaction),
+                       "::",
+                       stringify!(sa_mask)));
+    assert_eq!(unsafe { &(*(0 as *const sigaction)).sa_flags as *const _ as usize },
+               136usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigaction),
+                       "::",
+                       stringify!(sa_flags)));
+    assert_eq!(unsafe { &(*(0 as *const sigaction)).sa_restorer as *const _ as usize },
+               144usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigaction),
+                       "::",
+                       stringify!(sa_restorer)));
 }
 impl Clone for sigaction {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 extern "C" {
-    pub fn sigprocmask(__how: ::std::os::raw::c_int, __set: *const sigset_t,
-                       __oset: *mut sigset_t) -> ::std::os::raw::c_int;
+    pub fn sigprocmask(__how: c_int, __set: *const sigset_t, __oset: *mut sigset_t) -> c_int;
 }
 extern "C" {
-    pub fn sigsuspend(__set: *const sigset_t) -> ::std::os::raw::c_int;
+    pub fn sigsuspend(__set: *const sigset_t) -> c_int;
 }
 extern "C" {
-    pub fn sigaction(__sig: ::std::os::raw::c_int, __act: *const sigaction,
-                     __oact: *mut sigaction) -> ::std::os::raw::c_int;
+    pub fn sigaction(__sig: c_int, __act: *const sigaction, __oact: *mut sigaction) -> c_int;
 }
 extern "C" {
-    pub fn sigpending(__set: *mut sigset_t) -> ::std::os::raw::c_int;
+    pub fn sigpending(__set: *mut sigset_t) -> c_int;
 }
 extern "C" {
-    pub fn sigwait(__set: *const sigset_t, __sig: *mut ::std::os::raw::c_int)
-     -> ::std::os::raw::c_int;
+    pub fn sigwait(__set: *const sigset_t, __sig: *mut c_int) -> c_int;
 }
 extern "C" {
-    pub fn sigwaitinfo(__set: *const sigset_t, __info: *mut siginfo_t)
-     -> ::std::os::raw::c_int;
+    pub fn sigwaitinfo(__set: *const sigset_t, __info: *mut siginfo_t) -> c_int;
 }
 extern "C" {
-    pub fn sigtimedwait(__set: *const sigset_t, __info: *mut siginfo_t,
-                        __timeout: *const timespec) -> ::std::os::raw::c_int;
+    pub fn sigtimedwait(__set: *const sigset_t,
+                        __info: *mut siginfo_t,
+                        __timeout: *const timespec)
+                        -> c_int;
 }
 extern "C" {
-    pub fn sigqueue(__pid: __pid_t, __sig: ::std::os::raw::c_int,
-                    __val: sigval) -> ::std::os::raw::c_int;
+    pub fn sigqueue(__pid: __pid_t, __sig: c_int, __val: sigval) -> c_int;
 }
 extern "C" {
     #[link_name = "_sys_siglist"]
-    pub static mut _sys_siglist: [*const ::std::os::raw::c_char; 65usize];
+    pub static mut _sys_siglist: [*const c_char; 65usize];
 }
 extern "C" {
     #[link_name = "sys_siglist"]
-    pub static mut sys_siglist: [*const ::std::os::raw::c_char; 65usize];
+    pub static mut sys_siglist: [*const c_char; 65usize];
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
@@ -4691,96 +4948,118 @@ pub struct _fpx_sw_bytes {
 }
 #[test]
 fn bindgen_test_layout__fpx_sw_bytes() {
-    assert_eq!(::std::mem::size_of::<_fpx_sw_bytes>() , 48usize , concat ! (
-               "Size of: " , stringify ! ( _fpx_sw_bytes ) ));
-    assert_eq! (::std::mem::align_of::<_fpx_sw_bytes>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( _fpx_sw_bytes ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _fpx_sw_bytes ) ) . magic1 as * const _
-                as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( _fpx_sw_bytes ) , "::"
-                , stringify ! ( magic1 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _fpx_sw_bytes ) ) . extended_size as *
-                const _ as usize } , 4usize , concat ! (
-                "Alignment of field: " , stringify ! ( _fpx_sw_bytes ) , "::"
-                , stringify ! ( extended_size ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _fpx_sw_bytes ) ) . xstate_bv as * const
-                _ as usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( _fpx_sw_bytes ) , "::"
-                , stringify ! ( xstate_bv ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _fpx_sw_bytes ) ) . xstate_size as *
-                const _ as usize } , 16usize , concat ! (
-                "Alignment of field: " , stringify ! ( _fpx_sw_bytes ) , "::"
-                , stringify ! ( xstate_size ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _fpx_sw_bytes ) ) . padding as * const _
-                as usize } , 20usize , concat ! (
-                "Alignment of field: " , stringify ! ( _fpx_sw_bytes ) , "::"
-                , stringify ! ( padding ) ));
+    assert_eq!(::std::mem::size_of::<_fpx_sw_bytes>(),
+               48usize,
+               concat!("Size of: ", stringify!(_fpx_sw_bytes)));
+    assert_eq!(::std::mem::align_of::<_fpx_sw_bytes>(),
+               8usize,
+               concat!("Alignment of ", stringify!(_fpx_sw_bytes)));
+    assert_eq!(unsafe { &(*(0 as *const _fpx_sw_bytes)).magic1 as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(_fpx_sw_bytes),
+                       "::",
+                       stringify!(magic1)));
+    assert_eq!(unsafe { &(*(0 as *const _fpx_sw_bytes)).extended_size as *const _ as usize },
+               4usize,
+               concat!("Alignment of field: ",
+                       stringify!(_fpx_sw_bytes),
+                       "::",
+                       stringify!(extended_size)));
+    assert_eq!(unsafe { &(*(0 as *const _fpx_sw_bytes)).xstate_bv as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(_fpx_sw_bytes),
+                       "::",
+                       stringify!(xstate_bv)));
+    assert_eq!(unsafe { &(*(0 as *const _fpx_sw_bytes)).xstate_size as *const _ as usize },
+               16usize,
+               concat!("Alignment of field: ",
+                       stringify!(_fpx_sw_bytes),
+                       "::",
+                       stringify!(xstate_size)));
+    assert_eq!(unsafe { &(*(0 as *const _fpx_sw_bytes)).padding as *const _ as usize },
+               20usize,
+               concat!("Alignment of field: ",
+                       stringify!(_fpx_sw_bytes),
+                       "::",
+                       stringify!(padding)));
 }
 impl Clone for _fpx_sw_bytes {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct _fpreg {
-    pub significand: [::std::os::raw::c_ushort; 4usize],
-    pub exponent: ::std::os::raw::c_ushort,
+    pub significand: [c_ushort; 4usize],
+    pub exponent: c_ushort,
 }
 #[test]
 fn bindgen_test_layout__fpreg() {
-    assert_eq!(::std::mem::size_of::<_fpreg>() , 10usize , concat ! (
-               "Size of: " , stringify ! ( _fpreg ) ));
-    assert_eq! (::std::mem::align_of::<_fpreg>() , 2usize , concat ! (
-                "Alignment of " , stringify ! ( _fpreg ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _fpreg ) ) . significand as * const _ as
-                usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( _fpreg ) , "::" ,
-                stringify ! ( significand ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _fpreg ) ) . exponent as * const _ as
-                usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( _fpreg ) , "::" ,
-                stringify ! ( exponent ) ));
+    assert_eq!(::std::mem::size_of::<_fpreg>(),
+               10usize,
+               concat!("Size of: ", stringify!(_fpreg)));
+    assert_eq!(::std::mem::align_of::<_fpreg>(),
+               2usize,
+               concat!("Alignment of ", stringify!(_fpreg)));
+    assert_eq!(unsafe { &(*(0 as *const _fpreg)).significand as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(_fpreg),
+                       "::",
+                       stringify!(significand)));
+    assert_eq!(unsafe { &(*(0 as *const _fpreg)).exponent as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(_fpreg),
+                       "::",
+                       stringify!(exponent)));
 }
 impl Clone for _fpreg {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct _fpxreg {
-    pub significand: [::std::os::raw::c_ushort; 4usize],
-    pub exponent: ::std::os::raw::c_ushort,
-    pub padding: [::std::os::raw::c_ushort; 3usize],
+    pub significand: [c_ushort; 4usize],
+    pub exponent: c_ushort,
+    pub padding: [c_ushort; 3usize],
 }
 #[test]
 fn bindgen_test_layout__fpxreg() {
-    assert_eq!(::std::mem::size_of::<_fpxreg>() , 16usize , concat ! (
-               "Size of: " , stringify ! ( _fpxreg ) ));
-    assert_eq! (::std::mem::align_of::<_fpxreg>() , 2usize , concat ! (
-                "Alignment of " , stringify ! ( _fpxreg ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _fpxreg ) ) . significand as * const _ as
-                usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( _fpxreg ) , "::" ,
-                stringify ! ( significand ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _fpxreg ) ) . exponent as * const _ as
-                usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( _fpxreg ) , "::" ,
-                stringify ! ( exponent ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _fpxreg ) ) . padding as * const _ as
-                usize } , 10usize , concat ! (
-                "Alignment of field: " , stringify ! ( _fpxreg ) , "::" ,
-                stringify ! ( padding ) ));
+    assert_eq!(::std::mem::size_of::<_fpxreg>(),
+               16usize,
+               concat!("Size of: ", stringify!(_fpxreg)));
+    assert_eq!(::std::mem::align_of::<_fpxreg>(),
+               2usize,
+               concat!("Alignment of ", stringify!(_fpxreg)));
+    assert_eq!(unsafe { &(*(0 as *const _fpxreg)).significand as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(_fpxreg),
+                       "::",
+                       stringify!(significand)));
+    assert_eq!(unsafe { &(*(0 as *const _fpxreg)).exponent as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(_fpxreg),
+                       "::",
+                       stringify!(exponent)));
+    assert_eq!(unsafe { &(*(0 as *const _fpxreg)).padding as *const _ as usize },
+               10usize,
+               concat!("Alignment of field: ",
+                       stringify!(_fpxreg),
+                       "::",
+                       stringify!(padding)));
 }
 impl Clone for _fpxreg {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
@@ -4789,18 +5068,23 @@ pub struct _xmmreg {
 }
 #[test]
 fn bindgen_test_layout__xmmreg() {
-    assert_eq!(::std::mem::size_of::<_xmmreg>() , 16usize , concat ! (
-               "Size of: " , stringify ! ( _xmmreg ) ));
-    assert_eq! (::std::mem::align_of::<_xmmreg>() , 4usize , concat ! (
-                "Alignment of " , stringify ! ( _xmmreg ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _xmmreg ) ) . element as * const _ as
-                usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( _xmmreg ) , "::" ,
-                stringify ! ( element ) ));
+    assert_eq!(::std::mem::size_of::<_xmmreg>(),
+               16usize,
+               concat!("Size of: ", stringify!(_xmmreg)));
+    assert_eq!(::std::mem::align_of::<_xmmreg>(),
+               4usize,
+               concat!("Alignment of ", stringify!(_xmmreg)));
+    assert_eq!(unsafe { &(*(0 as *const _xmmreg)).element as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(_xmmreg),
+                       "::",
+                       stringify!(element)));
 }
 impl Clone for _xmmreg {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
@@ -4819,68 +5103,83 @@ pub struct _fpstate {
 }
 #[test]
 fn bindgen_test_layout__fpstate() {
-    assert_eq!(::std::mem::size_of::<_fpstate>() , 512usize , concat ! (
-               "Size of: " , stringify ! ( _fpstate ) ));
-    assert_eq! (::std::mem::align_of::<_fpstate>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( _fpstate ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _fpstate ) ) . cwd as * const _ as usize
-                } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( _fpstate ) , "::" ,
-                stringify ! ( cwd ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _fpstate ) ) . swd as * const _ as usize
-                } , 2usize , concat ! (
-                "Alignment of field: " , stringify ! ( _fpstate ) , "::" ,
-                stringify ! ( swd ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _fpstate ) ) . ftw as * const _ as usize
-                } , 4usize , concat ! (
-                "Alignment of field: " , stringify ! ( _fpstate ) , "::" ,
-                stringify ! ( ftw ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _fpstate ) ) . fop as * const _ as usize
-                } , 6usize , concat ! (
-                "Alignment of field: " , stringify ! ( _fpstate ) , "::" ,
-                stringify ! ( fop ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _fpstate ) ) . rip as * const _ as usize
-                } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( _fpstate ) , "::" ,
-                stringify ! ( rip ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _fpstate ) ) . rdp as * const _ as usize
-                } , 16usize , concat ! (
-                "Alignment of field: " , stringify ! ( _fpstate ) , "::" ,
-                stringify ! ( rdp ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _fpstate ) ) . mxcsr as * const _ as
-                usize } , 24usize , concat ! (
-                "Alignment of field: " , stringify ! ( _fpstate ) , "::" ,
-                stringify ! ( mxcsr ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _fpstate ) ) . mxcr_mask as * const _ as
-                usize } , 28usize , concat ! (
-                "Alignment of field: " , stringify ! ( _fpstate ) , "::" ,
-                stringify ! ( mxcr_mask ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _fpstate ) ) . _st as * const _ as usize
-                } , 32usize , concat ! (
-                "Alignment of field: " , stringify ! ( _fpstate ) , "::" ,
-                stringify ! ( _st ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _fpstate ) ) . _xmm as * const _ as usize
-                } , 160usize , concat ! (
-                "Alignment of field: " , stringify ! ( _fpstate ) , "::" ,
-                stringify ! ( _xmm ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _fpstate ) ) . padding as * const _ as
-                usize } , 416usize , concat ! (
-                "Alignment of field: " , stringify ! ( _fpstate ) , "::" ,
-                stringify ! ( padding ) ));
+    assert_eq!(::std::mem::size_of::<_fpstate>(),
+               512usize,
+               concat!("Size of: ", stringify!(_fpstate)));
+    assert_eq!(::std::mem::align_of::<_fpstate>(),
+               8usize,
+               concat!("Alignment of ", stringify!(_fpstate)));
+    assert_eq!(unsafe { &(*(0 as *const _fpstate)).cwd as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(_fpstate),
+                       "::",
+                       stringify!(cwd)));
+    assert_eq!(unsafe { &(*(0 as *const _fpstate)).swd as *const _ as usize },
+               2usize,
+               concat!("Alignment of field: ",
+                       stringify!(_fpstate),
+                       "::",
+                       stringify!(swd)));
+    assert_eq!(unsafe { &(*(0 as *const _fpstate)).ftw as *const _ as usize },
+               4usize,
+               concat!("Alignment of field: ",
+                       stringify!(_fpstate),
+                       "::",
+                       stringify!(ftw)));
+    assert_eq!(unsafe { &(*(0 as *const _fpstate)).fop as *const _ as usize },
+               6usize,
+               concat!("Alignment of field: ",
+                       stringify!(_fpstate),
+                       "::",
+                       stringify!(fop)));
+    assert_eq!(unsafe { &(*(0 as *const _fpstate)).rip as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(_fpstate),
+                       "::",
+                       stringify!(rip)));
+    assert_eq!(unsafe { &(*(0 as *const _fpstate)).rdp as *const _ as usize },
+               16usize,
+               concat!("Alignment of field: ",
+                       stringify!(_fpstate),
+                       "::",
+                       stringify!(rdp)));
+    assert_eq!(unsafe { &(*(0 as *const _fpstate)).mxcsr as *const _ as usize },
+               24usize,
+               concat!("Alignment of field: ",
+                       stringify!(_fpstate),
+                       "::",
+                       stringify!(mxcsr)));
+    assert_eq!(unsafe { &(*(0 as *const _fpstate)).mxcr_mask as *const _ as usize },
+               28usize,
+               concat!("Alignment of field: ",
+                       stringify!(_fpstate),
+                       "::",
+                       stringify!(mxcr_mask)));
+    assert_eq!(unsafe { &(*(0 as *const _fpstate))._st as *const _ as usize },
+               32usize,
+               concat!("Alignment of field: ",
+                       stringify!(_fpstate),
+                       "::",
+                       stringify!(_st)));
+    assert_eq!(unsafe { &(*(0 as *const _fpstate))._xmm as *const _ as usize },
+               160usize,
+               concat!("Alignment of field: ",
+                       stringify!(_fpstate),
+                       "::",
+                       stringify!(_xmm)));
+    assert_eq!(unsafe { &(*(0 as *const _fpstate)).padding as *const _ as usize },
+               416usize,
+               concat!("Alignment of field: ",
+                       stringify!(_fpstate),
+                       "::",
+                       stringify!(padding)));
 }
 impl Clone for _fpstate {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[repr(C)]
 #[derive(Copy)]
@@ -4903,10 +5202,10 @@ pub struct sigcontext {
     pub rsp: __uint64_t,
     pub rip: __uint64_t,
     pub eflags: __uint64_t,
-    pub cs: ::std::os::raw::c_ushort,
-    pub gs: ::std::os::raw::c_ushort,
-    pub fs: ::std::os::raw::c_ushort,
-    pub __pad0: ::std::os::raw::c_ushort,
+    pub cs: c_ushort,
+    pub gs: c_ushort,
+    pub fs: c_ushort,
+    pub __pad0: c_ushort,
     pub err: __uint64_t,
     pub trapno: __uint64_t,
     pub oldmask: __uint64_t,
@@ -4922,172 +5221,207 @@ pub union sigcontext__bindgen_ty_1 {
 }
 #[test]
 fn bindgen_test_layout_sigcontext__bindgen_ty_1() {
-    assert_eq!(::std::mem::size_of::<sigcontext__bindgen_ty_1>() , 8usize ,
-               concat ! (
-               "Size of: " , stringify ! ( sigcontext__bindgen_ty_1 ) ));
-    assert_eq! (::std::mem::align_of::<sigcontext__bindgen_ty_1>() , 8usize ,
-                concat ! (
-                "Alignment of " , stringify ! ( sigcontext__bindgen_ty_1 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigcontext__bindgen_ty_1 ) ) . fpstate as
-                * const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                sigcontext__bindgen_ty_1 ) , "::" , stringify ! ( fpstate )
-                ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigcontext__bindgen_ty_1 ) ) .
-                __fpstate_word as * const _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! (
-                sigcontext__bindgen_ty_1 ) , "::" , stringify ! (
-                __fpstate_word ) ));
+    assert_eq!(::std::mem::size_of::<sigcontext__bindgen_ty_1>(),
+               8usize,
+               concat!("Size of: ", stringify!(sigcontext__bindgen_ty_1)));
+    assert_eq!(::std::mem::align_of::<sigcontext__bindgen_ty_1>(),
+               8usize,
+               concat!("Alignment of ", stringify!(sigcontext__bindgen_ty_1)));
+    assert_eq!(unsafe { &(*(0 as *const sigcontext__bindgen_ty_1)).fpstate as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigcontext__bindgen_ty_1),
+                       "::",
+                       stringify!(fpstate)));
+    assert_eq!(unsafe {
+                   &(*(0 as *const sigcontext__bindgen_ty_1)).__fpstate_word as *const _ as usize
+               },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigcontext__bindgen_ty_1),
+                       "::",
+                       stringify!(__fpstate_word)));
 }
 impl Clone for sigcontext__bindgen_ty_1 {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[test]
 fn bindgen_test_layout_sigcontext() {
-    assert_eq!(::std::mem::size_of::<sigcontext>() , 256usize , concat ! (
-               "Size of: " , stringify ! ( sigcontext ) ));
-    assert_eq! (::std::mem::align_of::<sigcontext>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( sigcontext ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigcontext ) ) . r8 as * const _ as usize
-                } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigcontext ) , "::" ,
-                stringify ! ( r8 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigcontext ) ) . r9 as * const _ as usize
-                } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigcontext ) , "::" ,
-                stringify ! ( r9 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigcontext ) ) . r10 as * const _ as
-                usize } , 16usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigcontext ) , "::" ,
-                stringify ! ( r10 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigcontext ) ) . r11 as * const _ as
-                usize } , 24usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigcontext ) , "::" ,
-                stringify ! ( r11 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigcontext ) ) . r12 as * const _ as
-                usize } , 32usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigcontext ) , "::" ,
-                stringify ! ( r12 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigcontext ) ) . r13 as * const _ as
-                usize } , 40usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigcontext ) , "::" ,
-                stringify ! ( r13 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigcontext ) ) . r14 as * const _ as
-                usize } , 48usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigcontext ) , "::" ,
-                stringify ! ( r14 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigcontext ) ) . r15 as * const _ as
-                usize } , 56usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigcontext ) , "::" ,
-                stringify ! ( r15 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigcontext ) ) . rdi as * const _ as
-                usize } , 64usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigcontext ) , "::" ,
-                stringify ! ( rdi ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigcontext ) ) . rsi as * const _ as
-                usize } , 72usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigcontext ) , "::" ,
-                stringify ! ( rsi ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigcontext ) ) . rbp as * const _ as
-                usize } , 80usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigcontext ) , "::" ,
-                stringify ! ( rbp ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigcontext ) ) . rbx as * const _ as
-                usize } , 88usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigcontext ) , "::" ,
-                stringify ! ( rbx ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigcontext ) ) . rdx as * const _ as
-                usize } , 96usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigcontext ) , "::" ,
-                stringify ! ( rdx ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigcontext ) ) . rax as * const _ as
-                usize } , 104usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigcontext ) , "::" ,
-                stringify ! ( rax ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigcontext ) ) . rcx as * const _ as
-                usize } , 112usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigcontext ) , "::" ,
-                stringify ! ( rcx ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigcontext ) ) . rsp as * const _ as
-                usize } , 120usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigcontext ) , "::" ,
-                stringify ! ( rsp ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigcontext ) ) . rip as * const _ as
-                usize } , 128usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigcontext ) , "::" ,
-                stringify ! ( rip ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigcontext ) ) . eflags as * const _ as
-                usize } , 136usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigcontext ) , "::" ,
-                stringify ! ( eflags ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigcontext ) ) . cs as * const _ as usize
-                } , 144usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigcontext ) , "::" ,
-                stringify ! ( cs ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigcontext ) ) . gs as * const _ as usize
-                } , 146usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigcontext ) , "::" ,
-                stringify ! ( gs ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigcontext ) ) . fs as * const _ as usize
-                } , 148usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigcontext ) , "::" ,
-                stringify ! ( fs ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigcontext ) ) . __pad0 as * const _ as
-                usize } , 150usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigcontext ) , "::" ,
-                stringify ! ( __pad0 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigcontext ) ) . err as * const _ as
-                usize } , 152usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigcontext ) , "::" ,
-                stringify ! ( err ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigcontext ) ) . trapno as * const _ as
-                usize } , 160usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigcontext ) , "::" ,
-                stringify ! ( trapno ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigcontext ) ) . oldmask as * const _ as
-                usize } , 168usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigcontext ) , "::" ,
-                stringify ! ( oldmask ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigcontext ) ) . cr2 as * const _ as
-                usize } , 176usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigcontext ) , "::" ,
-                stringify ! ( cr2 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigcontext ) ) . __reserved1 as * const _
-                as usize } , 192usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigcontext ) , "::" ,
-                stringify ! ( __reserved1 ) ));
+    assert_eq!(::std::mem::size_of::<sigcontext>(),
+               256usize,
+               concat!("Size of: ", stringify!(sigcontext)));
+    assert_eq!(::std::mem::align_of::<sigcontext>(),
+               8usize,
+               concat!("Alignment of ", stringify!(sigcontext)));
+    assert_eq!(unsafe { &(*(0 as *const sigcontext)).r8 as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigcontext),
+                       "::",
+                       stringify!(r8)));
+    assert_eq!(unsafe { &(*(0 as *const sigcontext)).r9 as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigcontext),
+                       "::",
+                       stringify!(r9)));
+    assert_eq!(unsafe { &(*(0 as *const sigcontext)).r10 as *const _ as usize },
+               16usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigcontext),
+                       "::",
+                       stringify!(r10)));
+    assert_eq!(unsafe { &(*(0 as *const sigcontext)).r11 as *const _ as usize },
+               24usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigcontext),
+                       "::",
+                       stringify!(r11)));
+    assert_eq!(unsafe { &(*(0 as *const sigcontext)).r12 as *const _ as usize },
+               32usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigcontext),
+                       "::",
+                       stringify!(r12)));
+    assert_eq!(unsafe { &(*(0 as *const sigcontext)).r13 as *const _ as usize },
+               40usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigcontext),
+                       "::",
+                       stringify!(r13)));
+    assert_eq!(unsafe { &(*(0 as *const sigcontext)).r14 as *const _ as usize },
+               48usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigcontext),
+                       "::",
+                       stringify!(r14)));
+    assert_eq!(unsafe { &(*(0 as *const sigcontext)).r15 as *const _ as usize },
+               56usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigcontext),
+                       "::",
+                       stringify!(r15)));
+    assert_eq!(unsafe { &(*(0 as *const sigcontext)).rdi as *const _ as usize },
+               64usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigcontext),
+                       "::",
+                       stringify!(rdi)));
+    assert_eq!(unsafe { &(*(0 as *const sigcontext)).rsi as *const _ as usize },
+               72usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigcontext),
+                       "::",
+                       stringify!(rsi)));
+    assert_eq!(unsafe { &(*(0 as *const sigcontext)).rbp as *const _ as usize },
+               80usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigcontext),
+                       "::",
+                       stringify!(rbp)));
+    assert_eq!(unsafe { &(*(0 as *const sigcontext)).rbx as *const _ as usize },
+               88usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigcontext),
+                       "::",
+                       stringify!(rbx)));
+    assert_eq!(unsafe { &(*(0 as *const sigcontext)).rdx as *const _ as usize },
+               96usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigcontext),
+                       "::",
+                       stringify!(rdx)));
+    assert_eq!(unsafe { &(*(0 as *const sigcontext)).rax as *const _ as usize },
+               104usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigcontext),
+                       "::",
+                       stringify!(rax)));
+    assert_eq!(unsafe { &(*(0 as *const sigcontext)).rcx as *const _ as usize },
+               112usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigcontext),
+                       "::",
+                       stringify!(rcx)));
+    assert_eq!(unsafe { &(*(0 as *const sigcontext)).rsp as *const _ as usize },
+               120usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigcontext),
+                       "::",
+                       stringify!(rsp)));
+    assert_eq!(unsafe { &(*(0 as *const sigcontext)).rip as *const _ as usize },
+               128usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigcontext),
+                       "::",
+                       stringify!(rip)));
+    assert_eq!(unsafe { &(*(0 as *const sigcontext)).eflags as *const _ as usize },
+               136usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigcontext),
+                       "::",
+                       stringify!(eflags)));
+    assert_eq!(unsafe { &(*(0 as *const sigcontext)).cs as *const _ as usize },
+               144usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigcontext),
+                       "::",
+                       stringify!(cs)));
+    assert_eq!(unsafe { &(*(0 as *const sigcontext)).gs as *const _ as usize },
+               146usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigcontext),
+                       "::",
+                       stringify!(gs)));
+    assert_eq!(unsafe { &(*(0 as *const sigcontext)).fs as *const _ as usize },
+               148usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigcontext),
+                       "::",
+                       stringify!(fs)));
+    assert_eq!(unsafe { &(*(0 as *const sigcontext)).__pad0 as *const _ as usize },
+               150usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigcontext),
+                       "::",
+                       stringify!(__pad0)));
+    assert_eq!(unsafe { &(*(0 as *const sigcontext)).err as *const _ as usize },
+               152usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigcontext),
+                       "::",
+                       stringify!(err)));
+    assert_eq!(unsafe { &(*(0 as *const sigcontext)).trapno as *const _ as usize },
+               160usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigcontext),
+                       "::",
+                       stringify!(trapno)));
+    assert_eq!(unsafe { &(*(0 as *const sigcontext)).oldmask as *const _ as usize },
+               168usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigcontext),
+                       "::",
+                       stringify!(oldmask)));
+    assert_eq!(unsafe { &(*(0 as *const sigcontext)).cr2 as *const _ as usize },
+               176usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigcontext),
+                       "::",
+                       stringify!(cr2)));
+    assert_eq!(unsafe { &(*(0 as *const sigcontext)).__reserved1 as *const _ as usize },
+               192usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigcontext),
+                       "::",
+                       stringify!(__reserved1)));
 }
 impl Clone for sigcontext {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
@@ -5098,28 +5432,35 @@ pub struct _xsave_hdr {
 }
 #[test]
 fn bindgen_test_layout__xsave_hdr() {
-    assert_eq!(::std::mem::size_of::<_xsave_hdr>() , 64usize , concat ! (
-               "Size of: " , stringify ! ( _xsave_hdr ) ));
-    assert_eq! (::std::mem::align_of::<_xsave_hdr>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( _xsave_hdr ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _xsave_hdr ) ) . xstate_bv as * const _
-                as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( _xsave_hdr ) , "::" ,
-                stringify ! ( xstate_bv ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _xsave_hdr ) ) . reserved1 as * const _
-                as usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( _xsave_hdr ) , "::" ,
-                stringify ! ( reserved1 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _xsave_hdr ) ) . reserved2 as * const _
-                as usize } , 24usize , concat ! (
-                "Alignment of field: " , stringify ! ( _xsave_hdr ) , "::" ,
-                stringify ! ( reserved2 ) ));
+    assert_eq!(::std::mem::size_of::<_xsave_hdr>(),
+               64usize,
+               concat!("Size of: ", stringify!(_xsave_hdr)));
+    assert_eq!(::std::mem::align_of::<_xsave_hdr>(),
+               8usize,
+               concat!("Alignment of ", stringify!(_xsave_hdr)));
+    assert_eq!(unsafe { &(*(0 as *const _xsave_hdr)).xstate_bv as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(_xsave_hdr),
+                       "::",
+                       stringify!(xstate_bv)));
+    assert_eq!(unsafe { &(*(0 as *const _xsave_hdr)).reserved1 as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(_xsave_hdr),
+                       "::",
+                       stringify!(reserved1)));
+    assert_eq!(unsafe { &(*(0 as *const _xsave_hdr)).reserved2 as *const _ as usize },
+               24usize,
+               concat!("Alignment of field: ",
+                       stringify!(_xsave_hdr),
+                       "::",
+                       stringify!(reserved2)));
 }
 impl Clone for _xsave_hdr {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[repr(C)]
 pub struct _ymmh_state {
@@ -5127,15 +5468,18 @@ pub struct _ymmh_state {
 }
 #[test]
 fn bindgen_test_layout__ymmh_state() {
-    assert_eq!(::std::mem::size_of::<_ymmh_state>() , 256usize , concat ! (
-               "Size of: " , stringify ! ( _ymmh_state ) ));
-    assert_eq! (::std::mem::align_of::<_ymmh_state>() , 4usize , concat ! (
-                "Alignment of " , stringify ! ( _ymmh_state ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _ymmh_state ) ) . ymmh_space as * const _
-                as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( _ymmh_state ) , "::" ,
-                stringify ! ( ymmh_space ) ));
+    assert_eq!(::std::mem::size_of::<_ymmh_state>(),
+               256usize,
+               concat!("Size of: ", stringify!(_ymmh_state)));
+    assert_eq!(::std::mem::align_of::<_ymmh_state>(),
+               4usize,
+               concat!("Alignment of ", stringify!(_ymmh_state)));
+    assert_eq!(unsafe { &(*(0 as *const _ymmh_state)).ymmh_space as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(_ymmh_state),
+                       "::",
+                       stringify!(ymmh_space)));
 }
 #[repr(C)]
 pub struct _xstate {
@@ -5145,131 +5489,157 @@ pub struct _xstate {
 }
 #[test]
 fn bindgen_test_layout__xstate() {
-    assert_eq!(::std::mem::size_of::<_xstate>() , 832usize , concat ! (
-               "Size of: " , stringify ! ( _xstate ) ));
-    assert_eq! (::std::mem::align_of::<_xstate>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( _xstate ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _xstate ) ) . fpstate as * const _ as
-                usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( _xstate ) , "::" ,
-                stringify ! ( fpstate ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _xstate ) ) . xstate_hdr as * const _ as
-                usize } , 512usize , concat ! (
-                "Alignment of field: " , stringify ! ( _xstate ) , "::" ,
-                stringify ! ( xstate_hdr ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _xstate ) ) . ymmh as * const _ as usize
-                } , 576usize , concat ! (
-                "Alignment of field: " , stringify ! ( _xstate ) , "::" ,
-                stringify ! ( ymmh ) ));
+    assert_eq!(::std::mem::size_of::<_xstate>(),
+               832usize,
+               concat!("Size of: ", stringify!(_xstate)));
+    assert_eq!(::std::mem::align_of::<_xstate>(),
+               8usize,
+               concat!("Alignment of ", stringify!(_xstate)));
+    assert_eq!(unsafe { &(*(0 as *const _xstate)).fpstate as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(_xstate),
+                       "::",
+                       stringify!(fpstate)));
+    assert_eq!(unsafe { &(*(0 as *const _xstate)).xstate_hdr as *const _ as usize },
+               512usize,
+               concat!("Alignment of field: ",
+                       stringify!(_xstate),
+                       "::",
+                       stringify!(xstate_hdr)));
+    assert_eq!(unsafe { &(*(0 as *const _xstate)).ymmh as *const _ as usize },
+               576usize,
+               concat!("Alignment of field: ",
+                       stringify!(_xstate),
+                       "::",
+                       stringify!(ymmh)));
 }
 extern "C" {
-    pub fn sigreturn(__scp: *mut sigcontext) -> ::std::os::raw::c_int;
+    pub fn sigreturn(__scp: *mut sigcontext) -> c_int;
 }
 extern "C" {
-    pub fn siginterrupt(__sig: ::std::os::raw::c_int,
-                        __interrupt: ::std::os::raw::c_int)
-     -> ::std::os::raw::c_int;
+    pub fn siginterrupt(__sig: c_int, __interrupt: c_int) -> c_int;
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct sigstack {
-    pub ss_sp: *mut ::std::os::raw::c_void,
-    pub ss_onstack: ::std::os::raw::c_int,
+    pub ss_sp: *mut c_void,
+    pub ss_onstack: c_int,
 }
 #[test]
 fn bindgen_test_layout_sigstack() {
-    assert_eq!(::std::mem::size_of::<sigstack>() , 16usize , concat ! (
-               "Size of: " , stringify ! ( sigstack ) ));
-    assert_eq! (::std::mem::align_of::<sigstack>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( sigstack ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigstack ) ) . ss_sp as * const _ as
-                usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigstack ) , "::" ,
-                stringify ! ( ss_sp ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigstack ) ) . ss_onstack as * const _ as
-                usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigstack ) , "::" ,
-                stringify ! ( ss_onstack ) ));
+    assert_eq!(::std::mem::size_of::<sigstack>(),
+               16usize,
+               concat!("Size of: ", stringify!(sigstack)));
+    assert_eq!(::std::mem::align_of::<sigstack>(),
+               8usize,
+               concat!("Alignment of ", stringify!(sigstack)));
+    assert_eq!(unsafe { &(*(0 as *const sigstack)).ss_sp as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigstack),
+                       "::",
+                       stringify!(ss_sp)));
+    assert_eq!(unsafe { &(*(0 as *const sigstack)).ss_onstack as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigstack),
+                       "::",
+                       stringify!(ss_onstack)));
 }
 impl Clone for sigstack {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 pub const SS_ONSTACK: _bindgen_ty_10 = _bindgen_ty_10::SS_ONSTACK;
 pub const SS_DISABLE: _bindgen_ty_10 = _bindgen_ty_10::SS_DISABLE;
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
-pub enum _bindgen_ty_10 { SS_ONSTACK = 1, SS_DISABLE = 2, }
+pub enum _bindgen_ty_10 {
+    SS_ONSTACK = 1,
+    SS_DISABLE = 2,
+}
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct sigaltstack {
-    pub ss_sp: *mut ::std::os::raw::c_void,
-    pub ss_flags: ::std::os::raw::c_int,
+    pub ss_sp: *mut c_void,
+    pub ss_flags: c_int,
     pub ss_size: usize,
 }
 #[test]
 fn bindgen_test_layout_sigaltstack() {
-    assert_eq!(::std::mem::size_of::<sigaltstack>() , 24usize , concat ! (
-               "Size of: " , stringify ! ( sigaltstack ) ));
-    assert_eq! (::std::mem::align_of::<sigaltstack>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( sigaltstack ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigaltstack ) ) . ss_sp as * const _ as
-                usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigaltstack ) , "::" ,
-                stringify ! ( ss_sp ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigaltstack ) ) . ss_flags as * const _
-                as usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigaltstack ) , "::" ,
-                stringify ! ( ss_flags ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const sigaltstack ) ) . ss_size as * const _ as
-                usize } , 16usize , concat ! (
-                "Alignment of field: " , stringify ! ( sigaltstack ) , "::" ,
-                stringify ! ( ss_size ) ));
+    assert_eq!(::std::mem::size_of::<sigaltstack>(),
+               24usize,
+               concat!("Size of: ", stringify!(sigaltstack)));
+    assert_eq!(::std::mem::align_of::<sigaltstack>(),
+               8usize,
+               concat!("Alignment of ", stringify!(sigaltstack)));
+    assert_eq!(unsafe { &(*(0 as *const sigaltstack)).ss_sp as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigaltstack),
+                       "::",
+                       stringify!(ss_sp)));
+    assert_eq!(unsafe { &(*(0 as *const sigaltstack)).ss_flags as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigaltstack),
+                       "::",
+                       stringify!(ss_flags)));
+    assert_eq!(unsafe { &(*(0 as *const sigaltstack)).ss_size as *const _ as usize },
+               16usize,
+               concat!("Alignment of field: ",
+                       stringify!(sigaltstack),
+                       "::",
+                       stringify!(ss_size)));
 }
 impl Clone for sigaltstack {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 pub type stack_t = sigaltstack;
-pub type greg_t = ::std::os::raw::c_longlong;
+pub type greg_t = c_longlong;
 pub type gregset_t = [greg_t; 23usize];
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct _libc_fpxreg {
-    pub significand: [::std::os::raw::c_ushort; 4usize],
-    pub exponent: ::std::os::raw::c_ushort,
-    pub padding: [::std::os::raw::c_ushort; 3usize],
+    pub significand: [c_ushort; 4usize],
+    pub exponent: c_ushort,
+    pub padding: [c_ushort; 3usize],
 }
 #[test]
 fn bindgen_test_layout__libc_fpxreg() {
-    assert_eq!(::std::mem::size_of::<_libc_fpxreg>() , 16usize , concat ! (
-               "Size of: " , stringify ! ( _libc_fpxreg ) ));
-    assert_eq! (::std::mem::align_of::<_libc_fpxreg>() , 2usize , concat ! (
-                "Alignment of " , stringify ! ( _libc_fpxreg ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _libc_fpxreg ) ) . significand as * const
-                _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( _libc_fpxreg ) , "::" ,
-                stringify ! ( significand ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _libc_fpxreg ) ) . exponent as * const _
-                as usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( _libc_fpxreg ) , "::" ,
-                stringify ! ( exponent ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _libc_fpxreg ) ) . padding as * const _
-                as usize } , 10usize , concat ! (
-                "Alignment of field: " , stringify ! ( _libc_fpxreg ) , "::" ,
-                stringify ! ( padding ) ));
+    assert_eq!(::std::mem::size_of::<_libc_fpxreg>(),
+               16usize,
+               concat!("Size of: ", stringify!(_libc_fpxreg)));
+    assert_eq!(::std::mem::align_of::<_libc_fpxreg>(),
+               2usize,
+               concat!("Alignment of ", stringify!(_libc_fpxreg)));
+    assert_eq!(unsafe { &(*(0 as *const _libc_fpxreg)).significand as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(_libc_fpxreg),
+                       "::",
+                       stringify!(significand)));
+    assert_eq!(unsafe { &(*(0 as *const _libc_fpxreg)).exponent as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(_libc_fpxreg),
+                       "::",
+                       stringify!(exponent)));
+    assert_eq!(unsafe { &(*(0 as *const _libc_fpxreg)).padding as *const _ as usize },
+               10usize,
+               concat!("Alignment of field: ",
+                       stringify!(_libc_fpxreg),
+                       "::",
+                       stringify!(padding)));
 }
 impl Clone for _libc_fpxreg {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
@@ -5278,18 +5648,23 @@ pub struct _libc_xmmreg {
 }
 #[test]
 fn bindgen_test_layout__libc_xmmreg() {
-    assert_eq!(::std::mem::size_of::<_libc_xmmreg>() , 16usize , concat ! (
-               "Size of: " , stringify ! ( _libc_xmmreg ) ));
-    assert_eq! (::std::mem::align_of::<_libc_xmmreg>() , 4usize , concat ! (
-                "Alignment of " , stringify ! ( _libc_xmmreg ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _libc_xmmreg ) ) . element as * const _
-                as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( _libc_xmmreg ) , "::" ,
-                stringify ! ( element ) ));
+    assert_eq!(::std::mem::size_of::<_libc_xmmreg>(),
+               16usize,
+               concat!("Size of: ", stringify!(_libc_xmmreg)));
+    assert_eq!(::std::mem::align_of::<_libc_xmmreg>(),
+               4usize,
+               concat!("Alignment of ", stringify!(_libc_xmmreg)));
+    assert_eq!(unsafe { &(*(0 as *const _libc_xmmreg)).element as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(_libc_xmmreg),
+                       "::",
+                       stringify!(element)));
 }
 impl Clone for _libc_xmmreg {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
@@ -5308,68 +5683,83 @@ pub struct _libc_fpstate {
 }
 #[test]
 fn bindgen_test_layout__libc_fpstate() {
-    assert_eq!(::std::mem::size_of::<_libc_fpstate>() , 512usize , concat ! (
-               "Size of: " , stringify ! ( _libc_fpstate ) ));
-    assert_eq! (::std::mem::align_of::<_libc_fpstate>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( _libc_fpstate ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _libc_fpstate ) ) . cwd as * const _ as
-                usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( _libc_fpstate ) , "::"
-                , stringify ! ( cwd ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _libc_fpstate ) ) . swd as * const _ as
-                usize } , 2usize , concat ! (
-                "Alignment of field: " , stringify ! ( _libc_fpstate ) , "::"
-                , stringify ! ( swd ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _libc_fpstate ) ) . ftw as * const _ as
-                usize } , 4usize , concat ! (
-                "Alignment of field: " , stringify ! ( _libc_fpstate ) , "::"
-                , stringify ! ( ftw ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _libc_fpstate ) ) . fop as * const _ as
-                usize } , 6usize , concat ! (
-                "Alignment of field: " , stringify ! ( _libc_fpstate ) , "::"
-                , stringify ! ( fop ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _libc_fpstate ) ) . rip as * const _ as
-                usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( _libc_fpstate ) , "::"
-                , stringify ! ( rip ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _libc_fpstate ) ) . rdp as * const _ as
-                usize } , 16usize , concat ! (
-                "Alignment of field: " , stringify ! ( _libc_fpstate ) , "::"
-                , stringify ! ( rdp ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _libc_fpstate ) ) . mxcsr as * const _ as
-                usize } , 24usize , concat ! (
-                "Alignment of field: " , stringify ! ( _libc_fpstate ) , "::"
-                , stringify ! ( mxcsr ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _libc_fpstate ) ) . mxcr_mask as * const
-                _ as usize } , 28usize , concat ! (
-                "Alignment of field: " , stringify ! ( _libc_fpstate ) , "::"
-                , stringify ! ( mxcr_mask ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _libc_fpstate ) ) . _st as * const _ as
-                usize } , 32usize , concat ! (
-                "Alignment of field: " , stringify ! ( _libc_fpstate ) , "::"
-                , stringify ! ( _st ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _libc_fpstate ) ) . _xmm as * const _ as
-                usize } , 160usize , concat ! (
-                "Alignment of field: " , stringify ! ( _libc_fpstate ) , "::"
-                , stringify ! ( _xmm ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const _libc_fpstate ) ) . padding as * const _
-                as usize } , 416usize , concat ! (
-                "Alignment of field: " , stringify ! ( _libc_fpstate ) , "::"
-                , stringify ! ( padding ) ));
+    assert_eq!(::std::mem::size_of::<_libc_fpstate>(),
+               512usize,
+               concat!("Size of: ", stringify!(_libc_fpstate)));
+    assert_eq!(::std::mem::align_of::<_libc_fpstate>(),
+               8usize,
+               concat!("Alignment of ", stringify!(_libc_fpstate)));
+    assert_eq!(unsafe { &(*(0 as *const _libc_fpstate)).cwd as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(_libc_fpstate),
+                       "::",
+                       stringify!(cwd)));
+    assert_eq!(unsafe { &(*(0 as *const _libc_fpstate)).swd as *const _ as usize },
+               2usize,
+               concat!("Alignment of field: ",
+                       stringify!(_libc_fpstate),
+                       "::",
+                       stringify!(swd)));
+    assert_eq!(unsafe { &(*(0 as *const _libc_fpstate)).ftw as *const _ as usize },
+               4usize,
+               concat!("Alignment of field: ",
+                       stringify!(_libc_fpstate),
+                       "::",
+                       stringify!(ftw)));
+    assert_eq!(unsafe { &(*(0 as *const _libc_fpstate)).fop as *const _ as usize },
+               6usize,
+               concat!("Alignment of field: ",
+                       stringify!(_libc_fpstate),
+                       "::",
+                       stringify!(fop)));
+    assert_eq!(unsafe { &(*(0 as *const _libc_fpstate)).rip as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(_libc_fpstate),
+                       "::",
+                       stringify!(rip)));
+    assert_eq!(unsafe { &(*(0 as *const _libc_fpstate)).rdp as *const _ as usize },
+               16usize,
+               concat!("Alignment of field: ",
+                       stringify!(_libc_fpstate),
+                       "::",
+                       stringify!(rdp)));
+    assert_eq!(unsafe { &(*(0 as *const _libc_fpstate)).mxcsr as *const _ as usize },
+               24usize,
+               concat!("Alignment of field: ",
+                       stringify!(_libc_fpstate),
+                       "::",
+                       stringify!(mxcsr)));
+    assert_eq!(unsafe { &(*(0 as *const _libc_fpstate)).mxcr_mask as *const _ as usize },
+               28usize,
+               concat!("Alignment of field: ",
+                       stringify!(_libc_fpstate),
+                       "::",
+                       stringify!(mxcr_mask)));
+    assert_eq!(unsafe { &(*(0 as *const _libc_fpstate))._st as *const _ as usize },
+               32usize,
+               concat!("Alignment of field: ",
+                       stringify!(_libc_fpstate),
+                       "::",
+                       stringify!(_st)));
+    assert_eq!(unsafe { &(*(0 as *const _libc_fpstate))._xmm as *const _ as usize },
+               160usize,
+               concat!("Alignment of field: ",
+                       stringify!(_libc_fpstate),
+                       "::",
+                       stringify!(_xmm)));
+    assert_eq!(unsafe { &(*(0 as *const _libc_fpstate)).padding as *const _ as usize },
+               416usize,
+               concat!("Alignment of field: ",
+                       stringify!(_libc_fpstate),
+                       "::",
+                       stringify!(padding)));
 }
 impl Clone for _libc_fpstate {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 pub type fpregset_t = *mut _libc_fpstate;
 #[repr(C)]
@@ -5377,37 +5767,44 @@ pub type fpregset_t = *mut _libc_fpstate;
 pub struct mcontext_t {
     pub gregs: gregset_t,
     pub fpregs: fpregset_t,
-    pub __reserved1: [::std::os::raw::c_ulonglong; 8usize],
+    pub __reserved1: [c_ulonglong; 8usize],
 }
 #[test]
 fn bindgen_test_layout_mcontext_t() {
-    assert_eq!(::std::mem::size_of::<mcontext_t>() , 256usize , concat ! (
-               "Size of: " , stringify ! ( mcontext_t ) ));
-    assert_eq! (::std::mem::align_of::<mcontext_t>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( mcontext_t ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const mcontext_t ) ) . gregs as * const _ as
-                usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( mcontext_t ) , "::" ,
-                stringify ! ( gregs ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const mcontext_t ) ) . fpregs as * const _ as
-                usize } , 184usize , concat ! (
-                "Alignment of field: " , stringify ! ( mcontext_t ) , "::" ,
-                stringify ! ( fpregs ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const mcontext_t ) ) . __reserved1 as * const _
-                as usize } , 192usize , concat ! (
-                "Alignment of field: " , stringify ! ( mcontext_t ) , "::" ,
-                stringify ! ( __reserved1 ) ));
+    assert_eq!(::std::mem::size_of::<mcontext_t>(),
+               256usize,
+               concat!("Size of: ", stringify!(mcontext_t)));
+    assert_eq!(::std::mem::align_of::<mcontext_t>(),
+               8usize,
+               concat!("Alignment of ", stringify!(mcontext_t)));
+    assert_eq!(unsafe { &(*(0 as *const mcontext_t)).gregs as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(mcontext_t),
+                       "::",
+                       stringify!(gregs)));
+    assert_eq!(unsafe { &(*(0 as *const mcontext_t)).fpregs as *const _ as usize },
+               184usize,
+               concat!("Alignment of field: ",
+                       stringify!(mcontext_t),
+                       "::",
+                       stringify!(fpregs)));
+    assert_eq!(unsafe { &(*(0 as *const mcontext_t)).__reserved1 as *const _ as usize },
+               192usize,
+               concat!("Alignment of field: ",
+                       stringify!(mcontext_t),
+                       "::",
+                       stringify!(__reserved1)));
 }
 impl Clone for mcontext_t {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct ucontext {
-    pub uc_flags: ::std::os::raw::c_ulong,
+    pub uc_flags: c_ulong,
     pub uc_link: *mut ucontext,
     pub uc_stack: stack_t,
     pub uc_mcontext: mcontext_t,
@@ -5416,74 +5813,81 @@ pub struct ucontext {
 }
 #[test]
 fn bindgen_test_layout_ucontext() {
-    assert_eq!(::std::mem::size_of::<ucontext>() , 936usize , concat ! (
-               "Size of: " , stringify ! ( ucontext ) ));
-    assert_eq! (::std::mem::align_of::<ucontext>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( ucontext ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const ucontext ) ) . uc_flags as * const _ as
-                usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( ucontext ) , "::" ,
-                stringify ! ( uc_flags ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const ucontext ) ) . uc_link as * const _ as
-                usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( ucontext ) , "::" ,
-                stringify ! ( uc_link ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const ucontext ) ) . uc_stack as * const _ as
-                usize } , 16usize , concat ! (
-                "Alignment of field: " , stringify ! ( ucontext ) , "::" ,
-                stringify ! ( uc_stack ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const ucontext ) ) . uc_mcontext as * const _
-                as usize } , 40usize , concat ! (
-                "Alignment of field: " , stringify ! ( ucontext ) , "::" ,
-                stringify ! ( uc_mcontext ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const ucontext ) ) . uc_sigmask as * const _ as
-                usize } , 296usize , concat ! (
-                "Alignment of field: " , stringify ! ( ucontext ) , "::" ,
-                stringify ! ( uc_sigmask ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const ucontext ) ) . __fpregs_mem as * const _
-                as usize } , 424usize , concat ! (
-                "Alignment of field: " , stringify ! ( ucontext ) , "::" ,
-                stringify ! ( __fpregs_mem ) ));
+    assert_eq!(::std::mem::size_of::<ucontext>(),
+               936usize,
+               concat!("Size of: ", stringify!(ucontext)));
+    assert_eq!(::std::mem::align_of::<ucontext>(),
+               8usize,
+               concat!("Alignment of ", stringify!(ucontext)));
+    assert_eq!(unsafe { &(*(0 as *const ucontext)).uc_flags as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(ucontext),
+                       "::",
+                       stringify!(uc_flags)));
+    assert_eq!(unsafe { &(*(0 as *const ucontext)).uc_link as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(ucontext),
+                       "::",
+                       stringify!(uc_link)));
+    assert_eq!(unsafe { &(*(0 as *const ucontext)).uc_stack as *const _ as usize },
+               16usize,
+               concat!("Alignment of field: ",
+                       stringify!(ucontext),
+                       "::",
+                       stringify!(uc_stack)));
+    assert_eq!(unsafe { &(*(0 as *const ucontext)).uc_mcontext as *const _ as usize },
+               40usize,
+               concat!("Alignment of field: ",
+                       stringify!(ucontext),
+                       "::",
+                       stringify!(uc_mcontext)));
+    assert_eq!(unsafe { &(*(0 as *const ucontext)).uc_sigmask as *const _ as usize },
+               296usize,
+               concat!("Alignment of field: ",
+                       stringify!(ucontext),
+                       "::",
+                       stringify!(uc_sigmask)));
+    assert_eq!(unsafe { &(*(0 as *const ucontext)).__fpregs_mem as *const _ as usize },
+               424usize,
+               concat!("Alignment of field: ",
+                       stringify!(ucontext),
+                       "::",
+                       stringify!(__fpregs_mem)));
 }
 impl Clone for ucontext {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 pub type ucontext_t = ucontext;
 extern "C" {
-    pub fn sigstack(__ss: *mut sigstack, __oss: *mut sigstack)
-     -> ::std::os::raw::c_int;
+    pub fn sigstack(__ss: *mut sigstack, __oss: *mut sigstack) -> c_int;
 }
 extern "C" {
-    pub fn sigaltstack(__ss: *const sigaltstack, __oss: *mut sigaltstack)
-     -> ::std::os::raw::c_int;
+    pub fn sigaltstack(__ss: *const sigaltstack, __oss: *mut sigaltstack) -> c_int;
 }
 extern "C" {
-    pub fn pthread_sigmask(__how: ::std::os::raw::c_int,
+    pub fn pthread_sigmask(__how: c_int,
                            __newmask: *const __sigset_t,
                            __oldmask: *mut __sigset_t)
-     -> ::std::os::raw::c_int;
+                           -> c_int;
 }
 extern "C" {
-    pub fn pthread_kill(__threadid: pthread_t, __signo: ::std::os::raw::c_int)
-     -> ::std::os::raw::c_int;
+    pub fn pthread_kill(__threadid: pthread_t, __signo: c_int) -> c_int;
 }
 extern "C" {
-    pub fn __libc_current_sigrtmin() -> ::std::os::raw::c_int;
+    pub fn __libc_current_sigrtmin() -> c_int;
 }
 extern "C" {
-    pub fn __libc_current_sigrtmax() -> ::std::os::raw::c_int;
+    pub fn __libc_current_sigrtmax() -> c_int;
 }
-pub type mpfr_void = ::std::os::raw::c_void;
-pub type mpfr_int = ::std::os::raw::c_int;
-pub type mpfr_uint = ::std::os::raw::c_uint;
-pub type mpfr_long = ::std::os::raw::c_long;
-pub type mpfr_ulong = ::std::os::raw::c_ulong;
+pub type mpfr_void = c_void;
+pub type mpfr_int = c_int;
+pub type mpfr_uint = c_uint;
+pub type mpfr_long = c_long;
+pub type mpfr_ulong = c_ulong;
 pub type mpfr_size_t = usize;
 #[repr(i32)]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -5496,11 +5900,11 @@ pub enum mpfr_rnd_t {
     MPFR_RNDF = 5,
     MPFR_RNDNA = -1,
 }
-pub type mpfr_prec_t = ::std::os::raw::c_long;
-pub type mpfr_uprec_t = ::std::os::raw::c_ulong;
-pub type mpfr_sign_t = ::std::os::raw::c_int;
-pub type mpfr_exp_t = ::std::os::raw::c_long;
-pub type mpfr_uexp_t = ::std::os::raw::c_ulong;
+pub type mpfr_prec_t = c_long;
+pub type mpfr_uprec_t = c_ulong;
+pub type mpfr_sign_t = c_int;
+pub type mpfr_exp_t = c_long;
+pub type mpfr_uexp_t = c_ulong;
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct __mpfr_struct {
@@ -5511,33 +5915,41 @@ pub struct __mpfr_struct {
 }
 #[test]
 fn bindgen_test_layout___mpfr_struct() {
-    assert_eq!(::std::mem::size_of::<__mpfr_struct>() , 32usize , concat ! (
-               "Size of: " , stringify ! ( __mpfr_struct ) ));
-    assert_eq! (::std::mem::align_of::<__mpfr_struct>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( __mpfr_struct ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const __mpfr_struct ) ) . _mpfr_prec as * const
-                _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( __mpfr_struct ) , "::"
-                , stringify ! ( _mpfr_prec ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const __mpfr_struct ) ) . _mpfr_sign as * const
-                _ as usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( __mpfr_struct ) , "::"
-                , stringify ! ( _mpfr_sign ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const __mpfr_struct ) ) . _mpfr_exp as * const
-                _ as usize } , 16usize , concat ! (
-                "Alignment of field: " , stringify ! ( __mpfr_struct ) , "::"
-                , stringify ! ( _mpfr_exp ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const __mpfr_struct ) ) . _mpfr_d as * const _
-                as usize } , 24usize , concat ! (
-                "Alignment of field: " , stringify ! ( __mpfr_struct ) , "::"
-                , stringify ! ( _mpfr_d ) ));
+    assert_eq!(::std::mem::size_of::<__mpfr_struct>(),
+               32usize,
+               concat!("Size of: ", stringify!(__mpfr_struct)));
+    assert_eq!(::std::mem::align_of::<__mpfr_struct>(),
+               8usize,
+               concat!("Alignment of ", stringify!(__mpfr_struct)));
+    assert_eq!(unsafe { &(*(0 as *const __mpfr_struct))._mpfr_prec as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(__mpfr_struct),
+                       "::",
+                       stringify!(_mpfr_prec)));
+    assert_eq!(unsafe { &(*(0 as *const __mpfr_struct))._mpfr_sign as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(__mpfr_struct),
+                       "::",
+                       stringify!(_mpfr_sign)));
+    assert_eq!(unsafe { &(*(0 as *const __mpfr_struct))._mpfr_exp as *const _ as usize },
+               16usize,
+               concat!("Alignment of field: ",
+                       stringify!(__mpfr_struct),
+                       "::",
+                       stringify!(_mpfr_exp)));
+    assert_eq!(unsafe { &(*(0 as *const __mpfr_struct))._mpfr_d as *const _ as usize },
+               24usize,
+               concat!("Alignment of field: ",
+                       stringify!(__mpfr_struct),
+                       "::",
+                       stringify!(_mpfr_d)));
 }
 impl Clone for __mpfr_struct {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 pub type mpfr_t = [__mpfr_struct; 1usize];
 pub type mpfr_ptr = *mut __mpfr_struct;
@@ -5551,28 +5963,28 @@ pub enum mpfr_kind_t {
     MPFR_REGULAR_KIND = 3,
 }
 extern "C" {
-    pub fn mpfr_get_version() -> *const ::std::os::raw::c_char;
+    pub fn mpfr_get_version() -> *const c_char;
 }
 extern "C" {
-    pub fn mpfr_get_patches() -> *const ::std::os::raw::c_char;
+    pub fn mpfr_get_patches() -> *const c_char;
 }
 extern "C" {
-    pub fn mpfr_buildopt_tls_p() -> ::std::os::raw::c_int;
+    pub fn mpfr_buildopt_tls_p() -> c_int;
 }
 extern "C" {
-    pub fn mpfr_buildopt_decimal_p() -> ::std::os::raw::c_int;
+    pub fn mpfr_buildopt_decimal_p() -> c_int;
 }
 extern "C" {
-    pub fn mpfr_buildopt_gmpinternals_p() -> ::std::os::raw::c_int;
+    pub fn mpfr_buildopt_gmpinternals_p() -> c_int;
 }
 extern "C" {
-    pub fn mpfr_buildopt_tune_case() -> *const ::std::os::raw::c_char;
+    pub fn mpfr_buildopt_tune_case() -> *const c_char;
 }
 extern "C" {
     pub fn mpfr_get_emin() -> mpfr_exp_t;
 }
 extern "C" {
-    pub fn mpfr_set_emin(arg1: mpfr_exp_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_set_emin(arg1: mpfr_exp_t) -> c_int;
 }
 extern "C" {
     pub fn mpfr_get_emin_min() -> mpfr_exp_t;
@@ -5584,7 +5996,7 @@ extern "C" {
     pub fn mpfr_get_emax() -> mpfr_exp_t;
 }
 extern "C" {
-    pub fn mpfr_set_emax(arg1: mpfr_exp_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_set_emax(arg1: mpfr_exp_t) -> c_int;
 }
 extern "C" {
     pub fn mpfr_get_emax_min() -> mpfr_exp_t;
@@ -5599,8 +6011,7 @@ extern "C" {
     pub fn mpfr_get_default_rounding_mode() -> mpfr_rnd_t;
 }
 extern "C" {
-    pub fn mpfr_print_rnd_mode(arg1: mpfr_rnd_t)
-     -> *const ::std::os::raw::c_char;
+    pub fn mpfr_print_rnd_mode(arg1: mpfr_rnd_t) -> *const c_char;
 }
 extern "C" {
     pub fn mpfr_clear_flags();
@@ -5642,26 +6053,25 @@ extern "C" {
     pub fn mpfr_set_erangeflag();
 }
 extern "C" {
-    pub fn mpfr_underflow_p() -> ::std::os::raw::c_int;
+    pub fn mpfr_underflow_p() -> c_int;
 }
 extern "C" {
-    pub fn mpfr_overflow_p() -> ::std::os::raw::c_int;
+    pub fn mpfr_overflow_p() -> c_int;
 }
 extern "C" {
-    pub fn mpfr_divby0_p() -> ::std::os::raw::c_int;
+    pub fn mpfr_divby0_p() -> c_int;
 }
 extern "C" {
-    pub fn mpfr_nanflag_p() -> ::std::os::raw::c_int;
+    pub fn mpfr_nanflag_p() -> c_int;
 }
 extern "C" {
-    pub fn mpfr_inexflag_p() -> ::std::os::raw::c_int;
+    pub fn mpfr_inexflag_p() -> c_int;
 }
 extern "C" {
-    pub fn mpfr_erangeflag_p() -> ::std::os::raw::c_int;
+    pub fn mpfr_erangeflag_p() -> c_int;
 }
 extern "C" {
-    pub fn mpfr_check_range(arg1: mpfr_ptr, arg2: ::std::os::raw::c_int,
-                            arg3: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_check_range(arg1: mpfr_ptr, arg2: c_int, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
     pub fn mpfr_init2(arg1: mpfr_ptr, arg2: mpfr_prec_t);
@@ -5682,13 +6092,15 @@ extern "C" {
     pub fn mpfr_clears(arg1: mpfr_ptr, ...);
 }
 extern "C" {
-    pub fn mpfr_prec_round(arg1: mpfr_ptr, arg2: mpfr_prec_t,
-                           arg3: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_prec_round(arg1: mpfr_ptr, arg2: mpfr_prec_t, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_can_round(arg1: mpfr_srcptr, arg2: mpfr_exp_t,
-                          arg3: mpfr_rnd_t, arg4: mpfr_rnd_t,
-                          arg5: mpfr_prec_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_can_round(arg1: mpfr_srcptr,
+                          arg2: mpfr_exp_t,
+                          arg3: mpfr_rnd_t,
+                          arg4: mpfr_rnd_t,
+                          arg5: mpfr_prec_t)
+                          -> c_int;
 }
 extern "C" {
     pub fn mpfr_min_prec(arg1: mpfr_srcptr) -> mpfr_prec_t;
@@ -5697,8 +6109,7 @@ extern "C" {
     pub fn mpfr_get_exp(arg1: mpfr_srcptr) -> mpfr_exp_t;
 }
 extern "C" {
-    pub fn mpfr_set_exp(arg1: mpfr_ptr, arg2: mpfr_exp_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_set_exp(arg1: mpfr_ptr, arg2: mpfr_exp_t) -> c_int;
 }
 extern "C" {
     pub fn mpfr_get_prec(arg1: mpfr_srcptr) -> mpfr_prec_t;
@@ -5716,102 +6127,100 @@ extern "C" {
     pub fn mpfr_get_default_prec() -> mpfr_prec_t;
 }
 extern "C" {
-    pub fn mpfr_set_d(arg1: mpfr_ptr, arg2: f64, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_set_d(arg1: mpfr_ptr, arg2: f64, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_set_flt(arg1: mpfr_ptr, arg2: f32, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_set_flt(arg1: mpfr_ptr, arg2: f32, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_set_ld(arg1: mpfr_ptr, arg2: f64, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_set_ld(arg1: mpfr_ptr, arg2: f64, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_set_z(arg1: mpfr_ptr, arg2: mpz_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_set_z(arg1: mpfr_ptr, arg2: mpz_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_set_z_2exp(arg1: mpfr_ptr, arg2: mpz_srcptr, arg3: mpfr_exp_t,
-                           arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_set_z_2exp(arg1: mpfr_ptr,
+                           arg2: mpz_srcptr,
+                           arg3: mpfr_exp_t,
+                           arg4: mpfr_rnd_t)
+                           -> c_int;
 }
 extern "C" {
     pub fn mpfr_set_nan(arg1: mpfr_ptr);
 }
 extern "C" {
-    pub fn mpfr_set_inf(arg1: mpfr_ptr, arg2: ::std::os::raw::c_int);
+    pub fn mpfr_set_inf(arg1: mpfr_ptr, arg2: c_int);
 }
 extern "C" {
-    pub fn mpfr_set_zero(arg1: mpfr_ptr, arg2: ::std::os::raw::c_int);
+    pub fn mpfr_set_zero(arg1: mpfr_ptr, arg2: c_int);
 }
 extern "C" {
-    pub fn mpfr_set_f(arg1: mpfr_ptr, arg2: mpf_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_set_f(arg1: mpfr_ptr, arg2: mpf_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_get_f(arg1: mpf_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_get_f(arg1: mpf_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_set_si(arg1: mpfr_ptr, arg2: ::std::os::raw::c_long,
-                       arg3: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_set_si(arg1: mpfr_ptr, arg2: c_long, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_set_ui(arg1: mpfr_ptr, arg2: ::std::os::raw::c_ulong,
-                       arg3: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_set_ui(arg1: mpfr_ptr, arg2: c_ulong, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_set_si_2exp(arg1: mpfr_ptr, arg2: ::std::os::raw::c_long,
-                            arg3: mpfr_exp_t, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_set_si_2exp(arg1: mpfr_ptr,
+                            arg2: c_long,
+                            arg3: mpfr_exp_t,
+                            arg4: mpfr_rnd_t)
+                            -> c_int;
 }
 extern "C" {
-    pub fn mpfr_set_ui_2exp(arg1: mpfr_ptr, arg2: ::std::os::raw::c_ulong,
-                            arg3: mpfr_exp_t, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_set_ui_2exp(arg1: mpfr_ptr,
+                            arg2: c_ulong,
+                            arg3: mpfr_exp_t,
+                            arg4: mpfr_rnd_t)
+                            -> c_int;
 }
 extern "C" {
-    pub fn mpfr_set_q(arg1: mpfr_ptr, arg2: mpq_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_set_q(arg1: mpfr_ptr, arg2: mpq_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_set_str(arg1: mpfr_ptr, arg2: *const ::std::os::raw::c_char,
-                        arg3: ::std::os::raw::c_int, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_set_str(arg1: mpfr_ptr,
+                        arg2: *const c_char,
+                        arg3: c_int,
+                        arg4: mpfr_rnd_t)
+                        -> c_int;
 }
 extern "C" {
     pub fn mpfr_init_set_str(arg1: mpfr_ptr,
-                             arg2: *const ::std::os::raw::c_char,
-                             arg3: ::std::os::raw::c_int, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+                             arg2: *const c_char,
+                             arg3: c_int,
+                             arg4: mpfr_rnd_t)
+                             -> c_int;
 }
 extern "C" {
-    pub fn mpfr_set4(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t,
-                     arg4: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
+    pub fn mpfr_set4(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t, arg4: c_int) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_abs(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_abs(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_set(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_set(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_neg(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_neg(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_signbit(arg1: mpfr_srcptr) -> ::std::os::raw::c_int;
+    pub fn mpfr_signbit(arg1: mpfr_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_setsign(arg1: mpfr_ptr, arg2: mpfr_srcptr,
-                        arg3: ::std::os::raw::c_int, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_setsign(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: c_int, arg4: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_copysign(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_srcptr,
-                         arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_copysign(arg1: mpfr_ptr,
+                         arg2: mpfr_srcptr,
+                         arg3: mpfr_srcptr,
+                         arg4: mpfr_rnd_t)
+                         -> c_int;
 }
 extern "C" {
     pub fn mpfr_get_z_2exp(arg1: mpz_ptr, arg2: mpfr_srcptr) -> mpfr_exp_t;
@@ -5829,51 +6238,54 @@ extern "C" {
     pub fn mpfr_get_d1(arg1: mpfr_srcptr) -> f64;
 }
 extern "C" {
-    pub fn mpfr_get_d_2exp(arg1: *mut ::std::os::raw::c_long,
-                           arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> f64;
+    pub fn mpfr_get_d_2exp(arg1: *mut c_long, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> f64;
 }
 extern "C" {
-    pub fn mpfr_get_ld_2exp(arg1: *mut ::std::os::raw::c_long,
-                            arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> f64;
+    pub fn mpfr_get_ld_2exp(arg1: *mut c_long, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> f64;
 }
 extern "C" {
-    pub fn mpfr_frexp(arg1: *mut mpfr_exp_t, arg2: mpfr_ptr,
-                      arg3: mpfr_srcptr, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_frexp(arg1: *mut mpfr_exp_t,
+                      arg2: mpfr_ptr,
+                      arg3: mpfr_srcptr,
+                      arg4: mpfr_rnd_t)
+                      -> c_int;
 }
 extern "C" {
-    pub fn mpfr_get_si(arg1: mpfr_srcptr, arg2: mpfr_rnd_t)
-     -> ::std::os::raw::c_long;
+    pub fn mpfr_get_si(arg1: mpfr_srcptr, arg2: mpfr_rnd_t) -> c_long;
 }
 extern "C" {
-    pub fn mpfr_get_ui(arg1: mpfr_srcptr, arg2: mpfr_rnd_t)
-     -> ::std::os::raw::c_ulong;
+    pub fn mpfr_get_ui(arg1: mpfr_srcptr, arg2: mpfr_rnd_t) -> c_ulong;
 }
 extern "C" {
-    pub fn mpfr_get_str(arg1: *mut ::std::os::raw::c_char,
-                        arg2: *mut mpfr_exp_t, arg3: ::std::os::raw::c_int,
-                        arg4: usize, arg5: mpfr_srcptr, arg6: mpfr_rnd_t)
-     -> *mut ::std::os::raw::c_char;
+    pub fn mpfr_get_str(arg1: *mut c_char,
+                        arg2: *mut mpfr_exp_t,
+                        arg3: c_int,
+                        arg4: usize,
+                        arg5: mpfr_srcptr,
+                        arg6: mpfr_rnd_t)
+                        -> *mut c_char;
 }
 extern "C" {
-    pub fn mpfr_get_z(z: mpz_ptr, f: mpfr_srcptr, arg1: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_get_z(z: mpz_ptr, f: mpfr_srcptr, arg1: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_free_str(arg1: *mut ::std::os::raw::c_char);
+    pub fn mpfr_free_str(arg1: *mut c_char);
 }
 extern "C" {
-    pub fn mpfr_urandom(arg1: mpfr_ptr, arg2: *mut __gmp_randstate_struct,
-                        arg3: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_urandom(arg1: mpfr_ptr,
+                        arg2: *mut __gmp_randstate_struct,
+                        arg3: mpfr_rnd_t)
+                        -> c_int;
 }
 extern "C" {
-    pub fn mpfr_grandom(arg1: mpfr_ptr, arg2: mpfr_ptr,
-                        arg3: *mut __gmp_randstate_struct, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_grandom(arg1: mpfr_ptr,
+                        arg2: mpfr_ptr,
+                        arg3: *mut __gmp_randstate_struct,
+                        arg4: mpfr_rnd_t)
+                        -> c_int;
 }
 extern "C" {
-    pub fn mpfr_urandomb(arg1: mpfr_ptr, arg2: *mut __gmp_randstate_struct)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_urandomb(arg1: mpfr_ptr, arg2: *mut __gmp_randstate_struct) -> c_int;
 }
 extern "C" {
     pub fn mpfr_nextabove(arg1: mpfr_ptr);
@@ -5885,396 +6297,377 @@ extern "C" {
     pub fn mpfr_nexttoward(arg1: mpfr_ptr, arg2: mpfr_srcptr);
 }
 extern "C" {
-    pub fn mpfr_printf(arg1: *const ::std::os::raw::c_char, ...)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_printf(arg1: *const c_char, ...) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_asprintf(arg1: *mut *mut ::std::os::raw::c_char,
-                         arg2: *const ::std::os::raw::c_char, ...)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_asprintf(arg1: *mut *mut c_char, arg2: *const c_char, ...) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_sprintf(arg1: *mut ::std::os::raw::c_char,
-                        arg2: *const ::std::os::raw::c_char, ...)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_sprintf(arg1: *mut c_char, arg2: *const c_char, ...) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_snprintf(arg1: *mut ::std::os::raw::c_char, arg2: usize,
-                         arg3: *const ::std::os::raw::c_char, ...)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_snprintf(arg1: *mut c_char, arg2: usize, arg3: *const c_char, ...) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_pow(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_srcptr,
-                    arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_pow(arg1: mpfr_ptr,
+                    arg2: mpfr_srcptr,
+                    arg3: mpfr_srcptr,
+                    arg4: mpfr_rnd_t)
+                    -> c_int;
 }
 extern "C" {
-    pub fn mpfr_pow_si(arg1: mpfr_ptr, arg2: mpfr_srcptr,
-                       arg3: ::std::os::raw::c_long, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_pow_si(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: c_long, arg4: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_pow_ui(arg1: mpfr_ptr, arg2: mpfr_srcptr,
-                       arg3: ::std::os::raw::c_ulong, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_pow_ui(arg1: mpfr_ptr,
+                       arg2: mpfr_srcptr,
+                       arg3: c_ulong,
+                       arg4: mpfr_rnd_t)
+                       -> c_int;
 }
 extern "C" {
-    pub fn mpfr_ui_pow_ui(arg1: mpfr_ptr, arg2: ::std::os::raw::c_ulong,
-                          arg3: ::std::os::raw::c_ulong, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_ui_pow_ui(arg1: mpfr_ptr, arg2: c_ulong, arg3: c_ulong, arg4: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_ui_pow(arg1: mpfr_ptr, arg2: ::std::os::raw::c_ulong,
-                       arg3: mpfr_srcptr, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_ui_pow(arg1: mpfr_ptr,
+                       arg2: c_ulong,
+                       arg3: mpfr_srcptr,
+                       arg4: mpfr_rnd_t)
+                       -> c_int;
 }
 extern "C" {
-    pub fn mpfr_pow_z(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpz_srcptr,
-                      arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_pow_z(arg1: mpfr_ptr,
+                      arg2: mpfr_srcptr,
+                      arg3: mpz_srcptr,
+                      arg4: mpfr_rnd_t)
+                      -> c_int;
 }
 extern "C" {
-    pub fn mpfr_sqrt(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_sqrt(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_sqrt_ui(arg1: mpfr_ptr, arg2: ::std::os::raw::c_ulong,
-                        arg3: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_sqrt_ui(arg1: mpfr_ptr, arg2: c_ulong, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_rec_sqrt(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_rec_sqrt(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_add(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_srcptr,
-                    arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_add(arg1: mpfr_ptr,
+                    arg2: mpfr_srcptr,
+                    arg3: mpfr_srcptr,
+                    arg4: mpfr_rnd_t)
+                    -> c_int;
 }
 extern "C" {
-    pub fn mpfr_sub(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_srcptr,
-                    arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_sub(arg1: mpfr_ptr,
+                    arg2: mpfr_srcptr,
+                    arg3: mpfr_srcptr,
+                    arg4: mpfr_rnd_t)
+                    -> c_int;
 }
 extern "C" {
-    pub fn mpfr_mul(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_srcptr,
-                    arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_mul(arg1: mpfr_ptr,
+                    arg2: mpfr_srcptr,
+                    arg3: mpfr_srcptr,
+                    arg4: mpfr_rnd_t)
+                    -> c_int;
 }
 extern "C" {
-    pub fn mpfr_div(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_srcptr,
-                    arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_div(arg1: mpfr_ptr,
+                    arg2: mpfr_srcptr,
+                    arg3: mpfr_srcptr,
+                    arg4: mpfr_rnd_t)
+                    -> c_int;
 }
 extern "C" {
-    pub fn mpfr_add_ui(arg1: mpfr_ptr, arg2: mpfr_srcptr,
-                       arg3: ::std::os::raw::c_ulong, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_add_ui(arg1: mpfr_ptr,
+                       arg2: mpfr_srcptr,
+                       arg3: c_ulong,
+                       arg4: mpfr_rnd_t)
+                       -> c_int;
 }
 extern "C" {
-    pub fn mpfr_sub_ui(arg1: mpfr_ptr, arg2: mpfr_srcptr,
-                       arg3: ::std::os::raw::c_ulong, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_sub_ui(arg1: mpfr_ptr,
+                       arg2: mpfr_srcptr,
+                       arg3: c_ulong,
+                       arg4: mpfr_rnd_t)
+                       -> c_int;
 }
 extern "C" {
-    pub fn mpfr_ui_sub(arg1: mpfr_ptr, arg2: ::std::os::raw::c_ulong,
-                       arg3: mpfr_srcptr, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_ui_sub(arg1: mpfr_ptr,
+                       arg2: c_ulong,
+                       arg3: mpfr_srcptr,
+                       arg4: mpfr_rnd_t)
+                       -> c_int;
 }
 extern "C" {
-    pub fn mpfr_mul_ui(arg1: mpfr_ptr, arg2: mpfr_srcptr,
-                       arg3: ::std::os::raw::c_ulong, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_mul_ui(arg1: mpfr_ptr,
+                       arg2: mpfr_srcptr,
+                       arg3: c_ulong,
+                       arg4: mpfr_rnd_t)
+                       -> c_int;
 }
 extern "C" {
-    pub fn mpfr_div_ui(arg1: mpfr_ptr, arg2: mpfr_srcptr,
-                       arg3: ::std::os::raw::c_ulong, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_div_ui(arg1: mpfr_ptr,
+                       arg2: mpfr_srcptr,
+                       arg3: c_ulong,
+                       arg4: mpfr_rnd_t)
+                       -> c_int;
 }
 extern "C" {
-    pub fn mpfr_ui_div(arg1: mpfr_ptr, arg2: ::std::os::raw::c_ulong,
-                       arg3: mpfr_srcptr, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_ui_div(arg1: mpfr_ptr,
+                       arg2: c_ulong,
+                       arg3: mpfr_srcptr,
+                       arg4: mpfr_rnd_t)
+                       -> c_int;
 }
 extern "C" {
-    pub fn mpfr_add_si(arg1: mpfr_ptr, arg2: mpfr_srcptr,
-                       arg3: ::std::os::raw::c_long, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_add_si(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: c_long, arg4: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_sub_si(arg1: mpfr_ptr, arg2: mpfr_srcptr,
-                       arg3: ::std::os::raw::c_long, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_sub_si(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: c_long, arg4: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_si_sub(arg1: mpfr_ptr, arg2: ::std::os::raw::c_long,
-                       arg3: mpfr_srcptr, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_si_sub(arg1: mpfr_ptr, arg2: c_long, arg3: mpfr_srcptr, arg4: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_mul_si(arg1: mpfr_ptr, arg2: mpfr_srcptr,
-                       arg3: ::std::os::raw::c_long, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_mul_si(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: c_long, arg4: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_div_si(arg1: mpfr_ptr, arg2: mpfr_srcptr,
-                       arg3: ::std::os::raw::c_long, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_div_si(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: c_long, arg4: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_si_div(arg1: mpfr_ptr, arg2: ::std::os::raw::c_long,
-                       arg3: mpfr_srcptr, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_si_div(arg1: mpfr_ptr, arg2: c_long, arg3: mpfr_srcptr, arg4: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_add_d(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: f64,
-                      arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_add_d(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: f64, arg4: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_sub_d(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: f64,
-                      arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_sub_d(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: f64, arg4: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_d_sub(arg1: mpfr_ptr, arg2: f64, arg3: mpfr_srcptr,
-                      arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_d_sub(arg1: mpfr_ptr, arg2: f64, arg3: mpfr_srcptr, arg4: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_mul_d(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: f64,
-                      arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_mul_d(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: f64, arg4: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_div_d(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: f64,
-                      arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_div_d(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: f64, arg4: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_d_div(arg1: mpfr_ptr, arg2: f64, arg3: mpfr_srcptr,
-                      arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_d_div(arg1: mpfr_ptr, arg2: f64, arg3: mpfr_srcptr, arg4: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_sqr(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_sqr(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_const_pi(arg1: mpfr_ptr, arg2: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_const_pi(arg1: mpfr_ptr, arg2: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_const_log2(arg1: mpfr_ptr, arg2: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_const_log2(arg1: mpfr_ptr, arg2: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_const_euler(arg1: mpfr_ptr, arg2: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_const_euler(arg1: mpfr_ptr, arg2: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_const_catalan(arg1: mpfr_ptr, arg2: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_const_catalan(arg1: mpfr_ptr, arg2: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_agm(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_srcptr,
-                    arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_agm(arg1: mpfr_ptr,
+                    arg2: mpfr_srcptr,
+                    arg3: mpfr_srcptr,
+                    arg4: mpfr_rnd_t)
+                    -> c_int;
 }
 extern "C" {
-    pub fn mpfr_log(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_log(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_log2(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_log2(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_log10(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_log10(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_log1p(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_log1p(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_exp(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_exp(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_exp2(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_exp2(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_exp10(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_exp10(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_expm1(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_expm1(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_eint(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_eint(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_li2(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_li2(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_cmp(arg1: mpfr_srcptr, arg2: mpfr_srcptr)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_cmp(arg1: mpfr_srcptr, arg2: mpfr_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_cmp3(arg1: mpfr_srcptr, arg2: mpfr_srcptr,
-                     arg3: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
+    pub fn mpfr_cmp3(arg1: mpfr_srcptr, arg2: mpfr_srcptr, arg3: c_int) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_cmp_d(arg1: mpfr_srcptr, arg2: f64) -> ::std::os::raw::c_int;
+    pub fn mpfr_cmp_d(arg1: mpfr_srcptr, arg2: f64) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_cmp_ld(arg1: mpfr_srcptr, arg2: f64) -> ::std::os::raw::c_int;
+    pub fn mpfr_cmp_ld(arg1: mpfr_srcptr, arg2: f64) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_cmpabs(arg1: mpfr_srcptr, arg2: mpfr_srcptr)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_cmpabs(arg1: mpfr_srcptr, arg2: mpfr_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_cmp_ui(arg1: mpfr_srcptr, arg2: ::std::os::raw::c_ulong)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_cmp_ui(arg1: mpfr_srcptr, arg2: c_ulong) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_cmp_si(arg1: mpfr_srcptr, arg2: ::std::os::raw::c_long)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_cmp_si(arg1: mpfr_srcptr, arg2: c_long) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_cmp_ui_2exp(arg1: mpfr_srcptr, arg2: ::std::os::raw::c_ulong,
-                            arg3: mpfr_exp_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_cmp_ui_2exp(arg1: mpfr_srcptr, arg2: c_ulong, arg3: mpfr_exp_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_cmp_si_2exp(arg1: mpfr_srcptr, arg2: ::std::os::raw::c_long,
-                            arg3: mpfr_exp_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_cmp_si_2exp(arg1: mpfr_srcptr, arg2: c_long, arg3: mpfr_exp_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_reldiff(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_srcptr,
-                        arg4: mpfr_rnd_t);
+    pub fn mpfr_reldiff(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_srcptr, arg4: mpfr_rnd_t);
 }
 extern "C" {
-    pub fn mpfr_eq(arg1: mpfr_srcptr, arg2: mpfr_srcptr,
-                   arg3: ::std::os::raw::c_ulong) -> ::std::os::raw::c_int;
+    pub fn mpfr_eq(arg1: mpfr_srcptr, arg2: mpfr_srcptr, arg3: c_ulong) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_sgn(arg1: mpfr_srcptr) -> ::std::os::raw::c_int;
+    pub fn mpfr_sgn(arg1: mpfr_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_mul_2exp(arg1: mpfr_ptr, arg2: mpfr_srcptr,
-                         arg3: ::std::os::raw::c_ulong, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_mul_2exp(arg1: mpfr_ptr,
+                         arg2: mpfr_srcptr,
+                         arg3: c_ulong,
+                         arg4: mpfr_rnd_t)
+                         -> c_int;
 }
 extern "C" {
-    pub fn mpfr_div_2exp(arg1: mpfr_ptr, arg2: mpfr_srcptr,
-                         arg3: ::std::os::raw::c_ulong, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_div_2exp(arg1: mpfr_ptr,
+                         arg2: mpfr_srcptr,
+                         arg3: c_ulong,
+                         arg4: mpfr_rnd_t)
+                         -> c_int;
 }
 extern "C" {
-    pub fn mpfr_mul_2ui(arg1: mpfr_ptr, arg2: mpfr_srcptr,
-                        arg3: ::std::os::raw::c_ulong, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_mul_2ui(arg1: mpfr_ptr,
+                        arg2: mpfr_srcptr,
+                        arg3: c_ulong,
+                        arg4: mpfr_rnd_t)
+                        -> c_int;
 }
 extern "C" {
-    pub fn mpfr_div_2ui(arg1: mpfr_ptr, arg2: mpfr_srcptr,
-                        arg3: ::std::os::raw::c_ulong, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_div_2ui(arg1: mpfr_ptr,
+                        arg2: mpfr_srcptr,
+                        arg3: c_ulong,
+                        arg4: mpfr_rnd_t)
+                        -> c_int;
 }
 extern "C" {
-    pub fn mpfr_mul_2si(arg1: mpfr_ptr, arg2: mpfr_srcptr,
-                        arg3: ::std::os::raw::c_long, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_mul_2si(arg1: mpfr_ptr,
+                        arg2: mpfr_srcptr,
+                        arg3: c_long,
+                        arg4: mpfr_rnd_t)
+                        -> c_int;
 }
 extern "C" {
-    pub fn mpfr_div_2si(arg1: mpfr_ptr, arg2: mpfr_srcptr,
-                        arg3: ::std::os::raw::c_long, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_div_2si(arg1: mpfr_ptr,
+                        arg2: mpfr_srcptr,
+                        arg3: c_long,
+                        arg4: mpfr_rnd_t)
+                        -> c_int;
 }
 extern "C" {
-    pub fn mpfr_rint(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_rint(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_round(arg1: mpfr_ptr, arg2: mpfr_srcptr)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_round(arg1: mpfr_ptr, arg2: mpfr_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_trunc(arg1: mpfr_ptr, arg2: mpfr_srcptr)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_trunc(arg1: mpfr_ptr, arg2: mpfr_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_ceil(arg1: mpfr_ptr, arg2: mpfr_srcptr)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_ceil(arg1: mpfr_ptr, arg2: mpfr_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_floor(arg1: mpfr_ptr, arg2: mpfr_srcptr)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_floor(arg1: mpfr_ptr, arg2: mpfr_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_rint_round(arg1: mpfr_ptr, arg2: mpfr_srcptr,
-                           arg3: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_rint_round(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_rint_trunc(arg1: mpfr_ptr, arg2: mpfr_srcptr,
-                           arg3: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_rint_trunc(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_rint_ceil(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_rint_ceil(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_rint_floor(arg1: mpfr_ptr, arg2: mpfr_srcptr,
-                           arg3: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_rint_floor(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_frac(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_frac(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_modf(arg1: mpfr_ptr, arg2: mpfr_ptr, arg3: mpfr_srcptr,
-                     arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_modf(arg1: mpfr_ptr, arg2: mpfr_ptr, arg3: mpfr_srcptr, arg4: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_remquo(arg1: mpfr_ptr, arg2: *mut ::std::os::raw::c_long,
-                       arg3: mpfr_srcptr, arg4: mpfr_srcptr, arg5: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_remquo(arg1: mpfr_ptr,
+                       arg2: *mut c_long,
+                       arg3: mpfr_srcptr,
+                       arg4: mpfr_srcptr,
+                       arg5: mpfr_rnd_t)
+                       -> c_int;
 }
 extern "C" {
-    pub fn mpfr_remainder(arg1: mpfr_ptr, arg2: mpfr_srcptr,
-                          arg3: mpfr_srcptr, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_remainder(arg1: mpfr_ptr,
+                          arg2: mpfr_srcptr,
+                          arg3: mpfr_srcptr,
+                          arg4: mpfr_rnd_t)
+                          -> c_int;
 }
 extern "C" {
-    pub fn mpfr_fmod(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_srcptr,
-                     arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_fmod(arg1: mpfr_ptr,
+                     arg2: mpfr_srcptr,
+                     arg3: mpfr_srcptr,
+                     arg4: mpfr_rnd_t)
+                     -> c_int;
 }
 extern "C" {
-    pub fn mpfr_fits_ulong_p(arg1: mpfr_srcptr, arg2: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_fits_ulong_p(arg1: mpfr_srcptr, arg2: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_fits_slong_p(arg1: mpfr_srcptr, arg2: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_fits_slong_p(arg1: mpfr_srcptr, arg2: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_fits_uint_p(arg1: mpfr_srcptr, arg2: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_fits_uint_p(arg1: mpfr_srcptr, arg2: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_fits_sint_p(arg1: mpfr_srcptr, arg2: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_fits_sint_p(arg1: mpfr_srcptr, arg2: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_fits_ushort_p(arg1: mpfr_srcptr, arg2: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_fits_ushort_p(arg1: mpfr_srcptr, arg2: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_fits_sshort_p(arg1: mpfr_srcptr, arg2: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_fits_sshort_p(arg1: mpfr_srcptr, arg2: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_fits_uintmax_p(arg1: mpfr_srcptr, arg2: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_fits_uintmax_p(arg1: mpfr_srcptr, arg2: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_fits_intmax_p(arg1: mpfr_srcptr, arg2: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_fits_intmax_p(arg1: mpfr_srcptr, arg2: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_extract(arg1: mpz_ptr, arg2: mpfr_srcptr,
-                        arg3: ::std::os::raw::c_uint);
+    pub fn mpfr_extract(arg1: mpz_ptr, arg2: mpfr_srcptr, arg3: c_uint);
 }
 extern "C" {
     pub fn mpfr_swap(arg1: mpfr_ptr, arg2: mpfr_ptr);
@@ -6283,399 +6676,408 @@ extern "C" {
     pub fn mpfr_dump(arg1: mpfr_srcptr);
 }
 extern "C" {
-    pub fn mpfr_nan_p(arg1: mpfr_srcptr) -> ::std::os::raw::c_int;
+    pub fn mpfr_nan_p(arg1: mpfr_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_inf_p(arg1: mpfr_srcptr) -> ::std::os::raw::c_int;
+    pub fn mpfr_inf_p(arg1: mpfr_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_number_p(arg1: mpfr_srcptr) -> ::std::os::raw::c_int;
+    pub fn mpfr_number_p(arg1: mpfr_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_integer_p(arg1: mpfr_srcptr) -> ::std::os::raw::c_int;
+    pub fn mpfr_integer_p(arg1: mpfr_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_zero_p(arg1: mpfr_srcptr) -> ::std::os::raw::c_int;
+    pub fn mpfr_zero_p(arg1: mpfr_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_regular_p(arg1: mpfr_srcptr) -> ::std::os::raw::c_int;
+    pub fn mpfr_regular_p(arg1: mpfr_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_greater_p(arg1: mpfr_srcptr, arg2: mpfr_srcptr)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_greater_p(arg1: mpfr_srcptr, arg2: mpfr_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_greaterequal_p(arg1: mpfr_srcptr, arg2: mpfr_srcptr)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_greaterequal_p(arg1: mpfr_srcptr, arg2: mpfr_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_less_p(arg1: mpfr_srcptr, arg2: mpfr_srcptr)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_less_p(arg1: mpfr_srcptr, arg2: mpfr_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_lessequal_p(arg1: mpfr_srcptr, arg2: mpfr_srcptr)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_lessequal_p(arg1: mpfr_srcptr, arg2: mpfr_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_lessgreater_p(arg1: mpfr_srcptr, arg2: mpfr_srcptr)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_lessgreater_p(arg1: mpfr_srcptr, arg2: mpfr_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_equal_p(arg1: mpfr_srcptr, arg2: mpfr_srcptr)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_equal_p(arg1: mpfr_srcptr, arg2: mpfr_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_unordered_p(arg1: mpfr_srcptr, arg2: mpfr_srcptr)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_unordered_p(arg1: mpfr_srcptr, arg2: mpfr_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_atanh(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_atanh(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_acosh(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_acosh(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_asinh(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_asinh(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_cosh(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_cosh(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_sinh(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_sinh(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_tanh(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_tanh(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_sinh_cosh(arg1: mpfr_ptr, arg2: mpfr_ptr, arg3: mpfr_srcptr,
-                          arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_sinh_cosh(arg1: mpfr_ptr,
+                          arg2: mpfr_ptr,
+                          arg3: mpfr_srcptr,
+                          arg4: mpfr_rnd_t)
+                          -> c_int;
 }
 extern "C" {
-    pub fn mpfr_sech(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_sech(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_csch(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_csch(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_coth(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_coth(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_acos(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_acos(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_asin(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_asin(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_atan(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_atan(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_sin(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_sin(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_sin_cos(arg1: mpfr_ptr, arg2: mpfr_ptr, arg3: mpfr_srcptr,
-                        arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_sin_cos(arg1: mpfr_ptr,
+                        arg2: mpfr_ptr,
+                        arg3: mpfr_srcptr,
+                        arg4: mpfr_rnd_t)
+                        -> c_int;
 }
 extern "C" {
-    pub fn mpfr_cos(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_cos(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_tan(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_tan(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_atan2(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_srcptr,
-                      arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_atan2(arg1: mpfr_ptr,
+                      arg2: mpfr_srcptr,
+                      arg3: mpfr_srcptr,
+                      arg4: mpfr_rnd_t)
+                      -> c_int;
 }
 extern "C" {
-    pub fn mpfr_sec(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_sec(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_csc(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_csc(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_cot(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_cot(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_hypot(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_srcptr,
-                      arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_hypot(arg1: mpfr_ptr,
+                      arg2: mpfr_srcptr,
+                      arg3: mpfr_srcptr,
+                      arg4: mpfr_rnd_t)
+                      -> c_int;
 }
 extern "C" {
-    pub fn mpfr_erf(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_erf(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_erfc(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_erfc(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_cbrt(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_cbrt(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_root(arg1: mpfr_ptr, arg2: mpfr_srcptr,
-                     arg3: ::std::os::raw::c_ulong, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_root(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: c_ulong, arg4: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_gamma(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_gamma(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_lngamma(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_lngamma(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_lgamma(arg1: mpfr_ptr, arg2: *mut ::std::os::raw::c_int,
-                       arg3: mpfr_srcptr, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_lgamma(arg1: mpfr_ptr,
+                       arg2: *mut c_int,
+                       arg3: mpfr_srcptr,
+                       arg4: mpfr_rnd_t)
+                       -> c_int;
 }
 extern "C" {
-    pub fn mpfr_digamma(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_digamma(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_zeta(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_zeta(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_zeta_ui(arg1: mpfr_ptr, arg2: ::std::os::raw::c_ulong,
-                        arg3: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_zeta_ui(arg1: mpfr_ptr, arg2: c_ulong, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_fac_ui(arg1: mpfr_ptr, arg2: ::std::os::raw::c_ulong,
-                       arg3: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_fac_ui(arg1: mpfr_ptr, arg2: c_ulong, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_j0(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_j0(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_j1(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_j1(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_jn(arg1: mpfr_ptr, arg2: ::std::os::raw::c_long,
-                   arg3: mpfr_srcptr, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_jn(arg1: mpfr_ptr, arg2: c_long, arg3: mpfr_srcptr, arg4: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_y0(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_y0(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_y1(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_y1(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_yn(arg1: mpfr_ptr, arg2: ::std::os::raw::c_long,
-                   arg3: mpfr_srcptr, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_yn(arg1: mpfr_ptr, arg2: c_long, arg3: mpfr_srcptr, arg4: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_ai(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_ai(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_min(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_srcptr,
-                    arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_min(arg1: mpfr_ptr,
+                    arg2: mpfr_srcptr,
+                    arg3: mpfr_srcptr,
+                    arg4: mpfr_rnd_t)
+                    -> c_int;
 }
 extern "C" {
-    pub fn mpfr_max(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_srcptr,
-                    arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_max(arg1: mpfr_ptr,
+                    arg2: mpfr_srcptr,
+                    arg3: mpfr_srcptr,
+                    arg4: mpfr_rnd_t)
+                    -> c_int;
 }
 extern "C" {
-    pub fn mpfr_dim(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_srcptr,
-                    arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_dim(arg1: mpfr_ptr,
+                    arg2: mpfr_srcptr,
+                    arg3: mpfr_srcptr,
+                    arg4: mpfr_rnd_t)
+                    -> c_int;
 }
 extern "C" {
-    pub fn mpfr_mul_z(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpz_srcptr,
-                      arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_mul_z(arg1: mpfr_ptr,
+                      arg2: mpfr_srcptr,
+                      arg3: mpz_srcptr,
+                      arg4: mpfr_rnd_t)
+                      -> c_int;
 }
 extern "C" {
-    pub fn mpfr_div_z(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpz_srcptr,
-                      arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_div_z(arg1: mpfr_ptr,
+                      arg2: mpfr_srcptr,
+                      arg3: mpz_srcptr,
+                      arg4: mpfr_rnd_t)
+                      -> c_int;
 }
 extern "C" {
-    pub fn mpfr_add_z(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpz_srcptr,
-                      arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_add_z(arg1: mpfr_ptr,
+                      arg2: mpfr_srcptr,
+                      arg3: mpz_srcptr,
+                      arg4: mpfr_rnd_t)
+                      -> c_int;
 }
 extern "C" {
-    pub fn mpfr_sub_z(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpz_srcptr,
-                      arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_sub_z(arg1: mpfr_ptr,
+                      arg2: mpfr_srcptr,
+                      arg3: mpz_srcptr,
+                      arg4: mpfr_rnd_t)
+                      -> c_int;
 }
 extern "C" {
-    pub fn mpfr_z_sub(arg1: mpfr_ptr, arg2: mpz_srcptr, arg3: mpfr_srcptr,
-                      arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_z_sub(arg1: mpfr_ptr,
+                      arg2: mpz_srcptr,
+                      arg3: mpfr_srcptr,
+                      arg4: mpfr_rnd_t)
+                      -> c_int;
 }
 extern "C" {
-    pub fn mpfr_cmp_z(arg1: mpfr_srcptr, arg2: mpz_srcptr)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_cmp_z(arg1: mpfr_srcptr, arg2: mpz_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_mul_q(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpq_srcptr,
-                      arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_mul_q(arg1: mpfr_ptr,
+                      arg2: mpfr_srcptr,
+                      arg3: mpq_srcptr,
+                      arg4: mpfr_rnd_t)
+                      -> c_int;
 }
 extern "C" {
-    pub fn mpfr_div_q(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpq_srcptr,
-                      arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_div_q(arg1: mpfr_ptr,
+                      arg2: mpfr_srcptr,
+                      arg3: mpq_srcptr,
+                      arg4: mpfr_rnd_t)
+                      -> c_int;
 }
 extern "C" {
-    pub fn mpfr_add_q(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpq_srcptr,
-                      arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_add_q(arg1: mpfr_ptr,
+                      arg2: mpfr_srcptr,
+                      arg3: mpq_srcptr,
+                      arg4: mpfr_rnd_t)
+                      -> c_int;
 }
 extern "C" {
-    pub fn mpfr_sub_q(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpq_srcptr,
-                      arg4: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_sub_q(arg1: mpfr_ptr,
+                      arg2: mpfr_srcptr,
+                      arg3: mpq_srcptr,
+                      arg4: mpfr_rnd_t)
+                      -> c_int;
 }
 extern "C" {
-    pub fn mpfr_cmp_q(arg1: mpfr_srcptr, arg2: mpq_srcptr)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_cmp_q(arg1: mpfr_srcptr, arg2: mpq_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_cmp_f(arg1: mpfr_srcptr, arg2: mpf_srcptr)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_cmp_f(arg1: mpfr_srcptr, arg2: mpf_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_fma(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_srcptr,
-                    arg4: mpfr_srcptr, arg5: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_fma(arg1: mpfr_ptr,
+                    arg2: mpfr_srcptr,
+                    arg3: mpfr_srcptr,
+                    arg4: mpfr_srcptr,
+                    arg5: mpfr_rnd_t)
+                    -> c_int;
 }
 extern "C" {
-    pub fn mpfr_fms(arg1: mpfr_ptr, arg2: mpfr_srcptr, arg3: mpfr_srcptr,
-                    arg4: mpfr_srcptr, arg5: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_fms(arg1: mpfr_ptr,
+                    arg2: mpfr_srcptr,
+                    arg3: mpfr_srcptr,
+                    arg4: mpfr_srcptr,
+                    arg5: mpfr_rnd_t)
+                    -> c_int;
 }
 extern "C" {
-    pub fn mpfr_sum(arg1: mpfr_ptr, arg2: *const mpfr_ptr,
-                    arg3: ::std::os::raw::c_ulong, arg4: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_sum(arg1: mpfr_ptr,
+                    arg2: *const mpfr_ptr,
+                    arg3: c_ulong,
+                    arg4: mpfr_rnd_t)
+                    -> c_int;
 }
 extern "C" {
     pub fn mpfr_free_cache();
 }
 extern "C" {
-    pub fn mpfr_subnormalize(arg1: mpfr_ptr, arg2: ::std::os::raw::c_int,
-                             arg3: mpfr_rnd_t) -> ::std::os::raw::c_int;
+    pub fn mpfr_subnormalize(arg1: mpfr_ptr, arg2: c_int, arg3: mpfr_rnd_t) -> c_int;
 }
 extern "C" {
-    pub fn mpfr_strtofr(arg1: mpfr_ptr, arg2: *const ::std::os::raw::c_char,
-                        arg3: *mut *mut ::std::os::raw::c_char,
-                        arg4: ::std::os::raw::c_int, arg5: mpfr_rnd_t)
-     -> ::std::os::raw::c_int;
+    pub fn mpfr_strtofr(arg1: mpfr_ptr,
+                        arg2: *const c_char,
+                        arg3: *mut *mut c_char,
+                        arg4: c_int,
+                        arg5: mpfr_rnd_t)
+                        -> c_int;
 }
 extern "C" {
     pub fn mpfr_custom_get_size(arg1: mpfr_prec_t) -> usize;
 }
 extern "C" {
-    pub fn mpfr_custom_init(arg1: *mut ::std::os::raw::c_void,
-                            arg2: mpfr_prec_t);
+    pub fn mpfr_custom_init(arg1: *mut c_void, arg2: mpfr_prec_t);
 }
 extern "C" {
-    pub fn mpfr_custom_get_significand(arg1: mpfr_srcptr)
-     -> *mut ::std::os::raw::c_void;
+    pub fn mpfr_custom_get_significand(arg1: mpfr_srcptr) -> *mut c_void;
 }
 extern "C" {
     pub fn mpfr_custom_get_exp(arg1: mpfr_srcptr) -> mpfr_exp_t;
 }
 extern "C" {
-    pub fn mpfr_custom_move(arg1: mpfr_ptr,
-                            arg2: *mut ::std::os::raw::c_void);
+    pub fn mpfr_custom_move(arg1: mpfr_ptr, arg2: *mut c_void);
 }
 extern "C" {
-    pub fn mpfr_custom_init_set(arg1: mpfr_ptr, arg2: ::std::os::raw::c_int,
-                                arg3: mpfr_exp_t, arg4: mpfr_prec_t,
-                                arg5: *mut ::std::os::raw::c_void);
+    pub fn mpfr_custom_init_set(arg1: mpfr_ptr,
+                                arg2: c_int,
+                                arg3: mpfr_exp_t,
+                                arg4: mpfr_prec_t,
+                                arg5: *mut c_void);
 }
 extern "C" {
-    pub fn mpfr_custom_get_kind(arg1: mpfr_srcptr) -> ::std::os::raw::c_int;
+    pub fn mpfr_custom_get_kind(arg1: mpfr_srcptr) -> c_int;
 }
 extern "C" {
-    pub fn __gmpfr_inp_str(arg1: mpfr_ptr, arg2: *mut FILE,
-                           arg3: ::std::os::raw::c_int, arg4: mpfr_rnd_t)
-     -> usize;
+    pub fn __gmpfr_inp_str(arg1: mpfr_ptr,
+                           arg2: *mut FILE,
+                           arg3: c_int,
+                           arg4: mpfr_rnd_t)
+                           -> usize;
 }
 extern "C" {
-    pub fn __gmpfr_out_str(arg1: *mut FILE, arg2: ::std::os::raw::c_int,
-                           arg3: usize, arg4: mpfr_srcptr, arg5: mpfr_rnd_t)
-     -> usize;
+    pub fn __gmpfr_out_str(arg1: *mut FILE,
+                           arg2: c_int,
+                           arg3: usize,
+                           arg4: mpfr_srcptr,
+                           arg5: mpfr_rnd_t)
+                           -> usize;
 }
 extern "C" {
-    pub fn __gmpfr_fprintf(arg1: *mut FILE,
-                           arg2: *const ::std::os::raw::c_char, ...)
-     -> ::std::os::raw::c_int;
+    pub fn __gmpfr_fprintf(arg1: *mut FILE, arg2: *const c_char, ...) -> c_int;
 }
 extern "C" {
-    pub fn __gmpfr_vprintf(arg1: *const ::std::os::raw::c_char,
-                           arg2: *mut __va_list_tag) -> ::std::os::raw::c_int;
+    pub fn __gmpfr_vprintf(arg1: *const c_char, arg2: *mut __va_list_tag) -> c_int;
 }
 extern "C" {
-    pub fn __gmpfr_vasprintf(arg1: *mut *mut ::std::os::raw::c_char,
-                             arg2: *const ::std::os::raw::c_char,
+    pub fn __gmpfr_vasprintf(arg1: *mut *mut c_char,
+                             arg2: *const c_char,
                              arg3: *mut __va_list_tag)
-     -> ::std::os::raw::c_int;
+                             -> c_int;
 }
 extern "C" {
-    pub fn __gmpfr_vsprintf(arg1: *mut ::std::os::raw::c_char,
-                            arg2: *const ::std::os::raw::c_char,
+    pub fn __gmpfr_vsprintf(arg1: *mut c_char,
+                            arg2: *const c_char,
                             arg3: *mut __va_list_tag)
-     -> ::std::os::raw::c_int;
+                            -> c_int;
 }
 extern "C" {
-    pub fn __gmpfr_vsnprintf(arg1: *mut ::std::os::raw::c_char, arg2: usize,
-                             arg3: *const ::std::os::raw::c_char,
+    pub fn __gmpfr_vsnprintf(arg1: *mut c_char,
+                             arg2: usize,
+                             arg3: *const c_char,
                              arg4: *mut __va_list_tag)
-     -> ::std::os::raw::c_int;
+                             -> c_int;
 }
 extern "C" {
     pub fn __gmpfr_vfprintf(arg1: *mut FILE,
-                            arg2: *const ::std::os::raw::c_char,
+                            arg2: *const c_char,
                             arg3: *mut __va_list_tag)
-     -> ::std::os::raw::c_int;
+                            -> c_int;
 }
 extern "C" {
     #[link_name = "rec_word_tab"]
-    pub static mut rec_word_tab: [::std::os::raw::c_int; 256usize];
+    pub static mut rec_word_tab: [c_int; 256usize];
 }
 extern "C" {
     #[link_name = "version"]
-    pub static mut version: [::std::os::raw::c_char; 0usize];
+    pub static mut version: [c_char; 0usize];
 }
 extern "C" {
-    pub fn flint_malloc(size: usize) -> *mut ::std::os::raw::c_void;
+    pub fn flint_malloc(size: usize) -> *mut c_void;
 }
 extern "C" {
-    pub fn flint_realloc(ptr: *mut ::std::os::raw::c_void, size: usize)
-     -> *mut ::std::os::raw::c_void;
+    pub fn flint_realloc(ptr: *mut c_void, size: usize) -> *mut c_void;
 }
 extern "C" {
-    pub fn flint_calloc(num: usize, size: usize)
-     -> *mut ::std::os::raw::c_void;
+    pub fn flint_calloc(num: usize, size: usize) -> *mut c_void;
 }
 extern "C" {
-    pub fn flint_free(ptr: *mut ::std::os::raw::c_void);
+    pub fn flint_free(ptr: *mut c_void);
 }
-pub type flint_cleanup_function_t =
-    ::std::option::Option<unsafe extern "C" fn()>;
+pub type flint_cleanup_function_t = ::std::option::Option<unsafe extern "C" fn()>;
 extern "C" {
-    pub fn flint_register_cleanup_function(cleanup_function:
-                                               flint_cleanup_function_t);
+    pub fn flint_register_cleanup_function(cleanup_function: flint_cleanup_function_t);
 }
 extern "C" {
     pub fn flint_cleanup();
@@ -6685,119 +7087,114 @@ extern "C" {
                                             ::std::option::Option<unsafe extern "C" fn(arg1:
                                                                                            usize)
                                                                       ->
-                                                                          *mut ::std::os::raw::c_void>,
+                                                                          *mut c_void>,
                                         calloc_func:
                                             ::std::option::Option<unsafe extern "C" fn(arg1:
                                                                                            usize,
                                                                                        arg2:
                                                                                            usize)
                                                                       ->
-                                                                          *mut ::std::os::raw::c_void>,
+                                                                          *mut c_void>,
                                         realloc_func:
                                             ::std::option::Option<unsafe extern "C" fn(arg1:
-                                                                                           *mut ::std::os::raw::c_void,
+                                                                                           *mut c_void,
                                                                                        arg2:
                                                                                            usize)
                                                                       ->
-                                                                          *mut ::std::os::raw::c_void>,
+                                                                          *mut c_void>,
                                         free_func:
                                             ::std::option::Option<unsafe extern "C" fn(arg1:
-                                                                                           *mut ::std::os::raw::c_void)>);
+*mut c_void)>);
 }
 extern "C" {
     pub fn flint_abort();
 }
 extern "C" {
-    pub fn flint_set_abort(func:
-                               ::std::option::Option<unsafe extern "C" fn()>);
+    pub fn flint_set_abort(func: ::std::option::Option<unsafe extern "C" fn()>);
 }
 extern "C" {
-    pub fn flint_get_num_threads() -> ::std::os::raw::c_int;
+    pub fn flint_get_num_threads() -> c_int;
 }
 extern "C" {
-    pub fn flint_set_num_threads(num_threads: ::std::os::raw::c_int);
+    pub fn flint_set_num_threads(num_threads: c_int);
 }
 extern "C" {
     pub fn flint_parallel_cleanup();
 }
 extern "C" {
-    pub fn flint_test_multiplier() -> ::std::os::raw::c_int;
+    pub fn flint_test_multiplier() -> c_int;
 }
 #[repr(C)]
 #[derive(Copy)]
 pub struct flint_rand_s {
     pub gmp_state: gmp_randstate_t,
-    pub gmp_init: ::std::os::raw::c_int,
+    pub gmp_init: c_int,
     pub __randval: mp_limb_t,
     pub __randval2: mp_limb_t,
 }
 #[test]
 fn bindgen_test_layout_flint_rand_s() {
-    assert_eq!(::std::mem::size_of::<flint_rand_s>() , 56usize , concat ! (
-               "Size of: " , stringify ! ( flint_rand_s ) ));
-    assert_eq! (::std::mem::align_of::<flint_rand_s>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( flint_rand_s ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const flint_rand_s ) ) . gmp_state as * const _
-                as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( flint_rand_s ) , "::" ,
-                stringify ! ( gmp_state ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const flint_rand_s ) ) . gmp_init as * const _
-                as usize } , 32usize , concat ! (
-                "Alignment of field: " , stringify ! ( flint_rand_s ) , "::" ,
-                stringify ! ( gmp_init ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const flint_rand_s ) ) . __randval as * const _
-                as usize } , 40usize , concat ! (
-                "Alignment of field: " , stringify ! ( flint_rand_s ) , "::" ,
-                stringify ! ( __randval ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const flint_rand_s ) ) . __randval2 as * const
-                _ as usize } , 48usize , concat ! (
-                "Alignment of field: " , stringify ! ( flint_rand_s ) , "::" ,
-                stringify ! ( __randval2 ) ));
+    assert_eq!(::std::mem::size_of::<flint_rand_s>(),
+               56usize,
+               concat!("Size of: ", stringify!(flint_rand_s)));
+    assert_eq!(::std::mem::align_of::<flint_rand_s>(),
+               8usize,
+               concat!("Alignment of ", stringify!(flint_rand_s)));
+    assert_eq!(unsafe { &(*(0 as *const flint_rand_s)).gmp_state as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(flint_rand_s),
+                       "::",
+                       stringify!(gmp_state)));
+    assert_eq!(unsafe { &(*(0 as *const flint_rand_s)).gmp_init as *const _ as usize },
+               32usize,
+               concat!("Alignment of field: ",
+                       stringify!(flint_rand_s),
+                       "::",
+                       stringify!(gmp_init)));
+    assert_eq!(unsafe { &(*(0 as *const flint_rand_s)).__randval as *const _ as usize },
+               40usize,
+               concat!("Alignment of field: ",
+                       stringify!(flint_rand_s),
+                       "::",
+                       stringify!(__randval)));
+    assert_eq!(unsafe { &(*(0 as *const flint_rand_s)).__randval2 as *const _ as usize },
+               48usize,
+               concat!("Alignment of field: ",
+                       stringify!(flint_rand_s),
+                       "::",
+                       stringify!(__randval2)));
 }
 impl Clone for flint_rand_s {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 pub type flint_rand_t = [flint_rand_s; 1usize];
 pub type mpfr = __mpfr_struct;
 extern "C" {
-    pub fn parse_fmt(floating: *mut ::std::os::raw::c_int,
-                     fmt: *const ::std::os::raw::c_char)
-     -> ::std::os::raw::c_int;
+    pub fn parse_fmt(floating: *mut c_int, fmt: *const c_char) -> c_int;
 }
 extern "C" {
-    pub fn flint_printf(str: *const ::std::os::raw::c_char, ...)
-     -> ::std::os::raw::c_int;
+    pub fn flint_printf(str: *const c_char, ...) -> c_int;
 }
 extern "C" {
-    pub fn flint_vprintf(str: *const ::std::os::raw::c_char,
-                         ap: *mut __va_list_tag) -> ::std::os::raw::c_int;
+    pub fn flint_vprintf(str: *const c_char, ap: *mut __va_list_tag) -> c_int;
 }
 extern "C" {
-    pub fn flint_fprintf(f: *mut FILE,
-                         str: *const ::std::os::raw::c_char, ...)
-     -> ::std::os::raw::c_int;
+    pub fn flint_fprintf(f: *mut FILE, str: *const c_char, ...) -> c_int;
 }
 extern "C" {
-    pub fn flint_sprintf(s: *mut ::std::os::raw::c_char,
-                         str: *const ::std::os::raw::c_char, ...)
-     -> ::std::os::raw::c_int;
+    pub fn flint_sprintf(s: *mut c_char, str: *const c_char, ...) -> c_int;
 }
 extern "C" {
-    pub fn flint_scanf(str: *const ::std::os::raw::c_char, ...)
-     -> ::std::os::raw::c_int;
+    pub fn flint_scanf(str: *const c_char, ...) -> c_int;
 }
 extern "C" {
-    pub fn flint_fscanf(f: *mut FILE, str: *const ::std::os::raw::c_char, ...)
-     -> ::std::os::raw::c_int;
+    pub fn flint_fscanf(f: *mut FILE, str: *const c_char, ...) -> c_int;
 }
 extern "C" {
-    pub fn flint_sscanf(s: *const ::std::os::raw::c_char,
-                        str: *const ::std::os::raw::c_char, ...)
-     -> ::std::os::raw::c_int;
+    pub fn flint_sscanf(s: *const c_char, str: *const c_char, ...) -> c_int;
 }
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -6810,8 +7207,7 @@ pub enum flint_err_t {
     FLINT_INEXACT = 5,
 }
 extern "C" {
-    pub fn flint_throw(exc: flint_err_t,
-                       msg: *const ::std::os::raw::c_char, ...);
+    pub fn flint_throw(exc: flint_err_t, msg: *const c_char, ...);
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
@@ -6821,118 +7217,143 @@ pub struct pair_s {
 }
 #[test]
 fn bindgen_test_layout_pair_s() {
-    assert_eq!(::std::mem::size_of::<pair_s>() , 16usize , concat ! (
-               "Size of: " , stringify ! ( pair_s ) ));
-    assert_eq! (::std::mem::align_of::<pair_s>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( pair_s ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pair_s ) ) . x as * const _ as usize } ,
-                0usize , concat ! (
-                "Alignment of field: " , stringify ! ( pair_s ) , "::" ,
-                stringify ! ( x ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const pair_s ) ) . y as * const _ as usize } ,
-                8usize , concat ! (
-                "Alignment of field: " , stringify ! ( pair_s ) , "::" ,
-                stringify ! ( y ) ));
+    assert_eq!(::std::mem::size_of::<pair_s>(),
+               16usize,
+               concat!("Size of: ", stringify!(pair_s)));
+    assert_eq!(::std::mem::align_of::<pair_s>(),
+               8usize,
+               concat!("Alignment of ", stringify!(pair_s)));
+    assert_eq!(unsafe { &(*(0 as *const pair_s)).x as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(pair_s),
+                       "::",
+                       stringify!(x)));
+    assert_eq!(unsafe { &(*(0 as *const pair_s)).y as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(pair_s),
+                       "::",
+                       stringify!(y)));
 }
 impl Clone for pair_s {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 pub type n_pair_t = pair_s;
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct n_factor_t {
-    pub num: ::std::os::raw::c_int,
-    pub exp: [::std::os::raw::c_int; 15usize],
+    pub num: c_int,
+    pub exp: [c_int; 15usize],
     pub p: [mp_limb_t; 15usize],
 }
 #[test]
 fn bindgen_test_layout_n_factor_t() {
-    assert_eq!(::std::mem::size_of::<n_factor_t>() , 184usize , concat ! (
-               "Size of: " , stringify ! ( n_factor_t ) ));
-    assert_eq! (::std::mem::align_of::<n_factor_t>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( n_factor_t ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const n_factor_t ) ) . num as * const _ as
-                usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( n_factor_t ) , "::" ,
-                stringify ! ( num ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const n_factor_t ) ) . exp as * const _ as
-                usize } , 4usize , concat ! (
-                "Alignment of field: " , stringify ! ( n_factor_t ) , "::" ,
-                stringify ! ( exp ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const n_factor_t ) ) . p as * const _ as usize
-                } , 64usize , concat ! (
-                "Alignment of field: " , stringify ! ( n_factor_t ) , "::" ,
-                stringify ! ( p ) ));
+    assert_eq!(::std::mem::size_of::<n_factor_t>(),
+               184usize,
+               concat!("Size of: ", stringify!(n_factor_t)));
+    assert_eq!(::std::mem::align_of::<n_factor_t>(),
+               8usize,
+               concat!("Alignment of ", stringify!(n_factor_t)));
+    assert_eq!(unsafe { &(*(0 as *const n_factor_t)).num as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(n_factor_t),
+                       "::",
+                       stringify!(num)));
+    assert_eq!(unsafe { &(*(0 as *const n_factor_t)).exp as *const _ as usize },
+               4usize,
+               concat!("Alignment of field: ",
+                       stringify!(n_factor_t),
+                       "::",
+                       stringify!(exp)));
+    assert_eq!(unsafe { &(*(0 as *const n_factor_t)).p as *const _ as usize },
+               64usize,
+               concat!("Alignment of field: ",
+                       stringify!(n_factor_t),
+                       "::",
+                       stringify!(p)));
 }
 impl Clone for n_factor_t {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct n_primes_struct {
     pub small_i: mp_limb_signed_t,
     pub small_num: mp_limb_signed_t,
-    pub small_primes: *mut ::std::os::raw::c_uint,
+    pub small_primes: *mut c_uint,
     pub sieve_a: mp_limb_t,
     pub sieve_b: mp_limb_t,
     pub sieve_i: mp_limb_signed_t,
     pub sieve_num: mp_limb_signed_t,
-    pub sieve: *mut ::std::os::raw::c_char,
+    pub sieve: *mut c_char,
 }
 #[test]
 fn bindgen_test_layout_n_primes_struct() {
-    assert_eq!(::std::mem::size_of::<n_primes_struct>() , 64usize , concat ! (
-               "Size of: " , stringify ! ( n_primes_struct ) ));
-    assert_eq! (::std::mem::align_of::<n_primes_struct>() , 8usize , concat !
-                ( "Alignment of " , stringify ! ( n_primes_struct ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const n_primes_struct ) ) . small_i as * const
-                _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( n_primes_struct ) ,
-                "::" , stringify ! ( small_i ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const n_primes_struct ) ) . small_num as *
-                const _ as usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( n_primes_struct ) ,
-                "::" , stringify ! ( small_num ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const n_primes_struct ) ) . small_primes as *
-                const _ as usize } , 16usize , concat ! (
-                "Alignment of field: " , stringify ! ( n_primes_struct ) ,
-                "::" , stringify ! ( small_primes ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const n_primes_struct ) ) . sieve_a as * const
-                _ as usize } , 24usize , concat ! (
-                "Alignment of field: " , stringify ! ( n_primes_struct ) ,
-                "::" , stringify ! ( sieve_a ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const n_primes_struct ) ) . sieve_b as * const
-                _ as usize } , 32usize , concat ! (
-                "Alignment of field: " , stringify ! ( n_primes_struct ) ,
-                "::" , stringify ! ( sieve_b ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const n_primes_struct ) ) . sieve_i as * const
-                _ as usize } , 40usize , concat ! (
-                "Alignment of field: " , stringify ! ( n_primes_struct ) ,
-                "::" , stringify ! ( sieve_i ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const n_primes_struct ) ) . sieve_num as *
-                const _ as usize } , 48usize , concat ! (
-                "Alignment of field: " , stringify ! ( n_primes_struct ) ,
-                "::" , stringify ! ( sieve_num ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const n_primes_struct ) ) . sieve as * const _
-                as usize } , 56usize , concat ! (
-                "Alignment of field: " , stringify ! ( n_primes_struct ) ,
-                "::" , stringify ! ( sieve ) ));
+    assert_eq!(::std::mem::size_of::<n_primes_struct>(),
+               64usize,
+               concat!("Size of: ", stringify!(n_primes_struct)));
+    assert_eq!(::std::mem::align_of::<n_primes_struct>(),
+               8usize,
+               concat!("Alignment of ", stringify!(n_primes_struct)));
+    assert_eq!(unsafe { &(*(0 as *const n_primes_struct)).small_i as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(n_primes_struct),
+                       "::",
+                       stringify!(small_i)));
+    assert_eq!(unsafe { &(*(0 as *const n_primes_struct)).small_num as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(n_primes_struct),
+                       "::",
+                       stringify!(small_num)));
+    assert_eq!(unsafe { &(*(0 as *const n_primes_struct)).small_primes as *const _ as usize },
+               16usize,
+               concat!("Alignment of field: ",
+                       stringify!(n_primes_struct),
+                       "::",
+                       stringify!(small_primes)));
+    assert_eq!(unsafe { &(*(0 as *const n_primes_struct)).sieve_a as *const _ as usize },
+               24usize,
+               concat!("Alignment of field: ",
+                       stringify!(n_primes_struct),
+                       "::",
+                       stringify!(sieve_a)));
+    assert_eq!(unsafe { &(*(0 as *const n_primes_struct)).sieve_b as *const _ as usize },
+               32usize,
+               concat!("Alignment of field: ",
+                       stringify!(n_primes_struct),
+                       "::",
+                       stringify!(sieve_b)));
+    assert_eq!(unsafe { &(*(0 as *const n_primes_struct)).sieve_i as *const _ as usize },
+               40usize,
+               concat!("Alignment of field: ",
+                       stringify!(n_primes_struct),
+                       "::",
+                       stringify!(sieve_i)));
+    assert_eq!(unsafe { &(*(0 as *const n_primes_struct)).sieve_num as *const _ as usize },
+               48usize,
+               concat!("Alignment of field: ",
+                       stringify!(n_primes_struct),
+                       "::",
+                       stringify!(sieve_num)));
+    assert_eq!(unsafe { &(*(0 as *const n_primes_struct)).sieve as *const _ as usize },
+               56usize,
+               concat!("Alignment of field: ",
+                       stringify!(n_primes_struct),
+                       "::",
+                       stringify!(sieve)));
 }
 impl Clone for n_primes_struct {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 pub type n_primes_t = [n_primes_struct; 1usize];
 extern "C" {
@@ -6942,19 +7363,17 @@ extern "C" {
     pub fn n_primes_clear(iter: *mut n_primes_struct);
 }
 extern "C" {
-    pub fn n_primes_extend_small(iter: *mut n_primes_struct,
-                                 bound: mp_limb_t);
+    pub fn n_primes_extend_small(iter: *mut n_primes_struct, bound: mp_limb_t);
 }
 extern "C" {
-    pub fn n_primes_sieve_range(iter: *mut n_primes_struct, a: mp_limb_t,
-                                b: mp_limb_t);
+    pub fn n_primes_sieve_range(iter: *mut n_primes_struct, a: mp_limb_t, b: mp_limb_t);
 }
 extern "C" {
     pub fn n_primes_jump_after(iter: *mut n_primes_struct, n: mp_limb_t);
 }
 extern "C" {
     #[link_name = "flint_primes_small"]
-    pub static mut flint_primes_small: [::std::os::raw::c_uint; 0usize];
+    pub static mut flint_primes_small: [c_uint; 0usize];
 }
 extern "C" {
     #[link_name = "_flint_primes"]
@@ -6966,7 +7385,7 @@ extern "C" {
 }
 extern "C" {
     #[link_name = "_flint_primes_used"]
-    pub static mut _flint_primes_used: ::std::os::raw::c_int;
+    pub static mut _flint_primes_used: c_int;
 }
 extern "C" {
     pub fn n_compute_primes(num_primes: mp_limb_t);
@@ -6987,12 +7406,10 @@ extern "C" {
     pub fn n_randint(state: *mut flint_rand_s, limit: mp_limb_t) -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_randbits(state: *mut flint_rand_s, bits: ::std::os::raw::c_uint)
-     -> mp_limb_t;
+    pub fn n_randbits(state: *mut flint_rand_s, bits: c_uint) -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_randtest_bits(state: *mut flint_rand_s,
-                           bits: ::std::os::raw::c_int) -> mp_limb_t;
+    pub fn n_randtest_bits(state: *mut flint_rand_s, bits: c_int) -> mp_limb_t;
 }
 extern "C" {
     pub fn n_randtest(state: *mut flint_rand_s) -> mp_limb_t;
@@ -7001,12 +7418,10 @@ extern "C" {
     pub fn n_randtest_not_zero(state: *mut flint_rand_s) -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_randprime(state: *mut flint_rand_s, bits: mp_limb_t,
-                       proved: ::std::os::raw::c_int) -> mp_limb_t;
+    pub fn n_randprime(state: *mut flint_rand_s, bits: mp_limb_t, proved: c_int) -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_randtest_prime(state: *mut flint_rand_s,
-                            proved: ::std::os::raw::c_int) -> mp_limb_t;
+    pub fn n_randtest_prime(state: *mut flint_rand_s, proved: c_int) -> mp_limb_t;
 }
 extern "C" {
     pub fn n_pow(n: mp_limb_t, exp: mp_limb_t) -> mp_limb_t;
@@ -7024,94 +7439,122 @@ extern "C" {
     pub fn n_mod2_precomp(a: mp_limb_t, n: mp_limb_t, ninv: f64) -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_divrem2_precomp(q: *mut mp_limb_t, a: mp_limb_t, n: mp_limb_t,
-                             npre: f64) -> mp_limb_t;
+    pub fn n_divrem2_precomp(q: *mut mp_limb_t,
+                             a: mp_limb_t,
+                             n: mp_limb_t,
+                             npre: f64)
+                             -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_divrem2_preinv(q: *mut mp_limb_t, a: mp_limb_t, n: mp_limb_t,
-                            ninv: mp_limb_t) -> mp_limb_t;
+    pub fn n_divrem2_preinv(q: *mut mp_limb_t,
+                            a: mp_limb_t,
+                            n: mp_limb_t,
+                            ninv: mp_limb_t)
+                            -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_div2_preinv(a: mp_limb_t, n: mp_limb_t, ninv: mp_limb_t)
-     -> mp_limb_t;
+    pub fn n_div2_preinv(a: mp_limb_t, n: mp_limb_t, ninv: mp_limb_t) -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_mod2_preinv(a: mp_limb_t, n: mp_limb_t, ninv: mp_limb_t)
-     -> mp_limb_t;
+    pub fn n_mod2_preinv(a: mp_limb_t, n: mp_limb_t, ninv: mp_limb_t) -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_ll_mod_preinv(a_hi: mp_limb_t, a_lo: mp_limb_t, n: mp_limb_t,
-                           ninv: mp_limb_t) -> mp_limb_t;
+    pub fn n_ll_mod_preinv(a_hi: mp_limb_t,
+                           a_lo: mp_limb_t,
+                           n: mp_limb_t,
+                           ninv: mp_limb_t)
+                           -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_lll_mod_preinv(a_hi: mp_limb_t, a_mi: mp_limb_t, a_lo: mp_limb_t,
-                            n: mp_limb_t, ninv: mp_limb_t) -> mp_limb_t;
+    pub fn n_lll_mod_preinv(a_hi: mp_limb_t,
+                            a_mi: mp_limb_t,
+                            a_lo: mp_limb_t,
+                            n: mp_limb_t,
+                            ninv: mp_limb_t)
+                            -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_mulmod_precomp(a: mp_limb_t, b: mp_limb_t, n: mp_limb_t,
-                            ninv: f64) -> mp_limb_t;
+    pub fn n_mulmod_precomp(a: mp_limb_t, b: mp_limb_t, n: mp_limb_t, ninv: f64) -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_mulmod_preinv(a: mp_limb_t, b: mp_limb_t, n: mp_limb_t,
-                           ninv: mp_limb_t, norm: mp_limb_t) -> mp_limb_t;
+    pub fn n_mulmod_preinv(a: mp_limb_t,
+                           b: mp_limb_t,
+                           n: mp_limb_t,
+                           ninv: mp_limb_t,
+                           norm: mp_limb_t)
+                           -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_powmod_ui_precomp(a: mp_limb_t, exp: mp_limb_t, n: mp_limb_t,
-                               npre: f64) -> mp_limb_t;
+    pub fn n_powmod_ui_precomp(a: mp_limb_t, exp: mp_limb_t, n: mp_limb_t, npre: f64) -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_powmod_precomp(a: mp_limb_t, exp: mp_limb_signed_t, n: mp_limb_t,
-                            npre: f64) -> mp_limb_t;
+    pub fn n_powmod_precomp(a: mp_limb_t,
+                            exp: mp_limb_signed_t,
+                            n: mp_limb_t,
+                            npre: f64)
+                            -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_powmod2_preinv(a: mp_limb_t, exp: mp_limb_signed_t, n: mp_limb_t,
-                            ninv: mp_limb_t) -> mp_limb_t;
+    pub fn n_powmod2_preinv(a: mp_limb_t,
+                            exp: mp_limb_signed_t,
+                            n: mp_limb_t,
+                            ninv: mp_limb_t)
+                            -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_powmod2_ui_preinv(a: mp_limb_t, exp: mp_limb_t, n: mp_limb_t,
-                               ninv: mp_limb_t) -> mp_limb_t;
+    pub fn n_powmod2_ui_preinv(a: mp_limb_t,
+                               exp: mp_limb_t,
+                               n: mp_limb_t,
+                               ninv: mp_limb_t)
+                               -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_powmod_ui_preinv(a: mp_limb_t, exp: mp_limb_t, n: mp_limb_t,
-                              ninv: mp_limb_t, norm: mp_limb_t) -> mp_limb_t;
+    pub fn n_powmod_ui_preinv(a: mp_limb_t,
+                              exp: mp_limb_t,
+                              n: mp_limb_t,
+                              ninv: mp_limb_t,
+                              norm: mp_limb_t)
+                              -> mp_limb_t;
 }
 extern "C" {
     pub fn n_sqrtmod(a: mp_limb_t, p: mp_limb_t) -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_sqrtmod_2pow(sqrt: *mut *mut mp_limb_t, a: mp_limb_t,
-                          exp: mp_limb_signed_t) -> mp_limb_signed_t;
+    pub fn n_sqrtmod_2pow(sqrt: *mut *mut mp_limb_t,
+                          a: mp_limb_t,
+                          exp: mp_limb_signed_t)
+                          -> mp_limb_signed_t;
 }
 extern "C" {
-    pub fn n_sqrtmod_primepow(sqrt: *mut *mut mp_limb_t, a: mp_limb_t,
-                              p: mp_limb_t, exp: mp_limb_signed_t)
-     -> mp_limb_signed_t;
+    pub fn n_sqrtmod_primepow(sqrt: *mut *mut mp_limb_t,
+                              a: mp_limb_t,
+                              p: mp_limb_t,
+                              exp: mp_limb_signed_t)
+                              -> mp_limb_signed_t;
 }
 extern "C" {
-    pub fn n_sqrtmodn(sqrt: *mut *mut mp_limb_t, a: mp_limb_t,
-                      fac: *mut n_factor_t) -> mp_limb_signed_t;
+    pub fn n_sqrtmodn(sqrt: *mut *mut mp_limb_t,
+                      a: mp_limb_t,
+                      fac: *mut n_factor_t)
+                      -> mp_limb_signed_t;
 }
 extern "C" {
     pub fn n_gcd(x: mp_limb_t, y: mp_limb_t) -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_xgcd(a: *mut mp_limb_t, b: *mut mp_limb_t, x: mp_limb_t,
-                  y: mp_limb_t) -> mp_limb_t;
+    pub fn n_xgcd(a: *mut mp_limb_t, b: *mut mp_limb_t, x: mp_limb_t, y: mp_limb_t) -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_gcdinv(a: *mut mp_limb_t, x: mp_limb_t, y: mp_limb_t)
-     -> mp_limb_t;
+    pub fn n_gcdinv(a: *mut mp_limb_t, x: mp_limb_t, y: mp_limb_t) -> mp_limb_t;
 }
 extern "C" {
     pub fn n_revbin(in_: mp_limb_t, bits: mp_limb_t) -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_jacobi(x: mp_limb_signed_t, y: mp_limb_t)
-     -> ::std::os::raw::c_int;
+    pub fn n_jacobi(x: mp_limb_signed_t, y: mp_limb_t) -> c_int;
 }
 extern "C" {
-    pub fn n_jacobi_unsigned(x: mp_limb_t, y: mp_limb_t)
-     -> ::std::os::raw::c_int;
+    pub fn n_jacobi_unsigned(x: mp_limb_t, y: mp_limb_t) -> c_int;
 }
 extern "C" {
     pub fn n_sqrt(a: mp_limb_t) -> mp_limb_t;
@@ -7120,7 +7563,7 @@ extern "C" {
     pub fn n_sqrtrem(r: *mut mp_limb_t, a: mp_limb_t) -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_is_square(x: mp_limb_t) -> ::std::os::raw::c_int;
+    pub fn n_is_square(x: mp_limb_t) -> c_int;
 }
 extern "C" {
     pub fn n_cbrt_estimate(a: f64) -> f64;
@@ -7141,97 +7584,103 @@ extern "C" {
     pub fn n_cbrtrem(remainder: *mut mp_limb_t, n: mp_limb_t) -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_is_perfect_power235(n: mp_limb_t) -> ::std::os::raw::c_int;
+    pub fn n_is_perfect_power235(n: mp_limb_t) -> c_int;
 }
 extern "C" {
-    pub fn n_is_perfect_power(root: *mut mp_limb_t, n: mp_limb_t)
-     -> ::std::os::raw::c_int;
+    pub fn n_is_perfect_power(root: *mut mp_limb_t, n: mp_limb_t) -> c_int;
 }
 extern "C" {
-    pub fn n_is_oddprime_small(n: mp_limb_t) -> ::std::os::raw::c_int;
+    pub fn n_is_oddprime_small(n: mp_limb_t) -> c_int;
 }
 extern "C" {
-    pub fn n_is_oddprime_binary(n: mp_limb_t) -> ::std::os::raw::c_int;
+    pub fn n_is_oddprime_binary(n: mp_limb_t) -> c_int;
 }
 extern "C" {
-    pub fn n_is_probabprime_fermat(n: mp_limb_t, i: mp_limb_t)
-     -> ::std::os::raw::c_int;
+    pub fn n_is_probabprime_fermat(n: mp_limb_t, i: mp_limb_t) -> c_int;
 }
 extern "C" {
-    pub fn n_is_probabprime_fibonacci(n: mp_limb_t) -> ::std::os::raw::c_int;
+    pub fn n_is_probabprime_fibonacci(n: mp_limb_t) -> c_int;
 }
 extern "C" {
-    pub fn n_is_probabprime_lucas(n: mp_limb_t) -> ::std::os::raw::c_int;
+    pub fn n_is_probabprime_lucas(n: mp_limb_t) -> c_int;
 }
 extern "C" {
-    pub fn n_is_probabprime_BPSW(n: mp_limb_t) -> ::std::os::raw::c_int;
+    pub fn n_is_probabprime_BPSW(n: mp_limb_t) -> c_int;
 }
 extern "C" {
-    pub fn n_is_strong_probabprime_precomp(n: mp_limb_t, npre: f64,
-                                           a: mp_limb_t, d: mp_limb_t)
-     -> ::std::os::raw::c_int;
+    pub fn n_is_strong_probabprime_precomp(n: mp_limb_t,
+                                           npre: f64,
+                                           a: mp_limb_t,
+                                           d: mp_limb_t)
+                                           -> c_int;
 }
 extern "C" {
-    pub fn n_is_strong_probabprime2_preinv(n: mp_limb_t, ninv: mp_limb_t,
-                                           a: mp_limb_t, d: mp_limb_t)
-     -> ::std::os::raw::c_int;
+    pub fn n_is_strong_probabprime2_preinv(n: mp_limb_t,
+                                           ninv: mp_limb_t,
+                                           a: mp_limb_t,
+                                           d: mp_limb_t)
+                                           -> c_int;
 }
 extern "C" {
-    pub fn n_is_probabprime(n: mp_limb_t) -> ::std::os::raw::c_int;
+    pub fn n_is_probabprime(n: mp_limb_t) -> c_int;
 }
 extern "C" {
-    pub fn n_is_prime_pseudosquare(n: mp_limb_t) -> ::std::os::raw::c_int;
+    pub fn n_is_prime_pseudosquare(n: mp_limb_t) -> c_int;
 }
 extern "C" {
-    pub fn n_is_prime_pocklington(n: mp_limb_t, iterations: mp_limb_t)
-     -> ::std::os::raw::c_int;
+    pub fn n_is_prime_pocklington(n: mp_limb_t, iterations: mp_limb_t) -> c_int;
 }
 extern "C" {
-    pub fn n_is_prime(n: mp_limb_t) -> ::std::os::raw::c_int;
+    pub fn n_is_prime(n: mp_limb_t) -> c_int;
 }
 extern "C" {
     pub fn n_nth_prime(n: mp_limb_t) -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_nth_prime_bounds(lo: *mut mp_limb_t, hi: *mut mp_limb_t,
-                              n: mp_limb_t);
+    pub fn n_nth_prime_bounds(lo: *mut mp_limb_t, hi: *mut mp_limb_t, n: mp_limb_t);
 }
 extern "C" {
     pub fn n_prime_pi(n: mp_limb_t) -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_prime_pi_bounds(lo: *mut mp_limb_t, hi: *mut mp_limb_t,
-                             n: mp_limb_t);
+    pub fn n_prime_pi_bounds(lo: *mut mp_limb_t, hi: *mut mp_limb_t, n: mp_limb_t);
 }
 extern "C" {
-    pub fn n_remove(n: *mut mp_limb_t, p: mp_limb_t) -> ::std::os::raw::c_int;
+    pub fn n_remove(n: *mut mp_limb_t, p: mp_limb_t) -> c_int;
 }
 extern "C" {
-    pub fn n_remove2_precomp(n: *mut mp_limb_t, p: mp_limb_t, ppre: f64)
-     -> ::std::os::raw::c_int;
+    pub fn n_remove2_precomp(n: *mut mp_limb_t, p: mp_limb_t, ppre: f64) -> c_int;
 }
 extern "C" {
-    pub fn n_factor_insert(factors: *mut n_factor_t, p: mp_limb_t,
-                           exp: mp_limb_t);
+    pub fn n_factor_insert(factors: *mut n_factor_t, p: mp_limb_t, exp: mp_limb_t);
 }
 extern "C" {
-    pub fn n_factor_trial_range(factors: *mut n_factor_t, n: mp_limb_t,
-                                start: mp_limb_t, num_primes: mp_limb_t)
-     -> mp_limb_t;
+    pub fn n_factor_trial_range(factors: *mut n_factor_t,
+                                n: mp_limb_t,
+                                start: mp_limb_t,
+                                num_primes: mp_limb_t)
+                                -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_factor_trial_partial(factors: *mut n_factor_t, n: mp_limb_t,
-                                  prod: *mut mp_limb_t, num_primes: mp_limb_t,
-                                  limit: mp_limb_t) -> mp_limb_t;
+    pub fn n_factor_trial_partial(factors: *mut n_factor_t,
+                                  n: mp_limb_t,
+                                  prod: *mut mp_limb_t,
+                                  num_primes: mp_limb_t,
+                                  limit: mp_limb_t)
+                                  -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_factor_trial(factors: *mut n_factor_t, n: mp_limb_t,
-                          num_primes: mp_limb_t) -> mp_limb_t;
+    pub fn n_factor_trial(factors: *mut n_factor_t,
+                          n: mp_limb_t,
+                          num_primes: mp_limb_t)
+                          -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_factor_partial(factors: *mut n_factor_t, n: mp_limb_t,
-                            limit: mp_limb_t, proved: ::std::os::raw::c_int)
-     -> mp_limb_t;
+    pub fn n_factor_partial(factors: *mut n_factor_t,
+                            n: mp_limb_t,
+                            limit: mp_limb_t,
+                            proved: c_int)
+                            -> mp_limb_t;
 }
 extern "C" {
     pub fn n_factor_power235(exp: *mut mp_limb_t, n: mp_limb_t) -> mp_limb_t;
@@ -7246,72 +7695,67 @@ extern "C" {
     pub fn n_factor_SQUFOF(n: mp_limb_t, iters: mp_limb_t) -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_factor(factors: *mut n_factor_t, n: mp_limb_t,
-                    proved: ::std::os::raw::c_int);
+    pub fn n_factor(factors: *mut n_factor_t, n: mp_limb_t, proved: c_int);
 }
 extern "C" {
-    pub fn n_factor_pp1(n: mp_limb_t, B1: mp_limb_t, c: mp_limb_t)
-     -> mp_limb_t;
+    pub fn n_factor_pp1(n: mp_limb_t, B1: mp_limb_t, c: mp_limb_t) -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_factor_pollard_brent_single(factor: *mut mp_limb_t, n: mp_limb_t,
-                                         ninv: mp_limb_t, ai: mp_limb_t,
-                                         xi: mp_limb_t, normbits: mp_limb_t,
+    pub fn n_factor_pollard_brent_single(factor: *mut mp_limb_t,
+                                         n: mp_limb_t,
+                                         ninv: mp_limb_t,
+                                         ai: mp_limb_t,
+                                         xi: mp_limb_t,
+                                         normbits: mp_limb_t,
                                          max_iters: mp_limb_t)
-     -> ::std::os::raw::c_int;
+                                         -> c_int;
 }
 extern "C" {
     pub fn n_factor_pollard_brent(factor: *mut mp_limb_t,
-                                  state: *mut flint_rand_s, n_in: mp_limb_t,
-                                  max_tries: mp_limb_t, max_iters: mp_limb_t)
-     -> ::std::os::raw::c_int;
+                                  state: *mut flint_rand_s,
+                                  n_in: mp_limb_t,
+                                  max_tries: mp_limb_t,
+                                  max_iters: mp_limb_t)
+                                  -> c_int;
 }
 extern "C" {
-    pub fn n_is_squarefree(n: mp_limb_t) -> ::std::os::raw::c_int;
+    pub fn n_is_squarefree(n: mp_limb_t) -> c_int;
 }
 extern "C" {
-    pub fn n_moebius_mu(n: mp_limb_t) -> ::std::os::raw::c_int;
+    pub fn n_moebius_mu(n: mp_limb_t) -> c_int;
 }
 extern "C" {
-    pub fn n_moebius_mu_vec(mu: *mut ::std::os::raw::c_int, len: mp_limb_t);
+    pub fn n_moebius_mu_vec(mu: *mut c_int, len: mp_limb_t);
 }
 extern "C" {
     pub fn n_euler_phi(n: mp_limb_t) -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_sizeinbase(n: mp_limb_t, base: ::std::os::raw::c_int)
-     -> ::std::os::raw::c_int;
+    pub fn n_sizeinbase(n: mp_limb_t, base: c_int) -> c_int;
 }
 extern "C" {
-    pub fn n_nextprime(n: mp_limb_t, proved: ::std::os::raw::c_int)
-     -> mp_limb_t;
+    pub fn n_nextprime(n: mp_limb_t, proved: c_int) -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_factorial_mod2_preinv(n: mp_limb_t, p: mp_limb_t,
-                                   pinv: mp_limb_t) -> mp_limb_t;
+    pub fn n_factorial_mod2_preinv(n: mp_limb_t, p: mp_limb_t, pinv: mp_limb_t) -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_factorial_fast_mod2_preinv(n: mp_limb_t, p: mp_limb_t,
-                                        pinv: mp_limb_t) -> mp_limb_t;
+    pub fn n_factorial_fast_mod2_preinv(n: mp_limb_t, p: mp_limb_t, pinv: mp_limb_t) -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_primitive_root_prime_prefactor(p: mp_limb_t,
-                                            factors: *mut n_factor_t)
-     -> mp_limb_t;
+    pub fn n_primitive_root_prime_prefactor(p: mp_limb_t, factors: *mut n_factor_t) -> mp_limb_t;
 }
 extern "C" {
     pub fn n_primitive_root_prime(p: mp_limb_t) -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_discrete_log_bsgs(b: mp_limb_t, a: mp_limb_t, n: mp_limb_t)
-     -> mp_limb_t;
+    pub fn n_discrete_log_bsgs(b: mp_limb_t, a: mp_limb_t, n: mp_limb_t) -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_root_estimate(a: f64, n: ::std::os::raw::c_int) -> mp_limb_t;
+    pub fn n_root_estimate(a: f64, n: c_int) -> mp_limb_t;
 }
 extern "C" {
-    pub fn n_rootrem(remainder: *mut mp_limb_t, n: mp_limb_t, root: mp_limb_t)
-     -> mp_limb_t;
+    pub fn n_rootrem(remainder: *mut mp_limb_t, n: mp_limb_t, root: mp_limb_t) -> mp_limb_t;
 }
 extern "C" {
     pub fn n_root(n: mp_limb_t, root: mp_limb_t) -> mp_limb_t;
@@ -7326,100 +7770,134 @@ pub struct n_ecm_s {
     pub ninv: mp_limb_t,
     pub normbits: mp_limb_t,
     pub one: mp_limb_t,
-    pub GCD_table: *mut ::std::os::raw::c_uchar,
-    pub prime_table: *mut *mut ::std::os::raw::c_uchar,
+    pub GCD_table: *mut c_uchar,
+    pub prime_table: *mut *mut c_uchar,
 }
 #[test]
 fn bindgen_test_layout_n_ecm_s() {
-    assert_eq!(::std::mem::size_of::<n_ecm_s>() , 64usize , concat ! (
-               "Size of: " , stringify ! ( n_ecm_s ) ));
-    assert_eq! (::std::mem::align_of::<n_ecm_s>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( n_ecm_s ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const n_ecm_s ) ) . x as * const _ as usize } ,
-                0usize , concat ! (
-                "Alignment of field: " , stringify ! ( n_ecm_s ) , "::" ,
-                stringify ! ( x ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const n_ecm_s ) ) . z as * const _ as usize } ,
-                8usize , concat ! (
-                "Alignment of field: " , stringify ! ( n_ecm_s ) , "::" ,
-                stringify ! ( z ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const n_ecm_s ) ) . a24 as * const _ as usize }
-                , 16usize , concat ! (
-                "Alignment of field: " , stringify ! ( n_ecm_s ) , "::" ,
-                stringify ! ( a24 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const n_ecm_s ) ) . ninv as * const _ as usize
-                } , 24usize , concat ! (
-                "Alignment of field: " , stringify ! ( n_ecm_s ) , "::" ,
-                stringify ! ( ninv ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const n_ecm_s ) ) . normbits as * const _ as
-                usize } , 32usize , concat ! (
-                "Alignment of field: " , stringify ! ( n_ecm_s ) , "::" ,
-                stringify ! ( normbits ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const n_ecm_s ) ) . one as * const _ as usize }
-                , 40usize , concat ! (
-                "Alignment of field: " , stringify ! ( n_ecm_s ) , "::" ,
-                stringify ! ( one ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const n_ecm_s ) ) . GCD_table as * const _ as
-                usize } , 48usize , concat ! (
-                "Alignment of field: " , stringify ! ( n_ecm_s ) , "::" ,
-                stringify ! ( GCD_table ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const n_ecm_s ) ) . prime_table as * const _ as
-                usize } , 56usize , concat ! (
-                "Alignment of field: " , stringify ! ( n_ecm_s ) , "::" ,
-                stringify ! ( prime_table ) ));
+    assert_eq!(::std::mem::size_of::<n_ecm_s>(),
+               64usize,
+               concat!("Size of: ", stringify!(n_ecm_s)));
+    assert_eq!(::std::mem::align_of::<n_ecm_s>(),
+               8usize,
+               concat!("Alignment of ", stringify!(n_ecm_s)));
+    assert_eq!(unsafe { &(*(0 as *const n_ecm_s)).x as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(n_ecm_s),
+                       "::",
+                       stringify!(x)));
+    assert_eq!(unsafe { &(*(0 as *const n_ecm_s)).z as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(n_ecm_s),
+                       "::",
+                       stringify!(z)));
+    assert_eq!(unsafe { &(*(0 as *const n_ecm_s)).a24 as *const _ as usize },
+               16usize,
+               concat!("Alignment of field: ",
+                       stringify!(n_ecm_s),
+                       "::",
+                       stringify!(a24)));
+    assert_eq!(unsafe { &(*(0 as *const n_ecm_s)).ninv as *const _ as usize },
+               24usize,
+               concat!("Alignment of field: ",
+                       stringify!(n_ecm_s),
+                       "::",
+                       stringify!(ninv)));
+    assert_eq!(unsafe { &(*(0 as *const n_ecm_s)).normbits as *const _ as usize },
+               32usize,
+               concat!("Alignment of field: ",
+                       stringify!(n_ecm_s),
+                       "::",
+                       stringify!(normbits)));
+    assert_eq!(unsafe { &(*(0 as *const n_ecm_s)).one as *const _ as usize },
+               40usize,
+               concat!("Alignment of field: ",
+                       stringify!(n_ecm_s),
+                       "::",
+                       stringify!(one)));
+    assert_eq!(unsafe { &(*(0 as *const n_ecm_s)).GCD_table as *const _ as usize },
+               48usize,
+               concat!("Alignment of field: ",
+                       stringify!(n_ecm_s),
+                       "::",
+                       stringify!(GCD_table)));
+    assert_eq!(unsafe { &(*(0 as *const n_ecm_s)).prime_table as *const _ as usize },
+               56usize,
+               concat!("Alignment of field: ",
+                       stringify!(n_ecm_s),
+                       "::",
+                       stringify!(prime_table)));
 }
 impl Clone for n_ecm_s {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 pub type n_ecm_t = [n_ecm_s; 1usize];
 extern "C" {
-    pub fn n_factor_ecm_double(x: *mut mp_limb_t, z: *mut mp_limb_t,
-                               x0: mp_limb_t, z0: mp_limb_t, n: mp_limb_t,
+    pub fn n_factor_ecm_double(x: *mut mp_limb_t,
+                               z: *mut mp_limb_t,
+                               x0: mp_limb_t,
+                               z0: mp_limb_t,
+                               n: mp_limb_t,
                                n_ecm_inf: *mut n_ecm_s);
 }
 extern "C" {
-    pub fn n_factor_ecm_add(x: *mut mp_limb_t, z: *mut mp_limb_t,
-                            x1: mp_limb_t, z1: mp_limb_t, x2: mp_limb_t,
-                            z2: mp_limb_t, x0: mp_limb_t, z0: mp_limb_t,
-                            n: mp_limb_t, n_ecm_inf: *mut n_ecm_s);
+    pub fn n_factor_ecm_add(x: *mut mp_limb_t,
+                            z: *mut mp_limb_t,
+                            x1: mp_limb_t,
+                            z1: mp_limb_t,
+                            x2: mp_limb_t,
+                            z2: mp_limb_t,
+                            x0: mp_limb_t,
+                            z0: mp_limb_t,
+                            n: mp_limb_t,
+                            n_ecm_inf: *mut n_ecm_s);
 }
 extern "C" {
     pub fn n_factor_ecm_mul_montgomery_ladder(x: *mut mp_limb_t,
                                               z: *mut mp_limb_t,
-                                              x0: mp_limb_t, z0: mp_limb_t,
-                                              k: mp_limb_t, n: mp_limb_t,
+                                              x0: mp_limb_t,
+                                              z0: mp_limb_t,
+                                              k: mp_limb_t,
+                                              n: mp_limb_t,
                                               n_ecm_inf: *mut n_ecm_s);
 }
 extern "C" {
-    pub fn n_factor_ecm_select_curve(f: *mut mp_limb_t, sig: mp_limb_t,
-                                     n: mp_limb_t, n_ecm_inf: *mut n_ecm_s)
-     -> ::std::os::raw::c_int;
+    pub fn n_factor_ecm_select_curve(f: *mut mp_limb_t,
+                                     sig: mp_limb_t,
+                                     n: mp_limb_t,
+                                     n_ecm_inf: *mut n_ecm_s)
+                                     -> c_int;
 }
 extern "C" {
     pub fn n_factor_ecm_stage_I(f: *mut mp_limb_t,
-                                prime_array: *const mp_limb_t, num: mp_limb_t,
-                                B1: mp_limb_t, n: mp_limb_t,
+                                prime_array: *const mp_limb_t,
+                                num: mp_limb_t,
+                                B1: mp_limb_t,
+                                n: mp_limb_t,
                                 n_ecm_inf: *mut n_ecm_s)
-     -> ::std::os::raw::c_int;
+                                -> c_int;
 }
 extern "C" {
-    pub fn n_factor_ecm_stage_II(f: *mut mp_limb_t, B1: mp_limb_t,
-                                 B2: mp_limb_t, P: mp_limb_t, n: mp_limb_t,
+    pub fn n_factor_ecm_stage_II(f: *mut mp_limb_t,
+                                 B1: mp_limb_t,
+                                 B2: mp_limb_t,
+                                 P: mp_limb_t,
+                                 n: mp_limb_t,
                                  n_ecm_inf: *mut n_ecm_s)
-     -> ::std::os::raw::c_int;
+                                 -> c_int;
 }
 extern "C" {
-    pub fn n_factor_ecm(f: *mut mp_limb_t, curves: mp_limb_t, B1: mp_limb_t,
-                        B2: mp_limb_t, state: *mut flint_rand_s, n: mp_limb_t)
-     -> ::std::os::raw::c_int;
+    pub fn n_factor_ecm(f: *mut mp_limb_t,
+                        curves: mp_limb_t,
+                        B1: mp_limb_t,
+                        B2: mp_limb_t,
+                        state: *mut flint_rand_s,
+                        n: mp_limb_t)
+                        -> c_int;
 }
 extern "C" {
     pub fn n_mulmod_precomp_shoup(w: mp_limb_t, p: mp_limb_t) -> mp_limb_t;
@@ -7433,82 +7911,105 @@ pub struct nmod_t {
 }
 #[test]
 fn bindgen_test_layout_nmod_t() {
-    assert_eq!(::std::mem::size_of::<nmod_t>() , 24usize , concat ! (
-               "Size of: " , stringify ! ( nmod_t ) ));
-    assert_eq! (::std::mem::align_of::<nmod_t>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( nmod_t ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const nmod_t ) ) . n as * const _ as usize } ,
-                0usize , concat ! (
-                "Alignment of field: " , stringify ! ( nmod_t ) , "::" ,
-                stringify ! ( n ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const nmod_t ) ) . ninv as * const _ as usize }
-                , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( nmod_t ) , "::" ,
-                stringify ! ( ninv ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const nmod_t ) ) . norm as * const _ as usize }
-                , 16usize , concat ! (
-                "Alignment of field: " , stringify ! ( nmod_t ) , "::" ,
-                stringify ! ( norm ) ));
+    assert_eq!(::std::mem::size_of::<nmod_t>(),
+               24usize,
+               concat!("Size of: ", stringify!(nmod_t)));
+    assert_eq!(::std::mem::align_of::<nmod_t>(),
+               8usize,
+               concat!("Alignment of ", stringify!(nmod_t)));
+    assert_eq!(unsafe { &(*(0 as *const nmod_t)).n as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(nmod_t),
+                       "::",
+                       stringify!(n)));
+    assert_eq!(unsafe { &(*(0 as *const nmod_t)).ninv as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(nmod_t),
+                       "::",
+                       stringify!(ninv)));
+    assert_eq!(unsafe { &(*(0 as *const nmod_t)).norm as *const _ as usize },
+               16usize,
+               concat!("Alignment of field: ",
+                       stringify!(nmod_t),
+                       "::",
+                       stringify!(norm)));
 }
 impl Clone for nmod_t {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 extern "C" {
-    pub fn _nmod_vec_randtest(vec: mp_ptr, state: *mut flint_rand_s,
-                              len: mp_limb_signed_t, mod_: nmod_t);
+    pub fn _nmod_vec_randtest(vec: mp_ptr,
+                              state: *mut flint_rand_s,
+                              len: mp_limb_signed_t,
+                              mod_: nmod_t);
 }
 extern "C" {
-    pub fn _nmod_vec_max_bits(vec: mp_srcptr, len: mp_limb_signed_t)
-     -> mp_limb_t;
+    pub fn _nmod_vec_max_bits(vec: mp_srcptr, len: mp_limb_signed_t) -> mp_limb_t;
 }
 extern "C" {
-    pub fn _nmod_vec_reduce(res: mp_ptr, vec: mp_srcptr,
-                            len: mp_limb_signed_t, mod_: nmod_t);
+    pub fn _nmod_vec_reduce(res: mp_ptr, vec: mp_srcptr, len: mp_limb_signed_t, mod_: nmod_t);
 }
 extern "C" {
-    pub fn _nmod_vec_add(res: mp_ptr, vec1: mp_srcptr, vec2: mp_srcptr,
-                         len: mp_limb_signed_t, mod_: nmod_t);
-}
-extern "C" {
-    pub fn _nmod_vec_sub(res: mp_ptr, vec1: mp_srcptr, vec2: mp_srcptr,
-                         len: mp_limb_signed_t, mod_: nmod_t);
-}
-extern "C" {
-    pub fn _nmod_vec_neg(res: mp_ptr, vec: mp_srcptr, len: mp_limb_signed_t,
+    pub fn _nmod_vec_add(res: mp_ptr,
+                         vec1: mp_srcptr,
+                         vec2: mp_srcptr,
+                         len: mp_limb_signed_t,
                          mod_: nmod_t);
 }
 extern "C" {
-    pub fn _nmod_vec_scalar_mul_nmod(res: mp_ptr, vec: mp_srcptr,
-                                     len: mp_limb_signed_t, c: mp_limb_t,
+    pub fn _nmod_vec_sub(res: mp_ptr,
+                         vec1: mp_srcptr,
+                         vec2: mp_srcptr,
+                         len: mp_limb_signed_t,
+                         mod_: nmod_t);
+}
+extern "C" {
+    pub fn _nmod_vec_neg(res: mp_ptr, vec: mp_srcptr, len: mp_limb_signed_t, mod_: nmod_t);
+}
+extern "C" {
+    pub fn _nmod_vec_scalar_mul_nmod(res: mp_ptr,
+                                     vec: mp_srcptr,
+                                     len: mp_limb_signed_t,
+                                     c: mp_limb_t,
                                      mod_: nmod_t);
 }
 extern "C" {
-    pub fn _nmod_vec_scalar_mul_nmod_shoup(res: mp_ptr, vec: mp_srcptr,
+    pub fn _nmod_vec_scalar_mul_nmod_shoup(res: mp_ptr,
+                                           vec: mp_srcptr,
                                            len: mp_limb_signed_t,
-                                           c: mp_limb_t, mod_: nmod_t);
+                                           c: mp_limb_t,
+                                           mod_: nmod_t);
 }
 extern "C" {
-    pub fn _nmod_vec_scalar_addmul_nmod(res: mp_ptr, vec: mp_srcptr,
-                                        len: mp_limb_signed_t, c: mp_limb_t,
+    pub fn _nmod_vec_scalar_addmul_nmod(res: mp_ptr,
+                                        vec: mp_srcptr,
+                                        len: mp_limb_signed_t,
+                                        c: mp_limb_t,
                                         mod_: nmod_t);
 }
 extern "C" {
-    pub fn _nmod_vec_dot_bound_limbs(len: mp_limb_signed_t, mod_: nmod_t)
-     -> ::std::os::raw::c_int;
+    pub fn _nmod_vec_dot_bound_limbs(len: mp_limb_signed_t, mod_: nmod_t) -> c_int;
 }
 extern "C" {
-    pub fn _nmod_vec_dot(vec1: mp_srcptr, vec2: mp_srcptr,
-                         len: mp_limb_signed_t, mod_: nmod_t,
-                         nlimbs: ::std::os::raw::c_int) -> mp_limb_t;
+    pub fn _nmod_vec_dot(vec1: mp_srcptr,
+                         vec2: mp_srcptr,
+                         len: mp_limb_signed_t,
+                         mod_: nmod_t,
+                         nlimbs: c_int)
+                         -> mp_limb_t;
 }
 extern "C" {
-    pub fn _nmod_vec_dot_ptr(vec1: mp_srcptr, vec2: *const mp_ptr,
-                             offset: mp_limb_signed_t, len: mp_limb_signed_t,
-                             mod_: nmod_t, nlimbs: ::std::os::raw::c_int)
-     -> mp_limb_t;
+    pub fn _nmod_vec_dot_ptr(vec1: mp_srcptr,
+                             vec2: *const mp_ptr,
+                             offset: mp_limb_signed_t,
+                             len: mp_limb_signed_t,
+                             mod_: nmod_t,
+                             nlimbs: c_int)
+                             -> mp_limb_t;
 }
 pub type fmpz = mp_limb_signed_t;
 pub type fmpz_t = [fmpz; 1usize];
@@ -7530,29 +8031,35 @@ pub struct fmpz_preinvn_struct {
 }
 #[test]
 fn bindgen_test_layout_fmpz_preinvn_struct() {
-    assert_eq!(::std::mem::size_of::<fmpz_preinvn_struct>() , 24usize , concat
-               ! ( "Size of: " , stringify ! ( fmpz_preinvn_struct ) ));
-    assert_eq! (::std::mem::align_of::<fmpz_preinvn_struct>() , 8usize ,
-                concat ! (
-                "Alignment of " , stringify ! ( fmpz_preinvn_struct ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const fmpz_preinvn_struct ) ) . dinv as * const
-                _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( fmpz_preinvn_struct ) ,
-                "::" , stringify ! ( dinv ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const fmpz_preinvn_struct ) ) . n as * const _
-                as usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( fmpz_preinvn_struct ) ,
-                "::" , stringify ! ( n ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const fmpz_preinvn_struct ) ) . norm as * const
-                _ as usize } , 16usize , concat ! (
-                "Alignment of field: " , stringify ! ( fmpz_preinvn_struct ) ,
-                "::" , stringify ! ( norm ) ));
+    assert_eq!(::std::mem::size_of::<fmpz_preinvn_struct>(),
+               24usize,
+               concat!("Size of: ", stringify!(fmpz_preinvn_struct)));
+    assert_eq!(::std::mem::align_of::<fmpz_preinvn_struct>(),
+               8usize,
+               concat!("Alignment of ", stringify!(fmpz_preinvn_struct)));
+    assert_eq!(unsafe { &(*(0 as *const fmpz_preinvn_struct)).dinv as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(fmpz_preinvn_struct),
+                       "::",
+                       stringify!(dinv)));
+    assert_eq!(unsafe { &(*(0 as *const fmpz_preinvn_struct)).n as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(fmpz_preinvn_struct),
+                       "::",
+                       stringify!(n)));
+    assert_eq!(unsafe { &(*(0 as *const fmpz_preinvn_struct)).norm as *const _ as usize },
+               16usize,
+               concat!("Alignment of field: ",
+                       stringify!(fmpz_preinvn_struct),
+                       "::",
+                       stringify!(norm)));
 }
 impl Clone for fmpz_preinvn_struct {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 pub type fmpz_preinvn_t = [fmpz_preinvn_struct; 1usize];
 extern "C" {
@@ -7586,35 +8093,28 @@ extern "C" {
     pub fn fmpz_init2(f: *mut fmpz, limbs: mp_limb_t);
 }
 extern "C" {
-    pub fn fmpz_randbits(f: *mut fmpz, state: *mut flint_rand_s,
-                         bits: mp_limb_t);
+    pub fn fmpz_randbits(f: *mut fmpz, state: *mut flint_rand_s, bits: mp_limb_t);
 }
 extern "C" {
     pub fn fmpz_randm(f: *mut fmpz, state: *mut flint_rand_s, m: *mut fmpz);
 }
 extern "C" {
-    pub fn fmpz_randtest(f: *mut fmpz, state: *mut flint_rand_s,
-                         bits: mp_limb_t);
+    pub fn fmpz_randtest(f: *mut fmpz, state: *mut flint_rand_s, bits: mp_limb_t);
 }
 extern "C" {
-    pub fn fmpz_randtest_unsigned(f: *mut fmpz, state: *mut flint_rand_s,
-                                  bits: mp_limb_t);
+    pub fn fmpz_randtest_unsigned(f: *mut fmpz, state: *mut flint_rand_s, bits: mp_limb_t);
 }
 extern "C" {
-    pub fn fmpz_randtest_not_zero(f: *mut fmpz, state: *mut flint_rand_s,
-                                  bits: mp_limb_t);
+    pub fn fmpz_randtest_not_zero(f: *mut fmpz, state: *mut flint_rand_s, bits: mp_limb_t);
 }
 extern "C" {
-    pub fn fmpz_randtest_mod(f: *mut fmpz, state: *mut flint_rand_s,
-                             m: *mut fmpz);
+    pub fn fmpz_randtest_mod(f: *mut fmpz, state: *mut flint_rand_s, m: *mut fmpz);
 }
 extern "C" {
-    pub fn fmpz_randtest_mod_signed(f: *mut fmpz, state: *mut flint_rand_s,
-                                    m: *mut fmpz);
+    pub fn fmpz_randtest_mod_signed(f: *mut fmpz, state: *mut flint_rand_s, m: *mut fmpz);
 }
 extern "C" {
-    pub fn fmpz_randprime(f: *mut fmpz, state: *mut flint_rand_s,
-                          bits: mp_limb_t, proved: ::std::os::raw::c_int);
+    pub fn fmpz_randprime(f: *mut fmpz, state: *mut flint_rand_s, bits: mp_limb_t, proved: c_int);
 }
 extern "C" {
     pub fn fmpz_get_si(f: *mut fmpz) -> mp_limb_signed_t;
@@ -7641,16 +8141,13 @@ extern "C" {
     pub fn fmpz_set_mpf(f: *mut fmpz, x: *mut __mpf_struct);
 }
 extern "C" {
-    pub fn fmpz_get_mpfr(x: *mut __mpfr_struct, f: *mut fmpz,
-                         rnd: mpfr_rnd_t);
+    pub fn fmpz_get_mpfr(x: *mut __mpfr_struct, f: *mut fmpz, rnd: mpfr_rnd_t);
 }
 extern "C" {
-    pub fn fmpz_get_mpn(n: *mut mp_ptr, n_in: *mut fmpz)
-     -> ::std::os::raw::c_int;
+    pub fn fmpz_get_mpn(n: *mut mp_ptr, n_in: *mut fmpz) -> c_int;
 }
 extern "C" {
-    pub fn fmpz_set_str(f: *mut fmpz, str: *const ::std::os::raw::c_char,
-                        b: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
+    pub fn fmpz_set_str(f: *mut fmpz, str: *const c_char, b: c_int) -> c_int;
 }
 extern "C" {
     pub fn flint_mpz_init_set_readonly(z: *mut __mpz_struct, f: *mut fmpz);
@@ -7665,69 +8162,64 @@ extern "C" {
     pub fn fmpz_clear_readonly(f: *mut fmpz);
 }
 extern "C" {
-    pub fn fmpz_abs_fits_ui(f: *mut fmpz) -> ::std::os::raw::c_int;
+    pub fn fmpz_abs_fits_ui(f: *mut fmpz) -> c_int;
 }
 extern "C" {
-    pub fn fmpz_fits_si(f: *mut fmpz) -> ::std::os::raw::c_int;
+    pub fn fmpz_fits_si(f: *mut fmpz) -> c_int;
 }
 extern "C" {
     pub fn fmpz_set(f: *mut fmpz, g: *mut fmpz);
 }
 extern "C" {
-    pub fn fmpz_equal(f: *mut fmpz, g: *mut fmpz) -> ::std::os::raw::c_int;
+    pub fn fmpz_equal(f: *mut fmpz, g: *mut fmpz) -> c_int;
 }
 extern "C" {
-    pub fn fmpz_equal_si(f: *mut fmpz, g: mp_limb_signed_t)
-     -> ::std::os::raw::c_int;
+    pub fn fmpz_equal_si(f: *mut fmpz, g: mp_limb_signed_t) -> c_int;
 }
 extern "C" {
-    pub fn fmpz_equal_ui(f: *mut fmpz, g: mp_limb_t) -> ::std::os::raw::c_int;
+    pub fn fmpz_equal_ui(f: *mut fmpz, g: mp_limb_t) -> c_int;
 }
 extern "C" {
-    pub fn fmpz_read(f: *mut fmpz) -> ::std::os::raw::c_int;
+    pub fn fmpz_read(f: *mut fmpz) -> c_int;
 }
 extern "C" {
-    pub fn fmpz_fread(file: *mut FILE, f: *mut fmpz) -> ::std::os::raw::c_int;
+    pub fn fmpz_fread(file: *mut FILE, f: *mut fmpz) -> c_int;
 }
 extern "C" {
     pub fn fmpz_inp_raw(x: *mut fmpz, fin: *mut FILE) -> usize;
 }
 extern "C" {
-    pub fn fmpz_print(x: *mut fmpz) -> ::std::os::raw::c_int;
+    pub fn fmpz_print(x: *mut fmpz) -> c_int;
 }
 extern "C" {
-    pub fn fmpz_fprint(file: *mut FILE, x: *mut fmpz)
-     -> ::std::os::raw::c_int;
+    pub fn fmpz_fprint(file: *mut FILE, x: *mut fmpz) -> c_int;
 }
 extern "C" {
     pub fn fmpz_out_raw(fout: *mut FILE, x: *mut fmpz) -> usize;
 }
 extern "C" {
-    pub fn fmpz_sizeinbase(f: *const fmpz, b: ::std::os::raw::c_int) -> usize;
+    pub fn fmpz_sizeinbase(f: *const fmpz, b: c_int) -> usize;
 }
 extern "C" {
-    pub fn fmpz_get_str(str: *mut ::std::os::raw::c_char,
-                        b: ::std::os::raw::c_int, f: *const fmpz)
-     -> *mut ::std::os::raw::c_char;
+    pub fn fmpz_get_str(str: *mut c_char, b: c_int, f: *const fmpz) -> *mut c_char;
 }
 extern "C" {
-    pub fn fmpz_cmp(f: *mut fmpz, g: *mut fmpz) -> ::std::os::raw::c_int;
+    pub fn fmpz_cmp(f: *mut fmpz, g: *mut fmpz) -> c_int;
 }
 extern "C" {
-    pub fn fmpz_cmp_ui(f: *mut fmpz, g: mp_limb_t) -> ::std::os::raw::c_int;
+    pub fn fmpz_cmp_ui(f: *mut fmpz, g: mp_limb_t) -> c_int;
 }
 extern "C" {
-    pub fn fmpz_cmp_si(f: *mut fmpz, g: mp_limb_signed_t)
-     -> ::std::os::raw::c_int;
+    pub fn fmpz_cmp_si(f: *mut fmpz, g: mp_limb_signed_t) -> c_int;
 }
 extern "C" {
-    pub fn fmpz_cmpabs(f: *mut fmpz, g: *mut fmpz) -> ::std::os::raw::c_int;
+    pub fn fmpz_cmpabs(f: *mut fmpz, g: *mut fmpz) -> c_int;
 }
 extern "C" {
     pub fn fmpz_size(f: *mut fmpz) -> mp_size_t;
 }
 extern "C" {
-    pub fn fmpz_sgn(f: *mut fmpz) -> ::std::os::raw::c_int;
+    pub fn fmpz_sgn(f: *mut fmpz) -> c_int;
 }
 extern "C" {
     pub fn fmpz_bits(f: *mut fmpz) -> mp_limb_t;
@@ -7779,8 +8271,7 @@ extern "C" {
     pub fn fmpz_pow_ui(f: *mut fmpz, g: *mut fmpz, exp: mp_limb_t);
 }
 extern "C" {
-    pub fn fmpz_powm_ui(f: *mut fmpz, g: *mut fmpz, exp: mp_limb_t,
-                        m: *mut fmpz);
+    pub fn fmpz_powm_ui(f: *mut fmpz, g: *mut fmpz, exp: mp_limb_t, m: *mut fmpz);
 }
 extern "C" {
     pub fn fmpz_powm(f: *mut fmpz, g: *mut fmpz, e: *mut fmpz, m: *mut fmpz);
@@ -7789,7 +8280,7 @@ extern "C" {
     pub fn fmpz_setbit(f: *mut fmpz, i: mp_limb_t);
 }
 extern "C" {
-    pub fn fmpz_tstbit(f: *mut fmpz, i: mp_limb_t) -> ::std::os::raw::c_int;
+    pub fn fmpz_tstbit(f: *mut fmpz, i: mp_limb_t) -> c_int;
 }
 extern "C" {
     pub fn fmpz_clrbit(f: *mut fmpz, i: mp_limb_t);
@@ -7828,21 +8319,19 @@ extern "C" {
     pub fn fmpz_clog_ui(x: *mut fmpz, b: mp_limb_t) -> mp_limb_signed_t;
 }
 extern "C" {
-    pub fn fmpz_sqrtmod(b: *mut fmpz, a: *mut fmpz, p: *mut fmpz)
-     -> ::std::os::raw::c_int;
+    pub fn fmpz_sqrtmod(b: *mut fmpz, a: *mut fmpz, p: *mut fmpz) -> c_int;
 }
 extern "C" {
     pub fn fmpz_sqrt(f: *mut fmpz, g: *mut fmpz);
 }
 extern "C" {
-    pub fn fmpz_is_square(f: *mut fmpz) -> ::std::os::raw::c_int;
+    pub fn fmpz_is_square(f: *mut fmpz) -> c_int;
 }
 extern "C" {
     pub fn fmpz_root(r: *mut fmpz, f: *mut fmpz, n: mp_limb_signed_t);
 }
 extern "C" {
-    pub fn fmpz_is_perfect_power(root: *mut fmpz, f: *mut fmpz)
-     -> ::std::os::raw::c_int;
+    pub fn fmpz_is_perfect_power(root: *mut fmpz, f: *mut fmpz) -> c_int;
 }
 extern "C" {
     pub fn fmpz_sqrtrem(f: *mut fmpz, r: *mut fmpz, g: *mut fmpz);
@@ -7866,31 +8355,29 @@ extern "C" {
     pub fn fmpz_lcm(f: *mut fmpz, g: *mut fmpz, h: *mut fmpz);
 }
 extern "C" {
-    pub fn fmpz_gcdinv(d: *mut fmpz, a: *mut fmpz, f: *mut fmpz,
-                       g: *mut fmpz);
+    pub fn fmpz_gcdinv(d: *mut fmpz, a: *mut fmpz, f: *mut fmpz, g: *mut fmpz);
 }
 extern "C" {
-    pub fn fmpz_xgcd(d: *mut fmpz, a: *mut fmpz, b: *mut fmpz, f: *mut fmpz,
-                     g: *mut fmpz);
+    pub fn fmpz_xgcd(d: *mut fmpz, a: *mut fmpz, b: *mut fmpz, f: *mut fmpz, g: *mut fmpz);
 }
 extern "C" {
-    pub fn fmpz_xgcd_partial(co2: *mut fmpz, co1: *mut fmpz, r2: *mut fmpz,
-                             r1: *mut fmpz, L: *mut fmpz);
+    pub fn fmpz_xgcd_partial(co2: *mut fmpz,
+                             co1: *mut fmpz,
+                             r2: *mut fmpz,
+                             r1: *mut fmpz,
+                             L: *mut fmpz);
 }
 extern "C" {
-    pub fn fmpz_invmod(f: *mut fmpz, g: *mut fmpz, h: *mut fmpz)
-     -> ::std::os::raw::c_int;
+    pub fn fmpz_invmod(f: *mut fmpz, g: *mut fmpz, h: *mut fmpz) -> c_int;
 }
 extern "C" {
-    pub fn fmpz_jacobi(a: *mut fmpz, p: *mut fmpz) -> ::std::os::raw::c_int;
+    pub fn fmpz_jacobi(a: *mut fmpz, p: *mut fmpz) -> c_int;
 }
 extern "C" {
-    pub fn _fmpz_remove(x: *mut fmpz, f: *mut fmpz, finv: f64)
-     -> mp_limb_signed_t;
+    pub fn _fmpz_remove(x: *mut fmpz, f: *mut fmpz, finv: f64) -> mp_limb_signed_t;
 }
 extern "C" {
-    pub fn fmpz_remove(rop: *mut fmpz, op: *mut fmpz, f: *mut fmpz)
-     -> mp_limb_signed_t;
+    pub fn fmpz_remove(rop: *mut fmpz, op: *mut fmpz, f: *mut fmpz) -> mp_limb_signed_t;
 }
 extern "C" {
     pub fn fmpz_divexact(f: *mut fmpz, g: *mut fmpz, h: *mut fmpz);
@@ -7902,12 +8389,10 @@ extern "C" {
     pub fn fmpz_divexact_ui(f: *mut fmpz, g: *mut fmpz, h: mp_limb_t);
 }
 extern "C" {
-    pub fn fmpz_divisible(f: *mut fmpz, g: *mut fmpz)
-     -> ::std::os::raw::c_int;
+    pub fn fmpz_divisible(f: *mut fmpz, g: *mut fmpz) -> c_int;
 }
 extern "C" {
-    pub fn fmpz_divisible_si(f: *mut fmpz, g: mp_limb_signed_t)
-     -> ::std::os::raw::c_int;
+    pub fn fmpz_divisible_si(f: *mut fmpz, g: mp_limb_signed_t) -> c_int;
 }
 extern "C" {
     pub fn fmpz_cdiv_q(f: *mut fmpz, g: *mut fmpz, h: *mut fmpz);
@@ -7922,12 +8407,14 @@ extern "C" {
     pub fn fmpz_cdiv_q_2exp(f: *mut fmpz, g: *mut fmpz, exp: mp_limb_t);
 }
 extern "C" {
-    pub fn fmpz_fdiv_qr(f: *mut fmpz, s: *mut fmpz, g: *mut fmpz,
-                        h: *mut fmpz);
+    pub fn fmpz_fdiv_qr(f: *mut fmpz, s: *mut fmpz, g: *mut fmpz, h: *mut fmpz);
 }
 extern "C" {
-    pub fn fmpz_fdiv_qr_preinvn(f: *mut fmpz, s: *mut fmpz, g: *mut fmpz,
-                                h: *mut fmpz, inv: *mut fmpz_preinvn_struct);
+    pub fn fmpz_fdiv_qr_preinvn(f: *mut fmpz,
+                                s: *mut fmpz,
+                                g: *mut fmpz,
+                                h: *mut fmpz,
+                                inv: *mut fmpz_preinvn_struct);
 }
 extern "C" {
     pub fn fmpz_fdiv_q(f: *mut fmpz, g: *mut fmpz, h: *mut fmpz);
@@ -7951,8 +8438,7 @@ extern "C" {
     pub fn fmpz_tdiv_q(f: *mut fmpz, g: *mut fmpz, h: *mut fmpz);
 }
 extern "C" {
-    pub fn fmpz_tdiv_qr(f: *mut fmpz, s: *mut fmpz, g: *mut fmpz,
-                        h: *mut fmpz);
+    pub fn fmpz_tdiv_qr(f: *mut fmpz, s: *mut fmpz, g: *mut fmpz, h: *mut fmpz);
 }
 extern "C" {
     pub fn fmpz_tdiv_q_ui(f: *mut fmpz, g: *mut fmpz, h: mp_limb_t);
@@ -7979,12 +8465,13 @@ extern "C" {
     pub fn fmpz_set_d_2exp(f: *mut fmpz, m: f64, exp: mp_limb_signed_t);
 }
 extern "C" {
-    pub fn fmpz_mul_tdiv_q_2exp(f: *mut fmpz, g: *mut fmpz, h: *mut fmpz,
-                                exp: mp_limb_t);
+    pub fn fmpz_mul_tdiv_q_2exp(f: *mut fmpz, g: *mut fmpz, h: *mut fmpz, exp: mp_limb_t);
 }
 extern "C" {
-    pub fn fmpz_mul_si_tdiv_q_2exp(f: *mut fmpz, g: *mut fmpz,
-                                   x: mp_limb_signed_t, exp: mp_limb_t);
+    pub fn fmpz_mul_si_tdiv_q_2exp(f: *mut fmpz,
+                                   g: *mut fmpz,
+                                   x: mp_limb_signed_t,
+                                   exp: mp_limb_t);
 }
 extern "C" {
     pub fn fmpz_fac_ui(f: *mut fmpz, n: mp_limb_t);
@@ -7996,8 +8483,7 @@ extern "C" {
     pub fn fmpz_bin_uiui(res: *mut fmpz, n: mp_limb_t, k: mp_limb_t);
 }
 extern "C" {
-    pub fn _fmpz_rfac_ui(r: *mut fmpz, x: *mut fmpz, a: mp_limb_t,
-                         b: mp_limb_t);
+    pub fn _fmpz_rfac_ui(r: *mut fmpz, x: *mut fmpz, a: mp_limb_t, b: mp_limb_t);
 }
 extern "C" {
     pub fn fmpz_rfac_ui(r: *mut fmpz, x: *mut fmpz, n: mp_limb_t);
@@ -8006,38 +8492,58 @@ extern "C" {
     pub fn fmpz_rfac_uiui(r: *mut fmpz, x: mp_limb_t, n: mp_limb_t);
 }
 extern "C" {
-    pub fn fmpz_bit_pack(arr: mp_ptr, shift: mp_limb_t, bits: mp_limb_t,
-                         coeff: *mut fmpz, negate: ::std::os::raw::c_int,
-                         borrow: ::std::os::raw::c_int)
-     -> ::std::os::raw::c_int;
+    pub fn fmpz_bit_pack(arr: mp_ptr,
+                         shift: mp_limb_t,
+                         bits: mp_limb_t,
+                         coeff: *mut fmpz,
+                         negate: c_int,
+                         borrow: c_int)
+                         -> c_int;
 }
 extern "C" {
-    pub fn fmpz_bit_unpack(coeff: *mut fmpz, arr: mp_srcptr, shift: mp_limb_t,
-                           bits: mp_limb_t, negate: ::std::os::raw::c_int,
-                           borrow: ::std::os::raw::c_int)
-     -> ::std::os::raw::c_int;
+    pub fn fmpz_bit_unpack(coeff: *mut fmpz,
+                           arr: mp_srcptr,
+                           shift: mp_limb_t,
+                           bits: mp_limb_t,
+                           negate: c_int,
+                           borrow: c_int)
+                           -> c_int;
 }
 extern "C" {
-    pub fn fmpz_bit_unpack_unsigned(coeff: *mut fmpz, arr: mp_srcptr,
-                                    shift: mp_limb_t, bits: mp_limb_t);
+    pub fn fmpz_bit_unpack_unsigned(coeff: *mut fmpz,
+                                    arr: mp_srcptr,
+                                    shift: mp_limb_t,
+                                    bits: mp_limb_t);
 }
 extern "C" {
-    pub fn _fmpz_CRT_ui_precomp(out: *mut fmpz, r1: *mut fmpz, m1: *mut fmpz,
-                                r2: mp_limb_t, m2: mp_limb_t,
-                                m2inv: mp_limb_t, m1m2: *mut fmpz,
-                                c: mp_limb_t, sign: ::std::os::raw::c_int);
+    pub fn _fmpz_CRT_ui_precomp(out: *mut fmpz,
+                                r1: *mut fmpz,
+                                m1: *mut fmpz,
+                                r2: mp_limb_t,
+                                m2: mp_limb_t,
+                                m2inv: mp_limb_t,
+                                m1m2: *mut fmpz,
+                                c: mp_limb_t,
+                                sign: c_int);
 }
 extern "C" {
-    pub fn _fmpz_CRT_ui_signed_precomp(out: *mut fmpz, r1: *mut fmpz,
-                                       m1: *mut fmpz, r2: mp_limb_t,
-                                       m2: mp_limb_t, m2inv: mp_limb_t,
-                                       m1m2: *mut fmpz, halfm1m2: *mut fmpz,
+    pub fn _fmpz_CRT_ui_signed_precomp(out: *mut fmpz,
+                                       r1: *mut fmpz,
+                                       m1: *mut fmpz,
+                                       r2: mp_limb_t,
+                                       m2: mp_limb_t,
+                                       m2inv: mp_limb_t,
+                                       m1m2: *mut fmpz,
+                                       halfm1m2: *mut fmpz,
                                        c: mp_limb_t);
 }
 extern "C" {
-    pub fn fmpz_CRT_ui(out: *mut fmpz, r1: *mut fmpz, m1: *mut fmpz,
-                       r2: mp_limb_t, m2: mp_limb_t,
-                       sign: ::std::os::raw::c_int);
+    pub fn fmpz_CRT_ui(out: *mut fmpz,
+                       r1: *mut fmpz,
+                       m1: *mut fmpz,
+                       r2: mp_limb_t,
+                       m2: mp_limb_t,
+                       sign: c_int);
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
@@ -8051,43 +8557,53 @@ pub struct fmpz_comb_struct {
 }
 #[test]
 fn bindgen_test_layout_fmpz_comb_struct() {
-    assert_eq!(::std::mem::size_of::<fmpz_comb_struct>() , 48usize , concat !
-               ( "Size of: " , stringify ! ( fmpz_comb_struct ) ));
-    assert_eq! (::std::mem::align_of::<fmpz_comb_struct>() , 8usize , concat !
-                ( "Alignment of " , stringify ! ( fmpz_comb_struct ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const fmpz_comb_struct ) ) . primes as * const
-                _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( fmpz_comb_struct ) ,
-                "::" , stringify ! ( primes ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const fmpz_comb_struct ) ) . num_primes as *
-                const _ as usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( fmpz_comb_struct ) ,
-                "::" , stringify ! ( num_primes ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const fmpz_comb_struct ) ) . n as * const _ as
-                usize } , 16usize , concat ! (
-                "Alignment of field: " , stringify ! ( fmpz_comb_struct ) ,
-                "::" , stringify ! ( n ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const fmpz_comb_struct ) ) . comb as * const _
-                as usize } , 24usize , concat ! (
-                "Alignment of field: " , stringify ! ( fmpz_comb_struct ) ,
-                "::" , stringify ! ( comb ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const fmpz_comb_struct ) ) . res as * const _
-                as usize } , 32usize , concat ! (
-                "Alignment of field: " , stringify ! ( fmpz_comb_struct ) ,
-                "::" , stringify ! ( res ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const fmpz_comb_struct ) ) . mod_ as * const _
-                as usize } , 40usize , concat ! (
-                "Alignment of field: " , stringify ! ( fmpz_comb_struct ) ,
-                "::" , stringify ! ( mod_ ) ));
+    assert_eq!(::std::mem::size_of::<fmpz_comb_struct>(),
+               48usize,
+               concat!("Size of: ", stringify!(fmpz_comb_struct)));
+    assert_eq!(::std::mem::align_of::<fmpz_comb_struct>(),
+               8usize,
+               concat!("Alignment of ", stringify!(fmpz_comb_struct)));
+    assert_eq!(unsafe { &(*(0 as *const fmpz_comb_struct)).primes as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(fmpz_comb_struct),
+                       "::",
+                       stringify!(primes)));
+    assert_eq!(unsafe { &(*(0 as *const fmpz_comb_struct)).num_primes as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(fmpz_comb_struct),
+                       "::",
+                       stringify!(num_primes)));
+    assert_eq!(unsafe { &(*(0 as *const fmpz_comb_struct)).n as *const _ as usize },
+               16usize,
+               concat!("Alignment of field: ",
+                       stringify!(fmpz_comb_struct),
+                       "::",
+                       stringify!(n)));
+    assert_eq!(unsafe { &(*(0 as *const fmpz_comb_struct)).comb as *const _ as usize },
+               24usize,
+               concat!("Alignment of field: ",
+                       stringify!(fmpz_comb_struct),
+                       "::",
+                       stringify!(comb)));
+    assert_eq!(unsafe { &(*(0 as *const fmpz_comb_struct)).res as *const _ as usize },
+               32usize,
+               concat!("Alignment of field: ",
+                       stringify!(fmpz_comb_struct),
+                       "::",
+                       stringify!(res)));
+    assert_eq!(unsafe { &(*(0 as *const fmpz_comb_struct)).mod_ as *const _ as usize },
+               40usize,
+               concat!("Alignment of field: ",
+                       stringify!(fmpz_comb_struct),
+                       "::",
+                       stringify!(mod_)));
 }
 impl Clone for fmpz_comb_struct {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
@@ -8099,152 +8615,201 @@ pub struct fmpz_comb_temp_struct {
 }
 #[test]
 fn bindgen_test_layout_fmpz_comb_temp_struct() {
-    assert_eq!(::std::mem::size_of::<fmpz_comb_temp_struct>() , 32usize ,
-               concat ! ( "Size of: " , stringify ! ( fmpz_comb_temp_struct )
-               ));
-    assert_eq! (::std::mem::align_of::<fmpz_comb_temp_struct>() , 8usize ,
-                concat ! (
-                "Alignment of " , stringify ! ( fmpz_comb_temp_struct ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const fmpz_comb_temp_struct ) ) . n as * const
-                _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( fmpz_comb_temp_struct )
-                , "::" , stringify ! ( n ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const fmpz_comb_temp_struct ) ) . comb_temp as
-                * const _ as usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( fmpz_comb_temp_struct )
-                , "::" , stringify ! ( comb_temp ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const fmpz_comb_temp_struct ) ) . temp as *
-                const _ as usize } , 16usize , concat ! (
-                "Alignment of field: " , stringify ! ( fmpz_comb_temp_struct )
-                , "::" , stringify ! ( temp ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const fmpz_comb_temp_struct ) ) . temp2 as *
-                const _ as usize } , 24usize , concat ! (
-                "Alignment of field: " , stringify ! ( fmpz_comb_temp_struct )
-                , "::" , stringify ! ( temp2 ) ));
+    assert_eq!(::std::mem::size_of::<fmpz_comb_temp_struct>(),
+               32usize,
+               concat!("Size of: ", stringify!(fmpz_comb_temp_struct)));
+    assert_eq!(::std::mem::align_of::<fmpz_comb_temp_struct>(),
+               8usize,
+               concat!("Alignment of ", stringify!(fmpz_comb_temp_struct)));
+    assert_eq!(unsafe { &(*(0 as *const fmpz_comb_temp_struct)).n as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(fmpz_comb_temp_struct),
+                       "::",
+                       stringify!(n)));
+    assert_eq!(unsafe { &(*(0 as *const fmpz_comb_temp_struct)).comb_temp as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(fmpz_comb_temp_struct),
+                       "::",
+                       stringify!(comb_temp)));
+    assert_eq!(unsafe { &(*(0 as *const fmpz_comb_temp_struct)).temp as *const _ as usize },
+               16usize,
+               concat!("Alignment of field: ",
+                       stringify!(fmpz_comb_temp_struct),
+                       "::",
+                       stringify!(temp)));
+    assert_eq!(unsafe { &(*(0 as *const fmpz_comb_temp_struct)).temp2 as *const _ as usize },
+               24usize,
+               concat!("Alignment of field: ",
+                       stringify!(fmpz_comb_temp_struct),
+                       "::",
+                       stringify!(temp2)));
 }
 impl Clone for fmpz_comb_temp_struct {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 pub type fmpz_comb_t = [fmpz_comb_struct; 1usize];
 pub type fmpz_comb_temp_t = [fmpz_comb_temp_struct; 1usize];
 extern "C" {
-    pub fn fmpz_comb_temp_init(temp: *mut fmpz_comb_temp_struct,
-                               comb: *mut fmpz_comb_struct);
+    pub fn fmpz_comb_temp_init(temp: *mut fmpz_comb_temp_struct, comb: *mut fmpz_comb_struct);
 }
 extern "C" {
     pub fn fmpz_comb_temp_clear(temp: *mut fmpz_comb_temp_struct);
 }
 extern "C" {
-    pub fn fmpz_comb_init(comb: *mut fmpz_comb_struct, primes: mp_srcptr,
+    pub fn fmpz_comb_init(comb: *mut fmpz_comb_struct,
+                          primes: mp_srcptr,
                           num_primes: mp_limb_signed_t);
 }
 extern "C" {
     pub fn fmpz_comb_clear(comb: *mut fmpz_comb_struct);
 }
 extern "C" {
-    pub fn fmpz_multi_mod_ui(out: *mut mp_limb_t, in_: *mut fmpz,
+    pub fn fmpz_multi_mod_ui(out: *mut mp_limb_t,
+                             in_: *mut fmpz,
                              comb: *mut fmpz_comb_struct,
                              temp: *mut fmpz_comb_temp_struct);
 }
 extern "C" {
-    pub fn fmpz_multi_CRT_ui(output: *mut fmpz, residues: mp_srcptr,
+    pub fn fmpz_multi_CRT_ui(output: *mut fmpz,
+                             residues: mp_srcptr,
                              comb: *mut fmpz_comb_struct,
                              temp: *mut fmpz_comb_temp_struct,
-                             sign: ::std::os::raw::c_int);
+                             sign: c_int);
 }
 extern "C" {
-    pub fn fmpz_CRT(out: *mut fmpz, r1: *mut fmpz, m1: *mut fmpz,
-                    r2: *mut fmpz, m2: *mut fmpz,
-                    sign: ::std::os::raw::c_int);
+    pub fn fmpz_CRT(out: *mut fmpz,
+                    r1: *mut fmpz,
+                    m1: *mut fmpz,
+                    r2: *mut fmpz,
+                    m2: *mut fmpz,
+                    sign: c_int);
 }
 extern "C" {
-    pub fn fmpz_abs_ubound_ui_2exp(exp: *mut mp_limb_signed_t, x: *mut fmpz,
-                                   bits: ::std::os::raw::c_int) -> mp_limb_t;
+    pub fn fmpz_abs_ubound_ui_2exp(exp: *mut mp_limb_signed_t,
+                                   x: *mut fmpz,
+                                   bits: c_int)
+                                   -> mp_limb_t;
 }
 extern "C" {
-    pub fn fmpz_abs_lbound_ui_2exp(exp: *mut mp_limb_signed_t, x: *mut fmpz,
-                                   bits: ::std::os::raw::c_int) -> mp_limb_t;
+    pub fn fmpz_abs_lbound_ui_2exp(exp: *mut mp_limb_signed_t,
+                                   x: *mut fmpz,
+                                   bits: c_int)
+                                   -> mp_limb_t;
 }
 extern "C" {
-    pub fn fmpz_lucas_chain(Vm: *mut fmpz, Vm1: *mut fmpz, A: *mut fmpz,
-                            m: *mut fmpz, n: *mut fmpz);
+    pub fn fmpz_lucas_chain(Vm: *mut fmpz,
+                            Vm1: *mut fmpz,
+                            A: *mut fmpz,
+                            m: *mut fmpz,
+                            n: *mut fmpz);
 }
 extern "C" {
-    pub fn fmpz_lucas_chain_full(Vm: *mut fmpz, Vm1: *mut fmpz, A: *mut fmpz,
-                                 B: *mut fmpz, m: *mut fmpz, n: *mut fmpz);
+    pub fn fmpz_lucas_chain_full(Vm: *mut fmpz,
+                                 Vm1: *mut fmpz,
+                                 A: *mut fmpz,
+                                 B: *mut fmpz,
+                                 m: *mut fmpz,
+                                 n: *mut fmpz);
 }
 extern "C" {
-    pub fn fmpz_lucas_chain_double(U2m: *mut fmpz, U2m1: *mut fmpz,
-                                   Um: *mut fmpz, Um1: *mut fmpz,
-                                   A: *mut fmpz, B: *mut fmpz, n: *mut fmpz);
+    pub fn fmpz_lucas_chain_double(U2m: *mut fmpz,
+                                   U2m1: *mut fmpz,
+                                   Um: *mut fmpz,
+                                   Um1: *mut fmpz,
+                                   A: *mut fmpz,
+                                   B: *mut fmpz,
+                                   n: *mut fmpz);
 }
 extern "C" {
-    pub fn fmpz_lucas_chain_add(Umn: *mut fmpz, Umn1: *mut fmpz,
-                                Um: *mut fmpz, Um1: *mut fmpz, Un: *mut fmpz,
-                                Un1: *mut fmpz, A: *mut fmpz, B: *mut fmpz,
+    pub fn fmpz_lucas_chain_add(Umn: *mut fmpz,
+                                Umn1: *mut fmpz,
+                                Um: *mut fmpz,
+                                Um1: *mut fmpz,
+                                Un: *mut fmpz,
+                                Un1: *mut fmpz,
+                                A: *mut fmpz,
+                                B: *mut fmpz,
                                 n: *mut fmpz);
 }
 extern "C" {
-    pub fn fmpz_lucas_chain_mul(Ukm: *mut fmpz, Ukm1: *mut fmpz,
-                                Um: *mut fmpz, Um1: *mut fmpz, A: *mut fmpz,
-                                B: *mut fmpz, k: *mut fmpz, n: *mut fmpz);
+    pub fn fmpz_lucas_chain_mul(Ukm: *mut fmpz,
+                                Ukm1: *mut fmpz,
+                                Um: *mut fmpz,
+                                Um1: *mut fmpz,
+                                A: *mut fmpz,
+                                B: *mut fmpz,
+                                k: *mut fmpz,
+                                n: *mut fmpz);
 }
 extern "C" {
-    pub fn fmpz_lucas_chain_VtoU(Um: *mut fmpz, Um1: *mut fmpz, Vm: *mut fmpz,
-                                 Vm1: *mut fmpz, A: *mut fmpz, B: *mut fmpz,
-                                 Dinv: *mut fmpz, n: *mut fmpz);
+    pub fn fmpz_lucas_chain_VtoU(Um: *mut fmpz,
+                                 Um1: *mut fmpz,
+                                 Vm: *mut fmpz,
+                                 Vm1: *mut fmpz,
+                                 A: *mut fmpz,
+                                 B: *mut fmpz,
+                                 Dinv: *mut fmpz,
+                                 n: *mut fmpz);
 }
 extern "C" {
-    pub fn fmpz_is_probabprime_lucas(n: *mut fmpz) -> ::std::os::raw::c_int;
+    pub fn fmpz_is_probabprime_lucas(n: *mut fmpz) -> c_int;
 }
 extern "C" {
-    pub fn fmpz_is_probabprime_BPSW(n: *mut fmpz) -> ::std::os::raw::c_int;
+    pub fn fmpz_is_probabprime_BPSW(n: *mut fmpz) -> c_int;
 }
 extern "C" {
-    pub fn fmpz_is_strong_probabprime(n: *mut fmpz, a: *mut fmpz)
-     -> ::std::os::raw::c_int;
+    pub fn fmpz_is_strong_probabprime(n: *mut fmpz, a: *mut fmpz) -> c_int;
 }
 extern "C" {
-    pub fn fmpz_is_probabprime(p: *mut fmpz) -> ::std::os::raw::c_int;
+    pub fn fmpz_is_probabprime(p: *mut fmpz) -> c_int;
 }
 extern "C" {
-    pub fn fmpz_is_prime_pseudosquare(n: *mut fmpz) -> ::std::os::raw::c_int;
+    pub fn fmpz_is_prime_pseudosquare(n: *mut fmpz) -> c_int;
 }
 extern "C" {
-    pub fn _fmpz_nm1_trial_factors(n: *mut fmpz, pm1: mp_ptr,
+    pub fn _fmpz_nm1_trial_factors(n: *mut fmpz,
+                                   pm1: mp_ptr,
                                    num_pm1: *mut mp_limb_signed_t,
                                    limit: mp_limb_t);
 }
 extern "C" {
-    pub fn fmpz_is_prime_pocklington(F: *mut fmpz, R: *mut fmpz, n: *mut fmpz,
-                                     pm1: mp_ptr, num_pm1: mp_limb_signed_t)
-     -> ::std::os::raw::c_int;
+    pub fn fmpz_is_prime_pocklington(F: *mut fmpz,
+                                     R: *mut fmpz,
+                                     n: *mut fmpz,
+                                     pm1: mp_ptr,
+                                     num_pm1: mp_limb_signed_t)
+                                     -> c_int;
 }
 extern "C" {
-    pub fn _fmpz_np1_trial_factors(n: *mut fmpz, pp1: mp_ptr,
+    pub fn _fmpz_np1_trial_factors(n: *mut fmpz,
+                                   pp1: mp_ptr,
                                    num_pp1: *mut mp_limb_signed_t,
                                    limit: mp_limb_t);
 }
 extern "C" {
-    pub fn fmpz_is_prime_morrison(F: *mut fmpz, R: *mut fmpz, n: *mut fmpz,
-                                  pm1: mp_ptr, num_pm1: mp_limb_signed_t)
-     -> ::std::os::raw::c_int;
+    pub fn fmpz_is_prime_morrison(F: *mut fmpz,
+                                  R: *mut fmpz,
+                                  n: *mut fmpz,
+                                  pm1: mp_ptr,
+                                  num_pm1: mp_limb_signed_t)
+                                  -> c_int;
 }
 extern "C" {
-    pub fn fmpz_is_prime(p: *mut fmpz) -> ::std::os::raw::c_int;
+    pub fn fmpz_is_prime(p: *mut fmpz) -> c_int;
 }
 extern "C" {
-    pub fn fmpz_divisor_in_residue_class_lenstra(fac: *mut fmpz, n: *mut fmpz,
-                                                 r: *mut fmpz, s: *mut fmpz)
-     -> ::std::os::raw::c_int;
+    pub fn fmpz_divisor_in_residue_class_lenstra(fac: *mut fmpz,
+                                                 n: *mut fmpz,
+                                                 r: *mut fmpz,
+                                                 s: *mut fmpz)
+                                                 -> c_int;
 }
 extern "C" {
-    pub fn fmpz_nextprime(res: *mut fmpz, n: *mut fmpz,
-                          proved: ::std::os::raw::c_int);
+    pub fn fmpz_nextprime(res: *mut fmpz, n: *mut fmpz, proved: c_int);
 }
 extern "C" {
     pub fn fmpz_primorial(res: *mut fmpz, n: mp_limb_t);
@@ -8253,7 +8818,7 @@ extern "C" {
     pub fn fmpz_euler_phi(res: *mut fmpz, n: *mut fmpz);
 }
 extern "C" {
-    pub fn fmpz_moebius_mu(n: *mut fmpz) -> ::std::os::raw::c_int;
+    pub fn fmpz_moebius_mu(n: *mut fmpz) -> c_int;
 }
 extern "C" {
     pub fn fmpz_divisor_sigma(res: *mut fmpz, n: *mut fmpz, k: mp_limb_t);
@@ -8261,7 +8826,7 @@ extern "C" {
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct fmpz_factor_struct {
-    pub sign: ::std::os::raw::c_int,
+    pub sign: c_int,
     pub p: *mut fmpz,
     pub exp: *mut mp_limb_t,
     pub alloc: mp_limb_signed_t,
@@ -8269,38 +8834,47 @@ pub struct fmpz_factor_struct {
 }
 #[test]
 fn bindgen_test_layout_fmpz_factor_struct() {
-    assert_eq!(::std::mem::size_of::<fmpz_factor_struct>() , 40usize , concat
-               ! ( "Size of: " , stringify ! ( fmpz_factor_struct ) ));
-    assert_eq! (::std::mem::align_of::<fmpz_factor_struct>() , 8usize , concat
-                ! ( "Alignment of " , stringify ! ( fmpz_factor_struct ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const fmpz_factor_struct ) ) . sign as * const
-                _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( fmpz_factor_struct ) ,
-                "::" , stringify ! ( sign ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const fmpz_factor_struct ) ) . p as * const _
-                as usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( fmpz_factor_struct ) ,
-                "::" , stringify ! ( p ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const fmpz_factor_struct ) ) . exp as * const _
-                as usize } , 16usize , concat ! (
-                "Alignment of field: " , stringify ! ( fmpz_factor_struct ) ,
-                "::" , stringify ! ( exp ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const fmpz_factor_struct ) ) . alloc as * const
-                _ as usize } , 24usize , concat ! (
-                "Alignment of field: " , stringify ! ( fmpz_factor_struct ) ,
-                "::" , stringify ! ( alloc ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const fmpz_factor_struct ) ) . num as * const _
-                as usize } , 32usize , concat ! (
-                "Alignment of field: " , stringify ! ( fmpz_factor_struct ) ,
-                "::" , stringify ! ( num ) ));
+    assert_eq!(::std::mem::size_of::<fmpz_factor_struct>(),
+               40usize,
+               concat!("Size of: ", stringify!(fmpz_factor_struct)));
+    assert_eq!(::std::mem::align_of::<fmpz_factor_struct>(),
+               8usize,
+               concat!("Alignment of ", stringify!(fmpz_factor_struct)));
+    assert_eq!(unsafe { &(*(0 as *const fmpz_factor_struct)).sign as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(fmpz_factor_struct),
+                       "::",
+                       stringify!(sign)));
+    assert_eq!(unsafe { &(*(0 as *const fmpz_factor_struct)).p as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(fmpz_factor_struct),
+                       "::",
+                       stringify!(p)));
+    assert_eq!(unsafe { &(*(0 as *const fmpz_factor_struct)).exp as *const _ as usize },
+               16usize,
+               concat!("Alignment of field: ",
+                       stringify!(fmpz_factor_struct),
+                       "::",
+                       stringify!(exp)));
+    assert_eq!(unsafe { &(*(0 as *const fmpz_factor_struct)).alloc as *const _ as usize },
+               24usize,
+               concat!("Alignment of field: ",
+                       stringify!(fmpz_factor_struct),
+                       "::",
+                       stringify!(alloc)));
+    assert_eq!(unsafe { &(*(0 as *const fmpz_factor_struct)).num as *const _ as usize },
+               32usize,
+               concat!("Alignment of field: ",
+                       stringify!(fmpz_factor_struct),
+                       "::",
+                       stringify!(num)));
 }
 impl Clone for fmpz_factor_struct {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 pub type fmpz_factor_t = [fmpz_factor_struct; 1usize];
 extern "C" {
@@ -8313,20 +8887,16 @@ extern "C" {
     pub fn fmpz_factor_print(factor: *mut fmpz_factor_struct);
 }
 extern "C" {
-    pub fn _fmpz_factor_fit_length(factor: *mut fmpz_factor_struct,
-                                   len: mp_limb_signed_t);
+    pub fn _fmpz_factor_fit_length(factor: *mut fmpz_factor_struct, len: mp_limb_signed_t);
 }
 extern "C" {
-    pub fn _fmpz_factor_append_ui(factor: *mut fmpz_factor_struct,
-                                  p: mp_limb_t, exp: mp_limb_t);
+    pub fn _fmpz_factor_append_ui(factor: *mut fmpz_factor_struct, p: mp_limb_t, exp: mp_limb_t);
 }
 extern "C" {
-    pub fn _fmpz_factor_append(factor: *mut fmpz_factor_struct, p: *mut fmpz,
-                               exp: mp_limb_t);
+    pub fn _fmpz_factor_append(factor: *mut fmpz_factor_struct, p: *mut fmpz, exp: mp_limb_t);
 }
 extern "C" {
-    pub fn _fmpz_factor_set_length(factor: *mut fmpz_factor_struct,
-                                   newlen: mp_limb_signed_t);
+    pub fn _fmpz_factor_set_length(factor: *mut fmpz_factor_struct, newlen: mp_limb_signed_t);
 }
 extern "C" {
     pub fn _fmpz_factor_concat(factor1: *mut fmpz_factor_struct,
@@ -8334,85 +8904,87 @@ extern "C" {
                                exp: mp_limb_t);
 }
 extern "C" {
-    pub fn _fmpz_factor_extend_factor_ui(factor: *mut fmpz_factor_struct,
-                                         n: mp_limb_t);
+    pub fn _fmpz_factor_extend_factor_ui(factor: *mut fmpz_factor_struct, n: mp_limb_t);
 }
 extern "C" {
     pub fn fmpz_factor_trial_range(factor: *mut fmpz_factor_struct,
-                                   n: *mut fmpz, start: mp_limb_t,
+                                   n: *mut fmpz,
+                                   start: mp_limb_t,
                                    num_primes: mp_limb_t)
-     -> ::std::os::raw::c_int;
+                                   -> c_int;
 }
 extern "C" {
     pub fn fmpz_factor(factor: *mut fmpz_factor_struct, n: *mut fmpz);
 }
 extern "C" {
-    pub fn fmpz_factor_no_trial(factor: *mut fmpz_factor_struct,
-                                n: *mut fmpz);
+    pub fn fmpz_factor_no_trial(factor: *mut fmpz_factor_struct, n: *mut fmpz);
 }
 extern "C" {
-    pub fn fmpz_factor_si(factor: *mut fmpz_factor_struct,
-                          n: mp_limb_signed_t);
+    pub fn fmpz_factor_si(factor: *mut fmpz_factor_struct, n: mp_limb_signed_t);
 }
 extern "C" {
-    pub fn fmpz_factor_pp1(factor: *mut fmpz, n: *mut fmpz, B1: mp_limb_t,
-                           B2_sqrt: mp_limb_t, c: mp_limb_t)
-     -> ::std::os::raw::c_int;
+    pub fn fmpz_factor_pp1(factor: *mut fmpz,
+                           n: *mut fmpz,
+                           B1: mp_limb_t,
+                           B2_sqrt: mp_limb_t,
+                           c: mp_limb_t)
+                           -> c_int;
 }
 extern "C" {
-    pub fn fmpz_factor_refine(res: *mut fmpz_factor_struct,
-                              f: *mut fmpz_factor_struct);
+    pub fn fmpz_factor_refine(res: *mut fmpz_factor_struct, f: *mut fmpz_factor_struct);
 }
 extern "C" {
-    pub fn flint_mpn_sqr_and_add_a(y: mp_ptr, a: mp_ptr, n: mp_ptr,
-                                   n_size: mp_limb_t, ninv: mp_ptr,
+    pub fn flint_mpn_sqr_and_add_a(y: mp_ptr,
+                                   a: mp_ptr,
+                                   n: mp_ptr,
+                                   n_size: mp_limb_t,
+                                   ninv: mp_ptr,
                                    normbits: mp_limb_t);
 }
 extern "C" {
-    pub fn flint_mpn_factor_pollard_brent_single(factor: mp_ptr, n: mp_ptr,
-                                                 ninv: mp_ptr, a: mp_ptr,
-                                                 y: mp_ptr, n_size: mp_limb_t,
+    pub fn flint_mpn_factor_pollard_brent_single(factor: mp_ptr,
+                                                 n: mp_ptr,
+                                                 ninv: mp_ptr,
+                                                 a: mp_ptr,
+                                                 y: mp_ptr,
+                                                 n_size: mp_limb_t,
                                                  normbits: mp_limb_t,
                                                  max_iters: mp_limb_t)
-     -> ::std::os::raw::c_int;
+                                                 -> c_int;
 }
 extern "C" {
     pub fn fmpz_factor_pollard_brent_single(p_factor: *mut fmpz,
-                                            n_in: *mut fmpz, yi: *mut fmpz,
+                                            n_in: *mut fmpz,
+                                            yi: *mut fmpz,
                                             ai: *mut fmpz,
                                             max_iters: mp_limb_t)
-     -> ::std::os::raw::c_int;
+                                            -> c_int;
 }
 extern "C" {
     pub fn fmpz_factor_pollard_brent(factor: *mut fmpz,
-                                     state: *mut flint_rand_s, n: *mut fmpz,
+                                     state: *mut flint_rand_s,
+                                     n: *mut fmpz,
                                      max_tries: mp_limb_t,
                                      max_iters: mp_limb_t)
-     -> ::std::os::raw::c_int;
+                                     -> c_int;
 }
 extern "C" {
-    pub fn fmpz_factor_expand_iterative(n: *mut fmpz,
-                                        factor: *mut fmpz_factor_struct);
+    pub fn fmpz_factor_expand_iterative(n: *mut fmpz, factor: *mut fmpz_factor_struct);
 }
 extern "C" {
-    pub fn fmpz_factor_expand_multiexp(n: *mut fmpz,
-                                       factor: *mut fmpz_factor_struct);
+    pub fn fmpz_factor_expand_multiexp(n: *mut fmpz, factor: *mut fmpz_factor_struct);
 }
 extern "C" {
     pub fn fmpz_factor_expand(n: *mut fmpz, factor: *mut fmpz_factor_struct);
 }
 extern "C" {
-    pub fn fmpz_factor_euler_phi(res: *mut fmpz,
-                                 fac: *mut fmpz_factor_struct);
+    pub fn fmpz_factor_euler_phi(res: *mut fmpz, fac: *mut fmpz_factor_struct);
 }
 extern "C" {
-    pub fn fmpz_factor_moebius_mu(fac: *mut fmpz_factor_struct)
-     -> ::std::os::raw::c_int;
+    pub fn fmpz_factor_moebius_mu(fac: *mut fmpz_factor_struct) -> c_int;
 }
 extern "C" {
-    pub fn fmpz_factor_divisor_sigma(res: *mut fmpz,
-                                     fac: *mut fmpz_factor_struct,
-                                     k: mp_limb_t);
+    pub fn fmpz_factor_divisor_sigma(res: *mut fmpz, fac: *mut fmpz_factor_struct, k: mp_limb_t);
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
@@ -8426,85 +8998,102 @@ pub struct ecm_s {
     pub a24: mp_ptr,
     pub ninv: mp_ptr,
     pub one: mp_ptr,
-    pub GCD_table: *mut ::std::os::raw::c_uchar,
-    pub prime_table: *mut *mut ::std::os::raw::c_uchar,
+    pub GCD_table: *mut c_uchar,
+    pub prime_table: *mut *mut c_uchar,
     pub n_size: mp_limb_t,
     pub normbits: mp_limb_t,
 }
 #[test]
 fn bindgen_test_layout_ecm_s() {
-    assert_eq!(::std::mem::size_of::<ecm_s>() , 104usize , concat ! (
-               "Size of: " , stringify ! ( ecm_s ) ));
-    assert_eq! (::std::mem::align_of::<ecm_s>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( ecm_s ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const ecm_s ) ) . t as * const _ as usize } ,
-                0usize , concat ! (
-                "Alignment of field: " , stringify ! ( ecm_s ) , "::" ,
-                stringify ! ( t ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const ecm_s ) ) . u as * const _ as usize } ,
-                8usize , concat ! (
-                "Alignment of field: " , stringify ! ( ecm_s ) , "::" ,
-                stringify ! ( u ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const ecm_s ) ) . v as * const _ as usize } ,
-                16usize , concat ! (
-                "Alignment of field: " , stringify ! ( ecm_s ) , "::" ,
-                stringify ! ( v ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const ecm_s ) ) . w as * const _ as usize } ,
-                24usize , concat ! (
-                "Alignment of field: " , stringify ! ( ecm_s ) , "::" ,
-                stringify ! ( w ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const ecm_s ) ) . x as * const _ as usize } ,
-                32usize , concat ! (
-                "Alignment of field: " , stringify ! ( ecm_s ) , "::" ,
-                stringify ! ( x ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const ecm_s ) ) . z as * const _ as usize } ,
-                40usize , concat ! (
-                "Alignment of field: " , stringify ! ( ecm_s ) , "::" ,
-                stringify ! ( z ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const ecm_s ) ) . a24 as * const _ as usize } ,
-                48usize , concat ! (
-                "Alignment of field: " , stringify ! ( ecm_s ) , "::" ,
-                stringify ! ( a24 ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const ecm_s ) ) . ninv as * const _ as usize }
-                , 56usize , concat ! (
-                "Alignment of field: " , stringify ! ( ecm_s ) , "::" ,
-                stringify ! ( ninv ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const ecm_s ) ) . one as * const _ as usize } ,
-                64usize , concat ! (
-                "Alignment of field: " , stringify ! ( ecm_s ) , "::" ,
-                stringify ! ( one ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const ecm_s ) ) . GCD_table as * const _ as
-                usize } , 72usize , concat ! (
-                "Alignment of field: " , stringify ! ( ecm_s ) , "::" ,
-                stringify ! ( GCD_table ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const ecm_s ) ) . prime_table as * const _ as
-                usize } , 80usize , concat ! (
-                "Alignment of field: " , stringify ! ( ecm_s ) , "::" ,
-                stringify ! ( prime_table ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const ecm_s ) ) . n_size as * const _ as usize
-                } , 88usize , concat ! (
-                "Alignment of field: " , stringify ! ( ecm_s ) , "::" ,
-                stringify ! ( n_size ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const ecm_s ) ) . normbits as * const _ as
-                usize } , 96usize , concat ! (
-                "Alignment of field: " , stringify ! ( ecm_s ) , "::" ,
-                stringify ! ( normbits ) ));
+    assert_eq!(::std::mem::size_of::<ecm_s>(),
+               104usize,
+               concat!("Size of: ", stringify!(ecm_s)));
+    assert_eq!(::std::mem::align_of::<ecm_s>(),
+               8usize,
+               concat!("Alignment of ", stringify!(ecm_s)));
+    assert_eq!(unsafe { &(*(0 as *const ecm_s)).t as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(ecm_s),
+                       "::",
+                       stringify!(t)));
+    assert_eq!(unsafe { &(*(0 as *const ecm_s)).u as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(ecm_s),
+                       "::",
+                       stringify!(u)));
+    assert_eq!(unsafe { &(*(0 as *const ecm_s)).v as *const _ as usize },
+               16usize,
+               concat!("Alignment of field: ",
+                       stringify!(ecm_s),
+                       "::",
+                       stringify!(v)));
+    assert_eq!(unsafe { &(*(0 as *const ecm_s)).w as *const _ as usize },
+               24usize,
+               concat!("Alignment of field: ",
+                       stringify!(ecm_s),
+                       "::",
+                       stringify!(w)));
+    assert_eq!(unsafe { &(*(0 as *const ecm_s)).x as *const _ as usize },
+               32usize,
+               concat!("Alignment of field: ",
+                       stringify!(ecm_s),
+                       "::",
+                       stringify!(x)));
+    assert_eq!(unsafe { &(*(0 as *const ecm_s)).z as *const _ as usize },
+               40usize,
+               concat!("Alignment of field: ",
+                       stringify!(ecm_s),
+                       "::",
+                       stringify!(z)));
+    assert_eq!(unsafe { &(*(0 as *const ecm_s)).a24 as *const _ as usize },
+               48usize,
+               concat!("Alignment of field: ",
+                       stringify!(ecm_s),
+                       "::",
+                       stringify!(a24)));
+    assert_eq!(unsafe { &(*(0 as *const ecm_s)).ninv as *const _ as usize },
+               56usize,
+               concat!("Alignment of field: ",
+                       stringify!(ecm_s),
+                       "::",
+                       stringify!(ninv)));
+    assert_eq!(unsafe { &(*(0 as *const ecm_s)).one as *const _ as usize },
+               64usize,
+               concat!("Alignment of field: ",
+                       stringify!(ecm_s),
+                       "::",
+                       stringify!(one)));
+    assert_eq!(unsafe { &(*(0 as *const ecm_s)).GCD_table as *const _ as usize },
+               72usize,
+               concat!("Alignment of field: ",
+                       stringify!(ecm_s),
+                       "::",
+                       stringify!(GCD_table)));
+    assert_eq!(unsafe { &(*(0 as *const ecm_s)).prime_table as *const _ as usize },
+               80usize,
+               concat!("Alignment of field: ",
+                       stringify!(ecm_s),
+                       "::",
+                       stringify!(prime_table)));
+    assert_eq!(unsafe { &(*(0 as *const ecm_s)).n_size as *const _ as usize },
+               88usize,
+               concat!("Alignment of field: ",
+                       stringify!(ecm_s),
+                       "::",
+                       stringify!(n_size)));
+    assert_eq!(unsafe { &(*(0 as *const ecm_s)).normbits as *const _ as usize },
+               96usize,
+               concat!("Alignment of field: ",
+                       stringify!(ecm_s),
+                       "::",
+                       stringify!(normbits)));
 }
 impl Clone for ecm_s {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 pub type ecm_t = [ecm_s; 1usize];
 extern "C" {
@@ -8514,49 +9103,73 @@ extern "C" {
     pub fn fmpz_factor_ecm_clear(ecm_inf: *mut ecm_s);
 }
 extern "C" {
-    pub fn fmpz_factor_ecm_addmod(a: mp_ptr, b: mp_ptr, c: mp_ptr, n: mp_ptr,
-                                  n_size: mp_limb_t);
+    pub fn fmpz_factor_ecm_addmod(a: mp_ptr, b: mp_ptr, c: mp_ptr, n: mp_ptr, n_size: mp_limb_t);
 }
 extern "C" {
-    pub fn fmpz_factor_ecm_submod(x: mp_ptr, a: mp_ptr, b: mp_ptr, n: mp_ptr,
-                                  n_size: mp_limb_t);
+    pub fn fmpz_factor_ecm_submod(x: mp_ptr, a: mp_ptr, b: mp_ptr, n: mp_ptr, n_size: mp_limb_t);
 }
 extern "C" {
-    pub fn fmpz_factor_ecm_double(x: mp_ptr, z: mp_ptr, x0: mp_ptr,
-                                  z0: mp_ptr, n: mp_ptr, ecm_inf: *mut ecm_s);
+    pub fn fmpz_factor_ecm_double(x: mp_ptr,
+                                  z: mp_ptr,
+                                  x0: mp_ptr,
+                                  z0: mp_ptr,
+                                  n: mp_ptr,
+                                  ecm_inf: *mut ecm_s);
 }
 extern "C" {
-    pub fn fmpz_factor_ecm_add(x: mp_ptr, z: mp_ptr, x1: mp_ptr, z1: mp_ptr,
-                               x2: mp_ptr, z2: mp_ptr, x0: mp_ptr, z0: mp_ptr,
-                               n: mp_ptr, ecm_inf: *mut ecm_s);
+    pub fn fmpz_factor_ecm_add(x: mp_ptr,
+                               z: mp_ptr,
+                               x1: mp_ptr,
+                               z1: mp_ptr,
+                               x2: mp_ptr,
+                               z2: mp_ptr,
+                               x0: mp_ptr,
+                               z0: mp_ptr,
+                               n: mp_ptr,
+                               ecm_inf: *mut ecm_s);
 }
 extern "C" {
-    pub fn fmpz_factor_ecm_mul_montgomery_ladder(x: mp_ptr, z: mp_ptr,
-                                                 x0: mp_ptr, z0: mp_ptr,
-                                                 k: mp_limb_t, n: mp_ptr,
+    pub fn fmpz_factor_ecm_mul_montgomery_ladder(x: mp_ptr,
+                                                 z: mp_ptr,
+                                                 x0: mp_ptr,
+                                                 z0: mp_ptr,
+                                                 k: mp_limb_t,
+                                                 n: mp_ptr,
                                                  ecm_inf: *mut ecm_s);
 }
 extern "C" {
-    pub fn fmpz_factor_ecm_select_curve(f: mp_ptr, sig: mp_ptr, n: mp_ptr,
+    pub fn fmpz_factor_ecm_select_curve(f: mp_ptr,
+                                        sig: mp_ptr,
+                                        n: mp_ptr,
                                         ecm_inf: *mut ecm_s)
-     -> ::std::os::raw::c_int;
+                                        -> c_int;
 }
 extern "C" {
-    pub fn fmpz_factor_ecm_stage_I(f: mp_ptr, prime_array: *const mp_limb_t,
-                                   num: mp_limb_t, B1: mp_limb_t, n: mp_ptr,
+    pub fn fmpz_factor_ecm_stage_I(f: mp_ptr,
+                                   prime_array: *const mp_limb_t,
+                                   num: mp_limb_t,
+                                   B1: mp_limb_t,
+                                   n: mp_ptr,
                                    ecm_inf: *mut ecm_s)
-     -> ::std::os::raw::c_int;
+                                   -> c_int;
 }
 extern "C" {
-    pub fn fmpz_factor_ecm_stage_II(f: mp_ptr, B1: mp_limb_t, B2: mp_limb_t,
-                                    P: mp_limb_t, n: mp_ptr,
+    pub fn fmpz_factor_ecm_stage_II(f: mp_ptr,
+                                    B1: mp_limb_t,
+                                    B2: mp_limb_t,
+                                    P: mp_limb_t,
+                                    n: mp_ptr,
                                     ecm_inf: *mut ecm_s)
-     -> ::std::os::raw::c_int;
+                                    -> c_int;
 }
 extern "C" {
-    pub fn fmpz_factor_ecm(f: *mut fmpz, curves: mp_limb_t, B1: mp_limb_t,
-                           B2: mp_limb_t, state: *mut flint_rand_s,
-                           n_in: *mut fmpz) -> ::std::os::raw::c_int;
+    pub fn fmpz_factor_ecm(f: *mut fmpz,
+                           curves: mp_limb_t,
+                           B1: mp_limb_t,
+                           B2: mp_limb_t,
+                           state: *mut flint_rand_s,
+                           n_in: *mut fmpz)
+                           -> c_int;
 }
 extern "C" {
     pub fn wrapped_fmpz_clear(f: *mut fmpz);
@@ -8592,19 +9205,19 @@ extern "C" {
     pub fn wrapped_fmpz_one(f: *mut fmpz);
 }
 extern "C" {
-    pub fn wrapped_fmpz_is_zero(f: *mut fmpz) -> ::std::os::raw::c_int;
+    pub fn wrapped_fmpz_is_zero(f: *mut fmpz) -> c_int;
 }
 extern "C" {
-    pub fn wrapped_fmpz_is_one(f: *mut fmpz) -> ::std::os::raw::c_int;
+    pub fn wrapped_fmpz_is_one(f: *mut fmpz) -> c_int;
 }
 extern "C" {
     pub fn wrapped_fmpz_swap(f: *mut fmpz, g: *mut fmpz);
 }
 extern "C" {
-    pub fn wrapped_fmpz_is_even(f: *mut fmpz) -> ::std::os::raw::c_int;
+    pub fn wrapped_fmpz_is_even(f: *mut fmpz) -> c_int;
 }
 extern "C" {
-    pub fn wrapped_fmpz_is_odd(f: *mut fmpz) -> ::std::os::raw::c_int;
+    pub fn wrapped_fmpz_is_odd(f: *mut fmpz) -> c_int;
 }
 extern "C" {
     pub fn wrapped_fmpz_neg(f1: *mut fmpz, f2: *mut fmpz);
@@ -8613,49 +9226,55 @@ extern "C" {
     pub fn wrapped_fmpz_negmod(r: *mut fmpz, a: *mut fmpz, mod_: *mut fmpz);
 }
 extern "C" {
-    pub fn wrapped_fmpz_mul2_uiui(f: *mut fmpz, g: *mut fmpz, h1: mp_limb_t,
-                                  h2: mp_limb_t);
+    pub fn wrapped_fmpz_mul2_uiui(f: *mut fmpz, g: *mut fmpz, h1: mp_limb_t, h2: mp_limb_t);
 }
 extern "C" {
-    pub fn wrapped_fmpz_divexact2_uiui(f: *mut fmpz, g: *mut fmpz,
-                                       h1: mp_limb_t, h2: mp_limb_t);
+    pub fn wrapped_fmpz_divexact2_uiui(f: *mut fmpz, g: *mut fmpz, h1: mp_limb_t, h2: mp_limb_t);
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct __va_list_tag {
-    pub gp_offset: ::std::os::raw::c_uint,
-    pub fp_offset: ::std::os::raw::c_uint,
-    pub overflow_arg_area: *mut ::std::os::raw::c_void,
-    pub reg_save_area: *mut ::std::os::raw::c_void,
+    pub gp_offset: c_uint,
+    pub fp_offset: c_uint,
+    pub overflow_arg_area: *mut c_void,
+    pub reg_save_area: *mut c_void,
 }
 #[test]
 fn bindgen_test_layout___va_list_tag() {
-    assert_eq!(::std::mem::size_of::<__va_list_tag>() , 24usize , concat ! (
-               "Size of: " , stringify ! ( __va_list_tag ) ));
-    assert_eq! (::std::mem::align_of::<__va_list_tag>() , 8usize , concat ! (
-                "Alignment of " , stringify ! ( __va_list_tag ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const __va_list_tag ) ) . gp_offset as * const
-                _ as usize } , 0usize , concat ! (
-                "Alignment of field: " , stringify ! ( __va_list_tag ) , "::"
-                , stringify ! ( gp_offset ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const __va_list_tag ) ) . fp_offset as * const
-                _ as usize } , 4usize , concat ! (
-                "Alignment of field: " , stringify ! ( __va_list_tag ) , "::"
-                , stringify ! ( fp_offset ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const __va_list_tag ) ) . overflow_arg_area as
-                * const _ as usize } , 8usize , concat ! (
-                "Alignment of field: " , stringify ! ( __va_list_tag ) , "::"
-                , stringify ! ( overflow_arg_area ) ));
-    assert_eq! (unsafe {
-                & ( * ( 0 as * const __va_list_tag ) ) . reg_save_area as *
-                const _ as usize } , 16usize , concat ! (
-                "Alignment of field: " , stringify ! ( __va_list_tag ) , "::"
-                , stringify ! ( reg_save_area ) ));
+    assert_eq!(::std::mem::size_of::<__va_list_tag>(),
+               24usize,
+               concat!("Size of: ", stringify!(__va_list_tag)));
+    assert_eq!(::std::mem::align_of::<__va_list_tag>(),
+               8usize,
+               concat!("Alignment of ", stringify!(__va_list_tag)));
+    assert_eq!(unsafe { &(*(0 as *const __va_list_tag)).gp_offset as *const _ as usize },
+               0usize,
+               concat!("Alignment of field: ",
+                       stringify!(__va_list_tag),
+                       "::",
+                       stringify!(gp_offset)));
+    assert_eq!(unsafe { &(*(0 as *const __va_list_tag)).fp_offset as *const _ as usize },
+               4usize,
+               concat!("Alignment of field: ",
+                       stringify!(__va_list_tag),
+                       "::",
+                       stringify!(fp_offset)));
+    assert_eq!(unsafe { &(*(0 as *const __va_list_tag)).overflow_arg_area as *const _ as usize },
+               8usize,
+               concat!("Alignment of field: ",
+                       stringify!(__va_list_tag),
+                       "::",
+                       stringify!(overflow_arg_area)));
+    assert_eq!(unsafe { &(*(0 as *const __va_list_tag)).reg_save_area as *const _ as usize },
+               16usize,
+               concat!("Alignment of field: ",
+                       stringify!(__va_list_tag),
+                       "::",
+                       stringify!(reg_save_area)));
 }
 impl Clone for __va_list_tag {
-    fn clone(&self) -> Self { *self }
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 pub type __builtin_va_list = [__va_list_tag; 1usize];
