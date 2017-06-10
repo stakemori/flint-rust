@@ -8,6 +8,7 @@ build = "build.rs"
 gcc = "0.3"
 
 [dependencies]
+libc = "0.2.23"
 
 [dev-dependencies]
 num = "0.1"
