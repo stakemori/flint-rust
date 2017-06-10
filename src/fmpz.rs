@@ -16,7 +16,7 @@ pub struct Fmpz {
 impl Drop for Fmpz {
     fn drop(&mut self) {
         unsafe {
-            wrapped_fmpz_clear(self.as_mut_ptr());
+            fmpz_clear(self.as_mut_ptr());
         }
     }
 }
@@ -74,7 +74,7 @@ impl Fmpz {
     pub fn new() -> Fmpz {
         unsafe {
             let mut a = Fmpz::uninitialized();
-            wrapped_fmpz_init(a.as_mut_ptr());
+            fmpz_init(a.as_mut_ptr());
             Fmpz { fmpz: a }
         }
     }
@@ -82,7 +82,7 @@ impl Fmpz {
     pub fn from_si(g: c_long) -> Fmpz {
         unsafe {
             let mut a = Fmpz::uninitialized();
-            wrapped_fmpz_init_set_si(a.as_mut_ptr(), g);
+            fmpz_init_set_si(a.as_mut_ptr(), g);
             Fmpz { fmpz: a }
         }
     }
@@ -90,7 +90,7 @@ impl Fmpz {
     pub fn from_ui(g: c_ulong) -> Fmpz {
         unsafe {
             let mut a = Fmpz::uninitialized();
-            wrapped_fmpz_init_set_ui(a.as_mut_ptr(), g);
+            fmpz_init_set_ui(a.as_mut_ptr(), g);
             Fmpz { fmpz: a }
         }
     }
@@ -98,14 +98,14 @@ impl Fmpz {
     /// self = val
     pub fn set_si(&mut self, val: c_long) {
         unsafe {
-            wrapped_fmpz_set_si(self.as_mut_ptr(), val);
+            fmpz_set_si(self.as_mut_ptr(), val);
         }
     }
 
     /// self = val
     pub fn set_ui(&mut self, val: c_ulong) {
         unsafe {
-            wrapped_fmpz_set_ui(self.as_mut_ptr(), val);
+            fmpz_set_ui(self.as_mut_ptr(), val);
         }
     }
 

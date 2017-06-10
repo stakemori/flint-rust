@@ -373,12 +373,14 @@ extern "C" {
     pub fn fmpz_factor_trial_range(factor: *mut fmpz_factor_struct,
                                    n: *const fmpz,
                                    start: mp_limb_t,
-                                   num_primes: mp_limb_t) -> c_int;
+                                   num_primes: mp_limb_t)
+                                   -> c_int;
     pub fn fmpz_factor_pp1(factor: *mut fmpz,
                            n: *const fmpz,
                            B1: mp_limb_t,
                            B2_sqrt: mp_limb_t,
-                           c: mp_limb_t) -> c_int;
+                           c: mp_limb_t)
+                           -> c_int;
     pub fn fmpz_factor_init(factor: *mut fmpz_factor_struct);
     pub fn fmpz_factor_clear(factor: *mut fmpz_factor_struct);
     pub fn fmpz_factor(factor: *mut fmpz_factor_struct, n: fmpzptr);
@@ -388,38 +390,59 @@ extern "C" {
 
 #[link(name = "fmpz_wrapper")]
 extern "C" {
-    pub fn wrapped_fmpz_clear(f: fmpzmutptr);
-    pub fn wrapped_fmpz_init(f: fmpzmutptr);
-    pub fn wrapped_fmpz_init_set(f: fmpzmutptr, g: fmpzptr);
-    pub fn wrapped_fmpz_init_set_si(f: fmpzmutptr, g: mp_limb_signed_t);
-    pub fn wrapped_fmpz_init_set_ui(f: fmpzmutptr, g: mp_limb_t);
-    pub fn wrapped_fmpz_set_si(f: fmpzmutptr, val: mp_limb_signed_t);
-    pub fn wrapped_fmpz_set_ui(f: fmpzmutptr, val: mp_limb_t);
-    pub fn wrapped_fmpz_neg_ui(f: *mut fmpz, val: mp_limb_t);
-    pub fn wrapped_fmpz_set_uiui(f: *mut fmpz, hi: mp_limb_t, lo: mp_limb_t);
-    pub fn wrapped_fmpz_neg_uiui(f: *mut fmpz, hi: mp_limb_t, lo: mp_limb_t);
-    pub fn wrapped_fmpz_set_ui_smod(f: *mut fmpz, x: mp_limb_t, m: mp_limb_t);
+    #[link_name = "wrapped_fmpz_clear"]
+    pub fn fmpz_clear(f: fmpzmutptr);
+    #[link_name = "wrapped_fmpz_init"]
+    pub fn fmpz_init(f: fmpzmutptr);
+    #[link_name = "wrapped_fmpz_init_set"]
+    pub fn fmpz_init_set(f: fmpzmutptr, g: fmpzptr);
+    #[link_name = "wrapped_fmpz_init_set_si"]
+    pub fn fmpz_init_set_si(f: fmpzmutptr, g: mp_limb_signed_t);
+    #[link_name = "wrapped_fmpz_init_set_ui"]
+    pub fn fmpz_init_set_ui(f: fmpzmutptr, g: mp_limb_t);
+    #[link_name = "wrapped_fmpz_set_si"]
+    pub fn fmpz_set_si(f: fmpzmutptr, val: mp_limb_signed_t);
+    #[link_name = "wrapped_fmpz_set_ui"]
+    pub fn fmpz_set_ui(f: fmpzmutptr, val: mp_limb_t);
+    #[link_name = "wrapped_fmpz_neg_ui"]
+    pub fn fmpz_neg_ui(f: *mut fmpz, val: mp_limb_t);
+    #[link_name = "wrapped_fmpz_set_uiui"]
+    pub fn fmpz_set_uiui(f: *mut fmpz, hi: mp_limb_t, lo: mp_limb_t);
+    #[link_name = "wrapped_fmpz_neg_uiui"]
+    pub fn fmpz_neg_uiui(f: *mut fmpz, hi: mp_limb_t, lo: mp_limb_t);
+    #[link_name = "wrapped_fmpz_set_ui_smod"]
+    pub fn fmpz_set_ui_smod(f: *mut fmpz, x: mp_limb_t, m: mp_limb_t);
 
-    pub fn wrapped_fmpz_zero(f: *mut fmpz);
-    pub fn wrapped_fmpz_one(f: *mut fmpz);
+    #[link_name = "wrapped_fmpz_zero"]
+    pub fn fmpz_zero(f: *mut fmpz);
+    #[link_name = "wrapped_fmpz_one"]
+    pub fn fmpz_one(f: *mut fmpz);
 
-    pub fn wrapped_fmpz_is_zero(f: *const fmpz) -> c_int;
-    pub fn wrapped_fmpz_is_one(f: *const fmpz) -> c_int;
-    pub fn wrapped_fmpz_is_pm1(f: *const fmpz) -> c_int;
-    pub fn wrapped_fmpz_is_even(f: *const fmpz) -> c_int;
-    pub fn wrapped_fmpz_is_odd(f: *const fmpz) -> c_int;
+    #[link_name = "wrapped_fmpz_is_zero"]
+    pub fn fmpz_is_zero(f: *const fmpz) -> c_int;
+    #[link_name = "wrapped_fmpz_is_one"]
+    pub fn fmpz_is_one(f: *const fmpz) -> c_int;
+    #[link_name = "wrapped_fmpz_is_pm1"]
+    pub fn fmpz_is_pm1(f: *const fmpz) -> c_int;
+    #[link_name = "wrapped_fmpz_is_even"]
+    pub fn fmpz_is_even(f: *const fmpz) -> c_int;
+    #[link_name = "wrapped_fmpz_is_odd"]
+    pub fn fmpz_is_odd(f: *const fmpz) -> c_int;
 
-    pub fn wrapped_fmpz_neg(f1: *mut fmpz, f2: *const fmpz);
-    pub fn wrapped_fmpz_mul2_uiui(f: *mut fmpz, g: *const fmpz, h1: mp_limb_t, h2: mp_limb_t);
-    pub fn wrapped_fmpz_divexact2_uiui(f: *mut fmpz,
-                                       g: *const fmpz,
-                                       h1: mp_limb_t,
-                                       h2: mp_limb_t);
-    pub fn wrapped_fmpz_negmod(r: *mut fmpz, a: *const fmpz, mod_: *const fmpz);
+    #[link_name = "wrapped_fmpz_neg"]
+    pub fn fmpz_neg(f1: *mut fmpz, f2: *const fmpz);
+    #[link_name = "wrapped_fmpz_mul2_uiui"]
+    pub fn fmpz_mul2_uiui(f: *mut fmpz, g: *const fmpz, h1: mp_limb_t, h2: mp_limb_t);
+    #[link_name = "wrapped_fmpz_divexact2_uiui"]
+    pub fn fmpz_divexact2_uiui(f: *mut fmpz, g: *const fmpz, h1: mp_limb_t, h2: mp_limb_t);
+    #[link_name = "wrapped_fmpz_negmod"]
+    pub fn fmpz_negmod(r: *mut fmpz, a: *const fmpz, mod_: *const fmpz);
 
 
-    pub fn wrapped_flint_randinit(state: *mut flint_rand_s);
-    pub fn wrapped_flint_randclear(state: *mut flint_rand_s);
+    #[link_name = "wrapped_flint_randinit"]
+    pub fn flint_randinit(state: *mut flint_rand_s);
+    #[link_name = "wrapped_flint_randclear"]
+    pub fn flint_randclear(state: *mut flint_rand_s);
 
     pub fn bench_square_sum_native(n: c_ulong);
 }
