@@ -1,8 +1,7 @@
 extern crate flint;
 extern crate num;
-extern crate libc;
 
-use libc::c_ulong;
+use std::os::raw::{c_ulong, c_long};
 use num::FromPrimitive;
 use num::bigint::BigInt;
 use flint::fmpz::{Fmpz, FmpzFactor};
@@ -50,4 +49,14 @@ fn factor_test() {
     // println!("{}", res);
     let fac = a.to_factor();
     assert!(fac_to_fmpz(&fac).get_str(10) == a.get_str(10));
+}
+
+#[test]
+fn foo() {
+    let mut a = Fmpz::from_ui(200);
+    let b = Fmpz::from_ui(3);
+    a /= &b;
+    a += 1;
+    a *= -2 as c_long;
+    println!("{}", a);
 }
