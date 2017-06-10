@@ -107,6 +107,27 @@ void wrapped_fmpz_divexact2_uiui(fmpz_t f, const fmpz_t g, ulong h1, ulong h2)
   fmpz_divexact2_uiui(f, g, h1, h2);
 }
 
+void wrapped_flint_randinit(flint_rand_t state)
+{
+  flint_randinit(state);
+}
+
+void wrapped_flint_randclear(flint_rand_t state)
+{
+  flint_randclear(state);
+}
+
+void wrapped_fmpz_set_ui_smod(fmpz_t f, mp_limb_t x, mp_limb_t m)
+{
+  fmpz_set_ui_smod(f, x, m);
+}
+
+
+int wrapped_fmpz_is_pm1(const fmpz_t f)
+{
+  return fmpz_is_pm1(f);
+}
+
 void bench_square_sum_native(ulong n) {
   fmpz_t a, tmp, res;
 
