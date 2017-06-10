@@ -29,8 +29,17 @@ macro_rules! define_assign {
                 }
             }
         }
+    };
 
-
+    ($trait:ident, $meth:ident, $func:ident, $typ:ty) =>
+    {
+        impl $trait<$typ> for Fmpz {
+            fn $meth(&mut self, other: $typ) {
+                unsafe {
+                    $func(self.as_mut_ptr(), self.as_ptr(), other);
+                }
+            }
+        }
     }
 }
 
@@ -38,6 +47,10 @@ define_assign!(AddAssign, add_assign, fmpz_add);
 define_assign!(MulAssign, mul_assign, fmpz_mul);
 define_assign!(SubAssign, sub_assign, fmpz_sub);
 define_assign!(DivAssign, div_assign, fmpz_fdiv_q);
+
+define_assign!(AddAssign, add_assign, fmpz_add_ui, c_ulong);
+define_assign!(MulAssign, mul_assign, fmpz_mul_ui, c_ulong);
+define_assign!(MulAssign, mul_assign, fmpz_mul_si, c_long);
 
 impl Fmpz {
     fn as_mut_ptr(&mut self) -> fmpzmutptr {
