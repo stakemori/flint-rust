@@ -1,6 +1,9 @@
 #include "fmpz.h"
 #include "flint.h"
 #include "fmpz_poly.h"
+#include "fmpz_vec.h"
+#include "fmpz_mat.h"
+#include "fmpz_factor.h"
 
 void wrapped_fmpz_clear(fmpz_t f)
 {
