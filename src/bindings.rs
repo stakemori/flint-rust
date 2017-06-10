@@ -2,7 +2,9 @@
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
 #![allow(dead_code)]
-use std::os::raw::{c_ulong, c_long, c_char, c_int, c_void, c_double};
+extern crate libc;
+
+use self::libc::{c_ulong, c_long, c_char, c_int, c_void, c_double};
 pub type mp_limb_t = c_ulong;
 pub type mp_limb_signed_t = c_long;
 pub type fmpz = mp_limb_signed_t;

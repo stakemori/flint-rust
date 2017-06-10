@@ -1,10 +1,12 @@
+extern crate test;
+extern crate libc;
+
 use bindings::*;
 use std;
-use libc::{c_int, c_ulong, c_long};
+use self::libc::{c_int, c_ulong, c_long};
 use std::ffi::CString;
 use std::fmt;
 use std::ops::{AddAssign, MulAssign, SubAssign, DivAssign};
-extern crate test;
 
 #[derive(Debug)]
 pub struct Fmpz {
