@@ -243,6 +243,12 @@ impl FmpzFactor {
         unsafe { fmpz_factor(&mut self.factor_struct, n.as_ptr()) };
     }
 
+    pub fn factor_si(&mut self, n: c_long) {
+        unsafe{
+            fmpz_factor_si(&mut self.factor_struct, n);
+        }
+    }
+
     /// Evaluates an integer in factored form back to n.
     pub fn factor_expand_iterative(&self, n: &mut Fmpz) {
         unsafe {
