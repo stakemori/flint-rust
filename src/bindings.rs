@@ -403,7 +403,7 @@ extern "C" {
 }
 
 
-#[link(name = "fmpz_wrapper")]
+#[link(name = "flint_wrapper")]
 extern "C" {
     #[link_name = "wrapped_fmpz_clear"]
     pub fn fmpz_clear(f: fmpzmutptr);

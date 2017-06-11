@@ -8,8 +8,8 @@ fn main() {
     println!("cargo:rustc-link-lib=gmp");
 
     gcc::Config::new()
-        .file("src/fmpz_wrapper.c")
+        .file("src/flint_wrapper.c")
         .flag("-lflint -lmpfr -lgmp -lpthread")
         .include("/usr/include/flint")
-        .compile("libfmpz_wrapper.a");
+        .compile("libflint_wrapper.a");
 }
