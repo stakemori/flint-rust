@@ -4,7 +4,7 @@
 #![allow(dead_code)]
 extern crate libc;
 
-use self::libc::{c_ulong, c_long, c_char, c_int, c_void, c_double};
+use self::libc::{c_ulong, c_long, c_char, c_int, c_void, c_double, c_uint};
 pub type mp_limb_t = c_ulong;
 pub type mp_limb_signed_t = c_long;
 pub type fmpz = mp_limb_signed_t;
@@ -386,7 +386,22 @@ extern "C" {
     pub fn fmpz_factor(factor: *mut fmpz_factor_struct, n: fmpzptr);
     pub fn fmpz_factor_si(factor: *mut fmpz_factor_struct, n: mp_limb_signed_t);
     pub fn fmpz_factor_expand_iterative(n: fmpzmutptr, factor: *const fmpz_factor_struct);
+
+    // 57. ulong extras: Arithmetic for single word unsigned integers
+    pub fn n_randlimb(state: *mut flint_rand_s) -> mp_limb_t;
+    pub fn n_randbits(state: *mut flint_rand_s, bits: c_uint) -> mp_limb_t;
+    pub fn n_randtest_bits(state: *mut flint_rand_s, bits: c_int) -> mp_limb_t;
+    pub fn n_randint(state: *mut flint_rand_s, limit: mp_limb_t) -> mp_limb_t;
+    pub fn n_randtest(state: *mut flint_rand_s) -> mp_limb_t;
+    pub fn n_randtest_not_zero(state: *mut flint_rand_s) -> mp_limb_t;
+    pub fn n_randprime(state: *mut flint_rand_s, bits: mp_limb_t, proved: c_int) -> mp_limb_t;
+    pub fn n_randtest_prime(state: *mut flint_rand_s, proved: c_int) -> mp_limb_t;
+
+    pub fn n_pow(n: mp_limb_t, exp: mp_limb_t) -> mp_limb_t;
+    pub fn n_flog(n: mp_limb_t, b: mp_limb_t) -> mp_limb_t;
+    pub fn n_clog(n: mp_limb_t, b: mp_limb_t) -> mp_limb_t;
 }
+
 
 #[link(name = "fmpz_wrapper")]
 extern "C" {
