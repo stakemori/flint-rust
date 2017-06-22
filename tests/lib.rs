@@ -20,8 +20,8 @@ fn add_test() {
             let y: BigInt = FromPrimitive::from_u64(j).unwrap();
             b.set_ui(j);
             let z = &x + &y;
-            res.set_add(&a, &b);
-            res1.set_add_ui(&a, j);
+            res.add_mut(&a, &b);
+            res1.add_ui_mut(&a, j);
             assert!(z.to_str_radix(10) == res.get_str(10));
             assert!(z.to_str_radix(10) == res1.get_str(10));
         }
@@ -32,7 +32,7 @@ fn fac_to_fmpz(f: &FmpzFactor) -> Fmpz {
     let mut res = Fmpz::from_si(1);
     let mut tmp = Fmpz::new();
     for &(ref a, e) in f.to_vec().iter() {
-        tmp.pow_ui(&a, e as c_ulong);
+        tmp.pow_ui_mut(&a, e as c_ulong);
         res *= &tmp;
     }
     res

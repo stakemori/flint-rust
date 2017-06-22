@@ -110,49 +110,49 @@ impl Fmpz {
     }
 
     /// self = n + m
-    pub fn set_add(&mut self, n: &Fmpz, m: &Fmpz) {
+    pub fn add_mut(&mut self, n: &Fmpz, m: &Fmpz) {
         unsafe {
             fmpz_add(self.as_mut_ptr(), n.as_ptr(), m.as_ptr());
         }
     }
 
     /// self = n + m
-    pub fn set_add_ui(&mut self, n: &Self, m: c_ulong) {
+    pub fn add_ui_mut(&mut self, n: &Self, m: c_ulong) {
         unsafe {
             fmpz_add_ui(self.as_mut_ptr(), n.as_ptr(), m);
         }
     }
 
     /// self = n * m
-    pub fn set_mul(&mut self, n: &Fmpz, m: &Fmpz) {
+    pub fn mul_mut(&mut self, n: &Fmpz, m: &Fmpz) {
         unsafe {
             fmpz_mul(self.as_mut_ptr(), n.as_ptr(), m.as_ptr());
         }
     }
 
     /// self = n * m
-    pub fn set_mul_ui(&mut self, n: &Fmpz, m: c_long) {
+    pub fn mul_ui_mut(&mut self, n: &Fmpz, m: c_long) {
         unsafe {
             fmpz_mul_si(self.as_mut_ptr(), n.as_ptr(), m);
         }
     }
 
     /// self = g/h. Rounds up towards infinity.
-    pub fn set_cdiv_q(&mut self, g: &Fmpz, h: &Fmpz) {
+    pub fn cdiv_q_mut(&mut self, g: &Fmpz, h: &Fmpz) {
         unsafe {
             fmpz_cdiv_q(self.as_mut_ptr(), g.as_ptr(), h.as_ptr());
         }
     }
 
     /// self = g/h. Rounds up towards zero.
-    pub fn set_tdiv_q(&mut self, g: &Fmpz, h: &Fmpz) {
+    pub fn tdiv_q_mut(&mut self, g: &Fmpz, h: &Fmpz) {
         unsafe {
             fmpz_tdiv_q(self.as_mut_ptr(), g.as_ptr(), h.as_ptr());
         }
     }
 
     /// self = g/h. Rounds up towards -infinity.
-    pub fn set_fdiv_q(&mut self, g: &Fmpz, h: &Fmpz) {
+    pub fn fdiv_q_mut(&mut self, g: &Fmpz, h: &Fmpz) {
         unsafe {
             fmpz_fdiv_q(self.as_mut_ptr(), g.as_ptr(), h.as_ptr());
         }
@@ -160,7 +160,7 @@ impl Fmpz {
 
 
     /// self = g^exp
-    pub fn pow_ui(&mut self, g: &Fmpz, exp: c_ulong) {
+    pub fn pow_ui_mut(&mut self, g: &Fmpz, exp: c_ulong) {
         unsafe {
             fmpz_pow_ui(self.as_mut_ptr(), g.as_ptr(), exp);
         }
@@ -206,7 +206,7 @@ impl Fmpz {
     /// Prime factoriazation of self.
     pub fn to_factor(&self) -> FmpzFactor {
         let mut fac = FmpzFactor::new();
-        fac.factor(&self);
+        fac.factor_mut(&self);
         fac
     }
 }
@@ -239,11 +239,11 @@ impl FmpzFactor {
         }
     }
 
-    pub fn factor(&mut self, n: &Fmpz) {
+    pub fn factor_mut(&mut self, n: &Fmpz) {
         unsafe { fmpz_factor(&mut self.factor_struct, n.as_ptr()) };
     }
 
-    pub fn factor_si(&mut self, n: c_long) {
+    pub fn factor_si_mut(&mut self, n: c_long) {
         unsafe{
             fmpz_factor_si(&mut self.factor_struct, n);
         }
@@ -287,7 +287,7 @@ mod tests {
         let mut tmp = Fmpz::new();
         for i in 1..n {
             a.set_ui(i);
-            tmp.set_mul(&a, &a);
+            tmp.mul_mut(&a, &a);
             res += &tmp;
         }
     }
