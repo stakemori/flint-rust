@@ -64,7 +64,7 @@ impl Fmpz {
 
     fn uninitialized() -> fmpz_t {
         unsafe {
-            let a = std::mem::uninitialized();
+            let a: fmpz = std::mem::uninitialized();
             [a] as fmpz_t
         }
     }
