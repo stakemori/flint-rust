@@ -95,6 +95,13 @@ impl Fmpz {
     }
 
     /// self = val
+    pub fn set(&mut self, val: &Fmpz) {
+        unsafe {
+            fmpz_set(self.as_mut_ptr(), val.as_ptr());
+        }
+    }
+
+    /// self = val
     pub fn set_si(&mut self, val: c_long) {
         unsafe {
             fmpz_set_si(self.as_mut_ptr(), val);
