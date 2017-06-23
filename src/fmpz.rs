@@ -1,4 +1,3 @@
-extern crate test;
 extern crate libc;
 
 use bindings::*;
@@ -273,34 +272,5 @@ impl FmpzFactor {
 impl fmt::Display for Fmpz {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "{}", self.get_str(10))
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-    use self::test::Bencher;
-
-    fn square_sum(n: u64) {
-        let mut res = Fmpz::from_ui(0);
-        let mut a = Fmpz::new();
-        let mut tmp = Fmpz::new();
-        for i in 1..n {
-            a.set_ui(i);
-            tmp.mul_mut(&a, &a);
-            res += &tmp;
-        }
-    }
-
-    #[bench]
-    fn square_sum_bench(b: &mut Bencher) {
-        b.iter(|| square_sum(1000000))
-    }
-
-    #[bench]
-    fn square_sum_native_bench(b: &mut Bencher) {
-        b.iter(|| unsafe {
-                   bench_square_sum_native(1000000);
-               })
     }
 }
