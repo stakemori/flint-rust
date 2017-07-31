@@ -195,8 +195,9 @@ impl Fmpz {
 
     pub fn from_str(s: &str, base: usize) -> Result<Fmpz, ParseFmpzError> {
         // taken from rust-gmp (cf. https://crates.io/crates/rust-gmp)
-        let s = CString::new(s.to_string())
-            .map_err(|_| ParseFmpzError { _priv: () })?;
+        let s = CString::new(s.to_string()).map_err(
+            |_| ParseFmpzError { _priv: () },
+        )?;
         unsafe {
             assert!(base == 0 || (base >= 2 && base <= 62));
             let mut n = Fmpz::new();
@@ -250,7 +251,7 @@ impl FmpzFactor {
     }
 
     pub fn factor_si_mut(&mut self, n: c_long) {
-        unsafe{
+        unsafe {
             fmpz_factor_si(&mut self.factor_struct, n);
         }
     }
