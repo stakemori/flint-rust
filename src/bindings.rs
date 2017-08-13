@@ -128,14 +128,16 @@ extern "C" {
     pub fn fmpz_fits_si(f: *const fmpz) -> c_int;
     pub fn fmpz_setbit(f: *mut fmpz, i: mp_limb_t);
     pub fn fmpz_tstbit(f: *mut fmpz, i: mp_limb_t) -> c_int;
-    pub fn fmpz_abs_lbound_ui_2exp(exp: *mut mp_limb_signed_t,
-                                   x: *const fmpz,
-                                   bits: c_int)
-                                   -> mp_limb_t;
-    pub fn fmpz_abs_ubound_ui_2exp(exp: *mut mp_limb_signed_t,
-                                   x: *const fmpz,
-                                   bits: c_int)
-                                   -> mp_limb_t;
+    pub fn fmpz_abs_lbound_ui_2exp(
+        exp: *mut mp_limb_signed_t,
+        x: *const fmpz,
+        bits: c_int,
+    ) -> mp_limb_t;
+    pub fn fmpz_abs_ubound_ui_2exp(
+        exp: *mut mp_limb_signed_t,
+        x: *const fmpz,
+        bits: c_int,
+    ) -> mp_limb_t;
 
 
     pub fn fmpz_cmp(f: *const fmpz, g: *const fmpz) -> c_int;
@@ -186,11 +188,13 @@ extern "C" {
     pub fn fmpz_fdiv_ui(g: *const fmpz, h: mp_limb_t) -> mp_limb_t;
     pub fn fmpz_preinvn_init(inv: *mut fmpz_preinvn_struct, f: *mut fmpz);
     pub fn fmpz_preinvn_clear(inv: *mut fmpz_preinvn_struct);
-    pub fn fmpz_fdiv_qr_preinvn(f: *mut fmpz,
-                                s: *mut fmpz,
-                                g: *const fmpz,
-                                h: *const fmpz,
-                                inv: *const fmpz_preinvn_struct);
+    pub fn fmpz_fdiv_qr_preinvn(
+        f: *mut fmpz,
+        s: *mut fmpz,
+        g: *const fmpz,
+        h: *const fmpz,
+        inv: *const fmpz_preinvn_struct,
+    );
 
     pub fn fmpz_pow_ui(f: fmpzmutptr, g: fmpzptr, exp: mp_limb_t);
     pub fn fmpz_powm_ui(f: *mut fmpz, g: *const fmpz, exp: mp_limb_t, m: *const fmpz);
@@ -215,34 +219,40 @@ extern "C" {
     pub fn fmpz_rfac_ui(r: *mut fmpz, x: *const fmpz, n: mp_limb_t);
     pub fn fmpz_rfac_uiui(r: *mut fmpz, x: mp_limb_t, n: mp_limb_t);
     pub fn fmpz_mul_tdiv_q_2exp(f: *mut fmpz, g: *const fmpz, h: *const fmpz, exp: mp_limb_t);
-    pub fn fmpz_mul_si_tdiv_q_2exp(f: *mut fmpz,
-                                   g: *const fmpz,
-                                   x: mp_limb_signed_t,
-                                   exp: mp_limb_t);
+    pub fn fmpz_mul_si_tdiv_q_2exp(
+        f: *mut fmpz,
+        g: *const fmpz,
+        x: mp_limb_signed_t,
+        exp: mp_limb_t,
+    );
 
     pub fn _fmpz_remove(x: *mut fmpz, f: *const fmpz, finv: c_double) -> mp_limb_signed_t;
     pub fn fmpz_remove(rop: *mut fmpz, op: *const fmpz, f: *const fmpz) -> mp_limb_signed_t;
     pub fn fmpz_invmod(f: *mut fmpz, g: *const fmpz, h: *const fmpz) -> c_int;
     pub fn fmpz_jacobi(a: *const fmpz, p: *const fmpz) -> c_int;
 
-    pub fn fmpz_bit_pack(arr: mp_ptr,
-                         shift: mp_limb_t,
-                         bits: mp_limb_t,
-                         coeff: *mut fmpz,
-                         negate: c_int,
-                         borrow: c_int)
-                         -> c_int;
-    pub fn fmpz_bit_unpack(coeff: *mut fmpz,
-                           arr: *const mp_limb_t,
-                           shift: mp_limb_t,
-                           bits: mp_limb_t,
-                           negate: c_int,
-                           borrow: c_int)
-                           -> c_int;
-    pub fn fmpz_bit_unpack_unsigned(coeff: *mut fmpz,
-                                    arr: *const mp_limb_t,
-                                    shift: mp_limb_t,
-                                    bits: mp_limb_t);
+    pub fn fmpz_bit_pack(
+        arr: mp_ptr,
+        shift: mp_limb_t,
+        bits: mp_limb_t,
+        coeff: *mut fmpz,
+        negate: c_int,
+        borrow: c_int,
+    ) -> c_int;
+    pub fn fmpz_bit_unpack(
+        coeff: *mut fmpz,
+        arr: *const mp_limb_t,
+        shift: mp_limb_t,
+        bits: mp_limb_t,
+        negate: c_int,
+        borrow: c_int,
+    ) -> c_int;
+    pub fn fmpz_bit_unpack_unsigned(
+        coeff: *mut fmpz,
+        arr: *const mp_limb_t,
+        shift: mp_limb_t,
+        bits: mp_limb_t,
+    );
 
     pub fn fmpz_complement(r: *mut fmpz, f: *const fmpz);
     pub fn fmpz_combit(f: *mut fmpz, i: mp_limb_t);
@@ -252,30 +262,40 @@ extern "C" {
     pub fn fmpz_xor(r: *mut fmpz, a: *const fmpz, b: *const fmpz);
     pub fn fmpz_popcnt(c: *const fmpz) -> mp_limb_t;
 
-    pub fn fmpz_CRT_ui(out: *mut fmpz,
-                       r1: *mut fmpz,
-                       m1: *mut fmpz,
-                       r2: mp_limb_t,
-                       m2: mp_limb_t,
-                       sign: c_int);
-    pub fn fmpz_CRT(out: *mut fmpz,
-                    r1: *const fmpz,
-                    m1: *const fmpz,
-                    r2: *mut fmpz,
-                    m2: *mut fmpz,
-                    sign: c_int);
-    pub fn fmpz_multi_mod_ui(out: *mut mp_limb_t,
-                             in_: *const fmpz,
-                             comb: *const fmpz_comb_struct,
-                             temp: *mut fmpz_comb_temp_struct);
-    pub fn fmpz_multi_CRT_ui(output: *mut fmpz,
-                             residues: mp_srcptr,
-                             comb: *const fmpz_comb_struct,
-                             temp: *mut fmpz_comb_temp_struct,
-                             sign: c_int);
-    pub fn fmpz_comb_init(comb: *mut fmpz_comb_struct,
-                          primes: mp_srcptr,
-                          num_primes: mp_limb_signed_t);
+    pub fn fmpz_CRT_ui(
+        out: *mut fmpz,
+        r1: *mut fmpz,
+        m1: *mut fmpz,
+        r2: mp_limb_t,
+        m2: mp_limb_t,
+        sign: c_int,
+    );
+    pub fn fmpz_CRT(
+        out: *mut fmpz,
+        r1: *const fmpz,
+        m1: *const fmpz,
+        r2: *mut fmpz,
+        m2: *mut fmpz,
+        sign: c_int,
+    );
+    pub fn fmpz_multi_mod_ui(
+        out: *mut mp_limb_t,
+        in_: *const fmpz,
+        comb: *const fmpz_comb_struct,
+        temp: *mut fmpz_comb_temp_struct,
+    );
+    pub fn fmpz_multi_CRT_ui(
+        output: *mut fmpz,
+        residues: mp_srcptr,
+        comb: *const fmpz_comb_struct,
+        temp: *mut fmpz_comb_temp_struct,
+        sign: c_int,
+    );
+    pub fn fmpz_comb_init(
+        comb: *mut fmpz_comb_struct,
+        primes: mp_srcptr,
+        num_primes: mp_limb_signed_t,
+    );
     pub fn fmpz_comb_temp_init(temp: *mut fmpz_comb_temp_struct, comb: *const fmpz_comb_struct);
     pub fn fmpz_comb_clear(comb: *mut fmpz_comb_struct);
     pub fn fmpz_comb_temp_clear(temp: *mut fmpz_comb_temp_struct);
@@ -285,76 +305,95 @@ extern "C" {
     pub fn fmpz_is_probabprime_lucas(n: *const fmpz) -> c_int;
     pub fn fmpz_is_probabprime_BPSW(n: *const fmpz) -> c_int;
     pub fn fmpz_is_prime_pseudosquare(n: *const fmpz) -> c_int;
-    pub fn fmpz_is_prime_pocklington(F: *mut fmpz,
-                                     R: *mut fmpz,
-                                     n: *const fmpz,
-                                     pm1: mp_ptr,
-                                     num_pm1: mp_limb_signed_t)
-                                     -> c_int;
-    pub fn _fmpz_np1_trial_factors(n: *const fmpz,
-                                   pp1: mp_ptr,
-                                   num_pp1: *mut mp_limb_signed_t,
-                                   limit: mp_limb_t);
-    pub fn fmpz_is_prime_morrison(F: *mut fmpz,
-                                  R: *mut fmpz,
-                                  n: *const fmpz,
-                                  pm1: mp_ptr,
-                                  num_pm1: mp_limb_signed_t)
-                                  -> c_int;
-    pub fn _fmpz_nm1_trial_factors(n: *const fmpz,
-                                   pm1: mp_ptr,
-                                   num_pm1: *mut mp_limb_signed_t,
-                                   limit: mp_limb_t);
+    pub fn fmpz_is_prime_pocklington(
+        F: *mut fmpz,
+        R: *mut fmpz,
+        n: *const fmpz,
+        pm1: mp_ptr,
+        num_pm1: mp_limb_signed_t,
+    ) -> c_int;
+    pub fn _fmpz_np1_trial_factors(
+        n: *const fmpz,
+        pp1: mp_ptr,
+        num_pp1: *mut mp_limb_signed_t,
+        limit: mp_limb_t,
+    );
+    pub fn fmpz_is_prime_morrison(
+        F: *mut fmpz,
+        R: *mut fmpz,
+        n: *const fmpz,
+        pm1: mp_ptr,
+        num_pm1: mp_limb_signed_t,
+    ) -> c_int;
+    pub fn _fmpz_nm1_trial_factors(
+        n: *const fmpz,
+        pm1: mp_ptr,
+        num_pm1: *mut mp_limb_signed_t,
+        limit: mp_limb_t,
+    );
     pub fn fmpz_is_prime(p: *const fmpz) -> c_int;
 
-    pub fn fmpz_lucas_chain(Vm: *mut fmpz,
-                            Vm1: *mut fmpz,
-                            A: *const fmpz,
-                            m: *const fmpz,
-                            n: *const fmpz);
-    pub fn fmpz_lucas_chain_full(Vm: *mut fmpz,
-                                 Vm1: *mut fmpz,
-                                 A: *const fmpz,
-                                 B: *const fmpz,
-                                 m: *const fmpz,
-                                 n: *const fmpz);
-    pub fn fmpz_lucas_chain_double(U2m: *mut fmpz,
-                                   U2m1: *mut fmpz,
-                                   Um: *const fmpz,
-                                   Um1: *const fmpz,
-                                   A: *const fmpz,
-                                   B: *const fmpz,
-                                   n: *const fmpz);
-    pub fn fmpz_lucas_chain_add(Umn: *mut fmpz,
-                                Umn1: *mut fmpz,
-                                Um: *const fmpz,
-                                Um1: *const fmpz,
-                                Un: *const fmpz,
-                                Un1: *const fmpz,
-                                A: *const fmpz,
-                                B: *const fmpz,
-                                n: *const fmpz);
-    pub fn fmpz_lucas_chain_mul(Ukm: *mut fmpz,
-                                Ukm1: *mut fmpz,
-                                Um: *const fmpz,
-                                Um1: *const fmpz,
-                                A: *const fmpz,
-                                B: *const fmpz,
-                                k: *const fmpz,
-                                n: *const fmpz);
-    pub fn fmpz_lucas_chain_VtoU(Um: *mut fmpz,
-                                 Um1: *mut fmpz,
-                                 Vm: *const fmpz,
-                                 Vm1: *const fmpz,
-                                 A: *const fmpz,
-                                 B: *const fmpz,
-                                 Dinv: *const fmpz,
-                                 n: *const fmpz);
-    pub fn fmpz_divisor_in_residue_class_lenstra(fac: *mut fmpz,
-                                                 n: *const fmpz,
-                                                 r: *const fmpz,
-                                                 s: *const fmpz)
-                                                 -> c_int;
+    pub fn fmpz_lucas_chain(
+        Vm: *mut fmpz,
+        Vm1: *mut fmpz,
+        A: *const fmpz,
+        m: *const fmpz,
+        n: *const fmpz,
+    );
+    pub fn fmpz_lucas_chain_full(
+        Vm: *mut fmpz,
+        Vm1: *mut fmpz,
+        A: *const fmpz,
+        B: *const fmpz,
+        m: *const fmpz,
+        n: *const fmpz,
+    );
+    pub fn fmpz_lucas_chain_double(
+        U2m: *mut fmpz,
+        U2m1: *mut fmpz,
+        Um: *const fmpz,
+        Um1: *const fmpz,
+        A: *const fmpz,
+        B: *const fmpz,
+        n: *const fmpz,
+    );
+    pub fn fmpz_lucas_chain_add(
+        Umn: *mut fmpz,
+        Umn1: *mut fmpz,
+        Um: *const fmpz,
+        Um1: *const fmpz,
+        Un: *const fmpz,
+        Un1: *const fmpz,
+        A: *const fmpz,
+        B: *const fmpz,
+        n: *const fmpz,
+    );
+    pub fn fmpz_lucas_chain_mul(
+        Ukm: *mut fmpz,
+        Ukm1: *mut fmpz,
+        Um: *const fmpz,
+        Um1: *const fmpz,
+        A: *const fmpz,
+        B: *const fmpz,
+        k: *const fmpz,
+        n: *const fmpz,
+    );
+    pub fn fmpz_lucas_chain_VtoU(
+        Um: *mut fmpz,
+        Um1: *mut fmpz,
+        Vm: *const fmpz,
+        Vm1: *const fmpz,
+        A: *const fmpz,
+        B: *const fmpz,
+        Dinv: *const fmpz,
+        n: *const fmpz,
+    );
+    pub fn fmpz_divisor_in_residue_class_lenstra(
+        fac: *mut fmpz,
+        n: *const fmpz,
+        r: *const fmpz,
+        s: *const fmpz,
+    ) -> c_int;
 
 
     pub fn fmpz_primorial(res: *mut fmpz, n: mp_limb_t);
@@ -362,25 +401,25 @@ extern "C" {
     pub fn fmpz_factor_euler_phi(res: *mut fmpz, fac: *const fmpz_factor_struct);
     pub fn fmpz_factor_moebius_mu(fac: *const fmpz_factor_struct) -> c_int;
     pub fn fmpz_moebius_mu(n: *const fmpz) -> c_int;
-    pub fn fmpz_factor_divisor_sigma(res: *mut fmpz,
-                                     fac: *const fmpz_factor_struct,
-                                     k: mp_limb_t);
+    pub fn fmpz_factor_divisor_sigma(res: *mut fmpz, fac: *const fmpz_factor_struct, k: mp_limb_t);
     pub fn fmpz_divisor_sigma(res: *mut fmpz, n: *mut fmpz, k: mp_limb_t);
 
     // fmpz factor: Factorisation of arbitrary precision integers
     pub fn _fmpz_factor_append_ui(factor: *mut fmpz_factor_struct, p: mp_limb_t, exp: mp_limb_t);
     pub fn _fmpz_factor_append(factor: *mut fmpz_factor_struct, p: *mut fmpz, exp: mp_limb_t);
-    pub fn fmpz_factor_trial_range(factor: *mut fmpz_factor_struct,
-                                   n: *const fmpz,
-                                   start: mp_limb_t,
-                                   num_primes: mp_limb_t)
-                                   -> c_int;
-    pub fn fmpz_factor_pp1(factor: *mut fmpz,
-                           n: *const fmpz,
-                           B1: mp_limb_t,
-                           B2_sqrt: mp_limb_t,
-                           c: mp_limb_t)
-                           -> c_int;
+    pub fn fmpz_factor_trial_range(
+        factor: *mut fmpz_factor_struct,
+        n: *const fmpz,
+        start: mp_limb_t,
+        num_primes: mp_limb_t,
+    ) -> c_int;
+    pub fn fmpz_factor_pp1(
+        factor: *mut fmpz,
+        n: *const fmpz,
+        B1: mp_limb_t,
+        B2_sqrt: mp_limb_t,
+        c: mp_limb_t,
+    ) -> c_int;
     pub fn fmpz_factor_init(factor: *mut fmpz_factor_struct);
     pub fn fmpz_factor_clear(factor: *mut fmpz_factor_struct);
     pub fn fmpz_factor(factor: *mut fmpz_factor_struct, n: fmpzptr);
