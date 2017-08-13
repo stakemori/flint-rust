@@ -13,7 +13,7 @@ fn square_sum(n: u64) {
     let mut tmp = Fmpz::new();
     for i in 1..n {
         a.set_ui(i);
-        tmp.mul_mut(&a, &a);
+        tmp.pow_ui_mut(&a, 2);
         res += &tmp;
     }
 }
