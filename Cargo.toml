@@ -9,6 +9,7 @@ gcc = "0.3"
 
 [dependencies]
 libc = "0.2.23"
+rust-gmp = { git = "https://github.com/stakemori/rust-gmp.git"}
 
 [dev-dependencies]
 num = "0.1"
