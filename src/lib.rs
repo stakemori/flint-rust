@@ -2,3 +2,4 @@
 
 pub mod bindings;
 pub mod fmpz;
+pub mod fmpz_mat;
