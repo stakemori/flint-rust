@@ -7,9 +7,9 @@ use std::ffi::CString;
 use std::fmt;
 use std::ops::{AddAssign, MulAssign, SubAssign, DivAssign};
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Fmpz {
-    fmpz: fmpz_t,
+    pub fmpz: fmpz_t,
 }
 
 impl Drop for Fmpz {
@@ -54,11 +54,11 @@ define_assign!(MulAssign, mul_assign, fmpz_mul_ui, c_ulong);
 define_assign!(MulAssign, mul_assign, fmpz_mul_si, c_long);
 
 impl Fmpz {
-    fn as_mut_ptr(&mut self) -> fmpzmutptr {
+    pub fn as_mut_ptr(&mut self) -> fmpzmutptr {
         &mut self.fmpz[0] as fmpzmutptr
     }
 
-    fn as_ptr(&self) -> fmpzptr {
+    pub fn as_ptr(&self) -> fmpzptr {
         &self.fmpz[0] as fmpzptr
     }
 
