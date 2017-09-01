@@ -109,7 +109,7 @@ impl FmpzMat {
     }
 
     pub fn set_one(&mut self) {
-        debug_assert!(self.ncols() == self.nrows());
+        debug_assert_eq!(self.ncols(), self.nrows());
         unsafe {
             fmpz_mat_one(self.as_mut_ptr());
         }
