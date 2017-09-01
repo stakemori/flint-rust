@@ -279,18 +279,19 @@ impl Fmpz {
         let val_b = tmp2.remove(&b, &p);
         match (is_even!(val_a), is_even!(val_b)) {
             (true, true) => 1,
-            (true, false) => a.jacobi(&p),
-            (false, true) => b.jacobi(&p),
+            (true, false) => tmp1.jacobi(&p),
+            (false, true) => tmp2.jacobi(&p),
             (false, false) => {
                 if {
-                    tmp1.sub_ui_mut(&p, 1);
-                    *tmp1 >>= 1;
-                    tmp1.is_even()
+                    *tmp1 *= tmp2 as &Fmpz;
+                    tmp2.sub_ui_mut(&p, 1);
+                    *tmp2 >>= 1;
+                    tmp2.is_even()
                 }
                 {
-                    a.jacobi(&p) * b.jacobi(&p)
+                    tmp1.jacobi(&p)
                 } else {
-                    -a.jacobi(&p) * b.jacobi(&p)
+                    -tmp1.jacobi(&p)
                 }
             }
         }

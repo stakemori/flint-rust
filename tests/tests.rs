@@ -8,6 +8,25 @@ mod fmpz {
     use super::*;
 
     #[test]
+    fn test_hilbert_symbol_odd() {
+        let p: Fmpz = From::from(5);
+        let a: Fmpz = From::from(2);
+        assert_eq!(Fmpz::hilbert_symbol_odd(&a, &a, &p), 1);
+        assert_eq!(Fmpz::hilbert_symbol_odd(&a, &p, &p), -1);
+        assert_eq!(Fmpz::hilbert_symbol_odd(&p, &a, &p), -1);
+        assert_eq!(Fmpz::hilbert_symbol_odd(&p, &p, &p), 1);
+        assert_eq!(Fmpz::hilbert_symbol_odd(&p, &(&p * &a), &p), -1);
+
+        let p: Fmpz = From::from(7);
+        let a: Fmpz = From::from(3);
+        assert_eq!(Fmpz::hilbert_symbol_odd(&a, &a, &p), 1);
+        assert_eq!(Fmpz::hilbert_symbol_odd(&a, &p, &p), -1);
+        assert_eq!(Fmpz::hilbert_symbol_odd(&p, &a, &p), -1);
+        assert_eq!(Fmpz::hilbert_symbol_odd(&p, &p, &p), -1);
+        assert_eq!(Fmpz::hilbert_symbol_odd(&p, &(&p * &a), &p), 1);
+    }
+
+    #[test]
     fn test_div_r_2exp() {
         let a: Fmpz = From::from(11);
         let mut res: Fmpz = Default::default();
