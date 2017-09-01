@@ -17,11 +17,12 @@ mod fmpz {
             let mut tmp: Fmpz = Default::default();
             for i in 1..1000_000 {
                 let a: Fmpz = From::from(2 * i + 1);
-                if {
+                let cnd = {
                     tmp.sub_ui_mut(&a, 1);
                     tmp >>= 1;
                     tmp.is_even()
-                }
+                };
+                if cnd
                 {
                     s += 1;
                 }

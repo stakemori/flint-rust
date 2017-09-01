@@ -48,7 +48,7 @@ mod fmpz {
         assert_eq!(a, c as c_ulong);
 
         let p: Fmpz = From::from(3);
-        let b: Fmpz = From::from(236196);
+        let b: Fmpz = From::from(236_196);
         assert_eq!(a.remove(&b, &p), 10);
         assert_eq!(a, 4 as c_ulong);
     }
@@ -60,7 +60,7 @@ mod factor {
         let mut res = From::from(1);
         let mut tmp = Fmpz::new();
         for &(ref a, e) in &(f.to_vec()) {
-            tmp.pow_ui_mut(&a, e as c_ulong);
+            tmp.pow_ui_mut(a, e as c_ulong);
             res *= &tmp;
         }
         res
@@ -69,7 +69,7 @@ mod factor {
     #[test]
     fn factor_test() {
         let mut a = Fmpz::from_str("1844674407370955161", 10).unwrap();
-        let b = From::from(340394);
+        let b = From::from(340_394);
         a -= &b;
         // println!("res1={}", res);
         // res.set_mul_ui(&a, 10);
@@ -77,6 +77,6 @@ mod factor {
         // res.pow_ui(&a, 12);
         // println!("{}", res);
         let fac = a.to_factor();
-        assert!(fac_to_fmpz(&fac).get_str(10) == a.get_str(10));
+        assert_eq!(fac_to_fmpz(&fac).get_str(10), a.get_str(10));
     }
 }

@@ -265,7 +265,7 @@ impl Fmpz {
     pub fn hilbert_symbol_odd(a: &Self, b: &Self, p: &Self) -> i32 {
         let mut tmp1 = Fmpz::new();
         let mut tmp2 = Fmpz::new();
-        Self::_hilbert_symbol_odd(&a, &b, &p, &mut tmp1, &mut tmp2)
+        Self::_hilbert_symbol_odd(a, b, p, &mut tmp1, &mut tmp2)
     }
 
     pub fn _hilbert_symbol_odd(
@@ -275,23 +275,24 @@ impl Fmpz {
         tmp1: &mut Self,
         tmp2: &mut Self,
     ) -> i32 {
-        let val_a = tmp1.remove(&a, &p);
-        let val_b = tmp2.remove(&b, &p);
+        let val_a = tmp1.remove(a, p);
+        let val_b = tmp2.remove(b, p);
         match (is_even!(val_a), is_even!(val_b)) {
             (true, true) => 1,
-            (true, false) => tmp1.jacobi(&p),
-            (false, true) => tmp2.jacobi(&p),
+            (true, false) => tmp1.jacobi(p),
+            (false, true) => tmp2.jacobi(p),
             (false, false) => {
-                if {
+                let cond = {
                     *tmp1 *= tmp2 as &Fmpz;
-                    tmp2.sub_ui_mut(&p, 1);
+                    tmp2.sub_ui_mut(p, 1);
                     *tmp2 >>= 1;
                     tmp2.is_even()
-                }
+                };
+                if cond
                 {
-                    tmp1.jacobi(&p)
+                    tmp1.jacobi(p)
                 } else {
-                    -tmp1.jacobi(&p)
+                    -tmp1.jacobi(p)
                 }
             }
         }
