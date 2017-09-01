@@ -231,6 +231,13 @@ impl Fmpz {
         fac.factor_mut(self);
         fac
     }
+
+    /// Return jacobi symbol self mod p
+    pub fn jacobi(&self, p: &Self) -> i64 {
+        unsafe {
+            fmpz_jacobi(self.as_ptr(), p.as_ptr()) as i64
+        }
+    }
 }
 
 #[derive(Debug)]
