@@ -5,7 +5,7 @@ use std;
 use self::libc::{c_int, c_ulong, c_long};
 use std::ffi::CString;
 use std::fmt;
-use std::ops::{AddAssign, MulAssign, SubAssign, DivAssign};
+use std::ops::{AddAssign, MulAssign, SubAssign, DivAssign, Shr, Shl, ShlAssign, ShrAssign};
 use std::cmp::Ordering::{self, Greater, Less, Equal};
 
 #[derive(Debug, Clone)]
@@ -27,11 +27,11 @@ impl Default for Fmpz {
     }
 }
 
-impl_part_eq!(Fmpz, c_ulong, fmpz_cmp_ui);
-impl_part_cmp!(Fmpz, c_ulong, fmpz_cmp_ui);
+impl_part_eq_c!(Fmpz, c_ulong, fmpz_cmp_ui);
+impl_part_cmp_c!(Fmpz, c_ulong, fmpz_cmp_ui);
 
-impl_part_eq!(Fmpz, c_long, fmpz_cmp_si);
-impl_part_cmp!(Fmpz, c_long, fmpz_cmp_si);
+impl_part_eq_c!(Fmpz, c_long, fmpz_cmp_si);
+impl_part_cmp_c!(Fmpz, c_long, fmpz_cmp_si);
 
 impl PartialEq for Fmpz {
     fn eq(&self, other: &Fmpz) -> bool {
@@ -47,30 +47,6 @@ impl PartialOrd for Fmpz {
     }
 }
 
-macro_rules! define_assign {
-    ($trait:ident, $meth:ident, $func:ident) =>
-    {
-        impl<'a> $trait<&'a Self> for Fmpz {
-            fn $meth(&mut self, other: &Fmpz) {
-                unsafe {
-                    $func(self.as_mut_ptr(), self.as_ptr(), other.as_ptr());
-                }
-            }
-        }
-    };
-
-    ($trait:ident, $meth:ident, $func:ident, $typ:ty) =>
-    {
-        impl $trait<$typ> for Fmpz {
-            fn $meth(&mut self, other: $typ) {
-                unsafe {
-                    $func(self.as_mut_ptr(), self.as_ptr(), other);
-                }
-            }
-        }
-    }
-}
-
 define_assign!(AddAssign, add_assign, fmpz_add);
 define_assign!(MulAssign, mul_assign, fmpz_mul);
 define_assign!(SubAssign, sub_assign, fmpz_sub);
@@ -79,6 +55,9 @@ define_assign!(DivAssign, div_assign, fmpz_fdiv_q);
 define_assign!(AddAssign, add_assign, fmpz_add_ui, c_ulong);
 define_assign!(MulAssign, mul_assign, fmpz_mul_ui, c_ulong);
 define_assign!(MulAssign, mul_assign, fmpz_mul_si, c_long);
+
+define_assign!(ShlAssign, shl_assign, fmpz_mul_2exp, c_ulong);
+define_assign!(ShrAssign, shr_assign, fmpz_fdiv_q_2exp, c_ulong);
 
 impl From<c_long> for Fmpz {
     fn from(x: c_long) -> Fmpz {
