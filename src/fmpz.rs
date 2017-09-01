@@ -192,10 +192,7 @@ impl Fmpz {
 
             let first_nul = vector.iter().position(|i| i == &0).unwrap_or(len);
             vector.truncate(first_nul);
-            match String::from_utf8(vector) {
-                Ok(s) => s,
-                Err(_) => panic!("FMpz returned invalid UTF-8!"),
-            }
+            String::from_utf8(vector).unwrap()
         }
     }
 
@@ -219,7 +216,7 @@ impl Fmpz {
     /// Prime factoriazation of self.
     pub fn to_factor(&self) -> FmpzFactor {
         let mut fac = FmpzFactor::new();
-        fac.factor_mut(&self);
+        fac.factor_mut(self);
         fac
     }
 }
@@ -239,6 +236,12 @@ impl Drop for FmpzFactor {
         unsafe {
             fmpz_factor_clear(&mut self.factor_struct);
         }
+    }
+}
+
+impl Default for FmpzFactor {
+    fn default() -> Self {
+        FmpzFactor::new()
     }
 }
 

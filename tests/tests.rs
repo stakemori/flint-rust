@@ -31,7 +31,7 @@ fn add_test() {
 fn fac_to_fmpz(f: &FmpzFactor) -> Fmpz {
     let mut res = Fmpz::from_si(1);
     let mut tmp = Fmpz::new();
-    for &(ref a, e) in f.to_vec().iter() {
+    for &(ref a, e) in &(f.to_vec()) {
         tmp.pow_ui_mut(&a, e as c_ulong);
         res *= &tmp;
     }
