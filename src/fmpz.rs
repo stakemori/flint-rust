@@ -74,6 +74,12 @@ impl From<c_long> for Fmpz {
 }
 
 impl Fmpz {
+    pub fn is_even(&self) -> bool {
+        unsafe{
+            int_to_bool!(fmpz_is_even(self.as_ptr()))
+        }
+    }
+
     pub fn as_mut_ptr(&mut self) -> fmpzmutptr {
         &mut self.fmpz[0] as fmpzmutptr
     }
