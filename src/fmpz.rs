@@ -27,6 +27,12 @@ impl Default for Fmpz {
     }
 }
 
+impl_part_eq!(Fmpz, c_ulong, fmpz_cmp_ui);
+impl_part_cmp!(Fmpz, c_ulong, fmpz_cmp_ui);
+
+impl_part_eq!(Fmpz, c_long, fmpz_cmp_si);
+impl_part_cmp!(Fmpz, c_long, fmpz_cmp_si);
+
 impl PartialEq for Fmpz {
     fn eq(&self, other: &Fmpz) -> bool {
         unsafe { fmpz_equal(self.as_ptr(), other.as_ptr()) != 0 }
