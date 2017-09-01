@@ -9,12 +9,6 @@ use self::libc::{c_ulong, c_long};
 use fmpz::Fmpz;
 use std::fmt;
 
-macro_rules! int_to_bool {
-    ($a: expr) => {
-        $a != 0
-    }
-}
-
 #[derive(Debug, Clone)]
 pub struct FmpzMat {
     fmpz_mat: fmpz_mat_struct,

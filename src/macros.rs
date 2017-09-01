@@ -1,3 +1,9 @@
+macro_rules! int_to_bool {
+    ($a: expr) => {
+        $a != 0
+    }
+}
+
 macro_rules! is_even {
     ($expr: expr) => {($expr) & 1 == 0}
 }
