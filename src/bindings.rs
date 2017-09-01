@@ -2627,13 +2627,13 @@ extern "C" {
     pub fn fmpz_mat_clear(mat: *mut fmpz_mat_struct);
 }
 extern "C" {
-    pub fn fmpz_mat_equal(mat1: *mut fmpz_mat_struct, mat2: *mut fmpz_mat_struct) -> c_int;
+    pub fn fmpz_mat_equal(mat1: *const fmpz_mat_struct, mat2: *const fmpz_mat_struct) -> c_int;
 }
 extern "C" {
-    pub fn fmpz_mat_is_zero(mat: *mut fmpz_mat_struct) -> c_int;
+    pub fn fmpz_mat_is_zero(mat: *const fmpz_mat_struct) -> c_int;
 }
 extern "C" {
-    pub fn fmpz_mat_is_one(mat: *mut fmpz_mat_struct) -> c_int;
+    pub fn fmpz_mat_is_one(mat: *const fmpz_mat_struct) -> c_int;
 }
 extern "C" {
     pub fn fmpz_mat_zero(mat: *mut fmpz_mat_struct);
@@ -2748,101 +2748,113 @@ extern "C" {
     pub fn fmpz_mat_transpose(B: *mut fmpz_mat_struct, A: *mut fmpz_mat_struct);
 }
 extern "C" {
-    pub fn fmpz_mat_add(C: *mut fmpz_mat_struct, A: *mut fmpz_mat_struct, B: *mut fmpz_mat_struct);
+    pub fn fmpz_mat_add(
+        C: *mut fmpz_mat_struct,
+        A: *const fmpz_mat_struct,
+        B: *const fmpz_mat_struct,
+    );
 }
 extern "C" {
-    pub fn fmpz_mat_sub(C: *mut fmpz_mat_struct, A: *mut fmpz_mat_struct, B: *mut fmpz_mat_struct);
+    pub fn fmpz_mat_sub(
+        C: *mut fmpz_mat_struct,
+        A: *const fmpz_mat_struct,
+        B: *const fmpz_mat_struct,
+    );
 }
 extern "C" {
-    pub fn fmpz_mat_neg(B: *mut fmpz_mat_struct, A: *mut fmpz_mat_struct);
+    pub fn fmpz_mat_neg(B: *mut fmpz_mat_struct, A: *const fmpz_mat_struct);
 }
 extern "C" {
-    pub fn fmpz_mat_scalar_mul_fmpz(B: *mut fmpz_mat_struct, A: *mut fmpz_mat_struct, c: *mut fmpz);
+    pub fn fmpz_mat_scalar_mul_fmpz(
+        B: *mut fmpz_mat_struct,
+        A: *const fmpz_mat_struct,
+        c: *const fmpz,
+    );
 }
 extern "C" {
     pub fn fmpz_mat_scalar_mul_si(
         B: *mut fmpz_mat_struct,
-        A: *mut fmpz_mat_struct,
+        A: *const fmpz_mat_struct,
         c: mp_limb_signed_t,
     );
 }
 extern "C" {
-    pub fn fmpz_mat_scalar_mul_ui(B: *mut fmpz_mat_struct, A: *mut fmpz_mat_struct, c: mp_limb_t);
+    pub fn fmpz_mat_scalar_mul_ui(B: *mut fmpz_mat_struct, A: *const fmpz_mat_struct, c: mp_limb_t);
 }
 extern "C" {
     pub fn fmpz_mat_scalar_addmul_fmpz(
         B: *mut fmpz_mat_struct,
-        A: *mut fmpz_mat_struct,
-        c: *mut fmpz,
+        A: *const fmpz_mat_struct,
+        c: *const fmpz,
     );
 }
 extern "C" {
     pub fn fmpz_mat_scalar_addmul_si(
         B: *mut fmpz_mat_struct,
-        A: *mut fmpz_mat_struct,
+        A: *const fmpz_mat_struct,
         c: mp_limb_signed_t,
     );
 }
 extern "C" {
     pub fn fmpz_mat_scalar_addmul_ui(
         B: *mut fmpz_mat_struct,
-        A: *mut fmpz_mat_struct,
+        A: *const fmpz_mat_struct,
         c: mp_limb_t,
     );
 }
 extern "C" {
     pub fn fmpz_mat_scalar_submul_fmpz(
         B: *mut fmpz_mat_struct,
-        A: *mut fmpz_mat_struct,
-        c: *mut fmpz,
+        A: *const fmpz_mat_struct,
+        c: *const fmpz,
     );
 }
 extern "C" {
     pub fn fmpz_mat_scalar_submul_si(
         B: *mut fmpz_mat_struct,
-        A: *mut fmpz_mat_struct,
+        A: *const fmpz_mat_struct,
         c: mp_limb_signed_t,
     );
 }
 extern "C" {
     pub fn fmpz_mat_scalar_submul_ui(
         B: *mut fmpz_mat_struct,
-        A: *mut fmpz_mat_struct,
+        A: *const fmpz_mat_struct,
         c: mp_limb_t,
     );
 }
 extern "C" {
     pub fn fmpz_mat_scalar_divexact_fmpz(
         B: *mut fmpz_mat_struct,
-        A: *mut fmpz_mat_struct,
-        c: *mut fmpz,
+        A: *const fmpz_mat_struct,
+        c: *const fmpz,
     );
 }
 extern "C" {
     pub fn fmpz_mat_scalar_divexact_si(
         B: *mut fmpz_mat_struct,
-        A: *mut fmpz_mat_struct,
+        A: *const fmpz_mat_struct,
         c: mp_limb_signed_t,
     );
 }
 extern "C" {
     pub fn fmpz_mat_scalar_divexact_ui(
         B: *mut fmpz_mat_struct,
-        A: *mut fmpz_mat_struct,
+        A: *const fmpz_mat_struct,
         c: mp_limb_t,
     );
 }
 extern "C" {
     pub fn fmpz_mat_scalar_mul_2exp(
         B: *mut fmpz_mat_struct,
-        A: *mut fmpz_mat_struct,
+        A: *const fmpz_mat_struct,
         exp: mp_limb_t,
     );
 }
 extern "C" {
     pub fn fmpz_mat_scalar_tdiv_q_2exp(
         B: *mut fmpz_mat_struct,
-        A: *mut fmpz_mat_struct,
+        A: *const fmpz_mat_struct,
         exp: mp_limb_t,
     );
 }
@@ -2850,13 +2862,13 @@ extern "C" {
     pub fn fmpz_mat_scalar_mod_fmpz(B: *mut fmpz_mat_struct, A: *mut fmpz_mat_struct, m: *mut fmpz);
 }
 extern "C" {
-    pub fn fmpz_mat_mul(C: *mut fmpz_mat_struct, A: *mut fmpz_mat_struct, B: *mut fmpz_mat_struct);
+    pub fn fmpz_mat_mul(C: *mut fmpz_mat_struct, A: *const fmpz_mat_struct, B: *const fmpz_mat_struct);
 }
 extern "C" {
     pub fn fmpz_mat_mul_classical(
         C: *mut fmpz_mat_struct,
-        A: *mut fmpz_mat_struct,
-        B: *mut fmpz_mat_struct,
+        A: *const fmpz_mat_struct,
+        B: *const fmpz_mat_struct,
     );
 }
 extern "C" {
@@ -2993,7 +3005,7 @@ extern "C" {
     pub fn fmpz_mat_charpoly(cp: *mut fmpz_poly_struct, mat: *mut fmpz_mat_struct);
 }
 extern "C" {
-    pub fn fmpz_mat_rank(A: *mut fmpz_mat_struct) -> mp_limb_signed_t;
+    pub fn fmpz_mat_rank(A: *const fmpz_mat_struct) -> mp_limb_signed_t;
 }
 extern "C" {
     pub fn fmpz_mat_solve_bound(
@@ -3046,7 +3058,7 @@ extern "C" {
 extern "C" {
     pub fn fmpz_mat_nullspace(
         res: *mut fmpz_mat_struct,
-        mat: *mut fmpz_mat_struct,
+        mat: *const fmpz_mat_struct,
     ) -> mp_limb_signed_t;
 }
 extern "C" {
