@@ -248,8 +248,8 @@ impl Fmpz {
     }
 
     /// Return jacobi symbol self mod p
-    pub fn jacobi(&self, p: &Self) -> i64 {
-        unsafe { fmpz_jacobi(self.as_ptr(), p.as_ptr()) as i64 }
+    pub fn jacobi(&self, p: &Self) -> i32 {
+        unsafe { fmpz_jacobi(self.as_ptr(), p.as_ptr()) as i32 }
     }
 
     /// Return `valuation(op, f)` and set `self = op/f^e`, where e is the valuation.
