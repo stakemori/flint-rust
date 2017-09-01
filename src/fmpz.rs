@@ -5,7 +5,8 @@ use std;
 use self::libc::{c_int, c_ulong, c_long};
 use std::ffi::CString;
 use std::fmt;
-use std::ops::{AddAssign, MulAssign, SubAssign, DivAssign, Shr, Shl, ShlAssign, ShrAssign};
+use std::ops::{AddAssign, MulAssign, SubAssign, DivAssign, Shr, Shl, ShlAssign, ShrAssign, BitAnd,
+               BitOr, BitXor};
 use std::cmp::Ordering::{self, Greater, Less, Equal};
 
 #[derive(Debug, Clone)]
@@ -58,6 +59,13 @@ define_assign!(MulAssign, mul_assign, fmpz_mul_si, c_long);
 
 define_assign!(ShlAssign, shl_assign, fmpz_mul_2exp, c_ulong);
 define_assign!(ShrAssign, shr_assign, fmpz_fdiv_q_2exp, c_ulong);
+
+impl_operator!(BitAnd, Fmpz, bitand, fmpz_and);
+impl_operator!(BitOr, Fmpz, bitor, fmpz_or);
+impl_operator!(BitXor, Fmpz, bitxor, fmpz_xor);
+
+imp_operator_c!(Shl, Fmpz, shl, c_ulong, fmpz_mul_2exp);
+imp_operator_c!(Shr, Fmpz, shr, c_ulong, fmpz_fdiv_q_2exp);
 
 impl From<c_long> for Fmpz {
     fn from(x: c_long) -> Fmpz {
@@ -225,6 +233,8 @@ impl Fmpz {
         fac.factor_mut(self);
         fac
     }
+
+    impl_c_wrapper!(fdiv_r_2exp, fmpz_fdiv_r_2exp, Self, Ui, "self = x mod 2**y");
 
     /// Return jacobi symbol self mod p
     pub fn jacobi(&self, p: &Self) -> i32 {
