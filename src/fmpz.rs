@@ -6,7 +6,7 @@ use self::libc::{c_int, c_ulong, c_long};
 use std::ffi::CString;
 use std::fmt;
 use std::ops::{AddAssign, MulAssign, SubAssign, DivAssign, Shr, Shl, ShlAssign, ShrAssign, BitAnd,
-               BitOr, BitXor};
+               BitOr, BitXor, Mul, Add, Sub};
 use std::cmp::Ordering::{self, Greater, Less, Equal};
 
 #[derive(Debug, Clone)]
@@ -63,6 +63,10 @@ define_assign!(ShrAssign, shr_assign, fmpz_fdiv_q_2exp, c_ulong);
 impl_operator!(BitAnd, Fmpz, bitand, fmpz_and);
 impl_operator!(BitOr, Fmpz, bitor, fmpz_or);
 impl_operator!(BitXor, Fmpz, bitxor, fmpz_xor);
+
+impl_operator!(Mul, Fmpz, mul, fmpz_mul);
+impl_operator!(Add, Fmpz, add, fmpz_add);
+impl_operator!(Sub, Fmpz, sub, fmpz_sub);
 
 imp_operator_c!(Shl, Fmpz, shl, c_ulong, fmpz_mul_2exp);
 imp_operator_c!(Shr, Fmpz, shr, c_ulong, fmpz_fdiv_q_2exp);
