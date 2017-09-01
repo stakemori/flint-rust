@@ -96,12 +96,6 @@ impl From<c_long> for Fmpz {
     }
 }
 
-impl From<c_ulong> for Fmpz {
-    fn from(x: c_ulong) -> Fmpz {
-        Fmpz::from_ui(x)
-    }
-}
-
 impl Fmpz {
     pub fn as_mut_ptr(&mut self) -> fmpzmutptr {
         &mut self.fmpz[0] as fmpzmutptr

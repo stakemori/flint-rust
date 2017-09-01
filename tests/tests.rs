@@ -7,7 +7,7 @@ use flint::fmpz::{Fmpz, FmpzFactor};
 mod factor {
     use super::*;
     fn fac_to_fmpz(f: &FmpzFactor) -> Fmpz {
-        let mut res = Fmpz::from_si(1);
+        let mut res = From::from(1);
         let mut tmp = Fmpz::new();
         for &(ref a, e) in &(f.to_vec()) {
             tmp.pow_ui_mut(&a, e as c_ulong);
@@ -19,7 +19,7 @@ mod factor {
     #[test]
     fn factor_test() {
         let mut a = Fmpz::from_str("1844674407370955161", 10).unwrap();
-        let b = Fmpz::from_si(340394);
+        let b = From::from(340394);
         a -= &b;
         // println!("res1={}", res);
         // res.set_mul_ui(&a, 10);
