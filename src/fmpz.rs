@@ -251,6 +251,11 @@ impl Fmpz {
     pub fn jacobi(&self, p: &Self) -> i64 {
         unsafe { fmpz_jacobi(self.as_ptr(), p.as_ptr()) as i64 }
     }
+
+    /// Return `valuation(op, f)` and set `self = op/f^e`, where e is the valuation.
+    pub fn remove(&mut self, op: &Self, f: &Self) -> mp_limb_signed_t {
+        unsafe { fmpz_remove(self.as_mut_ptr(), op.as_ptr(), f.as_ptr()) }
+    }
 }
 
 #[derive(Debug)]

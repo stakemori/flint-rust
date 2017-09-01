@@ -4,6 +4,25 @@ extern crate libc;
 use libc::c_ulong;
 use flint::fmpz::{Fmpz, FmpzFactor};
 
+mod fmpz {
+    use super::*;
+
+    #[test]
+    fn test_remove() {
+        let mut a = Fmpz::new();
+        let c = 131;
+        let b: Fmpz = From::from(131 << 15);
+        let p: Fmpz = From::from(2);
+        assert_eq!(a.remove(&b, &p), 15);
+        assert_eq!(a, c as c_ulong);
+
+        let p: Fmpz = From::from(3);
+        let b: Fmpz = From::from(236196);
+        assert_eq!(a.remove(&b, &p), 10);
+        assert_eq!(a, 4 as c_ulong);
+    }
+}
+
 mod factor {
     use super::*;
     fn fac_to_fmpz(f: &FmpzFactor) -> Fmpz {
