@@ -2897,13 +2897,13 @@ extern "C" {
     pub fn fmpz_mat_sqr_bodrato(B: *mut fmpz_mat_struct, A: *mut fmpz_mat_struct);
 }
 extern "C" {
-    pub fn fmpz_mat_sqr(B: *mut fmpz_mat_struct, A: *mut fmpz_mat_struct);
+    pub fn fmpz_mat_sqr(B: *mut fmpz_mat_struct, A: *const fmpz_mat_struct);
 }
 extern "C" {
-    pub fn fmpz_mat_pow(B: *mut fmpz_mat_struct, A: *mut fmpz_mat_struct, exp: mp_limb_t);
+    pub fn fmpz_mat_pow(B: *mut fmpz_mat_struct, A: *const fmpz_mat_struct, exp: mp_limb_t);
 }
 extern "C" {
-    pub fn fmpz_mat_content(ret: *mut fmpz, A: *mut fmpz_mat_struct);
+    pub fn fmpz_mat_content(ret: *mut fmpz, A: *const fmpz_mat_struct);
 }
 extern "C" {
     pub fn fmpz_mat_find_pivot_any(
@@ -2958,10 +2958,10 @@ extern "C" {
     ) -> mp_limb_signed_t;
 }
 extern "C" {
-    pub fn fmpz_mat_trace(trace: *mut fmpz, mat: *mut fmpz_mat_struct);
+    pub fn fmpz_mat_trace(trace: *mut fmpz, mat: *const fmpz_mat_struct);
 }
 extern "C" {
-    pub fn fmpz_mat_det(det: *mut fmpz, A: *mut fmpz_mat_struct);
+    pub fn fmpz_mat_det(det: *mut fmpz, A: *const fmpz_mat_struct);
 }
 extern "C" {
     pub fn fmpz_mat_det_cofactor(det: *mut fmpz, A: *mut fmpz_mat_struct);

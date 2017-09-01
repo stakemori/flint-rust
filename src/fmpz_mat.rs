@@ -327,13 +327,7 @@ impl FmpzMat {
         "self = x/y"
     );
 
-    impl_c_wrapper!(
-        mul_mut,
-        fmpz_mat_mul,
-        Self,
-        Self,
-        "self = x * y"
-    );
+    impl_c_wrapper!(mul_mut, fmpz_mat_mul, Self, Self, "self = x * y");
 
     impl_c_wrapper!(
         mul_classical_mut,
@@ -342,6 +336,34 @@ impl FmpzMat {
         Self,
         "self = x * y"
     );
+
+    impl_c_wrapper!(sqr_mut, fmpz_mat_sqr, Self, "self = x * x");
+
+    pub fn pow_mut(&mut self, m: Self, exp: mp_limb_t) {
+        unsafe {
+            fmpz_mat_pow(self.as_mut_ptr(), m.as_ptr(), exp);
+        }
+    }
+
+    pub fn content_mut(res: &mut Fmpz, m: Self) {
+        unsafe {
+            fmpz_mat_content(res.as_mut_ptr(), m.as_ptr());
+        }
+    }
+
+    /// `res = m.trace()`
+    pub fn trace_mut(res: &mut Fmpz, m: Self) {
+        unsafe {
+            fmpz_mat_trace(res.as_mut_ptr(), m.as_ptr());
+        }
+    }
+
+    /// `res = m.det()`
+    pub fn det_mut(res: &mut Fmpz, m: Self) {
+        unsafe {
+            fmpz_mat_det(res.as_mut_ptr(), m.as_ptr());
+        }
+    }
 
     pub fn rank(&self) -> u64 {
         unsafe { fmpz_mat_rank(self.as_ptr()) as u64 }
