@@ -256,6 +256,41 @@ impl Fmpz {
     pub fn remove(&mut self, op: &Self, f: &Self) -> mp_limb_signed_t {
         unsafe { fmpz_remove(self.as_mut_ptr(), op.as_ptr(), f.as_ptr()) }
     }
+
+    /// Return the hilbert symbol of `hilb(a, b, p)`, where `p` is an odd prime.
+    pub fn hilbert_symbol_odd(a: &Self, b: &Self, p: &Self) -> i32 {
+        let mut tmp1 = Fmpz::new();
+        let mut tmp2 = Fmpz::new();
+        Self::_hilbert_symbol_odd(&a, &b, &p, &mut tmp1, &mut tmp2)
+    }
+
+    pub fn _hilbert_symbol_odd(
+        a: &Self,
+        b: &Self,
+        p: &Self,
+        tmp1: &mut Self,
+        tmp2: &mut Self,
+    ) -> i32 {
+        let val_a = tmp1.remove(&a, &p);
+        let val_b = tmp2.remove(&b, &p);
+        match (is_even!(val_a), is_even!(val_b)) {
+            (true, true) => 1,
+            (true, false) => a.jacobi(&p),
+            (false, true) => b.jacobi(&p),
+            (false, false) => {
+                if {
+                    tmp1.sub_ui_mut(&p, 1);
+                    *tmp1 >>= 1;
+                    tmp1.is_even()
+                }
+                {
+                    a.jacobi(&p) * b.jacobi(&p)
+                } else {
+                    -a.jacobi(&p) * b.jacobi(&p)
+                }
+            }
+        }
+    }
 }
 
 #[derive(Debug)]
