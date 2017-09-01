@@ -75,9 +75,7 @@ impl From<c_long> for Fmpz {
 
 impl Fmpz {
     pub fn is_even(&self) -> bool {
-        unsafe{
-            int_to_bool!(fmpz_is_even(self.as_ptr()))
-        }
+        unsafe { int_to_bool!(fmpz_is_even(self.as_ptr())) }
     }
 
     pub fn as_mut_ptr(&mut self) -> fmpzmutptr {
@@ -240,7 +238,13 @@ impl Fmpz {
         fac
     }
 
-    impl_c_wrapper!(fdiv_r_2exp_mut, fmpz_fdiv_r_2exp, Self, Ui, "self = x mod 2**y");
+    impl_c_wrapper!(
+        fdiv_r_2exp_mut,
+        fmpz_fdiv_r_2exp,
+        Self,
+        Ui,
+        "self = x mod 2**y"
+    );
     impl_c_wrapper!(sub_ui_mut, fmpz_sub_ui, Fmpz, Ui, "self = x - y");
 
     /// Return jacobi symbol self mod p
