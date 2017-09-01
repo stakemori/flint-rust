@@ -339,29 +339,29 @@ impl FmpzMat {
 
     impl_c_wrapper!(sqr_mut, fmpz_mat_sqr, Self, "self = x * x");
 
-    pub fn pow_mut(&mut self, m: Self, exp: mp_limb_t) {
+    pub fn pow_mut(&mut self, m: &Self, exp: mp_limb_t) {
         unsafe {
             fmpz_mat_pow(self.as_mut_ptr(), m.as_ptr(), exp);
         }
     }
 
-    pub fn content_mut(res: &mut Fmpz, m: Self) {
+    pub fn content_mut(&self, res: &mut Fmpz) {
         unsafe {
-            fmpz_mat_content(res.as_mut_ptr(), m.as_ptr());
+            fmpz_mat_content(res.as_mut_ptr(), self.as_ptr());
         }
     }
 
     /// `res = m.trace()`
-    pub fn trace_mut(res: &mut Fmpz, m: Self) {
+    pub fn trace_mut(&self, res: &mut Fmpz) {
         unsafe {
-            fmpz_mat_trace(res.as_mut_ptr(), m.as_ptr());
+            fmpz_mat_trace(res.as_mut_ptr(), self.as_ptr());
         }
     }
 
     /// `res = m.det()`
-    pub fn det_mut(res: &mut Fmpz, m: Self) {
+    pub fn det_mut(&self, res: &mut Fmpz) {
         unsafe {
-            fmpz_mat_det(res.as_mut_ptr(), m.as_ptr());
+            fmpz_mat_det(res.as_mut_ptr(), self.as_ptr());
         }
     }
 
