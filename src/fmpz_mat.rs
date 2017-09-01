@@ -47,9 +47,9 @@ impl PartialEq for FmpzMat {
     }
 }
 
-impl Shl<mp_limb_t> for FmpzMat {
-    type Output = Self;
-    fn shl(self, other: mp_limb_t) -> Self {
+impl<'a> Shl<mp_limb_t> for &'a FmpzMat {
+    type Output = FmpzMat;
+    fn shl(self, other: mp_limb_t) -> FmpzMat {
         let mut res = FmpzMat::new(
             self.nrows() as mp_limb_signed_t,
             self.ncols() as mp_limb_signed_t,
@@ -61,9 +61,9 @@ impl Shl<mp_limb_t> for FmpzMat {
     }
 }
 
-impl Shr<mp_limb_t> for FmpzMat {
-    type Output = Self;
-    fn shr(self, other: mp_limb_t) -> Self {
+impl<'a> Shr<mp_limb_t> for &'a FmpzMat {
+    type Output = FmpzMat;
+    fn shr(self, other: mp_limb_t) -> FmpzMat {
         let mut res = FmpzMat::new(
             self.nrows() as mp_limb_signed_t,
             self.ncols() as mp_limb_signed_t,
