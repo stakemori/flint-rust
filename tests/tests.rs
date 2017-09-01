@@ -36,7 +36,7 @@ mod fmpz {
         let mut res: Fmpz = Default::default();
         res.fdiv_r_2exp_mut(&a, 2);
         assert_eq!(res, 1 as c_ulong);
-}
+    }
 
     #[test]
     fn test_remove() {

@@ -15,19 +15,19 @@ mod fmpz {
         b.iter(|| {
             let mut s = 0;
             let mut tmp: Fmpz = Default::default();
-            for i in 1..1000_000 {
+            for i in 1..1_000_000 {
                 let a: Fmpz = From::from(2 * i + 1);
                 let cnd = {
                     tmp.sub_ui_mut(&a, 1);
                     tmp >>= 1;
                     tmp.is_even()
                 };
-                if cnd
-                {
+                if cnd {
                     s += 1;
                 }
             }
-            s})
+            s
+        })
     }
 
     #[bench]
@@ -35,18 +35,19 @@ mod fmpz {
         b.iter(|| {
             let mut s = 0;
             let mut tmp: Fmpz = Default::default();
-            for i in 1..1000_000 {
+            for i in 1..1_000_000 {
                 let a: Fmpz = From::from(2 * i + 1);
-                if {
+                let cnd = {
                     tmp.sub_ui_mut(&a, 1);
                     tmp.fdiv_r_2exp_mut(&a, 2);
                     tmp == 1 as c_ulong
-                }
-                {
+                };
+                if cnd {
                     s += 1;
                 }
             }
-            s})
+            s
+        })
     }
 
     #[bench]
