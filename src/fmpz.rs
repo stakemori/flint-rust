@@ -27,22 +27,6 @@ impl Default for Fmpz {
     }
 }
 
-
-macro_rules! int_to_ord {
-    ($cmp: expr) => {
-        {
-            let cmp = $cmp;
-            if cmp == 0 {
-                Equal
-            } else if cmp < 0 {
-                Less
-            } else {
-                Greater
-            }
-        }
-    }
-}
-
 impl PartialEq for Fmpz {
     fn eq(&self, other: &Fmpz) -> bool {
         unsafe { fmpz_equal(self.as_ptr(), other.as_ptr()) != 0 }

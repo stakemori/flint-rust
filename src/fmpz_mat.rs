@@ -91,58 +91,6 @@ impl ShrAssign<mp_limb_t> for FmpzMat {
     }
 }
 
-// copied from rust-gmp/macros.rs
-macro_rules! impl_c_wrapper {
-    ($meth: ident, $c_func: ident, Ui, $doc: expr) => {
-        #[doc = $doc]
-        pub fn $meth(&mut self, x: c_ulong) {
-            unsafe {
-                $c_func(self.as_mut_ptr(), x);
-            }
-        }
-    };
-    ($meth: ident, $c_func: ident, Si, $doc: expr) => {
-        #[doc = $doc]
-        pub fn $meth(&mut self, x: c_long) {
-            unsafe {
-                $c_func(self.as_mut_ptr(), x);
-            }
-        }
-    };
-    ($meth: ident, $c_func: ident, $t1: ty, $doc: expr) => {
-        #[doc = $doc]
-        pub fn $meth(&mut self, x: &$t1) {
-            unsafe {
-                $c_func(self.as_mut_ptr(), x.as_ptr());
-            }
-        }
-    };
-    ($meth: ident, $c_func: ident, $t: ty, Ui, $doc: expr) => {
-        #[doc = $doc]
-        pub fn $meth(&mut self, x: &$t, y: c_ulong) {
-            unsafe {
-                $c_func(self.as_mut_ptr(), x.as_ptr(), y);
-            }
-        }
-    };
-    ($meth: ident, $c_func: ident, $t: ty, Si, $doc: expr) => {
-        #[doc = $doc]
-        pub fn $meth(&mut self, x: &$t, y: c_long) {
-            unsafe {
-                $c_func(self.as_mut_ptr(), x.as_ptr(), y);
-            }
-        }
-    };
-    ($meth: ident, $c_func: ident, $t1: ty, $t2: ty, $doc: expr) => {
-        #[doc = $doc]
-        pub fn $meth(&mut self, x: &$t1, y: &$t2) {
-            unsafe {
-                $c_func(self.as_mut_ptr(), x.as_ptr(), y.as_ptr());
-            }
-        }
-    };
-}
-
 impl FmpzMat {
     pub fn new(rows: mp_limb_signed_t, cols: mp_limb_signed_t) -> Self {
         unsafe {
