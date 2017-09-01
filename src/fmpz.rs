@@ -20,6 +20,12 @@ impl Drop for Fmpz {
     }
 }
 
+impl Default for Fmpz {
+    fn default() -> Self {
+        Fmpz::new()
+    }
+}
+
 macro_rules! define_assign {
     ($trait:ident, $meth:ident, $func:ident) =>
     {
