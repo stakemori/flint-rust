@@ -6,6 +6,7 @@ use self::libc::{c_int, c_ulong, c_long};
 use std::ffi::CString;
 use std::fmt;
 use std::ops::{AddAssign, MulAssign, SubAssign, DivAssign};
+use std::cmp::Ordering::{self, Greater, Less, Equal};
 
 #[derive(Debug, Clone)]
 pub struct Fmpz {
@@ -23,6 +24,36 @@ impl Drop for Fmpz {
 impl Default for Fmpz {
     fn default() -> Self {
         Fmpz::new()
+    }
+}
+
+
+macro_rules! int_to_ord {
+    ($cmp: expr) => {
+        {
+            let cmp = $cmp;
+            if cmp == 0 {
+                Equal
+            } else if cmp < 0 {
+                Less
+            } else {
+                Greater
+            }
+        }
+    }
+}
+
+impl PartialEq for Fmpz {
+    fn eq(&self, other: &Fmpz) -> bool {
+        unsafe { fmpz_equal(self.as_ptr(), other.as_ptr()) != 0 }
+    }
+}
+
+impl PartialOrd for Fmpz {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(int_to_ord!(
+            unsafe { fmpz_cmp(self.as_ptr(), other.as_ptr()) }
+        ))
     }
 }
 
@@ -234,9 +265,7 @@ impl Fmpz {
 
     /// Return jacobi symbol self mod p
     pub fn jacobi(&self, p: &Self) -> i64 {
-        unsafe {
-            fmpz_jacobi(self.as_ptr(), p.as_ptr()) as i64
-        }
+        unsafe { fmpz_jacobi(self.as_ptr(), p.as_ptr()) as i64 }
     }
 }
 
