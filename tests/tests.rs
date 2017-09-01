@@ -1,32 +1,8 @@
 extern crate flint;
-extern crate num;
 extern crate libc;
 
 use libc::c_ulong;
-use num::FromPrimitive;
-use num::bigint::BigInt;
 use flint::fmpz::{Fmpz, FmpzFactor};
-
-#[test]
-fn add_test() {
-    let mut res = Fmpz::new();
-    let mut res1 = Fmpz::new();
-    let mut a = Fmpz::new();
-    let mut b = Fmpz::new();
-    for i in 0..100 {
-        let x: BigInt = FromPrimitive::from_u64(i).unwrap();
-        a.set_ui(i);
-        for j in 0..100 {
-            let y: BigInt = FromPrimitive::from_u64(j).unwrap();
-            b.set_ui(j);
-            let z = &x + &y;
-            res.add_mut(&a, &b);
-            res1.add_ui_mut(&a, j);
-            assert!(z.to_str_radix(10) == res.get_str(10));
-            assert!(z.to_str_radix(10) == res1.get_str(10));
-        }
-    }
-}
 
 fn fac_to_fmpz(f: &FmpzFactor) -> Fmpz {
     let mut res = Fmpz::from_si(1);
