@@ -8,6 +8,18 @@ mod fmpz {
     use super::*;
 
     #[test]
+    fn test_div_r_2exp() {
+        let a: Fmpz = From::from(11);
+        let mut res: Fmpz = Default::default();
+        res.fdiv_r_2exp_mut(&a, 2);
+        assert_eq!(res, 3 as c_ulong);
+        let a: Fmpz = From::from(13);
+        let mut res: Fmpz = Default::default();
+        res.fdiv_r_2exp_mut(&a, 2);
+        assert_eq!(res, 1 as c_ulong);
+}
+
+    #[test]
     fn test_remove() {
         let mut a = Fmpz::new();
         let c = 131;
