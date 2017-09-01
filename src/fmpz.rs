@@ -288,8 +288,7 @@ impl Fmpz {
                     *tmp2 >>= 1;
                     tmp2.is_even()
                 };
-                if cond
-                {
+                if cond {
                     tmp1.jacobi(p)
                 } else {
                     -tmp1.jacobi(p)
