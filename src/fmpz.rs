@@ -59,6 +59,18 @@ define_assign!(AddAssign, add_assign, fmpz_add_ui, c_ulong);
 define_assign!(MulAssign, mul_assign, fmpz_mul_ui, c_ulong);
 define_assign!(MulAssign, mul_assign, fmpz_mul_si, c_long);
 
+impl From<c_long> for Fmpz {
+    fn from(x: c_long) -> Fmpz {
+        Fmpz::from_si(x)
+    }
+}
+
+impl From<c_ulong> for Fmpz {
+    fn from(x: c_ulong) -> Fmpz {
+        Fmpz::from_ui(x)
+    }
+}
+
 impl Fmpz {
     pub fn as_mut_ptr(&mut self) -> fmpzmutptr {
         &mut self.fmpz[0] as fmpzmutptr
