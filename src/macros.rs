@@ -9,10 +9,10 @@ macro_rules! is_even {
 }
 
 macro_rules! define_assign {
-    ($trait:ident, $meth:ident, $func:ident) =>
+    ($t:ty, $trait:ident, $meth:ident, $func:ident) =>
     {
-        impl<'a> $trait<&'a Self> for Fmpz {
-            fn $meth(&mut self, other: &Fmpz) {
+        impl<'a> $trait<&'a Self> for $t {
+            fn $meth(&mut self, other: &$t) {
                 unsafe {
                     $func(self.as_mut_ptr(), self.as_ptr(), other.as_ptr());
                 }
@@ -20,9 +20,9 @@ macro_rules! define_assign {
         }
     };
 
-    ($trait:ident, $meth:ident, $func:ident, $typ:ty) =>
+    ($t:ty, $trait:ident, $meth:ident, $func:ident, $typ:ty) =>
     {
-        impl $trait<$typ> for Fmpz {
+        impl $trait<$typ> for $t {
             fn $meth(&mut self, other: $typ) {
                 unsafe {
                     $func(self.as_mut_ptr(), self.as_ptr(), other);
