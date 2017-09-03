@@ -200,6 +200,18 @@ impl Fmpz {
         }
     }
 
+    pub fn get_si(&self) -> c_long {
+        unsafe {
+            fmpz_get_si(self.as_ptr())
+        }
+    }
+
+    pub fn get_ui(&self) -> c_ulong {
+        unsafe {
+            fmpz_get_ui(self.as_ptr())
+        }
+    }
+
     pub fn get_str(&self, base: usize) -> String {
         // taken from rust-gmp (cf. https://crates.io/crates/rust-gmp)
         unsafe {
