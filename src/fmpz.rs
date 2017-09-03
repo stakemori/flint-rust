@@ -262,6 +262,7 @@ impl Fmpz {
         "self = x mod 2**y"
     );
     impl_c_wrapper!(sub_ui_mut, fmpz_sub_ui, Fmpz, Ui, "self = x - y");
+    impl_c_wrapper!(mod_ui_mut, fmpz_mod_ui, Fmpz, Ui, "self = x % y");
 
     /// Return jacobi symbol self mod p
     pub fn jacobi(&self, p: &Self) -> i32 {
