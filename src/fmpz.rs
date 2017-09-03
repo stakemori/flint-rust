@@ -306,6 +306,62 @@ impl Fmpz {
             }
         }
     }
+
+    pub fn hilbert_symbol_2(a: &Self, b: &Self) -> i32 {
+        let two: Fmpz = From::from(2);
+        let mut tmp1 = Fmpz::new();
+        let mut tmp2 = Fmpz::new();
+        Self::_hilbert_symbol_2(a, b, &two, &mut tmp1, &mut tmp2)
+    }
+
+    pub fn _hilbert_symbol_2(
+        a: &Self,
+        b: &Self,
+        two: &Self,
+        tmp1: &mut Self,
+        tmp2: &mut Self,
+    ) -> i32 {
+        let val_a = tmp1.remove(a, two);
+        let val_b = tmp2.remove(b, two);
+        let a_eps = tmp1._eps();
+        let b_eps = tmp2._eps();
+        let a_om = tmp1._omega(a_eps);
+        let b_om = tmp2._omega(b_eps);
+        let mut res_expt = 0;
+        if !is_even!(a_eps) && !is_even!(b_eps) {
+            res_expt += 1;
+        }
+        match (is_even!(val_a), is_even!(val_b)) {
+            (true, false) => {
+                res_expt += a_om;
+            }
+            (false, true) => {
+                res_expt += b_om;
+            }
+            (false, false) => {
+                res_expt += a_om + b_om;
+            }
+            _ => (),
+        }
+        if is_even!(res_expt) { 1 } else { -1 }
+    }
+
+    fn _omega(&mut self, eps: i32) -> i32 {
+        if eps == 0 {
+            *self >>= 1;
+            if self.is_even() { 0 } else { 1 }
+        } else {
+            *self -= 1;
+            *self >>= 1;
+            if self.is_even() { 1 } else { 0 }
+        }
+    }
+
+    fn _eps(&mut self) -> i32 {
+        *self -= 1;
+        *self >>= 1;
+        if self.is_even() { 0 } else { 1 }
+    }
 }
 
 #[derive(Debug)]

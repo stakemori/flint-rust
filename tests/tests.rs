@@ -27,6 +27,66 @@ mod fmpz {
     }
 
     #[test]
+    fn test_hilbert_symbol_2() {
+        let two: Fmpz = From::from(2);
+        let mut res = Vec::new();
+        let mut res1 = Vec::new();
+        let mut res2 = Vec::new();
+        for i in vec![1, 3, 5, 7] {
+            for j in vec![1, 3, 5, 7] {
+                let a = From::from(i);
+                let b = From::from(j);
+                let c = &two * &From::from(i);
+                let d = &two * &From::from(j);
+                assert_eq!(
+                    Fmpz::hilbert_symbol_2(&a, &b),
+                    Fmpz::hilbert_symbol_2(&b, &a)
+                );
+                assert_eq!(
+                    Fmpz::hilbert_symbol_2(&a, &d),
+                    Fmpz::hilbert_symbol_2(&d, &a)
+                );
+                if Fmpz::hilbert_symbol_2(&a, &d) == -1 {
+                    res.push((i, j));
+                }
+                if Fmpz::hilbert_symbol_2(&c, &d) == -1 {
+                    res1.push((i, j));
+                }
+                if Fmpz::hilbert_symbol_2(&a, &b) == -1 {
+                    res2.push((i, j));
+                }
+            }
+        }
+        assert_eq!(
+            res,
+            vec![
+                (3, 1),
+                (3, 5),
+                (5, 1),
+                (5, 3),
+                (5, 5),
+                (5, 7),
+                (7, 3),
+                (7, 7),
+            ]
+        );
+        assert_eq!(
+            res1,
+            vec![
+                (1, 3),
+                (1, 5),
+                (3, 1),
+                (3, 3),
+                (5, 1),
+                (5, 7),
+                (7, 5),
+                (7, 7),
+            ]
+        );
+        assert_eq!(res2, vec![(3, 3), (3, 7), (7, 3), (7, 7)]);
+    }
+
+    #[test]
     fn test_div_r_2exp() {
         let a: Fmpz = From::from(11);
         let mut res: Fmpz = Default::default();
