@@ -8,7 +8,7 @@ use test::Bencher;
 
 mod fmpz {
     use super::*;
-    use flint::fmpz::Fmpz;
+    use flint::fmpz::{Fmpz, FmpzFactor};
 
     #[bench]
     fn mod4_bench1(b: &mut Bencher) {
@@ -61,4 +61,33 @@ mod fmpz {
             }
         })
     }
+
+    // Sage benchmark:
+    // %time l = [factor(i) for i in range(1, 100000)]
+    // CPU times: user 1.13 s, sys: 15.8 ms, total: 1.14 s
+    // Wall time: 1.14 s
+
+    // test fmpz::prime_factor_bench ... bench:  20,701,657 ns/iter (+/- 416,316)
+    #[bench]
+    fn prime_factor_bench(b: &mut Bencher) {
+        b.iter(|| {
+            let mut fac = FmpzFactor::new();
+            for i in 1..100_000 {
+                let a: Fmpz = From::from(i);
+                fac.factor_mut(&a);
+            }
+        })
+    }
+
+    // test fmpz::prime_factor_si_bench ... bench:  19,990,004 ns/iter (+/- 317,584)
+    #[bench]
+    fn prime_factor_si_bench(b: &mut Bencher) {
+        b.iter(|| {
+            let mut fac = FmpzFactor::new();
+            for i in 1..100_000 {
+                fac.factor_si_mut(i);
+            }
+        })
+    }
+
 }
