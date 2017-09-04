@@ -32,8 +32,8 @@ mod fmpz {
         let mut res = Vec::new();
         let mut res1 = Vec::new();
         let mut res2 = Vec::new();
-        for i in vec![1, 3, 5, 7] {
-            for j in vec![1, 3, 5, 7] {
+        for i in [1, 3, 5, 7] {
+            for j in [1, 3, 5, 7] {
                 let a = From::from(i);
                 let b = From::from(j);
                 let c = &two * &From::from(i);
