@@ -3490,6 +3490,9 @@ extern "C" {
     pub fn n_pow(n: mp_limb_t, exp: mp_limb_t) -> mp_limb_t;
     pub fn n_flog(n: mp_limb_t, b: mp_limb_t) -> mp_limb_t;
     pub fn n_clog(n: mp_limb_t, b: mp_limb_t) -> mp_limb_t;
+
+    pub fn n_remove(n: *mut mp_limb_t, p: mp_limb_t) -> c_int;
+    pub fn n_jacobi(x: mp_limb_signed_t, y: mp_limb_t) -> c_int;
 }
 
 

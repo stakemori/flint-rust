@@ -1,8 +1,6 @@
-extern crate libc;
-
 use bindings::*;
 use std;
-use self::libc::{c_int, c_ulong, c_long};
+use libc::{c_int, c_ulong, c_long};
 use std::ffi::CString;
 use std::fmt;
 use std::ops::{AddAssign, MulAssign, SubAssign, DivAssign, Shr, Shl, ShlAssign, ShrAssign, BitAnd,

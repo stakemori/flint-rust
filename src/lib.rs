@@ -3,9 +3,11 @@
 #![cfg_attr(feature="clippy", plugin(clippy))]
 
 #![feature(untagged_unions)]
+extern crate libc;
 
 #[macro_use]
 mod macros;
 mod bindings;
+pub mod ulong_extras;
 pub mod fmpz;
 pub mod fmpz_mat;
