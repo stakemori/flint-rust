@@ -199,11 +199,11 @@ impl Fmpz {
         }
     }
 
-    pub fn get_si(&self) -> c_long {
+    pub fn get_si_unchecked(&self) -> c_long {
         unsafe { fmpz_get_si(self.as_ptr()) }
     }
 
-    pub fn get_ui(&self) -> c_ulong {
+    pub fn get_ui_unchecked(&self) -> c_ulong {
         unsafe { fmpz_get_ui(self.as_ptr()) }
     }
 
