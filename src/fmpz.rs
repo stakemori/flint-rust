@@ -207,6 +207,14 @@ impl Fmpz {
         unsafe { fmpz_get_ui(self.as_ptr()) }
     }
 
+    pub fn to_slong(&self) -> Option<c_long> {
+        if unsafe { fmpz_fits_si(self.as_ptr()) != 0 } {
+            Some(self.get_si_unchecked())
+        } else {
+            None
+        }
+    }
+
     pub fn get_str(&self, base: usize) -> String {
         // taken from rust-gmp (cf. https://crates.io/crates/rust-gmp)
         unsafe {

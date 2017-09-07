@@ -120,6 +120,14 @@ mod fmpz {
         assert_eq!(a.bits(), 63);
         assert_eq!(b.bits(), 64);
     }
+
+    #[test]
+    fn test_to_slong() {
+        let a = Fmpz::from_str("-9223372036854775807", 10).unwrap();
+        let b = Fmpz::from_str("-9223372036854775808", 10).unwrap();
+        assert_eq!(a.to_slong().unwrap(), -9223372036854775807);
+        assert_eq!(b.to_slong(), None);
+    }
 }
 
 mod factor {
