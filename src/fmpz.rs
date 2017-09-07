@@ -215,6 +215,14 @@ impl Fmpz {
         }
     }
 
+    pub fn to_ulong(&self) -> Option<c_ulong> {
+        if unsafe { fmpz_abs_fits_ui(self.as_ptr()) != 0 } {
+            Some(self.get_ui_unchecked())
+        } else {
+            None
+        }
+    }
+
     pub fn get_str(&self, base: usize) -> String {
         // taken from rust-gmp (cf. https://crates.io/crates/rust-gmp)
         unsafe {
