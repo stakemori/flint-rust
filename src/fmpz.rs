@@ -259,6 +259,10 @@ impl Fmpz {
     impl_c_wrapper!(sub_ui_mut, fmpz_sub_ui, Fmpz, Ui, "self = x - y");
     impl_c_wrapper!(mod_ui_mut, fmpz_mod_ui, Fmpz, Ui, "self = x % y");
 
+    pub fn bits(&self) -> c_ulong {
+        unsafe { fmpz_bits(self.as_ptr()) }
+    }
+
     /// Return jacobi symbol self mod p
     pub fn jacobi(&self, p: &Self) -> i32 {
         unsafe { fmpz_jacobi(self.as_ptr(), p.as_ptr()) as i32 }

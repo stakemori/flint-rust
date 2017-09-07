@@ -112,6 +112,14 @@ mod fmpz {
         assert_eq!(a.remove(&b, &p), 10);
         assert_eq!(a, 4 as c_ulong);
     }
+
+    #[test]
+    fn test_size() {
+        let a = Fmpz::from_str("-9223372036854775807", 10).unwrap();
+        let b = Fmpz::from_str("18446744073709551615", 10).unwrap();
+        assert_eq!(a.bits(), 63);
+        assert_eq!(b.bits(), 64);
+    }
 }
 
 mod factor {
