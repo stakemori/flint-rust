@@ -92,6 +92,15 @@ mod tests {
     use super::*;
 
     #[test]
+    fn test_remove() {
+        let mut a = 100;
+        let p = 5;
+        let b = remove(&mut a, p);
+        assert_eq!(b, 2);
+        assert_eq!(a, 4);
+    }
+
+    #[test]
     fn test_hilbert_symbol_odd() {
         let p = 5;
         let a = 2;
