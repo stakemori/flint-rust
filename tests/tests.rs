@@ -128,6 +128,14 @@ mod fmpz {
         assert_eq!(a.to_slong().unwrap(), -9223372036854775807);
         assert_eq!(b.to_slong(), None);
     }
+
+    #[test]
+    fn test_set_remove() {
+        let mut a = Fmpz::from_str("6338253001141147007483516026880", 10).unwrap();
+        let two: Fmpz = From::from(2);
+        assert_eq!(a.set_remove(&two), 100);
+        assert_eq!(a, 5 as c_ulong);
+    }
 }
 
 mod factor {

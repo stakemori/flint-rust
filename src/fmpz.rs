@@ -289,6 +289,10 @@ impl Fmpz {
         unsafe { fmpz_remove(self.as_mut_ptr(), op.as_ptr(), f.as_ptr()) }
     }
 
+    pub fn set_remove(&mut self, f: &Self) -> c_long {
+        unsafe { fmpz_remove(self.as_mut_ptr(), self.as_ptr(), f.as_ptr()) }
+    }
+
     /// Return the hilbert symbol of `hilb(a, b, p)`, where `p` is an odd prime.
     pub fn hilbert_symbol_odd(a: &Self, b: &Self, p: &Self) -> i32 {
         let mut tmp1 = Fmpz::new();
