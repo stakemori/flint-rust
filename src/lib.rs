@@ -10,4 +10,5 @@ mod macros;
 mod bindings;
 pub mod ulong_extras;
 pub mod fmpz;
+pub mod fmpq;
 pub mod fmpz_mat;

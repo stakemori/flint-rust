@@ -164,3 +164,25 @@ mod factor {
         assert_eq!(fac_to_fmpz(&fac).get_str(10), a.get_str(10));
     }
 }
+
+mod fmpq {
+    use flint::fmpq::Fmpq;
+    use flint::fmpz::Fmpz;
+    use libc::c_long;
+
+    #[test]
+    fn test_sgn() {
+        let a: Fmpq = From::from((-12, 5));
+        println!("{}", a.sgn());
+    }
+
+    #[test]
+    fn test_set_num_den() {
+        let a: Fmpq = From::from((-24, 14));
+        let mut num = Fmpz::new();
+        let mut den = Fmpz::new();
+        a.set_num_den(&mut num, &mut den);
+        assert_eq!(num, -12 as c_long);
+        assert_eq!(den, 7 as c_long);
+    }
+}

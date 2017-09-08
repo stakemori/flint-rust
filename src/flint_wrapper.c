@@ -1,4 +1,5 @@
 #include "flint.h"
+#include "fmpq.h"
 #include "fmpz.h"
 #include "fmpz_factor.h"
 #include "fmpz_mat.h"
@@ -72,3 +73,21 @@ void wrapped_fmpz_set_ui_smod(fmpz_t f, mp_limb_t x, mp_limb_t m)
 }
 
 int wrapped_fmpz_is_pm1(const fmpz_t f) { return fmpz_is_pm1(f); }
+
+void wrapped_fmpq_clear(fmpq_t x) { fmpq_clear(x); }
+void wrapped_fmpq_init(fmpq_t x) { fmpq_init(x); }
+void wrapped_fmpq_zero(fmpq_t x) { fmpq_zero(x); }
+void wrapped_fmpq_one(fmpq_t x) { fmpq_one(x); }
+int wrapped_fmpq_equal(fmpq_t x, fmpq_t y) { return fmpq_equal(x, y); }
+int wrapped_fmpq_sgn(fmpq_t x) { return fmpq_sgn(x); }
+int wrapped_fmpq_is_zero(fmpq_t x) { return fmpq_is_zero(x); }
+int wrapped_fmpq_is_one(fmpq_t x) { return fmpq_is_one(x); }
+void wrapped_fmpq_set(fmpq_t x, fmpq_t y) { fmpq_set(x, y); }
+void wrapped_fmpq_neg(fmpq_t x, fmpq_t y) { fmpq_neg(x, y); }
+void wrapped_fmpq_abs(fmpq_t x, fmpq_t y) { fmpq_abs(x, y); }
+
+void fmpq_get_fmpz(fmpq_t x, fmpz_t num, fmpz_t den)
+{
+  fmpz_set(num, fmpq_numref(x));
+  fmpz_set(den, fmpq_denref(x));
+}
