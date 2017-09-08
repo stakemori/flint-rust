@@ -2,13 +2,46 @@
 extern crate libc;
 extern crate test;
 extern crate flint;
-use libc::c_ulong;
+use libc::{c_ulong, c_long};
 
 use test::Bencher;
 
 mod fmpz {
     use super::*;
     use flint::fmpz::{Fmpz, FmpzFactor};
+
+    #[bench]
+    fn square_sum(b: &mut Bencher) {
+        let mut s = Fmpz::new();
+        let mut a = Fmpz::new();
+        let mut tmp = Fmpz::new();
+        b.iter(|| for i in 0..1000000 {
+            a.set_si(i);
+            tmp.pow_ui_mut(&a, 2);
+            s += &tmp;
+        })
+    }
+
+    #[bench]
+    fn set_bench(bn: &mut Bencher) {
+        let a: Fmpz = From::from(9223372036854775807);
+        let mut c = Fmpz::new();
+        c.pow_ui_mut(&a, 100);
+        let mut b = Fmpz::new();
+        bn.iter(|| { b.set(&a); })
+    }
+
+    #[bench]
+    fn get_ui_bench(b: &mut Bencher) {
+        let a: Fmpz = From::from(9223372036854775807);
+        b.iter(|| { let _ = a.to_slong().unwrap(); })
+    }
+
+    #[bench]
+    fn get_ui_unchecked_bench(b: &mut Bencher) {
+        let a: Fmpz = From::from(9223372036854775807);
+        b.iter(|| { let _ = a.get_ui_unchecked(); })
+    }
 
     #[bench]
     fn mod4_bench1(b: &mut Bencher) {
@@ -90,4 +123,32 @@ mod fmpz {
         })
     }
 
+}
+
+mod fmpz_mat {
+    use super::*;
+    use flint::fmpz::Fmpz;
+    use flint::fmpz_mat::FmpzMat;
+
+    #[bench]
+    fn test_row_vec_add(b: &mut Bencher) {
+        let v: Vec<_> = (0..100).map(|i| Fmpz::from_ui(i)).collect();
+        let mut w = v.clone();
+        b.iter(|| for i in 0..100 {
+            w[i] += &v[i];
+        })
+    }
+
+    #[bench]
+    fn test_row_vec_add_using_mat(b: &mut Bencher) {
+        let mut m = FmpzMat::new(100, 100);
+        let mut res = FmpzMat::new(100, 100);
+        for i in 0..100 {
+            m.set_entry_si(i, 0, i as c_long);
+            m.set_entry_si(i, 1, i as c_long);
+        }
+        let mut n = FmpzMat::new(100, 100);
+        n.set_entry_si(0, 1, 1);
+        b.iter(|| res.mul_mut(&m, &n))
+    }
 }
