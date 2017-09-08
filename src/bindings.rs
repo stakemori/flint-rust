@@ -7,7 +7,7 @@ extern crate gmp;
 
 use self::gmp::mpq::mpq_struct;
 use self::gmp::mpz::{mpz_struct, mp_limb_t};
-use self::libc::{c_ulong, c_long, c_char, c_int, c_void, c_double, c_uint};
+use self::libc::{c_long, c_char, c_int, c_void, c_double, c_uint};
 // TODO: Make sure this is correct.
 pub type mp_limb_signed_t = c_long;
 pub type fmpz = mp_limb_signed_t;
@@ -3551,6 +3551,4 @@ extern "C" {
     pub fn flint_randinit(state: *mut flint_rand_s);
     #[link_name = "wrapped_flint_randclear"]
     pub fn flint_randclear(state: *mut flint_rand_s);
-
-    pub fn bench_square_sum_native(n: c_ulong);
 }

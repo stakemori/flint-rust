@@ -72,22 +72,3 @@ void wrapped_fmpz_set_ui_smod(fmpz_t f, mp_limb_t x, mp_limb_t m)
 }
 
 int wrapped_fmpz_is_pm1(const fmpz_t f) { return fmpz_is_pm1(f); }
-
-void bench_square_sum_native(ulong n)
-{
-  fmpz_t a, tmp, res;
-
-  fmpz_init(a);
-  fmpz_init(tmp);
-  fmpz_init(res);
-  fmpz_set_ui(res, 0);
-  for (ulong i = 1; i < n; i++)
-    {
-      fmpz_set_ui(a, i);
-      fmpz_pow_ui(tmp, a, 2);
-      fmpz_add(res, res, tmp);
-    }
-  fmpz_clear(a);
-  fmpz_clear(tmp);
-  fmpz_clear(res);
-}
