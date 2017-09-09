@@ -132,6 +132,22 @@ impl Fmpq {
         &self.fmpq[0].num
     }
 
+    pub fn num(&self) -> Fmpz {
+        let mut a = Fmpz::new();
+        unsafe {
+            fmpz_set(a.as_mut_ptr(), self.num_as_ptr());
+        }
+        a
+    }
+
+    pub fn den(&self) -> Fmpz {
+        let mut a = Fmpz::new();
+        unsafe {
+            fmpz_set(a.as_mut_ptr(), self.den_as_ptr());
+        }
+        a
+    }
+
     pub fn num_as_mut_ptr(&mut self) -> fmpzptr {
         &mut self.fmpq[0].num
     }
