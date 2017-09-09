@@ -178,6 +178,28 @@ mod fmpq {
         let c = &a + &b;
         assert_eq!(c.num(), 5_u64);
         assert_eq!(c.den(), 6_u64);
+
+        let mut a: Fmpq = From::from(&a.den());
+
+        a.set_pow_si(-1);
+        assert_eq!(a.num(), 1_u64);
+        assert_eq!(a.den(), 2_u64);
+
+        a *= 3;
+        assert_eq!(a.num(), 3_u64);
+        assert_eq!(a.den(), 2_u64);
+
+        a /= 5;
+        assert_eq!(a.num(), 3_u64);
+        assert_eq!(a.den(), 10_u64);
+
+        a += 1;
+        assert_eq!(a.num(), 13_u64);
+        assert_eq!(a.den(), 10_u64);
+
+        a -= 2;
+        assert_eq!(a.num(), -7_i64);
+        assert_eq!(a.den(), 10_u64);
     }
 
     #[test]
