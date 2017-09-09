@@ -19,17 +19,19 @@ macro_rules! define_assign {
             }
         }
     };
+}
 
-    ($t:ty, $trait:ident, $meth:ident, $func:ident, $typ:ty) =>
+macro_rules! define_assign_wref {
+    ($t:ty, $trait:ident, $meth:ident, $func:ident, $ty:ty) =>
     {
-        impl<'a> $trait<&'a $typ> for $t {
-            fn $meth(&mut self, other: &$typ) {
+        impl<'a> $trait<&'a $ty> for $t {
+            fn $meth(&mut self, other: &$ty) {
                 unsafe {
                     $func(self.as_mut_ptr(), self.as_ptr(), other.as_ptr());
                 }
             }
         }
-    }
+    };
 }
 
 macro_rules! define_assign_c {
@@ -154,4 +156,14 @@ macro_rules! __ref_or_val {
     (FmpzRef, $val: expr) => {$val.as_ptr()};
     (FmpzRefMut, $val: expr) => {$val.as_mut_ptr()};
     ($t: ident, $val: expr) =>  {$val};
+}
+
+macro_rules! impl_self_mut_call_c {
+    ($meth: ident, $c_func: ident, $($x:ident: $t:ident),*) => {
+        pub fn $meth(&mut self, $($x: __ann_type!($t)),*) {
+            unsafe {
+                $c_func(self.as_mut_ptr(), self.as_ptr(), $(__ref_or_val!($t, $x)),*);
+            }
+        }
+    }
 }
