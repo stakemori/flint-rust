@@ -284,6 +284,34 @@ impl Fmpz {
         doc = "`self = x % y`"
     );
 
+    impl_mut_c_wrapper!(
+        addmul_mut,
+        fmpz_addmul,
+        (x: FmpzRef, y: FmpzRef),
+        doc = "`self += x * y`"
+    );
+
+    impl_mut_c_wrapper!(
+        submul_mut,
+        fmpz_submul,
+        (x: FmpzRef, y: FmpzRef),
+        doc = "`self -= x * y`"
+    );
+
+    impl_mut_c_wrapper!(
+        addmul_ui_mut,
+        fmpz_addmul_ui,
+        (x: FmpzRef, y: Ui),
+        doc = "`self += x * y`"
+    );
+
+    impl_mut_c_wrapper!(
+        submul_ui_mut,
+        fmpz_submul_ui,
+        (x: FmpzRef, y: Ui),
+        doc = "`self -= x * y`"
+    );
+
     pub fn bits(&self) -> c_ulong {
         unsafe { fmpz_bits(self.as_ptr()) }
     }
