@@ -60,6 +60,7 @@ impl fmt::Display for Fmpq {
 
 impl PartialEq for Fmpq {
     fn eq(&self, other: &Fmpq) -> bool {
+        debug_assert!(self.is_canonical() && other.is_canonical());
         unsafe { fmpq_equal(self.as_ptr(), other.as_ptr()) != 0 }
     }
 }
@@ -192,6 +193,10 @@ impl Fmpq {
         int_to_bool!(unsafe { fmpq_is_one(self.as_ptr()) })
     }
 
+    pub fn is_canonical(&self) -> bool {
+        int_to_bool!(unsafe { fmpq_is_canonical(self.as_ptr()) })
+    }
+
     impl_mut_c_wrapper!(
         canonicalise_mut,
         fmpq_canonicalise,
@@ -276,6 +281,11 @@ impl Fmpq {
     impl_mut_c_wrapper!(sub_mul_mut, fmpq_submul, (x: SelfRef, y: SelfRef),);
 
     impl_self_mut_call_c!(negate, fmpq_neg, (), doc = "`self = -self`");
-    impl_self_mut_call_c!(set_pow_si, fmpq_pow_si, (e: c_long), doc = "`self = self^e`");
-    impl_self_mut_call_c!(set_inv, fmpq_inv,(), doc = "`self = self^(-1)`");
+    impl_self_mut_call_c!(
+        set_pow_si,
+        fmpq_pow_si,
+        (e: c_long),
+        doc = "`self = self^e`"
+    );
+    impl_self_mut_call_c!(set_inv, fmpq_inv, (), doc = "`self = self^(-1)`");
 }
