@@ -7,7 +7,7 @@ extern crate libc;
 
 #[macro_use]
 mod macros;
-mod bindings;
+pub mod bindings;
 pub mod ulong_extras;
 pub mod fmpz;
 pub mod fmpq;
