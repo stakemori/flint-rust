@@ -169,6 +169,7 @@ mod fmpq {
     use flint::fmpq::Fmpq;
     use flint::fmpz::Fmpz;
     use libc::c_long;
+    use flint::bindings::fmpz_set;
 
     #[test]
     fn test_sgn() {
@@ -184,5 +185,20 @@ mod fmpq {
         a.set_num_den(&mut num, &mut den);
         assert_eq!(num, -12 as c_long);
         assert_eq!(den, 7 as c_long);
+    }
+
+    #[test]
+    fn test_num_ptr() {
+        let n = Fmpz::from_str(
+            "290329093209403904940394039049093409403903430909093820983209",
+            10,
+        ).unwrap();
+        let d = Fmpz::from_str("2", 10).unwrap();
+        let a: Fmpq = From::from((&n, &d));
+        let mut b = Fmpz::new();
+        unsafe {
+            fmpz_set(b.as_mut_ptr(), a.num_as_ptr());
+        }
+        assert_eq!(b, n);
     }
 }

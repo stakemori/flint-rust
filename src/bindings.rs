@@ -120,7 +120,6 @@ extern "C" {
 }
 
 extern "C" {
-    pub fn fmpq_get_fmpz(x: *const fmpq, num: *mut fmpz, den: *mut fmpz);
     #[link_name="wrapped_fmpq_clear"]
     pub fn fmpq_clear(x: *mut fmpq);
 

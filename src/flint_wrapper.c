@@ -85,9 +85,3 @@ int wrapped_fmpq_is_one(fmpq_t x) { return fmpq_is_one(x); }
 void wrapped_fmpq_set(fmpq_t x, fmpq_t y) { fmpq_set(x, y); }
 void wrapped_fmpq_neg(fmpq_t x, fmpq_t y) { fmpq_neg(x, y); }
 void wrapped_fmpq_abs(fmpq_t x, fmpq_t y) { fmpq_abs(x, y); }
-
-void fmpq_get_fmpz(fmpq_t x, fmpz_t num, fmpz_t den)
-{
-  fmpz_set(num, fmpq_numref(x));
-  fmpz_set(den, fmpq_denref(x));
-}
