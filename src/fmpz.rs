@@ -7,6 +7,8 @@ use std::fmt;
 use std::ops::{AddAssign, MulAssign, SubAssign, DivAssign, Shr, Shl, ShlAssign, ShrAssign, BitAnd,
                BitOr, BitXor, Mul, Add, Sub};
 use std::cmp::Ordering::{self, Greater, Less, Equal};
+use serde::ser::{Serialize, Serializer};
+use serde::{Deserialize, Deserializer};
 
 #[derive(Debug, Clone)]
 pub struct Fmpz {
@@ -523,5 +525,24 @@ impl FmpzFactor {
 impl fmt::Display for Fmpz {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "{}", self.get_str(10))
+    }
+}
+
+impl Serialize for Fmpz {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
+        String::serialize(&self.get_string(32), serializer)
+    }
+}
+
+impl<'de> Deserialize<'de> for Fmpz {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        let a = String::deserialize(deserializer)?;
+        Ok(Fmpz::from_str(&a, 32).unwrap())
     }
 }
