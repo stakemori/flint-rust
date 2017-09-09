@@ -324,6 +324,14 @@ impl Fmpz {
         doc = "Return jacobi symbol self mod p"
     );
 
+    impl_c_wrapper_w_rtype!(
+        sgn,
+        fmpz_sgn,
+        i32,
+        (),
+        doc = "Return -1 if `self < 0`, +1 if `self > 0` 0 otherwise."
+    );
+
     /// Return `valuation(op, f)` and set `self = op/f^e`, where e is the valuation.
     pub fn remove(&mut self, op: &Self, f: &Self) -> mp_limb_signed_t {
         unsafe { fmpz_remove(self.as_mut_ptr(), op.as_ptr(), f.as_ptr()) }
