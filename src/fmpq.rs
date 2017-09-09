@@ -227,4 +227,5 @@ impl Fmpq {
 
     impl_self_mut_call_c!(negate, fmpq_neg,);
     impl_self_mut_call_c!(set_pow_si, fmpq_pow_si, e: c_long);
+    impl_self_mut_call_c!(set_inv, fmpq_inv,);
 }
