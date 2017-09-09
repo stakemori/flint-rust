@@ -34,6 +34,10 @@ define_assign_wref!(Fmpq, DivAssign, div_assign, fmpq_div_fmpz, Fmpz);
 define_assign_c!(Fmpq, ShlAssign, shl_assign, fmpq_mul_2exp, c_ulong);
 define_assign_c!(Fmpq, ShrAssign, shr_assign, fmpq_div_2exp, c_ulong);
 
+impl_operator_c!(Add, Fmpq, add, c_long, fmpq_add_si);
+impl_operator_c!(Sub, Fmpq, sub, c_long, fmpq_sub_si);
+impl_operator_c!(Mul, Fmpq, mul, c_long, fmpq_mul_si);
+impl_operator_c!(Div, Fmpq, div, c_long, fmpq_div_si);
 impl_operator_c!(Shl, Fmpq, shl, c_ulong, fmpq_mul_2exp);
 impl_operator_c!(Shr, Fmpq, shr, c_ulong, fmpq_div_2exp);
 
