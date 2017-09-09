@@ -31,8 +31,8 @@ define_assign_wref!(Fmpq, DivAssign, div_assign, fmpq_div_fmpz, Fmpz);
 define_assign_c!(Fmpq, ShlAssign, shl_assign, fmpq_mul_2exp, c_ulong);
 define_assign_c!(Fmpq, ShrAssign, shr_assign, fmpq_div_2exp, c_ulong);
 
-imp_operator_c!(Shl, Fmpq, shl, c_ulong, fmpq_mul_2exp);
-imp_operator_c!(Shr, Fmpq, shr, c_ulong, fmpq_div_2exp);
+impl_operator_c!(Shl, Fmpq, shl, c_ulong, fmpq_mul_2exp);
+impl_operator_c!(Shr, Fmpq, shr, c_ulong, fmpq_div_2exp);
 
 impl Default for Fmpq {
     fn default() -> Self {

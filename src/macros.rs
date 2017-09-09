@@ -114,7 +114,7 @@ macro_rules! impl_neg {
     };
 }
 
-macro_rules! imp_operator_c {
+macro_rules! impl_operator_c  {
     ($tr: ident, $t: ty, $method: ident, $ct: ty, $cfunc: ident) => {
         impl<'a> $tr<$ct> for &'a $t {
             type Output = $t;

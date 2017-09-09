@@ -67,8 +67,8 @@ impl_operator!(Mul, Fmpz, mul, fmpz_mul);
 impl_operator!(Add, Fmpz, add, fmpz_add);
 impl_operator!(Sub, Fmpz, sub, fmpz_sub);
 
-imp_operator_c!(Shl, Fmpz, shl, c_ulong, fmpz_mul_2exp);
-imp_operator_c!(Shr, Fmpz, shr, c_ulong, fmpz_fdiv_q_2exp);
+impl_operator_c!(Shl, Fmpz, shl, c_ulong, fmpz_mul_2exp);
+impl_operator_c!(Shr, Fmpz, shr, c_ulong, fmpz_fdiv_q_2exp);
 
 impl From<c_long> for Fmpz {
     fn from(x: c_long) -> Fmpz {
