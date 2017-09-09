@@ -124,7 +124,8 @@ mod fmpz {
     #[test]
     fn test_to_slong() {
         let a = Fmpz::from_str("-9223372036854775807", 10).unwrap();
-        let b = Fmpz::from_str("-9223372036854775808", 10).unwrap();
+        let mut b = Fmpz::from_str("-9223372036854775808", 10).unwrap();
+        b <<= 1;
         assert_eq!(a.to_slong().unwrap(), -9223372036854775807);
         assert_eq!(b.to_slong(), None);
     }
