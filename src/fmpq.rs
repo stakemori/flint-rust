@@ -8,7 +8,7 @@ use std::ops::*;
 
 #[derive(Debug, Clone)]
 pub struct Fmpq {
-    pub fmpq: fmpq_t,
+    fmpq: fmpq_t,
 }
 
 impl_operator!(Mul, Fmpq, mul, fmpq_mul);
