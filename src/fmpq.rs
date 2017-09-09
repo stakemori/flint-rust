@@ -82,6 +82,12 @@ impl From<(c_long, c_ulong)> for Fmpq {
     }
 }
 
+impl From<c_long> for Fmpq {
+    fn from(x: c_long) -> Fmpq {
+        From::from((x, 1))
+    }
+}
+
 impl<'a> From<(&'a Fmpz, &'a Fmpz)> for Fmpq {
     fn from(x: (&'a Fmpz, &'a Fmpz)) -> Self {
         unsafe {
