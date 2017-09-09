@@ -148,7 +148,7 @@ impl Fmpq {
         a
     }
 
-    pub fn num_as_mut_ptr(&mut self) -> fmpzptr {
+    pub fn num_as_mut_ptr(&mut self) -> fmpzmutptr {
         &mut self.fmpq[0].num
     }
 
@@ -156,7 +156,7 @@ impl Fmpq {
         &self.fmpq[0].den
     }
 
-    pub fn den_as_mut_ptr(&mut self) -> fmpzptr {
+    pub fn den_as_mut_ptr(&mut self) -> fmpzmutptr {
         &mut self.fmpq[0].den
     }
 
