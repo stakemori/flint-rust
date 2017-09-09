@@ -5,6 +5,8 @@
 #![feature(untagged_unions)]
 extern crate libc;
 
+extern crate gmp;
+
 #[macro_use]
 mod macros;
 pub mod bindings;

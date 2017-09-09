@@ -3105,6 +3105,9 @@ extern "C" {
     // fmpz : Arbitrary precision integers. Functions related to mpz, mpf and IO are excluded.
     pub fn fmpz_init2(f: *mut fmpz, limbs: mp_limb_t);
 
+    pub fn fmpz_get_mpz(x: *mut mpz_struct, f: *const fmpz);
+    pub fn fmpz_set_mpz(f: *mut fmpz, x: *const mpz_struct);
+
     pub fn fmpz_randbits(f: *mut fmpz, state: *mut flint_rand_s, bits: mp_limb_t);
     pub fn fmpz_randtest(f: *mut fmpz, state: *mut flint_rand_s, bits: mp_limb_t);
     pub fn fmpz_randtest_unsigned(f: *mut fmpz, state: *mut flint_rand_s, bits: mp_limb_t);

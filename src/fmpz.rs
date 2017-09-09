@@ -1,3 +1,4 @@
+use gmp::mpz::Mpz;
 use bindings::*;
 use std;
 use libc::{c_int, c_ulong, c_long};
@@ -73,6 +74,26 @@ impl_operator_c!(Shr, Fmpz, shr, c_ulong, fmpz_fdiv_q_2exp);
 impl From<c_long> for Fmpz {
     fn from(x: c_long) -> Fmpz {
         Fmpz::from_si(x)
+    }
+}
+
+impl<'a> From<&'a Mpz> for Fmpz {
+    fn from(x: &Mpz) -> Fmpz {
+        unsafe {
+            let mut a = Fmpz::new();
+            fmpz_set_mpz(a.as_mut_ptr(), x.inner());
+            a
+        }
+    }
+}
+
+impl<'a> From<&'a Fmpz> for Mpz {
+    fn from(x: &Fmpz) -> Mpz {
+        unsafe {
+            let mut a = Mpz::new();
+            fmpz_get_mpz(a.inner_mut(), x.as_ptr());
+            a
+        }
     }
 }
 

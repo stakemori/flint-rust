@@ -1,11 +1,23 @@
 extern crate flint;
 extern crate libc;
+extern crate gmp;
 
 use libc::c_ulong;
 use flint::fmpz::{Fmpz, FmpzFactor};
 
 mod fmpz {
     use super::*;
+    use gmp::mpz::Mpz;
+
+    #[test]
+    fn test_from_mpz() {
+        let a: Mpz = From::from(10);
+        let mut b: Fmpz = From::from(&a);
+        assert_eq!(b, 10_u64);
+        b *= 2_u64;
+        let a: Mpz = From::from(&b);
+        assert_eq!(a, 20_u64);
+    }
 
     #[test]
     fn test_hilbert_symbol_odd() {
