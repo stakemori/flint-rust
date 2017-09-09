@@ -265,15 +265,12 @@ impl Fmpz {
         fac
     }
 
-    impl_c_wrapper!(
-        fdiv_r_2exp_mut,
-        fmpz_fdiv_r_2exp,
-        Self,
-        Ui,
-        "self = x mod 2**y"
-    );
-    impl_c_wrapper!(sub_ui_mut, fmpz_sub_ui, Fmpz, Ui, "self = x - y");
-    impl_c_wrapper!(mod_ui_mut, fmpz_mod_ui, Fmpz, Ui, "self = x % y");
+    /// self = x mod 2**y
+    impl_mut_c_wrapper!(fdiv_r_2exp_mut, fmpz_fdiv_r_2exp, x: SelfRef, y: Ui);
+    /// self = x - y
+    impl_mut_c_wrapper!(sub_ui_mut, fmpz_sub_ui, x: FmpzRef, y: Ui);
+    /// self = x % y
+    impl_mut_c_wrapper!(mod_ui_mut, fmpz_mod_ui, x: FmpzRef, y: Ui);
 
     pub fn bits(&self) -> c_ulong {
         unsafe { fmpz_bits(self.as_ptr()) }

@@ -19,6 +19,17 @@ macro_rules! define_assign {
             }
         }
     };
+
+    ($t:ty, $trait:ident, $meth:ident, $func:ident, $typ:ty) =>
+    {
+        impl<'a> $trait<&'a $typ> for $t {
+            fn $meth(&mut self, other: &$typ) {
+                unsafe {
+                    $func(self.as_mut_ptr(), self.as_ptr(), other.as_ptr());
+                }
+            }
+        }
+    }
 }
 
 macro_rules! define_assign_c {
@@ -101,54 +112,34 @@ macro_rules! imp_operator_c {
     }
 }
 
-// copied from rust-gmp/macros.rs
-macro_rules! impl_c_wrapper {
-    ($meth: ident, $c_func: ident, Ui, $doc: expr) => {
-        #[doc = $doc]
-        pub fn $meth(&mut self, x: c_ulong) {
+macro_rules! impl_mut_c_wrapper {
+    ($meth: ident, $c_func: ident, $($x:ident: $t:ident),*) => {
+        pub fn $meth(&mut self, $($x: __ann_type!($t)),*) {
             unsafe {
-                $c_func(self.as_mut_ptr(), x);
+                $c_func(self.as_mut_ptr(), $(__ref_or_val!($t, $x)),*);
             }
         }
     };
-    ($meth: ident, $c_func: ident, Si, $doc: expr) => {
-        #[doc = $doc]
-        pub fn $meth(&mut self, x: c_long) {
-            unsafe {
-                $c_func(self.as_mut_ptr(), x);
-            }
-        }
-    };
-    ($meth: ident, $c_func: ident, $t1: ty, $doc: expr) => {
-        #[doc = $doc]
-        pub fn $meth(&mut self, x: &$t1) {
-            unsafe {
-                $c_func(self.as_mut_ptr(), x.as_ptr());
-            }
-        }
-    };
-    ($meth: ident, $c_func: ident, $t: ty, Ui, $doc: expr) => {
-        #[doc = $doc]
-        pub fn $meth(&mut self, x: &$t, y: c_ulong) {
-            unsafe {
-                $c_func(self.as_mut_ptr(), x.as_ptr(), y);
-            }
-        }
-    };
-    ($meth: ident, $c_func: ident, $t: ty, Si, $doc: expr) => {
-        #[doc = $doc]
-        pub fn $meth(&mut self, x: &$t, y: c_long) {
-            unsafe {
-                $c_func(self.as_mut_ptr(), x.as_ptr(), y);
-            }
-        }
-    };
-    ($meth: ident, $c_func: ident, $t1: ty, $t2: ty, $doc: expr) => {
-        #[doc = $doc]
-        pub fn $meth(&mut self, x: &$t1, y: &$t2) {
-            unsafe {
-                $c_func(self.as_mut_ptr(), x.as_ptr(), y.as_ptr());
-            }
-        }
-    };
+    ($meth: ident, $c_func: ident, $($x:ident: $t:ident),*,)  =>
+        { impl_mut_c_wrapper!($meth, $c_func, $($x: $t),*); };
+}
+
+macro_rules! __ann_type {
+    (SelfRef) => {&Self};
+    (SelfRefMut) => {&mut Self};
+    (FmpzRef) => {&Fmpz};
+    (FmpzRefMut) => {&mut Fmpz};
+    (Si) => {c_long};
+    (Ui) => {c_ulong};
+    ($t: ident) => {$t};
+}
+
+macro_rules! __ref_or_val {
+    (Si, $val: expr) => {$val};
+    (Ui, $val: expr) => {$val};
+    (SelfRef, $val: expr) => {$val.as_ptr()};
+    (SelfRefMut, $val: expr) => {$val.as_mut_ptr()};
+    (FmpzRef, $val: expr) => {$val.as_ptr()};
+    (FmpzRefMut, $val: expr) => {$val.as_mut_ptr()};
+    ($t: ident, $val: expr) =>  {$val};
 }
