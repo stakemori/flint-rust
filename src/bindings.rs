@@ -275,6 +275,9 @@ extern "C" {
 
     pub fn fmpq_mul(res: *mut fmpq, op1: *const fmpq, op2: *const fmpq);
 
+    pub fn fmpq_mul_si(res: *mut fmpq, op1: *const fmpq, c: mp_limb_signed_t);
+    pub fn fmpq_div_si(res: *mut fmpq, op1: *const fmpq, c: mp_limb_signed_t);
+
     pub fn fmpq_mul_fmpz(res: *mut fmpq, op: *const fmpq, x: *const fmpz);
 
     pub fn _fmpq_pow_si(

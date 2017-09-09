@@ -85,3 +85,17 @@ int wrapped_fmpq_is_one(fmpq_t x) { return fmpq_is_one(x); }
 void wrapped_fmpq_set(fmpq_t x, fmpq_t y) { fmpq_set(x, y); }
 void wrapped_fmpq_neg(fmpq_t x, fmpq_t y) { fmpq_neg(x, y); }
 void wrapped_fmpq_abs(fmpq_t x, fmpq_t y) { fmpq_abs(x, y); }
+
+void fmpq_mul_si(fmpq_t res, fmpq_t x, long y)
+{
+  fmpz_mul_si(fmpq_numref(res), fmpq_numref(x), y);
+  fmpz_set(fmpq_denref(res), fmpq_denref(x));
+  fmpq_canonicalise(res);
+}
+
+void fmpq_div_si(fmpq_t res, fmpq_t x, long y)
+{
+  fmpz_mul_si(fmpq_denref(res), fmpq_denref(x), y);
+  fmpz_set(fmpq_numref(res), fmpq_numref(x));
+  fmpq_canonicalise(res);
+}

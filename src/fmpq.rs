@@ -23,6 +23,9 @@ define_assign!(Fmpq, DivAssign, div_assign, fmpq_div);
 
 define_assign_c!(Fmpq, AddAssign, add_assign, fmpq_add_si, c_long);
 define_assign_c!(Fmpq, SubAssign, sub_assign, fmpq_sub_si, c_long);
+define_assign_c!(Fmpq, MulAssign, mul_assign, fmpq_mul_si, c_long);
+define_assign_c!(Fmpq, DivAssign, div_assign, fmpq_div_si, c_long);
+
 define_assign_wref!(Fmpq, AddAssign, add_assign, fmpq_add_fmpz, Fmpz);
 define_assign_wref!(Fmpq, SubAssign, sub_assign, fmpq_sub_fmpz, Fmpz);
 define_assign_wref!(Fmpq, MulAssign, mul_assign, fmpq_mul_fmpz, Fmpz);
@@ -184,6 +187,11 @@ impl Fmpq {
     impl_mut_c_wrapper!(sub_si_mut, fmpq_sub_si, x: SelfRef, y: Si);
     /// `self = x + y`
     impl_mut_c_wrapper!(add_si_mut, fmpq_add_si, x: SelfRef, y: Si);
+    /// `self = x * y`
+    impl_mut_c_wrapper!(mul_si_mut, fmpq_mul_si, x: SelfRef, y: Si);
+    /// `self = x / y`
+    impl_mut_c_wrapper!(div_si_mut, fmpq_div_si, x: SelfRef, y: Si);
+
     /// `self = x - y`
     impl_mut_c_wrapper!(sub_fmpz_mut, fmpq_sub_fmpz, x: SelfRef, y: FmpzRef);
     /// `self = x + y`
