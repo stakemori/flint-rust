@@ -131,7 +131,8 @@ macro_rules! impl_operator_c  {
 }
 
 macro_rules! impl_c_wrapper_w_rtype {
-    ($meth: ident, $c_func: ident, $rtyp: ty, $($x:ident: $t:ident),*) => {
+    ($meth: ident, $c_func: ident, $rtyp: ty, ($($x:ident: $t:ident),*), $($m: meta),*) => {
+        $(#[$m])*
         pub fn $meth(&mut self, $($x: __ann_type!($t)),*) -> $rtyp {
             unsafe {
                 $c_func(self.as_ptr(), $(__ref_or_val!($t, $x)),*) as $rtyp
@@ -141,7 +142,8 @@ macro_rules! impl_c_wrapper_w_rtype {
 }
 
 macro_rules! impl_mut_c_wrapper {
-    ($meth: ident, $c_func: ident, $($x:ident: $t:ident),*) => {
+    ($meth: ident, $c_func: ident, ($($x:ident: $t:ident),*), $($m: meta),*) => {
+        $(#[$m])*
         pub fn $meth(&mut self, $($x: __ann_type!($t)),*) {
             unsafe {
                 $c_func(self.as_mut_ptr(), $(__ref_or_val!($t, $x)),*);
@@ -171,7 +173,8 @@ macro_rules! __ref_or_val {
 }
 
 macro_rules! impl_self_mut_call_c {
-    ($meth: ident, $c_func: ident, $($x:ident: $t:ident),*) => {
+    ($meth: ident, $c_func: ident, ($($x:ident: $t:ident),*), $($m: meta),*) => {
+        $(#[$m])*
         pub fn $meth(&mut self, $($x: __ann_type!($t)),*) {
             unsafe {
                 $c_func(self.as_mut_ptr(), self.as_ptr(), $(__ref_or_val!($t, $x)),*);

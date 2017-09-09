@@ -185,47 +185,91 @@ impl Fmpq {
     pub fn is_one(&self) -> bool {
         int_to_bool!(unsafe { fmpq_is_one(self.as_ptr()) })
     }
-    /// Canonicalize self
-    impl_mut_c_wrapper!(canonicalise_mut, fmpq_canonicalise,);
-    /// `self = x - y`
-    impl_mut_c_wrapper!(sub_si_mut, fmpq_sub_si, x: SelfRef, y: Si);
-    /// `self = x + y`
-    impl_mut_c_wrapper!(add_si_mut, fmpq_add_si, x: SelfRef, y: Si);
-    /// `self = x * y`
-    impl_mut_c_wrapper!(mul_si_mut, fmpq_mul_si, x: SelfRef, y: Si);
-    /// `self = x / y`
-    impl_mut_c_wrapper!(div_si_mut, fmpq_div_si, x: SelfRef, y: Si);
 
-    /// `self = x - y`
-    impl_mut_c_wrapper!(sub_fmpz_mut, fmpq_sub_fmpz, x: SelfRef, y: FmpzRef);
-    /// `self = x + y`
-    impl_mut_c_wrapper!(add_fmpz_mut, fmpq_add_fmpz, x: SelfRef, y: FmpzRef);
-    /// `self = x * y`
-    impl_mut_c_wrapper!(mul_fmpz_mut, fmpq_mul_fmpz, x: SelfRef, y: FmpzRef);
-    /// `self = x / y`
-    impl_mut_c_wrapper!(div_fmpz_mut, fmpq_div_fmpz, x: SelfRef, y: FmpzRef);
+    impl_mut_c_wrapper!(
+        canonicalise_mut,
+        fmpq_canonicalise,
+        (),
+        doc = "Canonicalize self"
+    );
+    impl_mut_c_wrapper!(
+        sub_si_mut,
+        fmpq_sub_si,
+        (x: SelfRef, y: Si),
+        doc = "`self = x - y`"
+    );
+    impl_mut_c_wrapper!(
+        add_si_mut,
+        fmpq_add_si,
+        (x: SelfRef, y: Si),
+        doc = "`self = x + y`"
+    );
+    impl_mut_c_wrapper!(
+        mul_si_mut,
+        fmpq_mul_si,
+        (x: SelfRef, y: Si),
+        doc = "`self = x * y`"
+    );
+    impl_mut_c_wrapper!(
+        div_si_mut,
+        fmpq_div_si,
+        (x: SelfRef, y: Si),
+        doc = "`self = x / y`"
+    );
 
-    /// `self = abs(x)`
-    impl_mut_c_wrapper!(abs_mut, fmpq_abs, x: SelfRef);
-    /// `self = x^(-1)`
-    impl_mut_c_wrapper!(inv_mut, fmpq_inv, x: SelfRef);
-    /// `self = -x`
-    impl_mut_c_wrapper!(neg_mut, fmpq_neg, x: SelfRef);
-    /// `self = x`
-    impl_mut_c_wrapper!(set, fmpq_set, x: SelfRef);
-    impl_mut_c_wrapper!(set_zero, fmpq_zero,);
-    impl_mut_c_wrapper!(set_one, fmpq_one,);
-    /// `self = p/q`
-    impl_mut_c_wrapper!(set_si, fmpq_set_si, p: Si, q: Ui);
-    /// `self = p/q`
-    impl_mut_c_wrapper!(set_fmpz_frac, fmpq_set_fmpz_frac, p: FmpzRef, q: FmpzRef);
-    /// `self = x^e`
-    impl_mut_c_wrapper!(pow_si_mut, fmpq_pow_si, x: SelfRef, e: c_long);
-    /// `self += x*y`
-    impl_mut_c_wrapper!(add_mul_mut, fmpq_addmul, x: SelfRef, y: SelfRef);
-    impl_mut_c_wrapper!(sub_mul_mut, fmpq_submul, x: SelfRef, y: SelfRef);
+    impl_mut_c_wrapper!(
+        sub_fmpz_mut,
+        fmpq_sub_fmpz,
+        (x: SelfRef, y: FmpzRef),
+        doc = "`self = x - y`"
+    );
+    impl_mut_c_wrapper!(
+        add_fmpz_mut,
+        fmpq_add_fmpz,
+        (x: SelfRef, y: FmpzRef),
+        doc = "`self = x + y`"
+    );
+    impl_mut_c_wrapper!(
+        mul_fmpz_mut,
+        fmpq_mul_fmpz,
+        (x: SelfRef, y: FmpzRef),
+        doc = "`self = x * y`"
+    );
+    impl_mut_c_wrapper!(
+        div_fmpz_mut,
+        fmpq_div_fmpz,
+        (x: SelfRef, y: FmpzRef),
+        doc = "`self = x / y`"
+    );
 
-    impl_self_mut_call_c!(negate, fmpq_neg,);
-    impl_self_mut_call_c!(set_pow_si, fmpq_pow_si, e: c_long);
-    impl_self_mut_call_c!(set_inv, fmpq_inv,);
+    impl_mut_c_wrapper!(abs_mut, fmpq_abs, (x: SelfRef), doc = "`self = abs(x)`");
+    impl_mut_c_wrapper!(inv_mut, fmpq_inv, (x: SelfRef), doc = "`self = x^(-1)`");
+    impl_mut_c_wrapper!(neg_mut, fmpq_neg, (x: SelfRef), doc = "`self = -x`");
+    impl_mut_c_wrapper!(set, fmpq_set, (x: SelfRef), doc = "`self = x`");
+    impl_mut_c_wrapper!(set_zero, fmpq_zero,(),);
+    impl_mut_c_wrapper!(set_one, fmpq_one,(),);
+    impl_mut_c_wrapper!(set_si, fmpq_set_si, (p: Si, q: Ui), doc = "`self = p/q`");
+    impl_mut_c_wrapper!(
+        set_fmpz_frac,
+        fmpq_set_fmpz_frac,
+        (p: FmpzRef, q: FmpzRef),
+        doc = "`self = p/q`"
+    );
+    impl_mut_c_wrapper!(
+        pow_si_mut,
+        fmpq_pow_si,
+        (x: SelfRef, e: c_long),
+        doc = "`self = x^e`"
+    );
+    impl_mut_c_wrapper!(
+        add_mul_mut,
+        fmpq_addmul,
+        (x: SelfRef, y: SelfRef),
+        doc = "`self += x*y`"
+    );
+    impl_mut_c_wrapper!(sub_mul_mut, fmpq_submul, (x: SelfRef, y: SelfRef),);
+
+    impl_self_mut_call_c!(negate, fmpq_neg, (),);
+    impl_self_mut_call_c!(set_pow_si, fmpq_pow_si, (e: c_long),);
+    impl_self_mut_call_c!(set_inv, fmpq_inv,(),);
 }

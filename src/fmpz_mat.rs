@@ -171,111 +171,118 @@ impl FmpzMat {
             fmpz_mat_neg(self.as_mut_ptr(), self.as_ptr());
         }
     }
-    /// self = x + y
-    impl_mut_c_wrapper!(add_mut, fmpz_mat_add, x: SelfRef, y: SelfRef);
-    /// self = x - y
-    impl_mut_c_wrapper!(sub_mut, fmpz_mat_sub, x: SelfRef, y: SelfRef);
-    /// self = -x
-    impl_mut_c_wrapper!(neg_mut, fmpz_mat_neg, x: SelfRef);
-    /// self = x * y
-    impl_mut_c_wrapper!(scalar_mul_si_mut, fmpz_mat_scalar_mul_si, x: SelfRef, y: Si);
-    /// self = x * y
-    impl_mut_c_wrapper!(scalar_mul_ui_mut, fmpz_mat_scalar_mul_ui, x: SelfRef, y: Ui);
 
-    /// self = x * y
+    impl_mut_c_wrapper!(
+        add_mut,
+        fmpz_mat_add,
+        (x: SelfRef, y: SelfRef),
+        doc = "self = x + y"
+    );
+    impl_mut_c_wrapper!(
+        sub_mut,
+        fmpz_mat_sub,
+        (x: SelfRef, y: SelfRef),
+        doc = "self = x - y"
+    );
+    impl_mut_c_wrapper!(neg_mut, fmpz_mat_neg, (x: SelfRef), doc = "self = -x");
+    impl_mut_c_wrapper!(
+        scalar_mul_si_mut,
+        fmpz_mat_scalar_mul_si,
+        (x: SelfRef, y: Si),
+        doc = "self = x * y"
+    );
+    impl_mut_c_wrapper!(
+        scalar_mul_ui_mut,
+        fmpz_mat_scalar_mul_ui,
+        (x: SelfRef, y: Ui),
+        doc = "self = x * y"
+    );
+
     impl_mut_c_wrapper!(
         scalar_mul_fmpz_mut,
         fmpz_mat_scalar_mul_fmpz,
-        x: SelfRef,
-        y: FmpzRef
+        (x: SelfRef, y: FmpzRef),
+        doc = "self = x * y"
     );
-    /// self += x * y
     impl_mut_c_wrapper!(
         scalar_addmul_fmpz_mut,
         fmpz_mat_scalar_addmul_fmpz,
-        x: SelfRef,
-        y: FmpzRef
+        (x: SelfRef, y: FmpzRef),
+        doc = "self += x * y"
     );
 
-    /// self += x * y
     impl_mut_c_wrapper!(
         scalar_addmul_si_mut,
         fmpz_mat_scalar_addmul_si,
-        x: SelfRef,
-        y: Si
+        (x: SelfRef, y: Si),
+        doc = "self += x * y"
     );
 
-    /// self += x * y
     impl_mut_c_wrapper!(
         scalar_addmul_ui_mut,
         fmpz_mat_scalar_addmul_ui,
-        x: SelfRef,
-        y: Ui
+        (x: SelfRef, y: Ui),
+        doc = "self += x * y"
     );
 
-    /// self -= x * y
     impl_mut_c_wrapper!(
         scalar_submul_fmpz_mut,
         fmpz_mat_scalar_submul_fmpz,
-        x: SelfRef,
-        y: FmpzRef
+        (x: SelfRef, y: FmpzRef),
+        doc = "self -= x * y"
     );
 
-    /// self -= x * y
     impl_mut_c_wrapper!(
         scalar_submul_si_mut,
         fmpz_mat_scalar_submul_si,
-        x: SelfRef,
-        y: Si
+        (x: SelfRef, y: Si),
+        doc = "self -= x * y"
     );
 
-    /// self -= x * y
     impl_mut_c_wrapper!(
         scalar_submul_ui_mut,
         fmpz_mat_scalar_submul_ui,
-        x: SelfRef,
-        y: Ui
+        (x: SelfRef, y: Ui),
+        doc = "self -= x * y"
     );
 
-    /// self = x/y
     impl_mut_c_wrapper!(
         scalar_divexact_fmpz_mut,
         fmpz_mat_scalar_divexact_fmpz,
-        x: SelfRef,
-        y: FmpzRef
+        (x: SelfRef, y: FmpzRef),
+        doc = "self = x/y"
     );
 
-    /// self = x/y
     impl_mut_c_wrapper!(
         scalar_divexact_si_mut,
         fmpz_mat_scalar_divexact_si,
-        x: SelfRef,
-        y: Si
+        (x: SelfRef, y: Si),
+        doc = "self = x/y"
     );
 
-    /// self = x/y
     impl_mut_c_wrapper!(
         scalar_divexact_ui_mut,
         fmpz_mat_scalar_divexact_ui,
-        x: SelfRef,
-        y: Ui
+        (x: SelfRef, y: Ui),
+        doc = "self = x/y"
     );
 
-    /// self = x * y
-    impl_mut_c_wrapper!(mul_mut, fmpz_mat_mul, x: SelfRef, y: SelfRef);
+    impl_mut_c_wrapper!(
+        mul_mut,
+        fmpz_mat_mul,
+        (x: SelfRef, y: SelfRef),
+        doc = "self = x * y"
+    );
 
-    /// self = x * y
     impl_mut_c_wrapper!(
         mul_classical_mut,
         fmpz_mat_mul_classical,
-        x: SelfRef,
-        y: SelfRef
+        (x: SelfRef, y: SelfRef),
+        doc = "self = x * y"
     );
+    impl_mut_c_wrapper!(sqr_mut, fmpz_mat_sqr, (x: SelfRef), doc = "self = x * x");
 
-    /// self = x * x
-    impl_mut_c_wrapper!(sqr_mut, fmpz_mat_sqr, x: SelfRef);
-
-    impl_mut_c_wrapper!(pow_mut, fmpz_mat_pow, m: SelfRef, exp: mp_limb_t);
+    impl_mut_c_wrapper!(pow_mut, fmpz_mat_pow, (m: SelfRef, exp: mp_limb_t),);
 
     pub fn content_mut(&self, res: &mut Fmpz) {
         unsafe {

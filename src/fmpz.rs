@@ -265,19 +265,36 @@ impl Fmpz {
         fac
     }
 
-    /// self = x mod 2**y
-    impl_mut_c_wrapper!(fdiv_r_2exp_mut, fmpz_fdiv_r_2exp, x: SelfRef, y: Ui);
-    /// self = x - y
-    impl_mut_c_wrapper!(sub_ui_mut, fmpz_sub_ui, x: FmpzRef, y: Ui);
-    /// self = x % y
-    impl_mut_c_wrapper!(mod_ui_mut, fmpz_mod_ui, x: FmpzRef, y: Ui);
+    impl_mut_c_wrapper!(
+        fdiv_r_2exp_mut,
+        fmpz_fdiv_r_2exp,
+        (x: SelfRef, y: Ui),
+        doc = "`self = x mod 2**y`"
+    );
+    impl_mut_c_wrapper!(
+        sub_ui_mut,
+        fmpz_sub_ui,
+        (x: FmpzRef, y: Ui),
+        doc = "`self = x - y`"
+    );
+    impl_mut_c_wrapper!(
+        mod_ui_mut,
+        fmpz_mod_ui,
+        (x: FmpzRef, y: Ui),
+        doc = "`self = x % y`"
+    );
 
     pub fn bits(&self) -> c_ulong {
         unsafe { fmpz_bits(self.as_ptr()) }
     }
 
-    /// Return jacobi symbol self mod p
-    impl_c_wrapper_w_rtype!(jacobi, fmpz_jacobi, i32, p: SelfRef);
+    impl_c_wrapper_w_rtype!(
+        jacobi,
+        fmpz_jacobi,
+        i32,
+        (p: SelfRef),
+        doc = "Return jacobi symbol self mod p"
+    );
 
     /// Return `valuation(op, f)` and set `self = op/f^e`, where e is the valuation.
     pub fn remove(&mut self, op: &Self, f: &Self) -> mp_limb_signed_t {
