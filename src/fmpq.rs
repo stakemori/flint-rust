@@ -275,7 +275,7 @@ impl Fmpq {
     );
     impl_mut_c_wrapper!(sub_mul_mut, fmpq_submul, (x: SelfRef, y: SelfRef),);
 
-    impl_self_mut_call_c!(negate, fmpq_neg, (),);
-    impl_self_mut_call_c!(set_pow_si, fmpq_pow_si, (e: c_long),);
-    impl_self_mut_call_c!(set_inv, fmpq_inv,(),);
+    impl_self_mut_call_c!(negate, fmpq_neg, (), doc = "`self = -self`");
+    impl_self_mut_call_c!(set_pow_si, fmpq_pow_si, (e: c_long), doc = "`self = self^e`");
+    impl_self_mut_call_c!(set_inv, fmpq_inv,(), doc = "`self = self^(-1)`");
 }
