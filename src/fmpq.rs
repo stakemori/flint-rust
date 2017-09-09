@@ -40,6 +40,8 @@ impl Default for Fmpq {
     }
 }
 
+impl_neg!(Fmpq, fmpq_neg);
+
 impl fmt::Display for Fmpq {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let mut num = Fmpz::new();

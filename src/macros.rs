@@ -98,6 +98,22 @@ macro_rules! impl_operator {
     }
 }
 
+
+macro_rules! impl_neg {
+    ($t: ty, $cfunc: ident) => {
+        impl<'b> Neg for &'b $t {
+            type Output = $t;
+            fn neg(self) -> $t {
+                unsafe {
+                    let mut a: $t = Default::default();
+                    $cfunc(a.as_mut_ptr(), self.as_ptr());
+                    a
+                }
+            }
+        }
+    };
+}
+
 macro_rules! imp_operator_c {
     ($tr: ident, $t: ty, $method: ident, $ct: ty, $cfunc: ident) => {
         impl<'a> $tr<$ct> for &'a $t {
