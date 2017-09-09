@@ -19,7 +19,9 @@ macro_rules! define_assign {
             }
         }
     };
+}
 
+macro_rules! define_assign_c {
     ($t:ty, $trait:ident, $meth:ident, $func:ident, $typ:ty) =>
     {
         impl $trait<$typ> for $t {
