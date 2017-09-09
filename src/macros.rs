@@ -138,8 +138,6 @@ macro_rules! impl_c_wrapper_w_rtype {
             }
         }
     };
-    ($meth: ident, $c_func: ident, $rtyp: ty, $($x:ident: $t:ident),*,)  =>
-    { impl_mut_c_wrapper_w_rtype!($meth, $c_func, $rtyp, $($x: $t),*); };
 }
 
 macro_rules! impl_mut_c_wrapper {
@@ -150,8 +148,6 @@ macro_rules! impl_mut_c_wrapper {
             }
         }
     };
-    ($meth: ident, $c_func: ident, $($x:ident: $t:ident),*,)  =>
-    { impl_mut_c_wrapper!($meth, $c_func, $($x: $t),*); };
 }
 
 macro_rules! __ann_type {
