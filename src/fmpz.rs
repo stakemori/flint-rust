@@ -9,7 +9,7 @@ use std::cmp::Ordering::{self, Greater, Less, Equal};
 
 #[derive(Debug, Clone)]
 pub struct Fmpz {
-    pub fmpz: fmpz_t,
+    fmpz: fmpz_t,
 }
 
 impl Drop for Fmpz {

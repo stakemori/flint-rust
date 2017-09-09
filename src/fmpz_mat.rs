@@ -142,10 +142,11 @@ impl FmpzMat {
     }
 
     pub fn entry_cloned(&self, r: isize, c: isize) -> Fmpz {
-        let p = self.entry_raw(r, c);
         unsafe {
-            let res = Fmpz { fmpz: [*p] };
-            res.clone()
+            let p = self.entry_raw(r, c);
+            let mut res = Fmpz::new();
+            fmpz_set(res.as_mut_ptr(), p);
+            res
         }
     }
 
