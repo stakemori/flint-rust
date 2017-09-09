@@ -112,6 +112,18 @@ macro_rules! imp_operator_c {
     }
 }
 
+macro_rules! impl_c_wrapper_w_rtype {
+    ($meth: ident, $c_func: ident, $rtyp: ty, $($x:ident: $t:ident),*) => {
+        pub fn $meth(&mut self, $($x: __ann_type!($t)),*) -> $rtyp {
+            unsafe {
+                $c_func(self.as_ptr(), $(__ref_or_val!($t, $x)),*) as $rtyp
+            }
+        }
+    };
+    ($meth: ident, $c_func: ident, $($x:ident: $t:ident),*,)  =>
+        { impl_mut_c_wrapper!($meth, $c_func, $($x: $t),*); };
+}
+
 macro_rules! impl_mut_c_wrapper {
     ($meth: ident, $c_func: ident, $($x:ident: $t:ident),*) => {
         pub fn $meth(&mut self, $($x: __ann_type!($t)),*) {
