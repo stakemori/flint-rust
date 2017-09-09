@@ -172,9 +172,18 @@ mod fmpq {
     use flint::bindings::fmpz_set;
 
     #[test]
+    fn test_op() {
+        let a: Fmpq = From::from((1, 2));
+        let b: Fmpq = From::from((1, 3));
+        let c = &a + &b;
+        assert_eq!(c.num(), 5_u64);
+        assert_eq!(c.den(), 6_u64);
+    }
+
+    #[test]
     fn test_sgn() {
         let a: Fmpq = From::from((-12, 5));
-        println!("{}", a.sgn());
+        assert_eq!(a.sgn(), -1);
     }
 
     #[test]
