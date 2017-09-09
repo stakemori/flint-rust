@@ -85,6 +85,17 @@ impl<'a> From<(&'a Fmpz, &'a Fmpz)> for Fmpq {
     }
 }
 
+impl<'a> From<&'a Fmpz> for Fmpq {
+    fn from(x: &Fmpz) -> Self {
+        unsafe {
+            let mut res = Fmpq::new();
+            fmpz_set(res.num_as_mut_ptr(), x.as_ptr());
+            fmpz_one(res.den_as_mut_ptr());
+            res
+        }
+    }
+}
+
 impl Drop for Fmpq {
     fn drop(&mut self) {
         unsafe {
