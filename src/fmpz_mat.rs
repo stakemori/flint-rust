@@ -27,7 +27,7 @@ impl fmt::Display for FmpzMat {
         let mut vv = Vec::new();
         for i in 0..self.nrows() {
             let v: Vec<String> = (0..self.ncols())
-                .map(|j| self.entry_cloned(i, j).get_str(10))
+                .map(|j| self.entry_cloned(i, j).get_string(10))
                 .collect();
             vv.push(format!("[{}]", v.join(", ")));
         }

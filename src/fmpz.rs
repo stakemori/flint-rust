@@ -246,7 +246,7 @@ impl Fmpz {
         }
     }
 
-    pub fn get_str(&self, base: usize) -> String {
+    pub fn get_string(&self, base: usize) -> String {
         // taken from rust-gmp (cf. https://crates.io/crates/rust-gmp)
         unsafe {
             // Extra two bytes are for possible minus sign and null terminator
@@ -524,7 +524,7 @@ impl FmpzFactor {
 
 impl fmt::Display for Fmpz {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{}", self.get_str(10))
+        write!(f, "{}", self.get_string(10))
     }
 }
 
