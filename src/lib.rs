@@ -1,7 +1,3 @@
-#![allow(unknown_lints, verbose_bit_mask)]
-#![cfg_attr(feature="clippy", feature(plugin))]
-#![cfg_attr(feature="clippy", plugin(clippy))]
-
 #![feature(untagged_unions)]
 extern crate libc;
 
