@@ -147,6 +147,18 @@ impl Fmpq {
         unsafe { fmpq_sgn(self.as_ptr()) as i32 }
     }
 
+    pub fn set_num(&self, num: &mut Fmpz) {
+        unsafe {
+            fmpz_set(num.as_mut_ptr(), self.num_as_ptr());
+        }
+    }
+
+    pub fn set_den(&self, den: &mut Fmpz) {
+        unsafe {
+            fmpz_set(den.as_mut_ptr(), self.den_as_ptr());
+        }
+    }
+
     pub fn set_num_den(&self, num: &mut Fmpz, den: &mut Fmpz) {
         unsafe {
             fmpz_set(num.as_mut_ptr(), self.num_as_ptr());
