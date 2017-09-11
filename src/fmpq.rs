@@ -178,6 +178,25 @@ impl Fmpq {
         a
     }
 
+    /// Assuming `self` has a canonical form, checks if `self` is integral.
+    pub fn is_integral(&self) -> bool {
+        unsafe { int_to_bool!(fmpz_is_one(self.den_as_ptr())) }
+    }
+
+    pub fn to_slong(&self) -> Option<c_long> {
+        if self.is_integral() {
+            unsafe {
+                if int_to_bool!(fmpz_fits_si(self.num_as_ptr())) {
+                    Some(fmpz_get_si(self.num_as_ptr()))
+                } else {
+                    None
+                }
+            }
+        } else {
+            None
+        }
+    }
+
     pub fn den(&self) -> Fmpz {
         let mut a = Fmpz::new();
         unsafe {
