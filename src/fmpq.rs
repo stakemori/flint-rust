@@ -126,6 +126,7 @@ impl Fmpq {
         }
     }
 
+    /// Return new rational, which is set to zero.
     pub fn new() -> Self {
         unsafe {
             let mut a = Self::uninitialized();
