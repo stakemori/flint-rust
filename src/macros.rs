@@ -34,6 +34,19 @@ macro_rules! define_assign_wref {
     };
 }
 
+macro_rules! define_assign_with_ptr {
+    ($t:ty, $trait:ident, $meth:ident, $func:ident, $ty:ty) =>
+    {
+        impl $trait<$ty> for $t {
+            fn $meth(&mut self, other: $ty) {
+                unsafe {
+                    $func(self.as_mut_ptr(), self.as_ptr(), other);
+                }
+            }
+        }
+    };
+}
+
 macro_rules! define_assign_c {
     ($t:ty, $trait:ident, $meth:ident, $func:ident, $typ:ty) =>
     {

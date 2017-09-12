@@ -10,6 +10,14 @@ mod fmpz {
     use gmp::mpz::Mpz;
 
     #[test]
+    fn test_op_with_ptr() {
+        let mut a: Fmpz = From::from(3);
+        let b: Fmpz = From::from(2);
+        a += b.as_ptr();
+        assert_eq!(a, 5_u64);
+    }
+
+    #[test]
     fn test_from_mpz() {
         let a: Mpz = From::from(10);
         let mut b: Fmpz = From::from(&a);

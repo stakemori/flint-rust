@@ -54,6 +54,12 @@ define_assign!(Fmpz, MulAssign, mul_assign, fmpz_mul);
 define_assign!(Fmpz, SubAssign, sub_assign, fmpz_sub);
 define_assign!(Fmpz, DivAssign, div_assign, fmpz_fdiv_q);
 
+// Perhaps should I implement Deref?
+define_assign_with_ptr!(Fmpz, AddAssign, add_assign, fmpz_add, fmpzptr);
+define_assign_with_ptr!(Fmpz, MulAssign, mul_assign, fmpz_mul, fmpzptr);
+define_assign_with_ptr!(Fmpz, SubAssign, sub_assign, fmpz_sub, fmpzptr);
+define_assign_with_ptr!(Fmpz, DivAssign, div_assign, fmpz_fdiv_q, fmpzptr);
+
 define_assign_c!(Fmpz, AddAssign, add_assign, fmpz_add_ui, c_ulong);
 define_assign_c!(Fmpz, SubAssign, sub_assign, fmpz_sub_ui, c_ulong);
 define_assign_c!(Fmpz, MulAssign, mul_assign, fmpz_mul_ui, c_ulong);
