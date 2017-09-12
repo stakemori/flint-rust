@@ -339,6 +339,12 @@ impl Fmpz {
         unsafe { fmpz_bits(self.as_ptr()) }
     }
 
+    pub fn is_probabprime(&self) -> bool {
+        unsafe {
+            int_to_bool!(fmpz_is_probabprime(self.as_ptr()))
+        }
+    }
+
     impl_c_wrapper_w_rtype!(
         jacobi,
         fmpz_jacobi,
