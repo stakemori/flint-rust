@@ -300,6 +300,14 @@ impl Fmpz {
         (x: SelfRef, y: Ui),
         doc = "`self = x mod 2**y`"
     );
+
+    impl_self_mut_call_c!(
+        set_fdiv_r_2exp,
+        fmpz_fdiv_r_2exp,
+        (y: Ui),
+        doc = "`self = self mod 2**y`"
+    );
+
     impl_mut_c_wrapper!(
         sub_ui_mut,
         fmpz_sub_ui,
