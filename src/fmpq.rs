@@ -320,4 +320,14 @@ impl Fmpq {
         doc = "`self = self^e`"
     );
     impl_self_mut_call_c!(set_inv, fmpq_inv, (), doc = "`self = self^(-1)`");
+
+    /// Call `fmpz_remove` on the numerator of `self` and return the valuation.
+    pub fn set_num_remove(&mut self, f: &Fmpz) -> c_long {
+        unsafe { fmpz_remove(self.num_as_mut_ptr(), self.num_as_ptr(), f.as_ptr()) }
+    }
+
+    /// Similar to `set_num_remove` for denominator.
+    pub fn set_den_remove(&mut self, f: &Fmpz) -> c_long {
+        unsafe { fmpz_remove(self.den_as_mut_ptr(), self.den_as_ptr(), f.as_ptr()) }
+    }
 }
