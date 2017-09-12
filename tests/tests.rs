@@ -174,7 +174,7 @@ mod factor {
         // res.pow_ui(&a, 12);
         // println!("{}", res);
         let fac = a.to_factor();
-        assert_eq!(fac_to_fmpz(&fac).get_str(10), a.get_str(10));
+        assert_eq!(fac_to_fmpz(&fac).get_string(10), a.get_string(10));
     }
 }
 
