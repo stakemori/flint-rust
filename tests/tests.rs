@@ -232,6 +232,25 @@ mod fmpq {
     }
 
     #[test]
+    fn test_op_mut() {
+        let a: Fmpq = From::from((1, 2));
+        let b: Fmpq = From::from((1, 3));
+        let mut res = Fmpq::new();
+
+        res.add_mut(&a, &b);
+        assert_eq!(res, Fmpq::from((5, 6)));
+
+        res.sub_mut(&a, &b);
+        assert_eq!(res, Fmpq::from((1, 6)));
+
+        res.mul_mut(&a, &b);
+        assert_eq!(res, Fmpq::from((1, 6)));
+
+        res.div_mut(&a, &b);
+        assert_eq!(res, Fmpq::from((3, 2)));
+    }
+
+    #[test]
     fn test_num_ptr() {
         let n = Fmpz::from_str(
             "290329093209403904940394039049093409403903430909093820983209",

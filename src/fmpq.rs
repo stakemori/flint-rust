@@ -261,6 +261,31 @@ impl Fmpq {
     );
 
     impl_mut_c_wrapper!(
+        add_mut,
+        fmpq_add,
+        (x: SelfRef, y: SelfRef),
+        doc = "`self = x + y`"
+    );
+    impl_mut_c_wrapper!(
+        sub_mut,
+        fmpq_sub,
+        (x: SelfRef, y: SelfRef),
+        doc = "`self = x - y`"
+    );
+    impl_mut_c_wrapper!(
+        mul_mut,
+        fmpq_mul,
+        (x: SelfRef, y: SelfRef),
+        doc = "`self = x * y`"
+    );
+    impl_mut_c_wrapper!(
+        div_mut,
+        fmpq_div,
+        (x: SelfRef, y: SelfRef),
+        doc = "`self = x / y`"
+    );
+
+    impl_mut_c_wrapper!(
         sub_fmpz_mut,
         fmpq_sub_fmpz,
         (x: SelfRef, y: FmpzRef),
