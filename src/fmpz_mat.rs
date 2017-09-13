@@ -37,7 +37,7 @@ impl fmt::Display for FmpzMat {
 
 impl PartialEq for FmpzMat {
     fn eq(&self, other: &Self) -> bool {
-        unsafe { int_to_bool!(fmpz_mat_equal(self.as_ptr(), other.as_ptr())) }
+        unsafe { int_to_bool!(fmpz_mat_equal(self.as_raw(), other.as_raw())) }
     }
 }
 
@@ -49,7 +49,7 @@ impl<'a> Shl<mp_limb_t> for &'a FmpzMat {
             self.ncols() as mp_limb_signed_t,
         );
         unsafe {
-            fmpz_mat_scalar_mul_2exp(res.as_mut_ptr(), self.as_ptr(), other);
+            fmpz_mat_scalar_mul_2exp(res.as_raw_mut(), self.as_raw(), other);
         }
         res
     }
@@ -63,7 +63,7 @@ impl<'a> Shr<mp_limb_t> for &'a FmpzMat {
             self.ncols() as mp_limb_signed_t,
         );
         unsafe {
-            fmpz_mat_scalar_tdiv_q_2exp(res.as_mut_ptr(), self.as_ptr(), other);
+            fmpz_mat_scalar_tdiv_q_2exp(res.as_raw_mut(), self.as_raw(), other);
         }
         res
     }
@@ -72,7 +72,7 @@ impl<'a> Shr<mp_limb_t> for &'a FmpzMat {
 impl ShlAssign<mp_limb_t> for FmpzMat {
     fn shl_assign(&mut self, other: mp_limb_t) {
         unsafe {
-            fmpz_mat_scalar_mul_2exp(self.as_mut_ptr(), self.as_ptr(), other);
+            fmpz_mat_scalar_mul_2exp(self.as_raw_mut(), self.as_raw(), other);
         }
     }
 }
@@ -80,7 +80,7 @@ impl ShlAssign<mp_limb_t> for FmpzMat {
 impl ShrAssign<mp_limb_t> for FmpzMat {
     fn shr_assign(&mut self, other: mp_limb_t) {
         unsafe {
-            fmpz_mat_scalar_tdiv_q_2exp(self.as_mut_ptr(), self.as_ptr(), other);
+            fmpz_mat_scalar_tdiv_q_2exp(self.as_raw_mut(), self.as_raw(), other);
         }
     }
 }
@@ -94,24 +94,24 @@ impl FmpzMat {
         }
     }
 
-    fn as_ptr(&self) -> *const fmpz_mat_struct {
+    fn as_raw(&self) -> *const fmpz_mat_struct {
         &self.fmpz_mat
     }
 
-    fn as_mut_ptr(&mut self) -> *mut fmpz_mat_struct {
+    fn as_raw_mut(&mut self) -> *mut fmpz_mat_struct {
         &mut self.fmpz_mat
     }
 
     pub fn set_zero(&mut self) {
         unsafe {
-            fmpz_mat_zero(self.as_mut_ptr());
+            fmpz_mat_zero(self.as_raw_mut());
         }
     }
 
     pub fn set_one(&mut self) {
         debug_assert_eq!(self.ncols(), self.nrows());
         unsafe {
-            fmpz_mat_one(self.as_mut_ptr());
+            fmpz_mat_one(self.as_raw_mut());
         }
     }
 
@@ -123,7 +123,7 @@ impl FmpzMat {
 
     pub fn set_entry(&mut self, r: isize, c: isize, x: &Fmpz) {
         unsafe {
-            fmpz_set(self.entry_raw_mut(r, c), x.as_ptr());
+            fmpz_set(self.entry_raw_mut(r, c), x.as_raw());
         }
     }
 
@@ -145,17 +145,17 @@ impl FmpzMat {
         unsafe {
             let p = self.entry_raw(r, c);
             let mut res = Fmpz::new();
-            fmpz_set(res.as_mut_ptr(), p);
+            fmpz_set(res.as_raw_mut(), p);
             res
         }
     }
 
     pub fn is_zero(&self) -> bool {
-        unsafe { int_to_bool!(fmpz_mat_is_zero(self.as_ptr())) }
+        unsafe { int_to_bool!(fmpz_mat_is_zero(self.as_raw())) }
     }
 
     pub fn is_one(&self) -> bool {
-        unsafe { int_to_bool!(fmpz_mat_is_one(self.as_ptr())) }
+        unsafe { int_to_bool!(fmpz_mat_is_one(self.as_raw())) }
     }
 
     pub fn ncols(&self) -> isize {
@@ -168,7 +168,7 @@ impl FmpzMat {
 
     pub fn negate(&mut self) {
         unsafe {
-            fmpz_mat_neg(self.as_mut_ptr(), self.as_ptr());
+            fmpz_mat_neg(self.as_raw_mut(), self.as_raw());
         }
     }
 
@@ -286,26 +286,26 @@ impl FmpzMat {
 
     pub fn content_mut(&self, res: &mut Fmpz) {
         unsafe {
-            fmpz_mat_content(res.as_mut_ptr(), self.as_ptr());
+            fmpz_mat_content(res.as_raw_mut(), self.as_raw());
         }
     }
 
     /// `res = m.trace()`
     pub fn trace_mut(&self, res: &mut Fmpz) {
         unsafe {
-            fmpz_mat_trace(res.as_mut_ptr(), self.as_ptr());
+            fmpz_mat_trace(res.as_raw_mut(), self.as_raw());
         }
     }
 
     /// `res = m.det()`
     pub fn det_mut(&self, res: &mut Fmpz) {
         unsafe {
-            fmpz_mat_det(res.as_mut_ptr(), self.as_ptr());
+            fmpz_mat_det(res.as_raw_mut(), self.as_raw());
         }
     }
 
     pub fn rank(&self) -> u64 {
-        unsafe { fmpz_mat_rank(self.as_ptr()) as u64 }
+        unsafe { fmpz_mat_rank(self.as_raw()) as u64 }
     }
 
     fn column_vector(&self, i: isize) -> Vec<Fmpz> {
@@ -323,7 +323,7 @@ impl FmpzMat {
             self.nrows() as mp_limb_signed_t,
             self.nrows() as mp_limb_signed_t,
         );
-        let r = unsafe { fmpz_mat_nullspace(b.as_mut_ptr(), self.as_ptr()) };
+        let r = unsafe { fmpz_mat_nullspace(b.as_raw_mut(), self.as_raw()) };
         b.column_vectors().into_iter().take(r as usize).collect()
     }
 }

@@ -18,7 +18,7 @@ pub struct Fmpz {
 impl Drop for Fmpz {
     fn drop(&mut self) {
         unsafe {
-            fmpz_clear(self.as_mut_ptr());
+            fmpz_clear(self.as_raw_mut());
         }
     }
 }
@@ -37,14 +37,14 @@ impl_part_cmp_c!(Fmpz, c_long, fmpz_cmp_si);
 
 impl PartialEq for Fmpz {
     fn eq(&self, other: &Fmpz) -> bool {
-        unsafe { fmpz_equal(self.as_ptr(), other.as_ptr()) != 0 }
+        unsafe { fmpz_equal(self.as_raw(), other.as_raw()) != 0 }
     }
 }
 
 impl PartialOrd for Fmpz {
     fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
         Some(int_to_ord!(
-            unsafe { fmpz_cmp(self.as_ptr(), other.as_ptr()) }
+            unsafe { fmpz_cmp(self.as_raw(), other.as_raw()) }
         ))
     }
 }
@@ -89,7 +89,7 @@ impl<'a> From<&'a Mpz> for Fmpz {
     fn from(x: &Mpz) -> Fmpz {
         unsafe {
             let mut a = Fmpz::new();
-            fmpz_set_mpz(a.as_mut_ptr(), x.inner());
+            fmpz_set_mpz(a.as_raw_mut(), x.inner());
             a
         }
     }
@@ -99,7 +99,7 @@ impl<'a> From<&'a Fmpz> for Mpz {
     fn from(x: &Fmpz) -> Mpz {
         unsafe {
             let mut a = Mpz::new();
-            fmpz_get_mpz(a.inner_mut(), x.as_ptr());
+            fmpz_get_mpz(a.inner_mut(), x.as_raw());
             a
         }
     }
@@ -107,14 +107,14 @@ impl<'a> From<&'a Fmpz> for Mpz {
 
 impl Fmpz {
     pub fn is_even(&self) -> bool {
-        unsafe { int_to_bool!(fmpz_is_even(self.as_ptr())) }
+        unsafe { int_to_bool!(fmpz_is_even(self.as_raw())) }
     }
 
-    pub fn as_mut_ptr(&mut self) -> fmpzmutptr {
+    pub fn as_raw_mut(&mut self) -> fmpzmutptr {
         &mut self.fmpz[0] as fmpzmutptr
     }
 
-    pub fn as_ptr(&self) -> fmpzptr {
+    pub fn as_raw(&self) -> fmpzptr {
         &self.fmpz[0] as fmpzptr
     }
 
@@ -153,70 +153,70 @@ impl Fmpz {
     /// self = val
     pub fn set(&mut self, val: &Fmpz) {
         unsafe {
-            fmpz_set(self.as_mut_ptr(), val.as_ptr());
+            fmpz_set(self.as_raw_mut(), val.as_raw());
         }
     }
 
     /// self = val
     pub fn set_si(&mut self, val: c_long) {
         unsafe {
-            fmpz_set_si(self.as_mut_ptr(), val);
+            fmpz_set_si(self.as_raw_mut(), val);
         }
     }
 
     /// self = val
     pub fn set_ui(&mut self, val: c_ulong) {
         unsafe {
-            fmpz_set_ui(self.as_mut_ptr(), val);
+            fmpz_set_ui(self.as_raw_mut(), val);
         }
     }
 
     /// self = n + m
     pub fn add_mut(&mut self, n: &Fmpz, m: &Fmpz) {
         unsafe {
-            fmpz_add(self.as_mut_ptr(), n.as_ptr(), m.as_ptr());
+            fmpz_add(self.as_raw_mut(), n.as_raw(), m.as_raw());
         }
     }
 
     /// self = n + m
     pub fn add_ui_mut(&mut self, n: &Self, m: c_ulong) {
         unsafe {
-            fmpz_add_ui(self.as_mut_ptr(), n.as_ptr(), m);
+            fmpz_add_ui(self.as_raw_mut(), n.as_raw(), m);
         }
     }
 
     /// self = n * m
     pub fn mul_mut(&mut self, n: &Fmpz, m: &Fmpz) {
         unsafe {
-            fmpz_mul(self.as_mut_ptr(), n.as_ptr(), m.as_ptr());
+            fmpz_mul(self.as_raw_mut(), n.as_raw(), m.as_raw());
         }
     }
 
     /// self = n * m
     pub fn mul_ui_mut(&mut self, n: &Fmpz, m: c_long) {
         unsafe {
-            fmpz_mul_si(self.as_mut_ptr(), n.as_ptr(), m);
+            fmpz_mul_si(self.as_raw_mut(), n.as_raw(), m);
         }
     }
 
     /// self = g/h. Rounds up towards infinity.
     pub fn cdiv_q_mut(&mut self, g: &Fmpz, h: &Fmpz) {
         unsafe {
-            fmpz_cdiv_q(self.as_mut_ptr(), g.as_ptr(), h.as_ptr());
+            fmpz_cdiv_q(self.as_raw_mut(), g.as_raw(), h.as_raw());
         }
     }
 
     /// self = g/h. Rounds up towards zero.
     pub fn tdiv_q_mut(&mut self, g: &Fmpz, h: &Fmpz) {
         unsafe {
-            fmpz_tdiv_q(self.as_mut_ptr(), g.as_ptr(), h.as_ptr());
+            fmpz_tdiv_q(self.as_raw_mut(), g.as_raw(), h.as_raw());
         }
     }
 
     /// self = g/h. Rounds up towards -infinity.
     pub fn fdiv_q_mut(&mut self, g: &Fmpz, h: &Fmpz) {
         unsafe {
-            fmpz_fdiv_q(self.as_mut_ptr(), g.as_ptr(), h.as_ptr());
+            fmpz_fdiv_q(self.as_raw_mut(), g.as_raw(), h.as_raw());
         }
     }
 
@@ -224,20 +224,20 @@ impl Fmpz {
     /// self = g^exp
     pub fn pow_ui_mut(&mut self, g: &Fmpz, exp: c_ulong) {
         unsafe {
-            fmpz_pow_ui(self.as_mut_ptr(), g.as_ptr(), exp);
+            fmpz_pow_ui(self.as_raw_mut(), g.as_raw(), exp);
         }
     }
 
     pub fn get_si_unchecked(&self) -> c_long {
-        unsafe { fmpz_get_si(self.as_ptr()) }
+        unsafe { fmpz_get_si(self.as_raw()) }
     }
 
     pub fn get_ui_unchecked(&self) -> c_ulong {
-        unsafe { fmpz_get_ui(self.as_ptr()) }
+        unsafe { fmpz_get_ui(self.as_raw()) }
     }
 
     pub fn to_slong(&self) -> Option<c_long> {
-        if unsafe { fmpz_fits_si(self.as_ptr()) != 0 } {
+        if unsafe { fmpz_fits_si(self.as_raw()) != 0 } {
             Some(self.get_si_unchecked())
         } else {
             None
@@ -245,7 +245,7 @@ impl Fmpz {
     }
 
     pub fn to_ulong(&self) -> Option<c_ulong> {
-        if unsafe { fmpz_abs_fits_ui(self.as_ptr()) != 0 } {
+        if unsafe { fmpz_abs_fits_ui(self.as_raw()) != 0 } {
             Some(self.get_ui_unchecked())
         } else {
             None
@@ -256,13 +256,13 @@ impl Fmpz {
         // taken from rust-gmp (cf. https://crates.io/crates/rust-gmp)
         unsafe {
             // Extra two bytes are for possible minus sign and null terminator
-            let len = fmpz_sizeinbase(self.as_ptr(), base as c_int) as usize + 2;
+            let len = fmpz_sizeinbase(self.as_raw(), base as c_int) as usize + 2;
 
             // Allocate and write into a raw *c_char of the correct length
             let mut vector: Vec<u8> = Vec::with_capacity(len);
             vector.set_len(len);
 
-            fmpz_get_str(vector.as_mut_ptr() as *mut _, base as c_int, self.as_ptr());
+            fmpz_get_str(vector.as_mut_ptr() as *mut _, base as c_int, self.as_raw());
 
             let first_nul = vector.iter().position(|i| i == &0).unwrap_or(len);
             vector.truncate(first_nul);
@@ -278,7 +278,7 @@ impl Fmpz {
         unsafe {
             assert!(base == 0 || (base >= 2 && base <= 62));
             let mut n = Fmpz::new();
-            let r = fmpz_set_str(n.as_mut_ptr(), s.as_ptr(), base as c_int);
+            let r = fmpz_set_str(n.as_raw_mut(), s.as_ptr(), base as c_int);
             if r == 0 {
                 Ok(n)
             } else {
@@ -350,13 +350,11 @@ impl Fmpz {
     );
 
     pub fn bits(&self) -> c_ulong {
-        unsafe { fmpz_bits(self.as_ptr()) }
+        unsafe { fmpz_bits(self.as_raw()) }
     }
 
     pub fn is_probabprime(&self) -> bool {
-        unsafe {
-            int_to_bool!(fmpz_is_probabprime(self.as_ptr()))
-        }
+        unsafe { int_to_bool!(fmpz_is_probabprime(self.as_raw())) }
     }
 
     impl_c_wrapper_w_rtype!(
@@ -377,11 +375,11 @@ impl Fmpz {
 
     /// Return `valuation(op, f)` and set `self = op/f^e`, where e is the valuation.
     pub fn remove(&mut self, op: &Self, f: &Self) -> mp_limb_signed_t {
-        unsafe { fmpz_remove(self.as_mut_ptr(), op.as_ptr(), f.as_ptr()) }
+        unsafe { fmpz_remove(self.as_raw_mut(), op.as_raw(), f.as_raw()) }
     }
 
     pub fn set_remove(&mut self, f: &Self) -> c_long {
-        unsafe { fmpz_remove(self.as_mut_ptr(), self.as_ptr(), f.as_ptr()) }
+        unsafe { fmpz_remove(self.as_raw_mut(), self.as_raw(), f.as_raw()) }
     }
 
     /// Return the hilbert symbol of `hilb(a, b, p)`, where `p` is an odd prime.
@@ -512,7 +510,7 @@ impl FmpzFactor {
     }
 
     pub fn factor_mut(&mut self, n: &Fmpz) {
-        unsafe { fmpz_factor(&mut self.factor_struct, n.as_ptr()) };
+        unsafe { fmpz_factor(&mut self.factor_struct, n.as_raw()) };
     }
 
     pub fn factor_si_mut(&mut self, n: c_long) {
@@ -524,7 +522,7 @@ impl FmpzFactor {
     /// Evaluates an integer in factored form back to n.
     pub fn factor_expand_iterative(&self, n: &mut Fmpz) {
         unsafe {
-            fmpz_factor_expand_iterative(n.as_mut_ptr(), &self.factor_struct);
+            fmpz_factor_expand_iterative(n.as_raw_mut(), &self.factor_struct);
         }
     }
 

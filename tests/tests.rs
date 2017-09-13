@@ -13,7 +13,7 @@ mod fmpz {
     fn test_op_with_ptr() {
         let mut a: Fmpz = From::from(3);
         let b: Fmpz = From::from(2);
-        a += b.as_ptr();
+        a += b.as_raw();
         assert_eq!(a, 5_u64);
     }
 
@@ -268,7 +268,7 @@ mod fmpq {
         let a: Fmpq = From::from((&n, &d));
         let mut b = Fmpz::new();
         unsafe {
-            fmpz_set(b.as_mut_ptr(), a.num_as_ptr());
+            fmpz_set(b.as_raw_mut(), a.num_as_raw());
         }
         assert_eq!(b, n);
     }

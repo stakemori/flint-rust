@@ -61,14 +61,14 @@ impl fmt::Display for Fmpq {
 impl PartialEq for Fmpq {
     fn eq(&self, other: &Fmpq) -> bool {
         debug_assert!(self.is_canonical() && other.is_canonical());
-        unsafe { fmpq_equal(self.as_ptr(), other.as_ptr()) != 0 }
+        unsafe { fmpq_equal(self.as_raw(), other.as_raw()) != 0 }
     }
 }
 
 impl PartialOrd for Fmpq {
     fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
         Some(int_to_ord!(
-            unsafe { fmpq_cmp(self.as_ptr(), other.as_ptr()) }
+            unsafe { fmpq_cmp(self.as_raw(), other.as_raw()) }
         ))
     }
 }
@@ -77,7 +77,7 @@ impl From<(c_long, c_ulong)> for Fmpq {
     fn from(x: (c_long, c_ulong)) -> Fmpq {
         unsafe {
             let mut a = Fmpq::new();
-            fmpq_set_si(a.as_mut_ptr(), x.0, x.1);
+            fmpq_set_si(a.as_raw_mut(), x.0, x.1);
             a
         }
     }
@@ -93,7 +93,7 @@ impl<'a> From<(&'a Fmpz, &'a Fmpz)> for Fmpq {
     fn from(x: (&'a Fmpz, &'a Fmpz)) -> Self {
         unsafe {
             let mut a = Fmpq::new();
-            fmpq_set_fmpz_frac(a.as_mut_ptr(), x.0.as_ptr(), x.1.as_ptr());
+            fmpq_set_fmpz_frac(a.as_raw_mut(), x.0.as_raw(), x.1.as_raw());
             a
         }
     }
@@ -103,8 +103,8 @@ impl<'a> From<&'a Fmpz> for Fmpq {
     fn from(x: &Fmpz) -> Self {
         unsafe {
             let mut res = Fmpq::new();
-            fmpz_set(res.num_as_mut_ptr(), x.as_ptr());
-            fmpz_one(res.den_as_mut_ptr());
+            fmpz_set(res.num_as_raw_mut(), x.as_raw());
+            fmpz_one(res.den_as_raw_mut());
             res
         }
     }
@@ -113,7 +113,7 @@ impl<'a> From<&'a Fmpz> for Fmpq {
 impl Drop for Fmpq {
     fn drop(&mut self) {
         unsafe {
-            fmpq_clear(self.as_mut_ptr());
+            fmpq_clear(self.as_raw_mut());
         }
     }
 }
@@ -135,59 +135,59 @@ impl Fmpq {
         }
     }
 
-    pub fn as_mut_ptr(&mut self) -> &mut fmpq {
+    pub fn as_raw_mut(&mut self) -> &mut fmpq {
         &mut self.fmpq[0]
     }
 
-    pub fn as_ptr(&self) -> *const fmpq {
+    pub fn as_raw(&self) -> *const fmpq {
         &self.fmpq[0]
     }
 
     pub fn sgn(&self) -> i32 {
-        unsafe { fmpq_sgn(self.as_ptr()) as i32 }
+        unsafe { fmpq_sgn(self.as_raw()) as i32 }
     }
 
     pub fn set_num(&self, num: &mut Fmpz) {
         unsafe {
-            fmpz_set(num.as_mut_ptr(), self.num_as_ptr());
+            fmpz_set(num.as_raw_mut(), self.num_as_raw());
         }
     }
 
     pub fn set_den(&self, den: &mut Fmpz) {
         unsafe {
-            fmpz_set(den.as_mut_ptr(), self.den_as_ptr());
+            fmpz_set(den.as_raw_mut(), self.den_as_raw());
         }
     }
 
     pub fn set_num_den(&self, num: &mut Fmpz, den: &mut Fmpz) {
         unsafe {
-            fmpz_set(num.as_mut_ptr(), self.num_as_ptr());
-            fmpz_set(den.as_mut_ptr(), self.den_as_ptr());
+            fmpz_set(num.as_raw_mut(), self.num_as_raw());
+            fmpz_set(den.as_raw_mut(), self.den_as_raw());
         }
     }
 
-    pub fn num_as_ptr(&self) -> fmpzptr {
+    pub fn num_as_raw(&self) -> fmpzptr {
         &self.fmpq[0].num
     }
 
     pub fn num(&self) -> Fmpz {
         let mut a = Fmpz::new();
         unsafe {
-            fmpz_set(a.as_mut_ptr(), self.num_as_ptr());
+            fmpz_set(a.as_raw_mut(), self.num_as_raw());
         }
         a
     }
 
     /// Assuming `self` has a canonical form, checks if `self` is integral.
     pub fn is_integral(&self) -> bool {
-        unsafe { int_to_bool!(fmpz_is_one(self.den_as_ptr())) }
+        unsafe { int_to_bool!(fmpz_is_one(self.den_as_raw())) }
     }
 
     pub fn to_slong(&self) -> Option<c_long> {
         if self.is_integral() {
             unsafe {
-                if int_to_bool!(fmpz_fits_si(self.num_as_ptr())) {
-                    Some(fmpz_get_si(self.num_as_ptr()))
+                if int_to_bool!(fmpz_fits_si(self.num_as_raw())) {
+                    Some(fmpz_get_si(self.num_as_raw()))
                 } else {
                     None
                 }
@@ -200,33 +200,33 @@ impl Fmpq {
     pub fn den(&self) -> Fmpz {
         let mut a = Fmpz::new();
         unsafe {
-            fmpz_set(a.as_mut_ptr(), self.den_as_ptr());
+            fmpz_set(a.as_raw_mut(), self.den_as_raw());
         }
         a
     }
 
-    pub fn num_as_mut_ptr(&mut self) -> fmpzmutptr {
+    pub fn num_as_raw_mut(&mut self) -> fmpzmutptr {
         &mut self.fmpq[0].num
     }
 
-    pub fn den_as_ptr(&self) -> fmpzptr {
+    pub fn den_as_raw(&self) -> fmpzptr {
         &self.fmpq[0].den
     }
 
-    pub fn den_as_mut_ptr(&mut self) -> fmpzmutptr {
+    pub fn den_as_raw_mut(&mut self) -> fmpzmutptr {
         &mut self.fmpq[0].den
     }
 
     pub fn is_zero(&self) -> bool {
-        int_to_bool!(unsafe { fmpq_is_zero(self.as_ptr()) })
+        int_to_bool!(unsafe { fmpq_is_zero(self.as_raw()) })
     }
 
     pub fn is_one(&self) -> bool {
-        int_to_bool!(unsafe { fmpq_is_one(self.as_ptr()) })
+        int_to_bool!(unsafe { fmpq_is_one(self.as_raw()) })
     }
 
     pub fn is_canonical(&self) -> bool {
-        int_to_bool!(unsafe { fmpq_is_canonical(self.as_ptr()) })
+        int_to_bool!(unsafe { fmpq_is_canonical(self.as_raw()) })
     }
 
     impl_mut_c_wrapper!(
@@ -348,11 +348,11 @@ impl Fmpq {
 
     /// Call `fmpz_remove` on the numerator of `self` and return the valuation.
     pub fn set_num_remove(&mut self, f: &Fmpz) -> c_long {
-        unsafe { fmpz_remove(self.num_as_mut_ptr(), self.num_as_ptr(), f.as_ptr()) }
+        unsafe { fmpz_remove(self.num_as_raw_mut(), self.num_as_raw(), f.as_raw()) }
     }
 
     /// Similar to `set_num_remove` for denominator.
     pub fn set_den_remove(&mut self, f: &Fmpz) -> c_long {
-        unsafe { fmpz_remove(self.den_as_mut_ptr(), self.den_as_ptr(), f.as_ptr()) }
+        unsafe { fmpz_remove(self.den_as_raw_mut(), self.den_as_raw(), f.as_raw()) }
     }
 }

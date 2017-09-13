@@ -14,7 +14,7 @@ macro_rules! define_assign {
         impl<'a> $trait<&'a Self> for $t {
             fn $meth(&mut self, other: &$t) {
                 unsafe {
-                    $func(self.as_mut_ptr(), self.as_ptr(), other.as_ptr());
+                    $func(self.as_raw_mut(), self.as_raw(), other.as_raw());
                 }
             }
         }
@@ -27,7 +27,7 @@ macro_rules! define_assign_wref {
         impl<'a> $trait<&'a $ty> for $t {
             fn $meth(&mut self, other: &$ty) {
                 unsafe {
-                    $func(self.as_mut_ptr(), self.as_ptr(), other.as_ptr());
+                    $func(self.as_raw_mut(), self.as_raw(), other.as_raw());
                 }
             }
         }
@@ -40,7 +40,7 @@ macro_rules! define_assign_with_ptr {
         impl $trait<$ty> for $t {
             fn $meth(&mut self, other: $ty) {
                 unsafe {
-                    $func(self.as_mut_ptr(), self.as_ptr(), other);
+                    $func(self.as_raw_mut(), self.as_raw(), other);
                 }
             }
         }
@@ -53,7 +53,7 @@ macro_rules! define_assign_c {
         impl $trait<$typ> for $t {
             fn $meth(&mut self, other: $typ) {
                 unsafe {
-                    $func(self.as_mut_ptr(), self.as_ptr(), other);
+                    $func(self.as_raw_mut(), self.as_raw(), other);
                 }
             }
         }
@@ -79,7 +79,7 @@ macro_rules! impl_part_eq_c {
     ($t: ty, $c_type: ty, $c_func: ident) => {
         impl PartialEq<$c_type> for $t {
             fn eq(&self, other: &$c_type) -> bool {
-                unsafe { $c_func(self.as_ptr(), *other) == 0 }
+                unsafe { $c_func(self.as_raw(), *other) == 0 }
             }
         }
     };
@@ -89,7 +89,7 @@ macro_rules! impl_part_cmp_c {
     ($t: ty, $c_type: ty, $c_func: ident) => {
         impl PartialOrd<$c_type> for $t {
             fn partial_cmp(&self, other: &$c_type) -> Option<Ordering> {
-                Some(int_to_ord!(unsafe { $c_func(self.as_ptr(), *other) }))
+                Some(int_to_ord!(unsafe { $c_func(self.as_raw(), *other) }))
             }
         }
     }
@@ -102,7 +102,7 @@ macro_rules! impl_operator {
             fn $method(self, other: &$t) -> $t {
                 let mut res: $t = Default::default();
                 unsafe{
-                    $cfunc(res.as_mut_ptr(), self.as_ptr(), other.as_ptr());
+                    $cfunc(res.as_raw_mut(), self.as_raw(), other.as_raw());
                 }
                 res
             }
@@ -119,7 +119,7 @@ macro_rules! impl_neg {
             fn neg(self) -> $t {
                 unsafe {
                     let mut a: $t = Default::default();
-                    $cfunc(a.as_mut_ptr(), self.as_ptr());
+                    $cfunc(a.as_raw_mut(), self.as_raw());
                     a
                 }
             }
@@ -134,7 +134,7 @@ macro_rules! impl_operator_c  {
             fn $method(self, other: $ct) -> $t {
                 let mut res: $t = Default::default();
                 unsafe {
-                    $cfunc(res.as_mut_ptr(), self.as_ptr(), other);
+                    $cfunc(res.as_raw_mut(), self.as_raw(), other);
                 }
                 res
             }
@@ -148,7 +148,7 @@ macro_rules! impl_c_wrapper_w_rtype {
         $(#[$m])*
         pub fn $meth(&mut self, $($x: __ann_type!($t)),*) -> $rtyp {
             unsafe {
-                $c_func(self.as_ptr(), $(__ref_or_val!($t, $x)),*) as $rtyp
+                $c_func(self.as_raw(), $(__ref_or_val!($t, $x)),*) as $rtyp
             }
         }
     };
@@ -159,7 +159,7 @@ macro_rules! impl_mut_c_wrapper {
         $(#[$m])*
         pub fn $meth(&mut self, $($x: __ann_type!($t)),*) {
             unsafe {
-                $c_func(self.as_mut_ptr(), $(__ref_or_val!($t, $x)),*);
+                $c_func(self.as_raw_mut(), $(__ref_or_val!($t, $x)),*);
             }
         }
     };
@@ -178,10 +178,10 @@ macro_rules! __ann_type {
 macro_rules! __ref_or_val {
     (Si, $val: expr) => {$val};
     (Ui, $val: expr) => {$val};
-    (SelfRef, $val: expr) => {$val.as_ptr()};
-    (SelfRefMut, $val: expr) => {$val.as_mut_ptr()};
-    (FmpzRef, $val: expr) => {$val.as_ptr()};
-    (FmpzRefMut, $val: expr) => {$val.as_mut_ptr()};
+    (SelfRef, $val: expr) => {$val.as_raw()};
+    (SelfRefMut, $val: expr) => {$val.as_raw_mut()};
+    (FmpzRef, $val: expr) => {$val.as_raw()};
+    (FmpzRefMut, $val: expr) => {$val.as_raw_mut()};
     ($t: ident, $val: expr) =>  {$val};
 }
 
@@ -190,7 +190,7 @@ macro_rules! impl_self_mut_call_c {
         $(#[$m])*
         pub fn $meth(&mut self, $($x: __ann_type!($t)),*) {
             unsafe {
-                $c_func(self.as_mut_ptr(), self.as_ptr(), $(__ref_or_val!($t, $x)),*);
+                $c_func(self.as_raw_mut(), self.as_raw(), $(__ref_or_val!($t, $x)),*);
             }
         }
     }
