@@ -272,18 +272,12 @@ impl Fmpz {
 
     pub fn from_str(s: &str, base: usize) -> Result<Fmpz, ParseFmpzError> {
         // taken from rust-gmp (cf. https://crates.io/crates/rust-gmp)
-        let s = CString::new(s.to_string()).map_err(
-            |_| ParseFmpzError { _priv: () },
-        )?;
+        let s = CString::new(s.to_string()).map_err(|_| ParseFmpzError)?;
         unsafe {
             assert!(base == 0 || (base >= 2 && base <= 62));
             let mut n = Fmpz::new();
             let r = fmpz_set_str(n.as_raw_mut(), s.as_ptr(), base as c_int);
-            if r == 0 {
-                Ok(n)
-            } else {
-                Err(ParseFmpzError { _priv: () })
-            }
+            if r == 0 { Ok(n) } else { Err(ParseFmpzError) }
         }
     }
 
@@ -476,9 +470,7 @@ impl Fmpz {
 }
 
 #[derive(Debug)]
-pub struct ParseFmpzError {
-    _priv: (),
-}
+pub struct ParseFmpzError;
 
 
 pub struct FmpzFactor {
