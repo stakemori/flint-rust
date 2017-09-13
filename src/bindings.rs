@@ -325,7 +325,7 @@ extern "C" {
     pub fn _fmpq_mod_fmpz(res: *mut fmpz, num: *mut fmpz, den: *mut fmpz, mod_: *mut fmpz)
         -> c_int;
 
-    pub fn fmpq_mod_fmpz(res: *mut fmpz, x: *mut fmpq, mod_: *mut fmpz) -> c_int;
+    pub fn fmpq_mod_fmpz(res: *mut fmpz, x: *const fmpq, mod_: *const fmpz) -> c_int;
 
     pub fn _fmpq_reconstruct_fmpz(
         num: *mut fmpz,

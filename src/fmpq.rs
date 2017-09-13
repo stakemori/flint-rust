@@ -118,6 +118,8 @@ impl Drop for Fmpq {
     }
 }
 
+pub struct InverseNotExist;
+
 impl Fmpq {
     fn uninitialized() -> fmpq_t {
         unsafe {
@@ -354,5 +356,12 @@ impl Fmpq {
     /// Similar to `set_num_remove` for denominator.
     pub fn set_den_remove(&mut self, f: &Fmpz) -> c_long {
         unsafe { fmpz_remove(self.den_as_raw_mut(), self.den_as_raw(), f.as_raw()) }
+    }
+
+    pub fn mod_fmpz_mut(&self, res: &mut Fmpz, m: &Fmpz) -> Result<(), InverseNotExist> {
+        unsafe {
+            let a = fmpq_mod_fmpz(res.as_raw_mut(), self.as_raw(), m.as_raw());
+            if a == 1 { Ok(()) } else { Err(InverseNotExist) }
+        }
     }
 }
