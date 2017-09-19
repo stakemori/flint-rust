@@ -2,7 +2,7 @@ extern crate flint;
 extern crate libc;
 extern crate gmp;
 
-use libc::c_ulong;
+use libc::{c_ulong, c_long};
 use flint::fmpz::{Fmpz, FmpzFactor};
 
 mod fmpz {
@@ -128,9 +128,9 @@ mod fmpz {
         assert_eq!(a, c as c_ulong);
 
         let p: Fmpz = From::from(3);
-        let b: Fmpz = From::from(236_196);
-        assert_eq!(a.remove(&b, &p), 10);
-        assert_eq!(a, 4 as c_ulong);
+        let b: Fmpz = From::from(-243);
+        assert_eq!(a.remove(&b, &p), 5);
+        assert_eq!(a, -1 as c_long);
     }
 
     #[test]
@@ -174,7 +174,7 @@ mod factor {
     #[test]
     fn factor_test() {
         let mut a = Fmpz::from_str("1844674407370955161", 10).unwrap();
-        let b = From::from(340_394);
+        let b: Fmpz = From::from(340_394);
         a -= &b;
         // println!("res1={}", res);
         // res.set_mul_ui(&a, 10);
@@ -197,30 +197,30 @@ mod fmpq {
         let a: Fmpq = From::from((1, 2));
         let b: Fmpq = From::from((1, 3));
         let c = &a + &b;
-        assert_eq!(c.num(), 5_u64);
-        assert_eq!(c.den(), 6_u64);
+        assert_eq!(c.num_new(), 5_u64);
+        assert_eq!(c.den_new(), 6_u64);
 
-        let mut a: Fmpq = From::from(&a.den());
+        let mut a: Fmpq = From::from(&a.den_new());
 
         a.set_pow_si(-1);
-        assert_eq!(a.num(), 1_u64);
-        assert_eq!(a.den(), 2_u64);
+        assert_eq!(a.num_new(), 1_u64);
+        assert_eq!(a.den_new(), 2_u64);
 
         a *= 3;
-        assert_eq!(a.num(), 3_u64);
-        assert_eq!(a.den(), 2_u64);
+        assert_eq!(a.num_new(), 3_u64);
+        assert_eq!(a.den_new(), 2_u64);
 
         a /= 5;
-        assert_eq!(a.num(), 3_u64);
-        assert_eq!(a.den(), 10_u64);
+        assert_eq!(a.num_new(), 3_u64);
+        assert_eq!(a.den_new(), 10_u64);
 
         a += 1;
-        assert_eq!(a.num(), 13_u64);
-        assert_eq!(a.den(), 10_u64);
+        assert_eq!(a.num_new(), 13_u64);
+        assert_eq!(a.den_new(), 10_u64);
 
         a -= 2;
-        assert_eq!(a.num(), -7_i64);
-        assert_eq!(a.den(), 10_u64);
+        assert_eq!(a.num_new(), -7_i64);
+        assert_eq!(a.den_new(), 10_u64);
     }
 
     #[test]
@@ -234,7 +234,8 @@ mod fmpq {
         let a: Fmpq = From::from((-24, 14));
         let mut num = Fmpz::new();
         let mut den = Fmpz::new();
-        a.set_num_den(&mut num, &mut den);
+        a.num(&mut num);
+        a.den(&mut den);
         assert_eq!(num, -12 as c_long);
         assert_eq!(den, 7 as c_long);
     }

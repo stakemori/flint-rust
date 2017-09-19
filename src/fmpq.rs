@@ -53,7 +53,8 @@ impl fmt::Display for Fmpq {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let mut num = Fmpz::new();
         let mut den = Fmpz::new();
-        self.set_num_den(&mut num, &mut den);
+        self.num(&mut num);
+        self.den(&mut den);
         write!(f, "{}/{}", num, den)
     }
 }
@@ -149,21 +150,14 @@ impl Fmpq {
         unsafe { fmpq_sgn(self.as_raw()) as i32 }
     }
 
-    pub fn set_num(&self, num: &mut Fmpz) {
+    pub fn num(&self, num: &mut Fmpz) {
         unsafe {
             fmpz_set(num.as_raw_mut(), self.num_as_raw());
         }
     }
 
-    pub fn set_den(&self, den: &mut Fmpz) {
+    pub fn den(&self, den: &mut Fmpz) {
         unsafe {
-            fmpz_set(den.as_raw_mut(), self.den_as_raw());
-        }
-    }
-
-    pub fn set_num_den(&self, num: &mut Fmpz, den: &mut Fmpz) {
-        unsafe {
-            fmpz_set(num.as_raw_mut(), self.num_as_raw());
             fmpz_set(den.as_raw_mut(), self.den_as_raw());
         }
     }
@@ -172,7 +166,7 @@ impl Fmpq {
         &self.fmpq[0].num
     }
 
-    pub fn num(&self) -> Fmpz {
+    pub fn num_new(&self) -> Fmpz {
         let mut a = Fmpz::new();
         unsafe {
             fmpz_set(a.as_raw_mut(), self.num_as_raw());
@@ -199,7 +193,7 @@ impl Fmpq {
         }
     }
 
-    pub fn den(&self) -> Fmpz {
+    pub fn den_new(&self) -> Fmpz {
         let mut a = Fmpz::new();
         unsafe {
             fmpz_set(a.as_raw_mut(), self.den_as_raw());
