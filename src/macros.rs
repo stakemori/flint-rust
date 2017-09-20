@@ -37,8 +37,8 @@ macro_rules! define_assign_wref {
 macro_rules! define_assign_with_ptr {
     ($t:ty, $trait:ident, $meth:ident, $func:ident, $ty:ty) =>
     {
-        impl $trait<$ty> for $t {
-            fn $meth(&mut self, other: $ty) {
+        impl<'a> $trait<&'a $ty> for $t {
+            fn $meth(&mut self, other: &$ty) {
                 unsafe {
                     $func(self.as_raw_mut(), self.as_raw(), other);
                 }
@@ -172,6 +172,10 @@ macro_rules! __ann_type {
     (FmpzRefMut) => {&mut Fmpz};
     (Si) => {c_long};
     (Ui) => {c_ulong};
+    (fmpzref) => {&fmpz};
+    (fmpzrefmut) => {&mut fmpz};
+    (fmpqref) => {&fmpq};
+    (fmpqrefmut) => {&mut fmpq};
     ($t: ident) => {$t};
 }
 

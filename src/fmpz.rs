@@ -4,8 +4,7 @@ use std;
 use libc::{c_int, c_ulong, c_long};
 use std::ffi::CString;
 use std::fmt;
-use std::ops::{AddAssign, MulAssign, SubAssign, DivAssign, Shr, Shl, ShlAssign, ShrAssign, BitAnd,
-               BitOr, BitXor, Mul, Add, Sub};
+use std::ops::*;
 use std::cmp::Ordering::{self, Greater, Less, Equal};
 use serde::ser::{Serialize, Serializer};
 use serde::{Deserialize, Deserializer};
@@ -26,6 +25,20 @@ impl Drop for Fmpz {
 impl Default for Fmpz {
     fn default() -> Self {
         Fmpz::new()
+    }
+}
+
+impl Deref for Fmpz {
+    type Target = fmpz;
+
+    fn deref(&self) -> &fmpz {
+        self.as_raw()
+    }
+}
+
+impl DerefMut for Fmpz {
+    fn deref_mut(&mut self) -> &mut fmpz {
+        self.as_raw_mut()
     }
 }
 
@@ -54,11 +67,10 @@ define_assign!(Fmpz, MulAssign, mul_assign, fmpz_mul);
 define_assign!(Fmpz, SubAssign, sub_assign, fmpz_sub);
 define_assign!(Fmpz, DivAssign, div_assign, fmpz_fdiv_q);
 
-// Perhaps should I implement Deref?
-define_assign_with_ptr!(Fmpz, AddAssign, add_assign, fmpz_add, fmpzptr);
-define_assign_with_ptr!(Fmpz, MulAssign, mul_assign, fmpz_mul, fmpzptr);
-define_assign_with_ptr!(Fmpz, SubAssign, sub_assign, fmpz_sub, fmpzptr);
-define_assign_with_ptr!(Fmpz, DivAssign, div_assign, fmpz_fdiv_q, fmpzptr);
+define_assign_with_ptr!(Fmpz, AddAssign, add_assign, fmpz_add, fmpz);
+define_assign_with_ptr!(Fmpz, MulAssign, mul_assign, fmpz_mul, fmpz);
+define_assign_with_ptr!(Fmpz, SubAssign, sub_assign, fmpz_sub, fmpz);
+define_assign_with_ptr!(Fmpz, DivAssign, div_assign, fmpz_fdiv_q, fmpz);
 
 define_assign_c!(Fmpz, AddAssign, add_assign, fmpz_add_ui, c_ulong);
 define_assign_c!(Fmpz, SubAssign, sub_assign, fmpz_sub_ui, c_ulong);
@@ -110,12 +122,12 @@ impl Fmpz {
         unsafe { int_to_bool!(fmpz_is_even(self.as_raw())) }
     }
 
-    pub fn as_raw_mut(&mut self) -> fmpzmutptr {
-        &mut self.fmpz[0] as fmpzmutptr
+    pub fn as_raw_mut(&mut self) -> &mut fmpz {
+        &mut self.fmpz[0]
     }
 
-    pub fn as_raw(&self) -> fmpzptr {
-        &self.fmpz[0] as fmpzptr
+    pub fn as_raw(&self) -> &fmpz {
+        &self.fmpz[0]
     }
 
     fn uninitialized() -> fmpz_t {
@@ -207,9 +219,9 @@ impl Fmpz {
     }
 
     /// self = g/h. Rounds up towards zero.
-    pub fn tdiv_q_mut(&mut self, g: &Fmpz, h: &Fmpz) {
+    pub fn tdiv_q_mut(&mut self, g: &fmpz, h: &fmpz) {
         unsafe {
-            fmpz_tdiv_q(self.as_raw_mut(), g.as_raw(), h.as_raw());
+            fmpz_tdiv_q(self.as_raw_mut(), g, h);
         }
     }
 
@@ -291,7 +303,7 @@ impl Fmpz {
     impl_mut_c_wrapper!(
         fdiv_r_2exp_mut,
         fmpz_fdiv_r_2exp,
-        (x: SelfRef, y: Ui),
+        (x: fmpzref, y: Ui),
         doc = "`self = x mod 2**y`"
     );
 
@@ -305,41 +317,41 @@ impl Fmpz {
     impl_mut_c_wrapper!(
         sub_ui_mut,
         fmpz_sub_ui,
-        (x: FmpzRef, y: Ui),
+        (x: fmpzref, y: Ui),
         doc = "`self = x - y`"
     );
     impl_mut_c_wrapper!(
         mod_ui_mut,
         fmpz_mod_ui,
-        (x: FmpzRef, y: Ui),
+        (x: fmpzref, y: Ui),
         doc = "`self = x % y`"
     );
 
     impl_mut_c_wrapper!(
         addmul_mut,
         fmpz_addmul,
-        (x: FmpzRef, y: FmpzRef),
+        (x: fmpzref, y: fmpzref),
         doc = "`self += x * y`"
     );
 
     impl_mut_c_wrapper!(
         submul_mut,
         fmpz_submul,
-        (x: FmpzRef, y: FmpzRef),
+        (x: fmpzref, y: fmpzref),
         doc = "`self -= x * y`"
     );
 
     impl_mut_c_wrapper!(
         addmul_ui_mut,
         fmpz_addmul_ui,
-        (x: FmpzRef, y: Ui),
+        (x: fmpzref, y: Ui),
         doc = "`self += x * y`"
     );
 
     impl_mut_c_wrapper!(
         submul_ui_mut,
         fmpz_submul_ui,
-        (x: FmpzRef, y: Ui),
+        (x: fmpzref, y: Ui),
         doc = "`self -= x * y`"
     );
 
@@ -355,7 +367,7 @@ impl Fmpz {
         jacobi,
         fmpz_jacobi,
         i32,
-        (p: SelfRef),
+        (p: fmpzref),
         doc = "Return jacobi symbol self mod p"
     );
 

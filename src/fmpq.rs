@@ -21,6 +21,11 @@ define_assign!(Fmpq, MulAssign, mul_assign, fmpq_mul);
 define_assign!(Fmpq, SubAssign, sub_assign, fmpq_sub);
 define_assign!(Fmpq, DivAssign, div_assign, fmpq_div);
 
+define_assign_with_ptr!(Fmpq, AddAssign, add_assign, fmpq_add, fmpq);
+define_assign_with_ptr!(Fmpq, MulAssign, mul_assign, fmpq_mul, fmpq);
+define_assign_with_ptr!(Fmpq, SubAssign, sub_assign, fmpq_sub, fmpq);
+define_assign_with_ptr!(Fmpq, DivAssign, div_assign, fmpq_div, fmpq);
+
 define_assign_c!(Fmpq, AddAssign, add_assign, fmpq_add_si, c_long);
 define_assign_c!(Fmpq, SubAssign, sub_assign, fmpq_sub_si, c_long);
 define_assign_c!(Fmpq, MulAssign, mul_assign, fmpq_mul_si, c_long);
@@ -30,6 +35,11 @@ define_assign_wref!(Fmpq, AddAssign, add_assign, fmpq_add_fmpz, Fmpz);
 define_assign_wref!(Fmpq, SubAssign, sub_assign, fmpq_sub_fmpz, Fmpz);
 define_assign_wref!(Fmpq, MulAssign, mul_assign, fmpq_mul_fmpz, Fmpz);
 define_assign_wref!(Fmpq, DivAssign, div_assign, fmpq_div_fmpz, Fmpz);
+
+define_assign_with_ptr!(Fmpq, AddAssign, add_assign, fmpq_add_fmpz, fmpz);
+define_assign_with_ptr!(Fmpq, MulAssign, mul_assign, fmpq_sub_fmpz, fmpz);
+define_assign_with_ptr!(Fmpq, SubAssign, sub_assign, fmpq_mul_fmpz, fmpz);
+define_assign_with_ptr!(Fmpq, DivAssign, div_assign, fmpq_div_fmpz, fmpz);
 
 define_assign_c!(Fmpq, ShlAssign, shl_assign, fmpq_mul_2exp, c_ulong);
 define_assign_c!(Fmpq, ShrAssign, shr_assign, fmpq_div_2exp, c_ulong);
@@ -44,6 +54,20 @@ impl_operator_c!(Shr, Fmpq, shr, c_ulong, fmpq_div_2exp);
 impl Default for Fmpq {
     fn default() -> Self {
         Fmpq::new()
+    }
+}
+
+impl Deref for Fmpq {
+    type Target = fmpq;
+
+    fn deref(&self) -> &fmpq {
+        self.as_raw()
+    }
+}
+
+impl DerefMut for Fmpq {
+    fn deref_mut(&mut self) -> &mut fmpq {
+        self.as_raw_mut()
     }
 }
 
@@ -142,7 +166,7 @@ impl Fmpq {
         &mut self.fmpq[0]
     }
 
-    pub fn as_raw(&self) -> *const fmpq {
+    pub fn as_raw(&self) -> &fmpq {
         &self.fmpq[0]
     }
 
@@ -234,104 +258,104 @@ impl Fmpq {
     impl_mut_c_wrapper!(
         sub_si_mut,
         fmpq_sub_si,
-        (x: SelfRef, y: Si),
+        (x: fmpqref, y: Si),
         doc = "`self = x - y`"
     );
     impl_mut_c_wrapper!(
         add_si_mut,
         fmpq_add_si,
-        (x: SelfRef, y: Si),
+        (x: fmpqref, y: Si),
         doc = "`self = x + y`"
     );
     impl_mut_c_wrapper!(
         mul_si_mut,
         fmpq_mul_si,
-        (x: SelfRef, y: Si),
+        (x: fmpqref, y: Si),
         doc = "`self = x * y`"
     );
     impl_mut_c_wrapper!(
         div_si_mut,
         fmpq_div_si,
-        (x: SelfRef, y: Si),
+        (x: fmpqref, y: Si),
         doc = "`self = x / y`"
     );
 
     impl_mut_c_wrapper!(
         add_mut,
         fmpq_add,
-        (x: SelfRef, y: SelfRef),
+        (x: fmpqref, y: fmpqref),
         doc = "`self = x + y`"
     );
     impl_mut_c_wrapper!(
         sub_mut,
         fmpq_sub,
-        (x: SelfRef, y: SelfRef),
+        (x: fmpqref, y: fmpqref),
         doc = "`self = x - y`"
     );
     impl_mut_c_wrapper!(
         mul_mut,
         fmpq_mul,
-        (x: SelfRef, y: SelfRef),
+        (x: fmpqref, y: fmpqref),
         doc = "`self = x * y`"
     );
     impl_mut_c_wrapper!(
         div_mut,
         fmpq_div,
-        (x: SelfRef, y: SelfRef),
+        (x: fmpqref, y: fmpqref),
         doc = "`self = x / y`"
     );
 
     impl_mut_c_wrapper!(
         sub_fmpz_mut,
         fmpq_sub_fmpz,
-        (x: SelfRef, y: FmpzRef),
+        (x: fmpqref, y: fmpzref),
         doc = "`self = x - y`"
     );
     impl_mut_c_wrapper!(
         add_fmpz_mut,
         fmpq_add_fmpz,
-        (x: SelfRef, y: FmpzRef),
+        (x: fmpqref, y: fmpzref),
         doc = "`self = x + y`"
     );
     impl_mut_c_wrapper!(
         mul_fmpz_mut,
         fmpq_mul_fmpz,
-        (x: SelfRef, y: FmpzRef),
+        (x: fmpqref, y: fmpzref),
         doc = "`self = x * y`"
     );
     impl_mut_c_wrapper!(
         div_fmpz_mut,
         fmpq_div_fmpz,
-        (x: SelfRef, y: FmpzRef),
+        (x: fmpqref, y: fmpzref),
         doc = "`self = x / y`"
     );
 
-    impl_mut_c_wrapper!(abs_mut, fmpq_abs, (x: SelfRef), doc = "`self = abs(x)`");
-    impl_mut_c_wrapper!(inv_mut, fmpq_inv, (x: SelfRef), doc = "`self = x^(-1)`");
-    impl_mut_c_wrapper!(neg_mut, fmpq_neg, (x: SelfRef), doc = "`self = -x`");
-    impl_mut_c_wrapper!(set, fmpq_set, (x: SelfRef), doc = "`self = x`");
+    impl_mut_c_wrapper!(abs_mut, fmpq_abs, (x: fmpqref), doc = "`self = abs(x)`");
+    impl_mut_c_wrapper!(inv_mut, fmpq_inv, (x: fmpqref), doc = "`self = x^(-1)`");
+    impl_mut_c_wrapper!(neg_mut, fmpq_neg, (x: fmpqref), doc = "`self = -x`");
+    impl_mut_c_wrapper!(set, fmpq_set, (x: fmpqref), doc = "`self = x`");
     impl_mut_c_wrapper!(set_zero, fmpq_zero,(),);
     impl_mut_c_wrapper!(set_one, fmpq_one,(),);
     impl_mut_c_wrapper!(set_si, fmpq_set_si, (p: Si, q: Ui), doc = "`self = p/q`");
     impl_mut_c_wrapper!(
         set_fmpz_frac,
         fmpq_set_fmpz_frac,
-        (p: FmpzRef, q: FmpzRef),
+        (p: fmpzref, q: fmpzref),
         doc = "`self = p/q`"
     );
     impl_mut_c_wrapper!(
         pow_si_mut,
         fmpq_pow_si,
-        (x: SelfRef, e: c_long),
+        (x: fmpqref, e: c_long),
         doc = "`self = x^e`"
     );
     impl_mut_c_wrapper!(
         add_mul_mut,
         fmpq_addmul,
-        (x: SelfRef, y: SelfRef),
+        (x: fmpqref, y: fmpqref),
         doc = "`self += x*y`"
     );
-    impl_mut_c_wrapper!(sub_mul_mut, fmpq_submul, (x: SelfRef, y: SelfRef),);
+    impl_mut_c_wrapper!(sub_mul_mut, fmpq_submul, (x: fmpqref, y: fmpqref),);
 
     impl_self_mut_call_c!(negate, fmpq_neg, (), doc = "`self = -self`");
     impl_self_mut_call_c!(
