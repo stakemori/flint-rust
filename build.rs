@@ -7,7 +7,7 @@ fn main() {
     println!("cargo:rustc-link-lib=mpfr");
     println!("cargo:rustc-link-lib=gmp");
 
-    gcc::Config::new()
+    gcc::Build::new()
         .file("src/flint_wrapper.c")
         .flag("-lflint -lmpfr -lgmp -lpthread")
         .include("/usr/include/flint")
