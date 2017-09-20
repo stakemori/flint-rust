@@ -18,6 +18,14 @@ macro_rules! define_assign_wref {
                 }
             }
         }
+
+        impl<'a,'b> $trait<&'a $ty> for &'b mut $t {
+            fn $meth(&mut self, other: &$ty) {
+                unsafe {
+                    $func(self.as_raw_mut(), self.as_raw(), other.as_raw());
+                }
+            }
+        }
     };
 }
 
@@ -31,6 +39,14 @@ macro_rules! define_assign_with_ptr {
                 }
             }
         }
+
+        impl<'a, 'b> $trait<&'a $ty> for &'b mut $t {
+            fn $meth(&mut self, other: &$ty) {
+                unsafe {
+                    $func(self.as_raw_mut(), self.as_raw(), other);
+                }
+            }
+        }
     };
 }
 
@@ -38,6 +54,14 @@ macro_rules! define_assign_c {
     ($t:ty, $trait:ident, $meth:ident, $func:ident, $typ:ty) =>
     {
         impl $trait<$typ> for $t {
+            fn $meth(&mut self, other: $typ) {
+                unsafe {
+                    $func(self.as_raw_mut(), self.as_raw(), other);
+                }
+            }
+        }
+
+        impl<'a> $trait<$typ> for &'a mut $t {
             fn $meth(&mut self, other: $typ) {
                 unsafe {
                     $func(self.as_raw_mut(), self.as_raw(), other);
