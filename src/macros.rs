@@ -19,8 +19,8 @@ macro_rules! define_assign_wref {
             }
         }
 
-        impl<'a,'b> $trait<&'a $ty> for &'b mut $t {
-            fn $meth(&mut self, other: &$ty) {
+        impl<'a> $trait<&'a mut $ty> for $t {
+            fn $meth(&mut self, other: &mut $ty) {
                 unsafe {
                     $func(self.as_raw_mut(), self.as_raw(), other.as_raw());
                 }
@@ -40,8 +40,8 @@ macro_rules! define_assign_with_ptr {
             }
         }
 
-        impl<'a, 'b> $trait<&'a $ty> for &'b mut $t {
-            fn $meth(&mut self, other: &$ty) {
+        impl<'a> $trait<&'a mut $ty> for $t {
+            fn $meth(&mut self, other: &mut $ty) {
                 unsafe {
                     $func(self.as_raw_mut(), self.as_raw(), other);
                 }
