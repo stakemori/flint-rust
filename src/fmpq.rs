@@ -186,7 +186,7 @@ impl Fmpq {
         }
     }
 
-    pub fn num_as_raw(&self) -> fmpzptr {
+    pub fn num_as_raw(&self) -> &fmpz {
         &self.fmpq[0].num
     }
 
@@ -225,15 +225,15 @@ impl Fmpq {
         a
     }
 
-    pub fn num_as_raw_mut(&mut self) -> fmpzmutptr {
+    pub fn num_as_raw_mut(&mut self) -> &mut fmpz {
         &mut self.fmpq[0].num
     }
 
-    pub fn den_as_raw(&self) -> fmpzptr {
+    pub fn den_as_raw(&self) -> &fmpz {
         &self.fmpq[0].den
     }
 
-    pub fn den_as_raw_mut(&mut self) -> fmpzmutptr {
+    pub fn den_as_raw_mut(&mut self) -> &mut fmpz {
         &mut self.fmpq[0].den
     }
 
