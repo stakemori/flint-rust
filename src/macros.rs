@@ -8,19 +8,6 @@ macro_rules! is_even {
     ($expr: expr) => {($expr) & 1 == 0}
 }
 
-macro_rules! define_assign {
-    ($t:ty, $trait:ident, $meth:ident, $func:ident) =>
-    {
-        impl<'a> $trait<&'a Self> for $t {
-            fn $meth(&mut self, other: &$t) {
-                unsafe {
-                    $func(self.as_raw_mut(), self.as_raw(), other.as_raw());
-                }
-            }
-        }
-    };
-}
-
 macro_rules! define_assign_wref {
     ($t:ty, $trait:ident, $meth:ident, $func:ident, $ty:ty) =>
     {

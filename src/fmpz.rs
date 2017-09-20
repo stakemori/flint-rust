@@ -62,10 +62,10 @@ impl PartialOrd for Fmpz {
     }
 }
 
-define_assign!(Fmpz, AddAssign, add_assign, fmpz_add);
-define_assign!(Fmpz, MulAssign, mul_assign, fmpz_mul);
-define_assign!(Fmpz, SubAssign, sub_assign, fmpz_sub);
-define_assign!(Fmpz, DivAssign, div_assign, fmpz_fdiv_q);
+define_assign_wref!(Fmpz, AddAssign, add_assign, fmpz_add, Fmpz);
+define_assign_wref!(Fmpz, MulAssign, mul_assign, fmpz_mul, Fmpz);
+define_assign_wref!(Fmpz, SubAssign, sub_assign, fmpz_sub, Fmpz);
+define_assign_wref!(Fmpz, DivAssign, div_assign, fmpz_fdiv_q, Fmpz);
 
 define_assign_with_ptr!(Fmpz, AddAssign, add_assign, fmpz_add, fmpz);
 define_assign_with_ptr!(Fmpz, MulAssign, mul_assign, fmpz_mul, fmpz);

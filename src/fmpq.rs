@@ -16,10 +16,10 @@ impl_operator!(Add, Fmpq, add, fmpq_add);
 impl_operator!(Sub, Fmpq, sub, fmpq_sub);
 impl_operator!(Div, Fmpq, div, fmpq_div);
 
-define_assign!(Fmpq, AddAssign, add_assign, fmpq_add);
-define_assign!(Fmpq, MulAssign, mul_assign, fmpq_mul);
-define_assign!(Fmpq, SubAssign, sub_assign, fmpq_sub);
-define_assign!(Fmpq, DivAssign, div_assign, fmpq_div);
+define_assign_wref!(Fmpq, AddAssign, add_assign, fmpq_add, Fmpq);
+define_assign_wref!(Fmpq, MulAssign, mul_assign, fmpq_mul, Fmpq);
+define_assign_wref!(Fmpq, SubAssign, sub_assign, fmpq_sub, Fmpq);
+define_assign_wref!(Fmpq, DivAssign, div_assign, fmpq_div, Fmpq);
 
 define_assign_with_ptr!(Fmpq, AddAssign, add_assign, fmpq_add, fmpq);
 define_assign_with_ptr!(Fmpq, MulAssign, mul_assign, fmpq_mul, fmpq);
