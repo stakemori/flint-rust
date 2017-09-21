@@ -1,4 +1,4 @@
-extern crate gcc;
+extern crate cc;
 
 fn main() {
     // Necessary for using library.
@@ -7,9 +7,9 @@ fn main() {
     println!("cargo:rustc-link-lib=mpfr");
     println!("cargo:rustc-link-lib=gmp");
 
-    gcc::Build::new()
+    cc::Build::new()
         .file("src/flint_wrapper.c")
         .flag("-lflint -lmpfr -lgmp -lpthread")
-        .include("/usr/include/flint")
+        .include("/usr/local/include/flint")
         .compile("libflint_wrapper.a");
 }
