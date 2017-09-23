@@ -320,8 +320,8 @@ impl FmpzMat {
 
     pub fn nullspace_basis(&self) -> Vec<Vec<Fmpz>> {
         let mut b = FmpzMat::new(
-            self.nrows() as mp_limb_signed_t,
-            self.nrows() as mp_limb_signed_t,
+            self.ncols() as mp_limb_signed_t,
+            self.ncols() as mp_limb_signed_t,
         );
         let r = unsafe { fmpz_mat_nullspace(b.as_raw_mut(), self.as_raw()) };
         b.column_vectors().into_iter().take(r as usize).collect()
@@ -334,7 +334,7 @@ mod tests {
 
     #[test]
     fn it_works() {
-        let mut m = FmpzMat::new(2, 2);
+        let mut m = FmpzMat::new(2, 3);
         m.set_entry_ui(0, 0, 1);
         m.set_entry_ui(0, 1, 2);
         m.set_entry_ui(1, 0, 2);
