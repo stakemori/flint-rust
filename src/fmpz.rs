@@ -107,6 +107,18 @@ impl<'a> From<&'a Mpz> for Fmpz {
     }
 }
 
+impl From<Mpz> for Fmpz {
+    fn from(x: Mpz) -> Fmpz {
+        From::from(&x)
+    }
+}
+
+impl From<Fmpz> for Mpz {
+    fn from(x: Fmpz) -> Mpz {
+        From::from(&x)
+    }
+}
+
 impl<'a> From<&'a Fmpz> for Mpz {
     fn from(x: &Fmpz) -> Mpz {
         unsafe {
