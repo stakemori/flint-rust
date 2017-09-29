@@ -37,8 +37,8 @@ define_assign_wref!(Fmpq, MulAssign, mul_assign, fmpq_mul_fmpz, Fmpz);
 define_assign_wref!(Fmpq, DivAssign, div_assign, fmpq_div_fmpz, Fmpz);
 
 define_assign_with_ptr!(Fmpq, AddAssign, add_assign, fmpq_add_fmpz, fmpz);
-define_assign_with_ptr!(Fmpq, MulAssign, mul_assign, fmpq_sub_fmpz, fmpz);
-define_assign_with_ptr!(Fmpq, SubAssign, sub_assign, fmpq_mul_fmpz, fmpz);
+define_assign_with_ptr!(Fmpq, MulAssign, mul_assign, fmpq_mul_fmpz, fmpz);
+define_assign_with_ptr!(Fmpq, SubAssign, sub_assign, fmpq_sub_fmpz, fmpz);
 define_assign_with_ptr!(Fmpq, DivAssign, div_assign, fmpq_div_fmpz, fmpz);
 
 define_assign_c!(Fmpq, ShlAssign, shl_assign, fmpq_mul_2exp, c_ulong);

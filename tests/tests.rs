@@ -221,6 +221,19 @@ mod fmpq {
         a -= 2;
         assert_eq!(a.num_new(), -7_i64);
         assert_eq!(a.den_new(), 10_u64);
+
+        let mut a: Fmpq = From::from((1, 2));
+        let b: Fmpz = From::from(2);
+        a *= &b;
+        assert_eq!(a.num_new(), 1_i64);
+        assert_eq!(a.den_new(), 1_i64);
+        a -= &b;
+        assert_eq!(a.num_new(), -1_i64);
+        assert_eq!(a.den_new(), 1_i64);
+
+        a += &b;
+        assert_eq!(a.num_new(), 1_i64);
+        assert_eq!(a.den_new(), 1_i64);
     }
 
     #[test]
