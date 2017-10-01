@@ -79,7 +79,11 @@ impl fmt::Display for Fmpq {
         let mut den = Fmpz::new();
         self.num(&mut num);
         self.den(&mut den);
-        write!(f, "{}/{}", num, den)
+        if den == 1_i64 {
+            write!(f, "{}", num)
+        } else {
+            write!(f, "{}/{}", num, den)
+        }
     }
 }
 
