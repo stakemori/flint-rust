@@ -287,3 +287,76 @@ mod fmpq {
         assert_eq!(b, n);
     }
 }
+
+
+mod fmpq_mat {
+    use flint::fmpq::Fmpq;
+    use flint::fmpq_mat::FmpqMat;
+
+    #[test]
+    fn test_right_kernel() {
+        {
+            let vv: Vec<Vec<Fmpq>> = vec![
+                vec![From::from(1), From::from(2), From::from(3)],
+                vec![From::from(2), From::from(4), From::from(6)],
+                vec![From::from(0), From::from(0), From::from(1)],
+            ];
+            let mat: FmpqMat = From::from(vv);
+            let mut res = FmpqMat::new(3, 3);
+            let r = res.rref_mut(&mat);
+            assert_eq!(r, 2);
+            let v = mat.right_kernel_basis();
+            // println!("{}", res);
+            assert_eq!(v[0], vec![From::from(-2), From::from(1), From::from(0)]);
+        }
+
+        {
+            let vv: Vec<Vec<Fmpq>> = vec![vec![From::from(0), From::from(0), From::from(1)]];
+            let mat: FmpqMat = From::from(vv);
+            let v = mat.right_kernel_basis();
+            let mut mat_mul: FmpqMat = FmpqMat::new(1, 2);
+            let km: FmpqMat = From::from(v);
+            let mut v_t = FmpqMat::new(km.ncols() as i64, km.nrows() as i64);
+            v_t.transpose_mut(&km);
+            // println!("{}", km);
+            mat_mul.mul_mut(&mat, &v_t);
+            assert!(mat_mul.is_zero());
+        }
+
+        {
+            let vv: Vec<Vec<Fmpq>> = vec![
+                vec![
+                    From::from(-12),
+                    From::from(-5),
+                    From::from(-1),
+                    From::from(-1),
+                    From::from(-3),
+                ],
+                vec![
+                    From::from(-1),
+                    From::from(1),
+                    From::from(1),
+                    From::from(0),
+                    From::from(-1),
+                ],
+                vec![
+                    From::from(3),
+                    From::from(-1),
+                    From::from(1),
+                    From::from(-1),
+                    From::from(1),
+                ],
+            ];
+            let mat: FmpqMat = From::from(vv);
+            let v = mat.right_kernel_basis();
+            let mut mat_mul: FmpqMat = FmpqMat::new(3, 2);
+            let km: FmpqMat = From::from(v);
+            let mut v_t = FmpqMat::new(km.ncols() as i64, km.nrows() as i64);
+            v_t.transpose_mut(&km);
+            println!("{}", km);
+            mat_mul.mul_mut(&mat, &v_t);
+            assert!(mat_mul.is_zero());
+        }
+    }
+
+}

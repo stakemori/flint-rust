@@ -3101,6 +3101,270 @@ extern "C" {
     ) -> c_int;
 }
 
+// fmpq_mat
+#[repr(C)]
+#[derive(Debug, Clone)]
+pub struct fmpq_mat_struct {
+    pub entries: *mut fmpq,
+    pub r: mp_limb_signed_t,
+    pub c: mp_limb_signed_t,
+    pub rows: *mut *mut fmpq,
+}
+pub type fmpq_mat_t = [fmpq_mat_struct; 1usize];
+extern "C" {
+    pub fn fmpq_mat_init(mat: *mut fmpq_mat_struct, rows: mp_limb_signed_t,
+                         cols: mp_limb_signed_t);
+}
+extern "C" {
+    pub fn fmpq_mat_init_set(mat1: *mut fmpq_mat_struct,
+                             mat2: *mut fmpq_mat_struct);
+}
+extern "C" {
+    pub fn fmpq_mat_clear(mat: *mut fmpq_mat_struct);
+}
+extern "C" {
+    pub fn fmpq_mat_swap(mat1: *mut fmpq_mat_struct,
+                         mat2: *mut fmpq_mat_struct);
+}
+extern "C" {
+    pub fn fmpq_mat_window_init(window: *mut fmpq_mat_struct,
+                                mat: *mut fmpq_mat_struct,
+                                r1: mp_limb_signed_t, c1: mp_limb_signed_t,
+                                r2: mp_limb_signed_t, c2: mp_limb_signed_t);
+}
+extern "C" {
+    pub fn fmpq_mat_window_clear(window: *mut fmpq_mat_struct);
+}
+extern "C" {
+    pub fn fmpq_mat_concat_horizontal(res: *mut fmpq_mat_struct,
+                                      mat1: *mut fmpq_mat_struct,
+                                      mat2: *mut fmpq_mat_struct);
+}
+extern "C" {
+    pub fn fmpq_mat_concat_vertical(res: *mut fmpq_mat_struct,
+                                    mat1: *mut fmpq_mat_struct,
+                                    mat2: *mut fmpq_mat_struct);
+}
+extern "C" {
+    pub fn fmpq_mat_print(mat: *mut fmpq_mat_struct);
+}
+extern "C" {
+    pub fn fmpq_mat_randbits(mat: *mut fmpq_mat_struct,
+                             state: *mut flint_rand_s, bits: mp_limb_t);
+}
+extern "C" {
+    pub fn fmpq_mat_randtest(mat: *mut fmpq_mat_struct,
+                             state: *mut flint_rand_s, bits: mp_limb_t);
+}
+extern "C" {
+    pub fn fmpq_mat_hilbert_matrix(mat: *mut fmpq_mat_struct);
+}
+extern "C" {
+    pub fn fmpq_mat_set(dest: *mut fmpq_mat_struct,
+                        src: *mut fmpq_mat_struct);
+}
+extern "C" {
+    pub fn fmpq_mat_zero(mat: *mut fmpq_mat_struct);
+}
+extern "C" {
+    pub fn fmpq_mat_one(mat: *mut fmpq_mat_struct);
+}
+extern "C" {
+    pub fn fmpq_mat_transpose(rop: *mut fmpq_mat_struct,
+                              op: *const fmpq_mat_struct);
+}
+extern "C" {
+    pub fn fmpq_mat_add(mat: *mut fmpq_mat_struct, mat1: *mut fmpq_mat_struct,
+                        mat2: *mut fmpq_mat_struct);
+}
+extern "C" {
+    pub fn fmpq_mat_sub(mat: *mut fmpq_mat_struct, mat1: *mut fmpq_mat_struct,
+                        mat2: *mut fmpq_mat_struct);
+}
+extern "C" {
+    pub fn fmpq_mat_neg(rop: *mut fmpq_mat_struct, op: *mut fmpq_mat_struct);
+}
+extern "C" {
+    pub fn fmpq_mat_scalar_mul_fmpz(rop: *mut fmpq_mat_struct,
+                                    op: *mut fmpq_mat_struct, x: *mut fmpz);
+}
+extern "C" {
+    pub fn fmpq_mat_scalar_div_fmpz(rop: *mut fmpq_mat_struct,
+                                    op: *mut fmpq_mat_struct, x: *mut fmpz);
+}
+extern "C" {
+    pub fn fmpq_mat_equal(mat1: *mut fmpq_mat_struct,
+                          mat2: *mut fmpq_mat_struct)
+     -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn fmpq_mat_is_integral(mat: *mut fmpq_mat_struct)
+     -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn fmpq_mat_is_zero(mat: *const fmpq_mat_struct)
+     -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn fmpq_mat_is_one(mat: *mut fmpq_mat_struct)
+     -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn fmpq_mat_get_fmpz_mat(dest: *mut fmpz_mat_struct,
+                                 mat: *mut fmpq_mat_struct)
+     -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn fmpq_mat_get_fmpz_mat_entrywise(num: *mut fmpz_mat_struct,
+                                           den: *mut fmpz_mat_struct,
+                                           mat: *mut fmpq_mat_struct);
+}
+extern "C" {
+    pub fn fmpq_mat_get_fmpz_mat_matwise(num: *mut fmpz_mat_struct,
+                                         den: *mut fmpz,
+                                         mat: *mut fmpq_mat_struct);
+}
+extern "C" {
+    pub fn fmpq_mat_get_fmpz_mat_rowwise(num: *mut fmpz_mat_struct,
+                                         den: *mut fmpz,
+                                         mat: *mut fmpq_mat_struct);
+}
+extern "C" {
+    pub fn fmpq_mat_get_fmpz_mat_colwise(num: *mut fmpz_mat_struct,
+                                         den: *mut fmpz,
+                                         mat: *mut fmpq_mat_struct);
+}
+extern "C" {
+    pub fn fmpq_mat_get_fmpz_mat_rowwise_2(num: *mut fmpz_mat_struct,
+                                           num2: *mut fmpz_mat_struct,
+                                           den: *mut fmpz,
+                                           mat: *mut fmpq_mat_struct,
+                                           mat2: *mut fmpq_mat_struct);
+}
+extern "C" {
+    pub fn fmpq_mat_get_fmpz_mat_mod_fmpz(dest: *mut fmpz_mat_struct,
+                                          mat: *mut fmpq_mat_struct,
+                                          mod_: *mut fmpz);
+}
+extern "C" {
+    pub fn fmpq_mat_set_fmpz_mat(dest: *mut fmpq_mat_struct,
+                                 src: *mut fmpz_mat_struct);
+}
+extern "C" {
+    pub fn fmpq_mat_set_fmpz_mat_div_fmpz(X: *mut fmpq_mat_struct,
+                                          Xmod: *mut fmpz_mat_struct,
+                                          div: *mut fmpz);
+}
+extern "C" {
+    pub fn fmpq_mat_set_fmpz_mat_mod_fmpz(X: *mut fmpq_mat_struct,
+                                          Xmod: *mut fmpz_mat_struct,
+                                          mod_: *mut fmpz)
+     -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn fmpq_mat_mul_direct(C: *mut fmpq_mat_struct,
+                               A: *mut fmpq_mat_struct,
+                               B: *mut fmpq_mat_struct);
+}
+extern "C" {
+    pub fn fmpq_mat_mul_cleared(C: *mut fmpq_mat_struct,
+                                A: *mut fmpq_mat_struct,
+                                B: *mut fmpq_mat_struct);
+}
+extern "C" {
+    pub fn fmpq_mat_mul(C: *mut fmpq_mat_struct, A: *const fmpq_mat_struct,
+                        B: *const fmpq_mat_struct);
+}
+extern "C" {
+    pub fn fmpq_mat_mul_fmpz_mat(C: *mut fmpq_mat_struct,
+                                 A: *mut fmpq_mat_struct,
+                                 B: *mut fmpz_mat_struct);
+}
+extern "C" {
+    pub fn fmpq_mat_mul_r_fmpz_mat(C: *mut fmpq_mat_struct,
+                                   A: *mut fmpz_mat_struct,
+                                   B: *mut fmpq_mat_struct);
+}
+extern "C" {
+    pub fn fmpq_mat_trace(trace: *mut fmpq, mat: *mut fmpq_mat_struct);
+}
+extern "C" {
+    pub fn fmpq_mat_det(det: *mut fmpq, mat: *mut fmpq_mat_struct);
+}
+extern "C" {
+    pub fn fmpq_mat_solve_fraction_free(X: *mut fmpq_mat_struct,
+                                        A: *mut fmpq_mat_struct,
+                                        B: *mut fmpq_mat_struct)
+     -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn fmpq_mat_solve_dixon(X: *mut fmpq_mat_struct,
+                                A: *mut fmpq_mat_struct,
+                                B: *mut fmpq_mat_struct)
+     -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn fmpq_mat_solve_fmpz_mat(X: *mut fmpq_mat_struct,
+                                   A: *mut fmpz_mat_struct,
+                                   B: *mut fmpz_mat_struct)
+     -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn fmpq_mat_inv(B: *mut fmpq_mat_struct, A: *mut fmpq_mat_struct)
+     -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn fmpq_mat_pivot(perm: *mut mp_limb_signed_t,
+                          mat: *mut fmpq_mat_struct, r: mp_limb_signed_t,
+                          c: mp_limb_signed_t) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn fmpq_mat_rref_classical(B: *mut fmpq_mat_struct,
+                                   A: *mut fmpq_mat_struct)
+     -> mp_limb_signed_t;
+}
+extern "C" {
+    pub fn fmpq_mat_rref_fraction_free(B: *mut fmpq_mat_struct,
+                                       A: *mut fmpq_mat_struct)
+     -> mp_limb_signed_t;
+}
+extern "C" {
+    pub fn fmpq_mat_rref(B: *mut fmpq_mat_struct, A: *const fmpq_mat_struct)
+     -> mp_limb_signed_t;
+}
+extern "C" {
+    pub fn fmpq_mat_gso(B: *mut fmpq_mat_struct, A: *mut fmpq_mat_struct);
+}
+extern "C" {
+    pub fn fmpq_mat_similarity(A: *mut fmpq_mat_struct, r: mp_limb_signed_t,
+                               d: *mut fmpq);
+}
+extern "C" {
+    pub fn _fmpq_mat_charpoly(coeffs: *mut fmpz, den: *mut fmpz,
+                              mat: *mut fmpq_mat_struct);
+}
+extern "C" {
+    pub fn fmpq_mat_charpoly(pol: *mut fmpq_poly_struct,
+                             mat: *mut fmpq_mat_struct);
+}
+extern "C" {
+    pub fn _fmpq_mat_minpoly(coeffs: *mut fmpz, den: *mut fmpz,
+                             mat: *mut fmpq_mat_struct) -> mp_limb_signed_t;
+}
+extern "C" {
+    pub fn fmpq_mat_minpoly(pol: *mut fmpq_poly_struct,
+                            mat: *mut fmpq_mat_struct);
+}
+
+#[repr(C)]
+#[derive(Debug, Clone)]
+pub struct fmpq_poly_struct {
+    pub coeffs: *mut fmpz,
+    pub den: fmpz_t,
+    pub alloc: mp_limb_signed_t,
+    pub length: mp_limb_signed_t,
+}
+
 extern "C" {
     // fmpz : Arbitrary precision integers. Functions related to mpz, mpf and IO are excluded.
     pub fn fmpz_init2(f: *mut fmpz, limbs: mp_limb_t);
