@@ -312,6 +312,23 @@ impl Fmpz {
         fac
     }
 
+
+    pub fn gcd(x: &fmpz, y: &fmpz) -> Self {
+        let mut res = Fmpz::new();
+        unsafe {
+            fmpz_gcd(res.as_raw_mut(), x, y);
+            res
+        }
+    }
+
+    pub fn lcm(x: &fmpz, y: &fmpz) -> Self {
+        let mut res = Fmpz::new();
+        unsafe {
+            fmpz_lcm(res.as_raw_mut(), x, y);
+            res
+        }
+    }
+
     impl_mut_c_wrapper!(
         fdiv_r_2exp_mut,
         fmpz_fdiv_r_2exp,

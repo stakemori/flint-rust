@@ -3665,6 +3665,8 @@ extern "C" {
         s: *const fmpz,
     ) -> c_int;
 
+    pub fn fmpz_gcd(f: *mut fmpz, g: *const fmpz, h: *const fmpz);
+    pub fn fmpz_lcm(f: *mut fmpz, g: *const fmpz, h: *const fmpz);
 
     pub fn fmpz_primorial(res: *mut fmpz, n: mp_limb_t);
     pub fn fmpz_euler_phi(res: *mut fmpz, n: *const fmpz);
