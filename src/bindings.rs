@@ -2550,7 +2550,7 @@ extern "C" {
 
 // fmpz_mat
 #[repr(C)]
-#[derive(Debug, Clone)]
+#[derive(Debug)]
 pub struct fmpz_mat_struct {
     pub entries: *mut fmpz,
     pub r: mp_limb_signed_t,
@@ -2569,7 +2569,7 @@ extern "C" {
     pub fn fmpz_mat_swap(mat1: *mut fmpz_mat_struct, mat2: *mut fmpz_mat_struct);
 }
 extern "C" {
-    pub fn fmpz_mat_set(mat1: *mut fmpz_mat_struct, mat2: *mut fmpz_mat_struct);
+    pub fn fmpz_mat_set(mat1: *mut fmpz_mat_struct, mat2: *const fmpz_mat_struct);
 }
 extern "C" {
     pub fn fmpz_mat_clear(mat: *mut fmpz_mat_struct);

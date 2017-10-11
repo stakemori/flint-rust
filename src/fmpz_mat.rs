@@ -9,9 +9,22 @@ use self::libc::{c_ulong, c_long};
 use fmpz::Fmpz;
 use std::fmt;
 
-#[derive(Debug, Clone)]
+#[derive(Debug)]
 pub struct FmpzMat {
     fmpz_mat: fmpz_mat_struct,
+}
+
+impl Clone for FmpzMat {
+    fn clone(&self) -> Self {
+        let mut a = FmpzMat::new(self.nrows() as i64, self.ncols() as i64);
+        a.set(&self);
+        a
+    }
+
+    fn clone_from(&mut self, other: &Self) {
+        debug_assert_eq!((self.nrows(), self.ncols()), (other.nrows(), other.ncols()));
+        self.set(other);
+    }
 }
 
 impl Drop for FmpzMat {
@@ -93,6 +106,8 @@ impl FmpzMat {
             FmpzMat { fmpz_mat: fmpz_mat }
         }
     }
+
+    impl_mut_c_wrapper!(set, fmpz_mat_set, (m: SelfRef),);
 
     fn as_raw(&self) -> *const fmpz_mat_struct {
         &self.fmpz_mat
