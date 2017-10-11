@@ -6,9 +6,21 @@ use std::fmt;
 use std::cmp::Ordering::{self, Greater, Less, Equal};
 use std::ops::*;
 
-#[derive(Debug, Clone)]
+#[derive(Debug)]
 pub struct Fmpq {
     fmpq: fmpq_t,
+}
+
+impl Clone for Fmpq {
+    fn clone(&self) -> Self {
+        let mut a = Fmpq::new();
+        a.set(self);
+        a
+    }
+
+    fn clone_from(&mut self, other: &Self) {
+        self.set(other);
+    }
 }
 
 impl_operator!(Mul, Fmpq, mul, fmpq_mul);
@@ -93,6 +105,8 @@ impl PartialEq for Fmpq {
         unsafe { fmpq_equal(self.as_raw(), other.as_raw()) != 0 }
     }
 }
+
+impl Eq for Fmpq {}
 
 impl PartialOrd for Fmpq {
     fn partial_cmp(&self, other: &Self) -> Option<Ordering> {

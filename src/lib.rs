@@ -1,4 +1,3 @@
-#![feature(untagged_unions)]
 extern crate libc;
 
 extern crate serde;

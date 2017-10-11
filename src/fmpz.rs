@@ -9,9 +9,21 @@ use std::cmp::Ordering::{self, Greater, Less, Equal};
 use serde::ser::{Serialize, Serializer};
 use serde::{Deserialize, Deserializer};
 
-#[derive(Debug, Clone)]
+#[derive(Debug)]
 pub struct Fmpz {
     fmpz: fmpz_t,
+}
+
+impl Clone for Fmpz {
+    fn clone(&self) -> Self {
+        let mut a = Fmpz::new();
+        a.set(self);
+        a
+    }
+
+    fn clone_from(&mut self, other: &Self) {
+        self.set(other);
+    }
 }
 
 impl Drop for Fmpz {

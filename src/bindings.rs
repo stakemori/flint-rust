@@ -103,7 +103,7 @@ pub struct fmpz_comb_temp_struct {
 
 // fmpq
 #[repr(C)]
-#[derive(Debug, Clone)]
+#[derive(Debug)]
 pub struct fmpq {
     pub num: fmpz,
     pub den: fmpz,
