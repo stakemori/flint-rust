@@ -187,9 +187,9 @@ impl Fmpz {
     }
 
     /// self = val
-    pub fn set(&mut self, val: &Fmpz) {
+    pub fn set(&mut self, val: &fmpz) {
         unsafe {
-            fmpz_set(self.as_raw_mut(), val.as_raw());
+            fmpz_set(self.as_raw_mut(), val);
         }
     }
 
