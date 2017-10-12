@@ -136,9 +136,9 @@ impl FmpzMat {
         }
     }
 
-    pub fn set_entry(&mut self, r: isize, c: isize, x: &Fmpz) {
+    pub fn set_entry(&mut self, r: isize, c: isize, x: &fmpz) {
         unsafe {
-            fmpz_set(self.entry_raw_mut(r, c), x.as_raw());
+            fmpz_set(self.entry_raw_mut(r, c), x);
         }
     }
 
