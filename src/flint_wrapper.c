@@ -1,9 +1,10 @@
+#include "arith.h"
 #include "flint.h"
 #include "fmpq.h"
+#include "fmpq_mat.h"
 #include "fmpz.h"
 #include "fmpz_factor.h"
 #include "fmpz_mat.h"
-#include "fmpq_mat.h"
 #include "fmpz_poly.h"
 #include "fmpz_vec.h"
 

@@ -360,3 +360,24 @@ mod fmpq_mat {
     }
 
 }
+
+mod fmpq_poly {
+    use flint::fmpq_poly::FmpqPoly;
+    use flint::arith::bernoulli_poly;
+    use flint::fmpq::Fmpq;
+
+    #[test]
+    fn test_bernoulli_poly() {
+        let mut a = FmpqPoly::new();
+        bernoulli_poly(&mut a, 10);
+        assert_eq!(
+            format!("{}", a),
+            "x^10 - 5*x^9 + 15/2*x^8 - 7*x^6 + 5*x^4 - 3/2*x^2 + 5/66"
+        );
+        let x: Fmpq = From::from(10);
+        let mut res = Fmpq::new();
+        a.eval_fmpq(&mut res, &x);
+        assert_eq!(res.num_new().to_slong().unwrap(), 379041290105);
+        assert_eq!(res.den_new().to_slong().unwrap(), 66);
+    }
+}
