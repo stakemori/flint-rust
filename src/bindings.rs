@@ -28,16 +28,7 @@ pub struct fmpz_factor_struct {
 pub type mp_ptr = *mut mp_limb_t;
 pub type mp_srcptr = *const mp_limb_t;
 
-// Rand
-#[repr(C)]
-struct __mpz_struct {
-    _mp_alloc: c_int,
-    _mp_size: c_int,
-    _mp_d: *mut mp_limb_t,
-}
-
-
-type mpz_t = [__mpz_struct; 1usize];
+type mpz_t = [mpz_struct; 1usize];
 
 #[repr(u32)]
 enum gmp_randalg_t {
