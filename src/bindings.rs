@@ -3049,13 +3049,13 @@ extern "C" {
     pub fn fmpz_mat_is_in_hnf(A: *mut fmpz_mat_struct) -> c_int;
 }
 extern "C" {
-    pub fn fmpz_mat_snf(S: *mut fmpz_mat_struct, A: *mut fmpz_mat_struct);
+    pub fn fmpz_mat_snf(S: *mut fmpz_mat_struct, A: *const fmpz_mat_struct);
 }
 extern "C" {
-    pub fn fmpz_mat_snf_diagonal(S: *mut fmpz_mat_struct, A: *mut fmpz_mat_struct);
+    pub fn fmpz_mat_snf_diagonal(S: *mut fmpz_mat_struct, A: *const fmpz_mat_struct);
 }
 extern "C" {
-    pub fn fmpz_mat_snf_kannan_bachem(S: *mut fmpz_mat_struct, A: *mut fmpz_mat_struct);
+    pub fn fmpz_mat_snf_kannan_bachem(S: *mut fmpz_mat_struct, A: *const fmpz_mat_struct);
 }
 extern "C" {
     pub fn fmpz_mat_snf_iliopoulos(

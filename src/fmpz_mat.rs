@@ -299,6 +299,13 @@ impl FmpzMat {
 
     impl_mut_c_wrapper!(pow_mut, fmpz_mat_pow, (m: SelfRef, exp: mp_limb_t),);
 
+    impl_mut_c_wrapper!(
+        snf_mut,
+        fmpz_mat_snf,
+        (a: SelfRef),
+        doc = "Set `self` to the Smith normal form of `a`"
+    );
+
     pub fn content_mut(&self, res: &mut Fmpz) {
         unsafe {
             fmpz_mat_content(res.as_raw_mut(), self.as_raw());
