@@ -573,15 +573,27 @@ impl FmpzFactor {
 
     pub fn to_vec(&self) -> Vec<(Fmpz, c_long)> {
         let mut v: Vec<(Fmpz, c_long)> = Vec::new();
-        let n_p = self.factor_struct.p;
-        let exp_p = self.factor_struct.exp;
-        for i in 0..self.factor_struct.num {
-            let j = i as isize;
-            let n = unsafe { Fmpz { fmpz: [*n_p.offset(j)] } };
-            let exp = unsafe { *exp_p.offset(j) as c_long };
-            v.push((n, exp))
+        for i in 0..self.len() {
+            let mut n = Fmpz::new();
+            unsafe {
+                let a = self.nth(i);
+                fmpz_set(n.as_raw_mut(), a.0);
+                v.push((n, a.1))
+            }
         }
         v
+    }
+
+    pub fn len(&self) -> isize {
+        self.factor_struct.num as isize
+    }
+
+    pub unsafe fn nth(&self, i: isize) -> (*const fmpz, i64) {
+        debug_assert!(i < self.len());
+        let n_p = self.factor_struct.p;
+        let exp_p = self.factor_struct.exp;
+        let exp = *exp_p.offset(i) as i64;
+        (n_p.offset(i), exp)
     }
 }
 
