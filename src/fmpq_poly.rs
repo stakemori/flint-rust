@@ -1,10 +1,23 @@
 use bindings::*;
 use std::mem::uninitialized;
 use std::ops::*;
+use std::fmt;
+use std::ffi::CString;
 
 #[derive(Debug)]
 pub struct FmpqPoly {
     fmpq_poly: fmpq_poly_struct,
+}
+
+impl fmt::Display for FmpqPoly {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        unsafe {
+            let var = CString::new("x").unwrap();
+            let raw_str = fmpq_poly_get_str_pretty(self.as_raw(), var.as_ptr());
+            let s = CString::from_raw(raw_str);
+            write!(f, "{}", s.into_string().unwrap())
+        }
+    }
 }
 
 impl Deref for FmpqPoly {
