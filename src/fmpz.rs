@@ -520,6 +520,16 @@ impl Fmpz {
         *self >>= 1;
         if self.is_even() { 0 } else { 1 }
     }
+
+    pub fn get_mpz(&self, res: &mut Mpz) {
+        unsafe { fmpz_get_mpz(res.inner_mut(), self.as_raw()) }
+    }
+
+    pub fn set_mpz(&mut self, a: &Mpz) {
+        unsafe {
+            fmpz_set_mpz(self.as_raw_mut(), a.inner());
+        }
+    }
 }
 
 #[derive(Debug)]
