@@ -14,6 +14,36 @@ pub struct Fmpz {
     fmpz: fmpz_t,
 }
 
+pub struct FlintRandState {
+    rand_state: flint_rand_s,
+}
+
+impl Drop for FlintRandState {
+    fn drop(&mut self) {
+        unsafe {
+            flint_randclear(self.as_raw_mut());
+        }
+    }
+}
+
+impl FlintRandState {
+    pub fn new() -> Self {
+        unsafe {
+            let mut a = std::mem::uninitialized();
+            flint_randinit(&mut a);
+            Self { rand_state: a }
+        }
+    }
+
+    pub fn as_raw(&self) -> &flint_rand_s {
+        &self.rand_state
+    }
+
+    pub fn as_raw_mut(&mut self) -> &mut flint_rand_s {
+        &mut self.rand_state
+    }
+}
+
 impl Clone for Fmpz {
     fn clone(&self) -> Self {
         let mut a = Fmpz::new();
@@ -419,6 +449,12 @@ impl Fmpz {
         (),
         doc = "Return -1 if `self < 0`, +1 if `self > 0` 0 otherwise."
     );
+
+    pub fn randm_mut(&mut self, s: &mut FlintRandState, m: &Self) {
+        unsafe {
+            fmpz_randm(self.as_raw_mut(), s.as_raw_mut(), m.as_raw());
+        }
+    }
 
     /// Return `valuation(op, f)` and set `self = op/f^e`, where e is the valuation.
     pub fn remove(&mut self, op: &Self, f: &Self) -> mp_limb_signed_t {
