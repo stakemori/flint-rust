@@ -3460,8 +3460,10 @@ extern "C" {
     pub fn fmpq_poly_get_str(poly: *const fmpq_poly_struct) -> *mut c_char;
 }
 extern "C" {
-    pub fn fmpq_poly_get_str_pretty(poly: *const fmpq_poly_struct, var: *const c_char)
-        -> *mut c_char;
+    pub fn fmpq_poly_get_str_pretty(
+        poly: *const fmpq_poly_struct,
+        var: *const c_char,
+    ) -> *mut c_char;
 }
 extern "C" {
     pub fn _fmpq_poly_get_str_pretty(
