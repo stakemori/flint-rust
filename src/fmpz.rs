@@ -294,6 +294,12 @@ impl Fmpz {
         }
     }
 
+    pub fn set_pow_ui(&mut self, exp: c_ulong) {
+        unsafe {
+            fmpz_pow_ui(self.as_raw_mut(), self.as_raw(), exp);
+        }
+    }
+
     pub fn get_si_unchecked(&self) -> c_long {
         unsafe { fmpz_get_si(self.as_raw()) }
     }
