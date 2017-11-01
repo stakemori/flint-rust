@@ -9,6 +9,16 @@ pub fn remove(n: &mut c_ulong, p: c_ulong) -> u64 {
     unsafe { bindings::n_remove(n as *mut c_ulong, p) as u64 }
 }
 
+pub fn gcd(x: u64, y: u64) -> u64 {
+    unsafe {
+        if y > x {
+            bindings::n_gcd(y, x)
+        } else {
+            bindings::n_gcd(x, y)
+        }
+    }
+}
+
 /// Return the hilbert symbol of `(u_a * p^a_expt, u_b * p^b_expt)`.
 pub fn hilbert_symbol_odd_with_expt(
     a_expt: u64,
