@@ -566,6 +566,12 @@ impl Fmpz {
             fmpz_set_mpz(self.as_raw_mut(), a.inner());
         }
     }
+
+    pub fn divisor_sigma(&mut self, n: &Self, k: u64) {
+        unsafe {
+            fmpz_divisor_sigma(self.as_raw_mut(), n.as_raw(), k);
+        }
+    }
 }
 
 #[derive(Debug)]

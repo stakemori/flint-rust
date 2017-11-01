@@ -5119,7 +5119,7 @@ extern "C" {
     pub fn fmpz_factor_moebius_mu(fac: *const fmpz_factor_struct) -> c_int;
     pub fn fmpz_moebius_mu(n: *const fmpz) -> c_int;
     pub fn fmpz_factor_divisor_sigma(res: *mut fmpz, fac: *const fmpz_factor_struct, k: mp_limb_t);
-    pub fn fmpz_divisor_sigma(res: *mut fmpz, n: *mut fmpz, k: mp_limb_t);
+    pub fn fmpz_divisor_sigma(res: *mut fmpz, n: *const fmpz, k: mp_limb_t);
 
     // fmpz factor: Factorisation of arbitrary precision integers
     pub fn _fmpz_factor_append_ui(factor: *mut fmpz_factor_struct, p: mp_limb_t, exp: mp_limb_t);
