@@ -126,6 +126,12 @@ impl From<(c_long, c_ulong)> for Fmpq {
     }
 }
 
+impl From<(Fmpz, Fmpz)> for Fmpq {
+    fn from(x: (Fmpz, Fmpz)) -> Self {
+        Into::into((&x.0, &x.1))
+    }
+}
+
 impl From<c_long> for Fmpq {
     fn from(x: c_long) -> Fmpq {
         From::from((x, 1))
