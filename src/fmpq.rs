@@ -5,6 +5,9 @@ use fmpz::Fmpz;
 use std::fmt;
 use std::cmp::Ordering::{self, Greater, Less, Equal};
 use std::ops::*;
+use serde::ser::{Serialize, Serializer};
+use serde::{Deserialize, Deserializer};
+
 
 #[derive(Debug)]
 pub struct Fmpq {
@@ -20,6 +23,27 @@ impl Clone for Fmpq {
 
     fn clone_from(&mut self, other: &Self) {
         self.set(other);
+    }
+}
+
+impl Serialize for Fmpq {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
+        let a = (self.num_new(), self.den_new());
+        a.serialize(serializer)
+    }
+}
+
+impl<'de> Deserialize<'de> for Fmpq {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        type FmpzTuple = (Fmpz, Fmpz);
+        let a = FmpzTuple::deserialize(deserializer)?;
+        Ok(From::from((&a.0, &a.1)))
     }
 }
 

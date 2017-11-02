@@ -1,6 +1,7 @@
 extern crate flint;
 extern crate libc;
 extern crate gmp;
+extern crate serde_json;
 
 use libc::{c_ulong, c_long};
 use flint::fmpz::{Fmpz, FmpzFactor};
@@ -187,10 +188,22 @@ mod factor {
 }
 
 mod fmpq {
+    use super::*;
     use flint::fmpq::Fmpq;
     use flint::fmpz::Fmpz;
     use libc::c_long;
     use flint::bindings::fmpz_set;
+
+    #[test]
+    fn test_serialize_fmpq() {
+        let a: Fmpq = From::from((
+            Fmpz::from_str("4304903940901920901902911", 10).unwrap(),
+            Fmpz::from_str("1332343034094031188388181332", 10).unwrap(),
+        ));
+        let serialized = serde_json::to_string(&a).unwrap();
+        let deserialized: Fmpq = serde_json::from_str(&serialized).unwrap();
+        assert_eq!(a, deserialized);
+    }
 
     #[test]
     fn test_op() {
