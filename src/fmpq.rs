@@ -297,6 +297,13 @@ impl Fmpq {
         int_to_bool!(unsafe { fmpq_is_canonical(self.as_raw()) })
     }
 
+    pub fn set_fmpz(&mut self, num: &Fmpz) {
+        unsafe {
+            fmpz_set(self.num_as_raw_mut(), num.as_raw());
+            fmpz_set_ui(self.den_as_raw_mut(), 1);
+        }
+    }
+
     impl_mut_c_wrapper!(
         canonicalise_mut,
         fmpq_canonicalise,
