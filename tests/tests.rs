@@ -421,3 +421,18 @@ mod fmpq_poly {
         assert_eq!(res.den_new().to_slong().unwrap(), 66);
     }
 }
+
+mod fmpz_mat {
+    use flint::fmpz_mat::FmpzMat;
+    #[test]
+    fn test_snf() {
+        let mut a = FmpzMat::new(2, 2);
+        let mut b = FmpzMat::new(2, 2);
+        b.set_entry_si(0, 0, 2);
+        b.set_entry_si(0, 1, 4);
+        b.set_entry_si(1, 0, 6);
+        b.set_entry_si(1, 1, 12);
+        a.snf_mut(&b);
+        println!("{}", a);
+    }
+}
