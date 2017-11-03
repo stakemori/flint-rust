@@ -456,6 +456,20 @@ impl Fmpz {
         doc = "Return -1 if `self < 0`, +1 if `self > 0` 0 otherwise."
     );
 
+    pub fn is_divisible(&self, other: &Self) -> bool {
+        debug_assert!(other > &0_i64);
+        unsafe {
+            int_to_bool!(fmpz_divisible(self.as_raw(), other.as_raw()))
+        }
+    }
+
+    pub fn is_divisible_si(&self, other: c_long) -> bool {
+        debug_assert!(other > 0);
+        unsafe {
+            int_to_bool!(fmpz_divisible_si(self.as_raw(), other))
+        }
+    }
+
     pub fn randm_mut(&mut self, s: &mut FlintRandState, m: &Self) {
         unsafe {
             fmpz_randm(self.as_raw_mut(), s.as_raw_mut(), m.as_raw());

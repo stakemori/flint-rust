@@ -12,6 +12,17 @@ mod fmpz {
     use flint::fmpz::FlintRandState;
 
     #[test]
+    fn test_divisible() {
+        let a: Fmpz = From::from(91);
+        let b: Fmpz = From::from(7);
+        let c: Fmpz = From::from(3);
+        assert!(a.is_divisible(&b));
+        assert!(!a.is_divisible(&c));
+        assert!(a.is_divisible_si(13));
+        assert!(!a.is_divisible_si(5));
+    }
+
+    #[test]
     fn test_op_with_ptr() {
         let mut a: Fmpz = From::from(3);
         let b: Fmpz = From::from(2);
