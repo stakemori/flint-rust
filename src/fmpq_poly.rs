@@ -3,6 +3,9 @@ use std::mem::uninitialized;
 use std::ops::*;
 use std::fmt;
 use std::ffi::CString;
+use fmpq::Fmpq;
+use libc::c_long;
+
 
 #[derive(Debug)]
 pub struct FmpqPoly {
@@ -72,6 +75,18 @@ impl FmpqPoly {
     }
 
     impl_mut_c_wrapper!(set, fmpq_poly_set, (x: SelfRef), doc = "`self = x`");
+
+    pub fn get_coeff(&self, res: &mut Fmpq, n: c_long) {
+        unsafe {
+            fmpq_poly_get_coeff_fmpq(res.as_raw_mut(), self.as_raw(), n);
+        }
+    }
+
+    pub fn set_coeff(&mut self, a: &Fmpq, n: c_long) {
+        unsafe {
+            fmpq_poly_set_coeff_fmpq(self.as_raw_mut(), n, a.as_raw());
+        }
+    }
 
     pub fn eval_fmpq(&self, res: &mut fmpq, a: &fmpq) {
         unsafe {

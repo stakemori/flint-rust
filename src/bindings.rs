@@ -3508,10 +3508,10 @@ extern "C" {
     );
 }
 extern "C" {
-    pub fn fmpq_poly_get_coeff_fmpz(x: *mut fmpz, poly: *mut fmpq_poly_struct, n: mp_limb_signed_t);
+    pub fn fmpq_poly_get_coeff_fmpz(x: *mut fmpz, poly: *const fmpq_poly_struct, n: mp_limb_signed_t);
 }
 extern "C" {
-    pub fn fmpq_poly_get_coeff_fmpq(x: *mut fmpq, poly: *mut fmpq_poly_struct, n: mp_limb_signed_t);
+    pub fn fmpq_poly_get_coeff_fmpq(x: *mut fmpq, poly: *const fmpq_poly_struct, n: mp_limb_signed_t);
 }
 extern "C" {
     pub fn fmpq_poly_set_coeff_si(
@@ -3524,10 +3524,10 @@ extern "C" {
     pub fn fmpq_poly_set_coeff_ui(poly: *mut fmpq_poly_struct, n: mp_limb_signed_t, x: mp_limb_t);
 }
 extern "C" {
-    pub fn fmpq_poly_set_coeff_fmpz(poly: *mut fmpq_poly_struct, n: mp_limb_signed_t, x: *mut fmpz);
+    pub fn fmpq_poly_set_coeff_fmpz(poly: *mut fmpq_poly_struct, n: mp_limb_signed_t, x: *const fmpz);
 }
 extern "C" {
-    pub fn fmpq_poly_set_coeff_fmpq(poly: *mut fmpq_poly_struct, n: mp_limb_signed_t, x: *mut fmpq);
+    pub fn fmpq_poly_set_coeff_fmpq(poly: *mut fmpq_poly_struct, n: mp_limb_signed_t, x: *const fmpq);
 }
 extern "C" {
     pub fn fmpq_poly_set_coeff_mpz(
