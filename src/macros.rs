@@ -157,6 +157,8 @@ macro_rules! __ann_type {
     (SelfRefMut) => {&mut Self};
     (FmpzRef) => {&Fmpz};
     (FmpzRefMut) => {&mut Fmpz};
+    (FmpqRef) => {&Fmpq};
+    (FmpqRefMut) => {&mut Fmpq};
     (Si) => {c_long};
     (Ui) => {c_ulong};
     (fmpzref) => {&fmpz};
@@ -173,6 +175,8 @@ macro_rules! __ref_or_val {
     (SelfRefMut, $val: expr) => {$val.as_raw_mut()};
     (FmpzRef, $val: expr) => {$val.as_raw()};
     (FmpzRefMut, $val: expr) => {$val.as_raw_mut()};
+    (FmpqRef, $val: expr) => {$val.as_raw()};
+    (FmpqRefMut, $val: expr) => {$val.as_raw_mut()};
     ($t: ident, $val: expr) =>  {$val};
 }
 
