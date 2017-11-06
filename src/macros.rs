@@ -8,12 +8,23 @@ macro_rules! is_even {
     ($expr: expr) => {($expr) & 1 == 0}
 }
 
+macro_rules! div_check {
+    (DivAssign, $x: ident) => {debug_assert!(!$x.is_zero());};
+    ($a: ident, $x: ident) => {}
+}
+
+macro_rules! div_check_c {
+    (DivAssign, $x: ident) => {debug_assert!($x != 0);};
+    ($a: ident, $x: ident) => {}
+}
+
 macro_rules! define_assign_wref {
     ($t:ty, $trait:ident, $meth:ident, $func:ident, $ty:ty) =>
     {
         impl<'a> $trait<&'a $ty> for $t {
             fn $meth(&mut self, other: &$ty) {
                 unsafe {
+                    div_check!($trait, other);
                     $func(self.as_raw_mut(), self.as_raw(), other.as_raw());
                 }
             }
@@ -40,6 +51,7 @@ macro_rules! define_assign_c {
         impl $trait<$typ> for $t {
             fn $meth(&mut self, other: $typ) {
                 unsafe {
+                    div_check_c!($trait, other);
                     $func(self.as_raw_mut(), self.as_raw(), other);
                 }
             }
