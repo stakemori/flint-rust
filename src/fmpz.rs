@@ -176,6 +176,10 @@ impl Fmpz {
         unsafe { int_to_bool!(fmpz_is_even(self.as_raw())) }
     }
 
+    pub fn is_zero(&self) -> bool {
+        unsafe { int_to_bool!(fmpz_is_zero(self.as_raw())) }
+    }
+
     pub fn as_raw_mut(&mut self) -> &mut fmpz {
         &mut self.fmpz[0]
     }
@@ -458,16 +462,12 @@ impl Fmpz {
 
     pub fn is_divisible(&self, other: &Self) -> bool {
         debug_assert!(other > &0_i64);
-        unsafe {
-            int_to_bool!(fmpz_divisible(self.as_raw(), other.as_raw()))
-        }
+        unsafe { int_to_bool!(fmpz_divisible(self.as_raw(), other.as_raw())) }
     }
 
     pub fn is_divisible_si(&self, other: c_long) -> bool {
         debug_assert!(other > 0);
-        unsafe {
-            int_to_bool!(fmpz_divisible_si(self.as_raw(), other))
-        }
+        unsafe { int_to_bool!(fmpz_divisible_si(self.as_raw(), other)) }
     }
 
     pub fn randm_mut(&mut self, s: &mut FlintRandState, m: &Self) {
