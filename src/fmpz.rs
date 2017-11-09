@@ -314,6 +314,11 @@ impl Fmpz {
         }
     }
 
+    pub fn pow(&self, exp: c_ulong) -> Fmpz {
+        let mut res = Fmpz::new();
+        res.pow_ui_mut(self, exp);
+        res
+    }
 
     /// self = g^exp
     pub fn pow_ui_mut(&mut self, g: &Fmpz, exp: c_ulong) {
