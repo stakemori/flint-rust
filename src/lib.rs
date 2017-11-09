@@ -13,4 +13,5 @@ pub mod fmpq;
 pub mod fmpz_mat;
 pub mod fmpq_mat;
 pub mod fmpq_poly;
+pub mod fmpz_poly;
 pub mod arith;

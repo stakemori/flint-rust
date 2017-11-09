@@ -447,3 +447,20 @@ mod fmpz_mat {
         println!("{}", a);
     }
 }
+
+mod fmpz_poly {
+    use flint::fmpz_poly::*;
+    use flint::arith::*;
+
+    #[test]
+    fn test_fmpz_poly() {
+        let mut a = FmpzPoly::new();
+        let b = ramanujan_tau_series_new(10);
+        a.set_coeff_si(0, 1);
+        a.set_coeff_si(1, -1);
+        let mut c = FmpzPoly::new();
+        c.inv_series_mut(&a, 10);
+        println!("{}", c);
+        println!("{}", b);
+    }
+}
