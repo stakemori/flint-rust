@@ -139,6 +139,30 @@ impl From<c_long> for Fmpz {
     }
 }
 
+impl Mul<Fmpz> for Fmpz {
+    type Output = Fmpz;
+    fn mul(self, other: Fmpz) -> Fmpz {
+        let a = &self;
+        a.mul(&other)
+    }
+}
+
+impl Add<Fmpz> for Fmpz {
+    type Output = Fmpz;
+    fn add(self, other: Fmpz) -> Fmpz {
+        let a = &self;
+        a.add(&other)
+    }
+}
+
+impl Sub<Fmpz> for Fmpz {
+    type Output = Fmpz;
+    fn sub(self, other: Fmpz) -> Fmpz {
+        let a = &self;
+        a.sub(&other)
+    }
+}
+
 impl<'a> From<&'a Mpz> for Fmpz {
     fn from(x: &Mpz) -> Fmpz {
         unsafe {
