@@ -139,6 +139,15 @@ impl From<c_long> for Fmpz {
     }
 }
 
+impl Mul<i64> for Fmpz {
+    type Output = Fmpz;
+    fn mul(self, other: i64) -> Fmpz {
+        let mut res = self.clone();
+        res *= other;
+        res
+    }
+}
+
 impl Mul<Fmpz> for Fmpz {
     type Output = Fmpz;
     fn mul(self, other: Fmpz) -> Fmpz {
