@@ -139,6 +139,32 @@ impl From<c_long> for Fmpz {
     }
 }
 
+impl Neg for Fmpz {
+    type Output = Fmpz;
+    fn neg(self) -> Fmpz {
+        let mut res = self.clone();
+        res *= -1_i64;
+        res
+    }
+}
+
+impl<'a> Neg for &'a Fmpz {
+    type Output = Fmpz;
+    fn neg(self) -> Fmpz {
+        let mut res = self.clone();
+        res *= -1_i64;
+        res
+    }
+}
+
+impl<'a> Mul<&'a Fmpz> for Fmpz {
+    type Output = Fmpz;
+    fn mul(self, other: &Fmpz) -> Fmpz {
+        let a = &self;
+        a.mul(other)
+    }
+}
+
 impl Mul<i64> for Fmpz {
     type Output = Fmpz;
     fn mul(self, other: i64) -> Fmpz {
