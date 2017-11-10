@@ -7,6 +7,7 @@ extern crate gmp;
 
 use self::gmp::mpq::mpq_struct;
 use self::gmp::mpz::{mpz_struct, mp_limb_t};
+use self::gmp::mpf::mpf_struct;
 use self::libc::{c_long, c_char, c_int, c_void, c_double, c_uint};
 // TODO: Make sure this is correct.
 pub type mp_limb_signed_t = c_long;
@@ -4811,6 +4812,7 @@ extern "C" {
 }
 
 extern "C" {
+    pub fn fmpz_get_mpf(x: *mut mpf_struct, f: *const fmpz);
     // fmpz : Arbitrary precision integers. Functions related to mpz, mpf and IO are excluded.
     pub fn fmpz_init2(f: *mut fmpz, limbs: mp_limb_t);
 

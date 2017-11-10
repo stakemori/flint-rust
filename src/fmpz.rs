@@ -8,6 +8,7 @@ use std::ops::*;
 use std::cmp::Ordering::{self, Greater, Less, Equal};
 use serde::ser::{Serialize, Serializer};
 use serde::{Deserialize, Deserializer};
+use gmp::mpf::Mpf;
 
 #[derive(Debug)]
 pub struct Fmpz {
@@ -654,6 +655,12 @@ impl Fmpz {
     pub fn divisor_sigma(&mut self, n: &Self, k: u64) {
         unsafe {
             fmpz_divisor_sigma(self.as_raw_mut(), n.as_raw(), k);
+        }
+    }
+
+    pub fn get_mpf(&self, x: &mut Mpf) {
+        unsafe {
+            fmpz_get_mpf(x.inner_mut(), self.as_raw());
         }
     }
 }
