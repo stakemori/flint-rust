@@ -393,6 +393,10 @@ impl Fmpz {
         }
     }
 
+    pub fn size_in_base(&self, base: i32) -> usize {
+        unsafe { fmpz_sizeinbase(self.as_raw(), base) as usize }
+    }
+
     pub fn get_string(&self, base: usize) -> String {
         // taken from rust-gmp (cf. https://crates.io/crates/rust-gmp)
         unsafe {
