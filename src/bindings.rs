@@ -3449,7 +3449,7 @@ extern "C" {
     pub fn fmpq_poly_set_mpz(poly: *mut fmpq_poly_struct, x: *mut mpz_struct);
 }
 extern "C" {
-    pub fn fmpq_poly_set_fmpz_poly(rop: *mut fmpq_poly_struct, op: *mut fmpz_poly_struct);
+    pub fn fmpq_poly_set_fmpz_poly(rop: *mut fmpq_poly_struct, op: *const fmpz_poly_struct);
 }
 extern "C" {
     pub fn _fmpq_poly_set_str(poly: *mut fmpz, den: *mut fmpz, str: *const c_char) -> c_int;
