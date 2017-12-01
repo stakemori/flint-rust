@@ -3,9 +3,10 @@ use std::mem::uninitialized;
 use std::ops::*;
 use std::fmt;
 use std::ffi::CString;
-use libc::c_long;
+use libc::{c_long, c_ulong};
 use fmpz::Fmpz;
 
+#[derive(Debug)]
 pub struct FmpzPoly {
     fmpz_poly: fmpz_poly_struct,
 }
@@ -92,6 +93,13 @@ impl FmpzPoly {
         fmpz_poly_set_coeff_fmpz,
         (n: c_long, x: FmpzRef),
         doc = "`self[n] = x`"
+    );
+
+    impl_mut_c_wrapper!(
+        pow_trunc_mut,
+        fmpz_poly_pow_trunc,
+        (poly: SelfRef, e: c_ulong, n: c_long),
+        doc = "`self = poly^e mod x^n`"
     );
 
     pub fn get_coeff(&self, res: &mut Fmpz, n: c_long) {

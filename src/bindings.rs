@@ -1180,7 +1180,7 @@ extern "C" {
 extern "C" {
     pub fn fmpz_poly_pow_trunc(
         res: *mut fmpz_poly_struct,
-        poly: *mut fmpz_poly_struct,
+        poly: *const fmpz_poly_struct,
         e: mp_limb_t,
         n: mp_limb_signed_t,
     );

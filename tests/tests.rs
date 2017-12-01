@@ -462,5 +462,11 @@ mod fmpz_poly {
         c.inv_series_mut(&a, 10);
         println!("{}", c);
         println!("{}", b);
+
+        let mut d = FmpzPoly::new();
+        let mut e = FmpzPoly::new();
+        d.pow_trunc_mut(&b, 2, 5);
+        e.mullow_mut(&b, &b, 5);
+        assert_eq!(d, e);
     }
 }
