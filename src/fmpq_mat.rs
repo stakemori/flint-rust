@@ -110,6 +110,12 @@ impl FmpqMat {
         }
     }
 
+    pub fn get_entry(&self, r: isize, c: isize, x: &mut Fmpq) {
+        unsafe {
+            fmpq_set(x.as_raw_mut(), self.entry_raw(r, c));
+        }
+    }
+
     pub fn right_kernel_basis(&self) -> Vec<Vec<Fmpq>> {
         let m = self.ncols();
         let mut mat = Self::new(self.nrows() as i64, m as i64);
