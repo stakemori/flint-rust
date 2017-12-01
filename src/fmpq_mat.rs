@@ -110,10 +110,6 @@ impl FmpqMat {
         }
     }
 
-    pub fn rref_mut(&mut self, mat: &Self) -> c_long {
-        unsafe { fmpq_mat_rref(self.as_raw_mut(), mat.as_raw()) }
-    }
-
     pub fn right_kernel_basis(&self) -> Vec<Vec<Fmpq>> {
         let m = self.ncols();
         let mut mat = Self::new(self.nrows() as i64, m as i64);
@@ -160,7 +156,7 @@ impl FmpqMat {
     );
 
     impl_mut_c_wrapper_w_rtype!(
-        rref,
+        rref_mut,
         fmpq_mat_rref,
         c_long,
         (x: SelfRef),
