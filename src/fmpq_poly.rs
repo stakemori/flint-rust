@@ -76,6 +76,13 @@ impl FmpqPoly {
 
     impl_mut_c_wrapper!(set, fmpq_poly_set, (x: SelfRef), doc = "`self = x`");
 
+    impl_mut_c_wrapper!(
+        inv_series_newton_mut,
+        fmpq_poly_inv_series_newton,
+        (x: SelfRef, n: c_long),
+        doc = "`self = x`"
+    );
+
     pub fn get_coeff(&self, res: &mut Fmpq, n: c_long) {
         unsafe {
             fmpq_poly_get_coeff_fmpq(res.as_raw_mut(), self.as_raw(), n);
