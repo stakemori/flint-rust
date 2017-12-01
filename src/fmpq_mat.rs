@@ -158,4 +158,12 @@ impl FmpqMat {
         (x: SelfRef),
         doc = "self = x^t"
     );
+
+    impl_mut_c_wrapper_w_rtype!(
+        rref,
+        fmpq_mat_rref,
+        c_long,
+        (x: SelfRef),
+        doc = "Call `fmpq_mat_rref(self, x)`"
+    );
 }
