@@ -5,7 +5,7 @@ use std::fmt;
 use std::ffi::CString;
 use fmpq::Fmpq;
 use libc::c_long;
-
+use fmpz_poly::FmpzPoly;
 
 #[derive(Debug)]
 pub struct FmpqPoly {
@@ -75,6 +75,12 @@ impl FmpqPoly {
     }
 
     impl_mut_c_wrapper!(set, fmpq_poly_set, (x: SelfRef), doc = "`self = x`");
+
+    pub fn set_fmpz_poly(&mut self, x: &FmpzPoly) {
+        unsafe {
+            fmpq_poly_set_fmpz_poly(self.as_raw_mut(), x.as_raw());
+        }
+    }
 
     impl_mut_c_wrapper!(
         inv_series_newton_mut,
