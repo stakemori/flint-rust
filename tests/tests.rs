@@ -9,7 +9,7 @@ use flint::fmpz::{Fmpz, FmpzFactor};
 mod fmpz {
     use super::*;
     use gmp::mpz::Mpz;
-    use flint::fmpz::FlintRandState;
+    // use flint::fmpz::FlintRandState;
 
     #[test]
     fn test_divisible() {
@@ -171,31 +171,31 @@ mod fmpz {
         assert_eq!(a, 5 as c_ulong);
     }
 
-    #[test]
-    fn test_rand_and_factor() {
-        let mut m: Fmpz = From::from(1);
-        let mut n: Fmpz = From::from(1);
-        let mut s = FlintRandState::new();
-        let mut b = Fmpz::new();
-        let mut f = FmpzFactor::new();
-        n <<= 70;
-        m <<= 90;
-        let mut a = Fmpz::new();
-        for i in 0..100 {
-            loop {
-                a.randm_mut(&mut s, &m);
-                if n < a {
-                    break;
-                }
-            }
-            b.set(&a);
-            b += 1;
-            b *= &a;
-            println!("i: {}, a: {}, b: {}", i, a, b);
-            f.factor_mut(&b);
-            println!("f: {:?}", f.to_vec());
-        }
-    }
+    // #[test]
+    // fn test_rand_and_factor() {
+    //     let mut m: Fmpz = From::from(1);
+    //     let mut n: Fmpz = From::from(1);
+    //     let mut s = FlintRandState::new();
+    //     let mut b = Fmpz::new();
+    //     let mut f = FmpzFactor::new();
+    //     n <<= 70;
+    //     m <<= 90;
+    //     let mut a = Fmpz::new();
+    //     for i in 0..100 {
+    //         loop {
+    //             a.randm_mut(&mut s, &m);
+    //             if n < a {
+    //                 break;
+    //             }
+    //         }
+    //         b.set(&a);
+    //         b += 1;
+    //         b *= &a;
+    //         println!("i: {}, a: {}, b: {}", i, a, b);
+    //         f.factor_mut(&b);
+    //         println!("f: {:?}", f.to_vec());
+    //     }
+    // }
 }
 
 mod factor {
