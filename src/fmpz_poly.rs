@@ -121,6 +121,8 @@ impl FmpzPoly {
         doc = "`self = x * y trancated length n`"
     );
 
+
+
     impl_mut_c_wrapper!(
         inv_series_mut,
         fmpz_poly_inv_series,
@@ -171,6 +173,12 @@ impl FmpzPoly {
     pub fn get_coeff(&self, res: &mut Fmpz, n: c_long) {
         unsafe {
             fmpz_poly_get_coeff_fmpz(res.as_raw_mut(), self.as_raw(), n);
+        }
+    }
+
+    pub fn mullow_assign(&mut self, other: &Self, n: c_long) {
+        unsafe {
+            fmpz_poly_mullow(self.as_raw_mut(), self.as_raw(), other.as_raw(), n);
         }
     }
 }
