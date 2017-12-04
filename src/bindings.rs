@@ -458,7 +458,7 @@ extern "C" {
     pub fn _fmpz_poly_normalise(poly: *mut fmpz_poly_struct);
 }
 extern "C" {
-    pub fn fmpz_poly_set(poly1: *mut fmpz_poly_struct, poly2: *mut fmpz_poly_struct);
+    pub fn fmpz_poly_set(poly1: *mut fmpz_poly_struct, poly2: *const fmpz_poly_struct);
 }
 extern "C" {
     pub fn fmpz_poly_set_ui(poly: *mut fmpz_poly_struct, c: mp_limb_t);

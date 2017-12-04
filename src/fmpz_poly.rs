@@ -22,6 +22,18 @@ impl fmt::Display for FmpzPoly {
     }
 }
 
+impl Clone for FmpzPoly {
+    fn clone(&self) -> Self {
+        let mut res = FmpzPoly::new();
+        res.set(self);
+        res
+    }
+
+    fn clone_from(&mut self, other: &Self) {
+        self.set(other);
+    }
+}
+
 impl Drop for FmpzPoly {
     fn drop(&mut self) {
         unsafe {
@@ -69,6 +81,12 @@ impl FmpzPoly {
     pub fn as_raw_mut(&mut self) -> &mut fmpz_poly_struct {
         &mut self.fmpz_poly
     }
+
+    impl_mut_c_wrapper!(
+        set,
+        fmpz_poly_set,
+        (x: SelfRef),
+    );
 
     impl_mut_c_wrapper!(
         add_mut,
