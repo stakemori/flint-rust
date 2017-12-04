@@ -597,8 +597,8 @@ extern "C" {
 extern "C" {
     pub fn fmpz_poly_add(
         res: *mut fmpz_poly_struct,
-        poly1: *mut fmpz_poly_struct,
-        poly2: *mut fmpz_poly_struct,
+        poly1: *const fmpz_poly_struct,
+        poly2: *const fmpz_poly_struct,
     );
 }
 extern "C" {
@@ -621,8 +621,8 @@ extern "C" {
 extern "C" {
     pub fn fmpz_poly_sub(
         res: *mut fmpz_poly_struct,
-        poly1: *mut fmpz_poly_struct,
-        poly2: *mut fmpz_poly_struct,
+        poly1: *const fmpz_poly_struct,
+        poly2: *const fmpz_poly_struct,
     );
 }
 extern "C" {

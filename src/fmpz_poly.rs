@@ -50,6 +50,9 @@ impl PartialEq for FmpzPoly {
     }
 }
 
+define_assign_wref!(FmpzPoly, AddAssign, add_assign, fmpz_poly_add, FmpzPoly);
+define_assign_wref!(FmpzPoly, SubAssign, sub_assign, fmpz_poly_sub, FmpzPoly);
+
 impl FmpzPoly {
     pub fn new() -> Self {
         unsafe {
@@ -66,6 +69,20 @@ impl FmpzPoly {
     pub fn as_raw_mut(&mut self) -> &mut fmpz_poly_struct {
         &mut self.fmpz_poly
     }
+
+    impl_mut_c_wrapper!(
+        add_mut,
+        fmpz_poly_add,
+        (x: SelfRef, y: SelfRef),
+        doc = "`self = x + y`"
+    );
+
+    impl_mut_c_wrapper!(
+        sub_mut,
+        fmpz_poly_sub,
+        (x: SelfRef, y: SelfRef),
+        doc = "`self = x + y`"
+    );
 
     impl_mut_c_wrapper!(
         mullow_mut,
