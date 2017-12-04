@@ -3863,8 +3863,8 @@ extern "C" {
 extern "C" {
     pub fn fmpq_poly_scalar_mul_fmpz(
         rop: *mut fmpq_poly_struct,
-        op: *mut fmpq_poly_struct,
-        c: *mut fmpz,
+        op: *const fmpq_poly_struct,
+        c: *const fmpz,
     );
 }
 extern "C" {
@@ -3939,15 +3939,15 @@ extern "C" {
 extern "C" {
     pub fn fmpq_poly_scalar_div_fmpz(
         rop: *mut fmpq_poly_struct,
-        op: *mut fmpq_poly_struct,
-        c: *mut fmpz,
+        op: *const fmpq_poly_struct,
+        c: *const fmpz,
     );
 }
 extern "C" {
     pub fn fmpq_poly_scalar_div_fmpq(
         rop: *mut fmpq_poly_struct,
-        op: *mut fmpq_poly_struct,
-        c: *mut fmpq,
+        op: *const fmpq_poly_struct,
+        c: *const fmpq,
     );
 }
 extern "C" {
