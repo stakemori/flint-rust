@@ -132,7 +132,7 @@ impl FmpqPoly {
         sub_mut,
         fmpq_poly_sub,
         (x: SelfRef, y: SelfRef),
-        doc = "`self = x + y`"
+        doc = "`self = x - y`"
     );
 
     pub fn get_coeff(&self, res: &mut Fmpq, n: c_long) {
