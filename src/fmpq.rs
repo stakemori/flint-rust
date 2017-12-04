@@ -191,6 +191,7 @@ impl Drop for Fmpq {
     }
 }
 
+#[derive(Debug)]
 pub struct InverseNotExist;
 
 impl Fmpq {
