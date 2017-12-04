@@ -111,6 +111,22 @@ macro_rules! impl_operator {
 }
 
 
+macro_rules! impl_operator_w_ref {
+    ($tr: ident, $t: ty, $method: ident, $cfunc: ident, $to: ty) => {
+        impl<'a, 'b> $tr<&'b $to> for &'a $t {
+            type Output = $t;
+            fn $method(self, other: &$to) -> $t {
+                let mut res: $t = Default::default();
+                unsafe{
+                    $cfunc(res.as_raw_mut(), self.as_raw(), other.as_raw());
+                }
+                res
+            }
+        }
+
+    }
+}
+
 macro_rules! impl_neg {
     ($t: ty, $cfunc: ident) => {
         impl<'b> Neg for &'b $t {

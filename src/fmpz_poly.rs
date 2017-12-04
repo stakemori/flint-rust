@@ -1,3 +1,4 @@
+// TODO: refactor code
 use bindings::*;
 use std::mem::uninitialized;
 use std::ops::*;
@@ -19,6 +20,12 @@ impl fmt::Display for FmpzPoly {
             let s = CString::from_raw(raw_str);
             write!(f, "{}", s.into_string().unwrap())
         }
+    }
+}
+
+impl Default for FmpzPoly {
+    fn default() -> Self {
+        FmpzPoly::new()
     }
 }
 
@@ -64,6 +71,10 @@ impl PartialEq for FmpzPoly {
 
 define_assign_wref!(FmpzPoly, AddAssign, add_assign, fmpz_poly_add, FmpzPoly);
 define_assign_wref!(FmpzPoly, SubAssign, sub_assign, fmpz_poly_sub, FmpzPoly);
+impl_operator!(Add, FmpzPoly, add, fmpz_poly_add);
+impl_operator!(Sub, FmpzPoly, sub, fmpz_poly_sub);
+impl_operator_w_ref!(Mul, FmpzPoly, mul, fmpz_poly_scalar_mul_fmpz, Fmpz);
+impl_operator_c!(Mul, FmpzPoly, mul, c_long, fmpz_poly_scalar_mul_si);
 
 impl FmpzPoly {
     pub fn new() -> Self {
@@ -136,6 +147,13 @@ impl FmpzPoly {
         (poly: SelfRef, e: c_ulong, n: c_long),
         doc = "`self = poly^e mod x^n`"
     );
+
+    pub fn pow_trunc(&self, e: c_ulong, n: c_long) -> FmpzPoly {
+        let mut res = FmpzPoly::new();
+        res.pow_trunc_mut(&self, e, n);
+        res
+    }
+
     impl_mut_c_wrapper!(
         add_mul_scalar_mut,
         fmpz_poly_scalar_addmul_fmpz,

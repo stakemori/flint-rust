@@ -649,22 +649,22 @@ extern "C" {
 extern "C" {
     pub fn fmpz_poly_scalar_mul_ui(
         poly1: *mut fmpz_poly_struct,
-        poly2: *mut fmpz_poly_struct,
+        poly2: *const fmpz_poly_struct,
         x: mp_limb_t,
     );
 }
 extern "C" {
     pub fn fmpz_poly_scalar_mul_si(
         poly1: *mut fmpz_poly_struct,
-        poly2: *mut fmpz_poly_struct,
+        poly2: *const fmpz_poly_struct,
         x: mp_limb_signed_t,
     );
 }
 extern "C" {
     pub fn fmpz_poly_scalar_mul_fmpz(
         poly1: *mut fmpz_poly_struct,
-        poly2: *mut fmpz_poly_struct,
-        x: *mut fmpz,
+        poly2: *const fmpz_poly_struct,
+        x: *const fmpz,
     );
 }
 extern "C" {
