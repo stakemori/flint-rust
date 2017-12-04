@@ -134,12 +134,11 @@ impl FmpzPoly {
         doc = "`self[n] = x`"
     );
 
-    impl_mut_c_wrapper!(
-        set_coeff_fmpz,
-        fmpz_poly_set_coeff_fmpz,
-        (n: c_long, x: FmpzRef),
-        doc = "`self[n] = x`"
-    );
+    pub fn set_coeff(&mut self, x: &Fmpz, n: c_long) {
+        unsafe {
+            fmpz_poly_set_coeff_fmpz(self.as_raw_mut(), n, x.as_raw());
+        }
+    }
 
     impl_mut_c_wrapper!(
         pow_trunc_mut,
