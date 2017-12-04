@@ -71,6 +71,7 @@ impl PartialEq for FmpzPoly {
 
 define_assign_wref!(FmpzPoly, AddAssign, add_assign, fmpz_poly_add, FmpzPoly);
 define_assign_wref!(FmpzPoly, SubAssign, sub_assign, fmpz_poly_sub, FmpzPoly);
+define_assign_wref!(FmpzPoly, MulAssign, mul_assign, fmpz_poly_scalar_mul_fmpz, Fmpz);
 impl_operator!(Add, FmpzPoly, add, fmpz_poly_add);
 impl_operator!(Sub, FmpzPoly, sub, fmpz_poly_sub);
 impl_operator_w_ref!(Mul, FmpzPoly, mul, fmpz_poly_scalar_mul_fmpz, Fmpz);
