@@ -478,6 +478,13 @@ impl Fmpz {
     );
 
     impl_mut_c_wrapper!(
+        mod_mut,
+        fmpz_mod,
+        (g: SelfRef, h: SelfRef),
+        doc = "`self = g mod h`"
+    );
+
+    impl_mut_c_wrapper!(
         addmul_mut,
         fmpz_addmul,
         (x: fmpzref, y: fmpzref),
