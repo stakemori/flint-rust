@@ -60,10 +60,34 @@ impl Drop for FmpqPoly {
 
 define_assign_wref!(FmpqPoly, AddAssign, add_assign, fmpq_poly_add, FmpqPoly);
 define_assign_wref!(FmpqPoly, SubAssign, sub_assign, fmpq_poly_sub, FmpqPoly);
-define_assign_wref!(FmpqPoly, MulAssign, mul_assign, fmpq_poly_scalar_mul_fmpq, Fmpq);
-define_assign_wref!(FmpqPoly, MulAssign, mul_assign, fmpq_poly_scalar_mul_fmpz, Fmpz);
-define_assign_wref!(FmpqPoly, DivAssign, div_assign, fmpq_poly_scalar_div_fmpq, Fmpq);
-define_assign_wref!(FmpqPoly, DivAssign, div_assign, fmpq_poly_scalar_div_fmpz, Fmpz);
+define_assign_wref!(
+    FmpqPoly,
+    MulAssign,
+    mul_assign,
+    fmpq_poly_scalar_mul_fmpq,
+    Fmpq
+);
+define_assign_wref!(
+    FmpqPoly,
+    MulAssign,
+    mul_assign,
+    fmpq_poly_scalar_mul_fmpz,
+    Fmpz
+);
+define_assign_wref!(
+    FmpqPoly,
+    DivAssign,
+    div_assign,
+    fmpq_poly_scalar_div_fmpq,
+    Fmpq
+);
+define_assign_wref!(
+    FmpqPoly,
+    DivAssign,
+    div_assign,
+    fmpq_poly_scalar_div_fmpz,
+    Fmpz
+);
 
 impl FmpqPoly {
     pub fn new() -> Self {
