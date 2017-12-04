@@ -57,6 +57,10 @@ impl Drop for FmpqPoly {
     }
 }
 
+define_assign_wref!(FmpqPoly, AddAssign, add_assign, fmpq_poly_add, FmpqPoly);
+define_assign_wref!(FmpqPoly, SubAssign, sub_assign, fmpq_poly_sub, FmpqPoly);
+define_assign_wref!(FmpqPoly, MulAssign, mul_assign, fmpq_poly_scalar_mul_fmpq, Fmpq);
+
 impl FmpqPoly {
     pub fn new() -> Self {
         unsafe {
@@ -87,6 +91,20 @@ impl FmpqPoly {
         fmpq_poly_inv_series_newton,
         (x: SelfRef, n: c_long),
         doc = "`self = x`"
+    );
+
+    impl_mut_c_wrapper!(
+        add_mut,
+        fmpq_poly_add,
+        (x: SelfRef, y: SelfRef),
+        doc = "`self = x + y`"
+    );
+
+    impl_mut_c_wrapper!(
+        sub_mut,
+        fmpq_poly_sub,
+        (x: SelfRef, y: SelfRef),
+        doc = "`self = x + y`"
     );
 
     pub fn get_coeff(&self, res: &mut Fmpq, n: c_long) {
