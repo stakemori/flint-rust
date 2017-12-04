@@ -659,16 +659,16 @@ extern "C" {
 }
 extern "C" {
     pub fn fmpz_poly_scalar_addmul_fmpz(
-        poly1: *mut fmpz_poly_struct,
-        poly2: *mut fmpz_poly_struct,
-        x: *mut fmpz,
+        poly1: *const fmpz_poly_struct,
+        poly2: *const fmpz_poly_struct,
+        x: *const fmpz,
     );
 }
 extern "C" {
     pub fn fmpz_poly_scalar_submul_fmpz(
-        poly1: *mut fmpz_poly_struct,
-        poly2: *mut fmpz_poly_struct,
-        x: *mut fmpz,
+        poly1: *const fmpz_poly_struct,
+        poly2: *const fmpz_poly_struct,
+        x: *const fmpz,
     );
 }
 extern "C" {

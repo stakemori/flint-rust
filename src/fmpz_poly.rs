@@ -118,6 +118,19 @@ impl FmpzPoly {
         (poly: SelfRef, e: c_ulong, n: c_long),
         doc = "`self = poly^e mod x^n`"
     );
+    impl_mut_c_wrapper!(
+        add_mul_mut,
+        fmpz_poly_scalar_addmul_fmpz,
+        (x: SelfRef, a: FmpzRef),
+        doc = "`self += ax`"
+    );
+
+    impl_mut_c_wrapper!(
+        sub_mul_mut,
+        fmpz_poly_scalar_submul_fmpz,
+        (x: SelfRef, a: FmpzRef),
+        doc = "`self -= ax`"
+    );
 
     pub fn get_coeff(&self, res: &mut Fmpz, n: c_long) {
         unsafe {
