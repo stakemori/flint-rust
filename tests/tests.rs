@@ -451,6 +451,7 @@ mod fmpz_mat {
 mod fmpz_poly {
     use flint::fmpz_poly::*;
     use flint::arith::*;
+    use flint::fmpz::Fmpz;
 
     #[test]
     fn test_fmpz_poly() {
@@ -468,5 +469,16 @@ mod fmpz_poly {
         d.pow_trunc_mut(&b, 2, 5);
         e.mullow_mut(&b, &b, 5);
         assert_eq!(d, e);
+    }
+
+    #[test]
+    fn test_fmt() {
+        for i in 0..1000_000 {
+            let mut tmp = FmpzPoly::new();
+            let mut tmp_z: Fmpz = From::from(i);
+            tmp_z.set_pow_ui(10);
+            tmp.set_coeff(&tmp_z, 0);
+            let _ = format!("{}", tmp);
+        }
     }
 }

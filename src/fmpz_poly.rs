@@ -3,7 +3,7 @@ use bindings::*;
 use std::mem::uninitialized;
 use std::ops::*;
 use std::fmt;
-use std::ffi::CString;
+use std::ffi::{CStr, CString};
 use libc::{c_long, c_ulong};
 use fmpz::Fmpz;
 
@@ -17,8 +17,8 @@ impl fmt::Display for FmpzPoly {
         unsafe {
             let var = CString::new("x").unwrap();
             let raw_str = fmpz_poly_get_str_pretty(self.as_raw(), var.as_ptr());
-            let s = CString::from_raw(raw_str);
-            write!(f, "{}", s.into_string().unwrap())
+            let s = CStr::from_ptr(raw_str);
+            write!(f, "{}", s.to_str().unwrap().to_string())
         }
     }
 }
