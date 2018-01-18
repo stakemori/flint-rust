@@ -451,6 +451,13 @@ impl Fmpz {
     }
 
     impl_mut_c_wrapper!(
+        gcd_mut,
+        fmpz_gcd,
+        (x: SelfRef, y: SelfRef),
+        doc = "`self = gcd(x, y)`"
+    );
+
+    impl_mut_c_wrapper!(
         fdiv_r_2exp_mut,
         fmpz_fdiv_r_2exp,
         (x: fmpzref, y: Ui),
