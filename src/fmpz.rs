@@ -232,6 +232,14 @@ impl<'a> From<&'a Fmpz> for Mpz {
 }
 
 impl Fmpz {
+    pub fn zero() -> Self {
+        Fmpz::from_si(0)
+    }
+
+    pub fn one() -> Self {
+        Fmpz::from_si(1)
+    }
+
     pub fn is_even(&self) -> bool {
         unsafe { int_to_bool!(fmpz_is_even(self.as_raw())) }
     }
@@ -458,6 +466,15 @@ impl Fmpz {
     );
 
     impl_mut_c_wrapper!(
+        sub_mut,
+        fmpz_sub,
+        (x: SelfRef, y: SelfRef),
+        doc = "`self = x - y`"
+    );
+
+    impl_mut_c_wrapper!(negate, fmpz_neg, (x: SelfRef), doc = "`self = -x`");
+
+    impl_mut_c_wrapper!(
         fdiv_r_2exp_mut,
         fmpz_fdiv_r_2exp,
         (x: fmpzref, y: Ui),
@@ -681,6 +698,13 @@ impl Fmpz {
             fmpz_get_mpf(x.inner_mut(), self.as_raw());
         }
     }
+
+    impl_self_mut_call_c!(
+        set_divexact,
+        fmpz_divexact,
+        (x: SelfRef),
+        doc = "`self = self / x`"
+    );
 }
 
 #[derive(Debug)]
