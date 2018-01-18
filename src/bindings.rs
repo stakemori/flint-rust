@@ -5372,6 +5372,10 @@ extern "C" {
     pub fn arith_landau_function_vec(res: *mut fmpz, len: mp_limb_signed_t);
 }
 
+extern "C" {
+    pub fn flint_free(ptr: *mut c_void);
+}
+
 
 #[link(name = "flint_wrapper")]
 extern "C" {

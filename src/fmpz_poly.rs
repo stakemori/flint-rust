@@ -4,7 +4,7 @@ use std::mem::uninitialized;
 use std::ops::*;
 use std::fmt;
 use std::ffi::{CStr, CString};
-use libc::{c_long, c_ulong};
+use libc::{c_long, c_ulong, c_void};
 use fmpz::Fmpz;
 
 #[derive(Debug)]
@@ -18,6 +18,7 @@ impl fmt::Display for FmpzPoly {
             let var = CString::new("x").unwrap();
             let raw_str = fmpz_poly_get_str_pretty(self.as_raw(), var.as_ptr());
             let s = CStr::from_ptr(raw_str);
+            flint_free(raw_str as *mut c_void);
             write!(f, "{}", s.to_str().unwrap().to_string())
         }
     }
