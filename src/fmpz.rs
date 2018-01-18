@@ -472,7 +472,7 @@ impl Fmpz {
         doc = "`self = x - y`"
     );
 
-    impl_mut_c_wrapper!(negate, fmpz_neg, (x: SelfRef), doc = "`self = -x`");
+    impl_self_mut_call_c!(negate, fmpz_neg, (), doc = "`self = -self`");
 
     impl_mut_c_wrapper!(
         fdiv_r_2exp_mut,
