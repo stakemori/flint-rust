@@ -171,6 +171,11 @@ mod fmpz {
         assert_eq!(a, 5 as c_ulong);
     }
 
+    #[test]
+    fn test_shift() {
+        assert_eq!(Into::<Fmpz>::into(10) >> 1, 5_i64);
+    }
+
     // #[test]
     // fn test_rand_and_factor() {
     //     let mut m: Fmpz = From::from(1);

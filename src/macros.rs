@@ -155,6 +155,16 @@ macro_rules! impl_operator_c  {
             }
         }
 
+        impl<'a> $tr<$ct> for $t {
+            type Output = $t;
+            fn $method(self, other: $ct) -> $t {
+                let mut res: $t = Default::default();
+                unsafe {
+                    $cfunc(res.as_raw_mut(), self.as_raw(), other);
+                }
+                res
+            }
+        }
     }
 }
 
