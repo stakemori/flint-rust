@@ -298,6 +298,20 @@ impl Fmpq {
         int_to_bool!(unsafe { fmpq_is_canonical(self.as_raw()) })
     }
 
+    pub fn set_ui(&mut self, num: c_ulong) {
+        unsafe {
+            fmpz_set_ui(self.num_as_raw_mut(), num);
+            fmpz_set_ui(self.den_as_raw_mut(), 1);
+        }
+    }
+
+    pub fn set_si(&mut self, num: c_long) {
+        unsafe {
+            fmpz_set_si(self.num_as_raw_mut(), num);
+            fmpz_set_ui(self.den_as_raw_mut(), 1);
+        }
+    }
+
     pub fn set_fmpz(&mut self, num: &Fmpz) {
         unsafe {
             fmpz_set(self.num_as_raw_mut(), num.as_raw());
