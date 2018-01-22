@@ -298,10 +298,11 @@ impl Fmpq {
         int_to_bool!(unsafe { fmpq_is_canonical(self.as_raw()) })
     }
 
-    pub fn set_ui(&mut self, num: c_ulong) {
+    pub fn set_ui(&mut self, num: c_ulong, den: c_ulong) {
         unsafe {
             fmpz_set_ui(self.num_as_raw_mut(), num);
-            fmpz_set_ui(self.den_as_raw_mut(), 1);
+            fmpz_set_ui(self.den_as_raw_mut(), den);
+            self.canonicalise_mut();
         }
     }
 
