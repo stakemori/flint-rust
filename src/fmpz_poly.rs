@@ -164,14 +164,14 @@ impl FmpzPoly {
     }
 
     impl_mut_c_wrapper!(
-        add_mul_scalar_mut,
+        addmul_scalar_mut,
         fmpz_poly_scalar_addmul_fmpz,
         (x: SelfRef, a: FmpzRef),
         doc = "`self += ax`"
     );
 
     impl_mut_c_wrapper!(
-        sub_mul_scalar_mut,
+        submul_scalar_mut,
         fmpz_poly_scalar_submul_fmpz,
         (x: SelfRef, a: FmpzRef),
         doc = "`self -= ax`"
