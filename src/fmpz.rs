@@ -561,6 +561,7 @@ impl Fmpz {
     );
 
     pub fn is_divisible(&self, other: &Self) -> bool {
+        // Looking at source, this assertion seems unnecessary.
         debug_assert!(other > &0_i64);
         unsafe { int_to_bool!(fmpz_divisible(self.as_raw(), other.as_raw())) }
     }
