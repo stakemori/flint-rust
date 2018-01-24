@@ -414,12 +414,12 @@ impl Fmpq {
         doc = "`self = x^e`"
     );
     impl_mut_c_wrapper!(
-        add_mul_mut,
+        addmul_mut,
         fmpq_addmul,
         (x: fmpqref, y: fmpqref),
         doc = "`self += x*y`"
     );
-    impl_mut_c_wrapper!(sub_mul_mut, fmpq_submul, (x: fmpqref, y: fmpqref),);
+    impl_mut_c_wrapper!(submul_mut, fmpq_submul, (x: fmpqref, y: fmpqref),);
 
     impl_self_mut_call_c!(negate, fmpq_neg, (), doc = "`self = -self`");
     impl_self_mut_call_c!(
