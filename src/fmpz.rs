@@ -560,6 +560,13 @@ impl Fmpz {
         doc = "Return -1 if `self < 0`, +1 if `self > 0` 0 otherwise."
     );
 
+    impl_mut_c_wrapper!(
+        bi_uiui_mut,
+        fmpz_bin_uiui,
+        (n: Ui, k: Ui),
+        doc = "Set `self` to binomial(n, k)."
+    );
+
     pub fn is_divisible(&self, other: &Self) -> bool {
         // Looking at source, this assertion seems unnecessary.
         debug_assert!(other > &0_i64);
