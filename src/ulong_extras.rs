@@ -118,7 +118,7 @@ mod tests {
         assert_eq!(hilbert_symbol_odd(a, p, p), -1);
         assert_eq!(hilbert_symbol_odd(p, a, p), -1);
         assert_eq!(hilbert_symbol_odd(p, p, p), 1);
-        assert_eq!(hilbert_symbol_odd(p, (p * a), p), -1);
+        assert_eq!(hilbert_symbol_odd(p, p * a, p), -1);
 
         let p = 7;
         let a = 3;
@@ -126,7 +126,7 @@ mod tests {
         assert_eq!(hilbert_symbol_odd(a, p, p), -1);
         assert_eq!(hilbert_symbol_odd(p, a, p), -1);
         assert_eq!(hilbert_symbol_odd(p, p, p), -1);
-        assert_eq!(hilbert_symbol_odd(p, (p * a), p), 1);
+        assert_eq!(hilbert_symbol_odd(p, p * a, p), 1);
     }
 
     #[test]
