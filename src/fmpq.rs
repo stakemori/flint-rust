@@ -398,7 +398,6 @@ impl Fmpq {
     impl_mut_c_wrapper!(abs_mut, fmpq_abs, (x: fmpqref), doc = "`self = abs(x)`");
     impl_mut_c_wrapper!(inv_mut, fmpq_inv, (x: fmpqref), doc = "`self = x^(-1)`");
     impl_mut_c_wrapper!(neg_mut, fmpq_neg, (x: fmpqref), doc = "`self = -x`");
-    impl_mut_c_wrapper!(set, fmpq_set, (x: fmpqref), doc = "`self = x`");
     impl_mut_c_wrapper!(set_zero, fmpq_zero,(),);
     impl_mut_c_wrapper!(set_one, fmpq_one,(),);
     impl_mut_c_wrapper!(set_si, fmpq_set_si, (p: Si, q: Ui), doc = "`self = p/q`");
@@ -445,6 +444,14 @@ impl Fmpq {
         unsafe {
             let a = fmpq_mod_fmpz(res.as_raw_mut(), self.as_raw(), m.as_raw());
             if a == 1 { Ok(()) } else { Err(InverseNotExist) }
+        }
+    }
+}
+
+impl<'a> SetSelf<&'a fmpq> for Fmpq {
+    fn set(&mut self, x: &fmpq) {
+        unsafe {
+            fmpq_set(self.as_raw_mut(), x);
         }
     }
 }
