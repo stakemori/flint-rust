@@ -310,9 +310,9 @@ impl Fmpz {
     }
 
     /// self = n + m
-    pub fn add_mut(&mut self, n: &Fmpz, m: &Fmpz) {
+    pub fn add_mut(&mut self, n: &fmpz, m: &fmpz) {
         unsafe {
-            fmpz_add(self.as_raw_mut(), n.as_raw(), m.as_raw());
+            fmpz_add(self.as_raw_mut(), n, m);
         }
     }
 
@@ -324,23 +324,23 @@ impl Fmpz {
     }
 
     /// self = n * m
-    pub fn mul_mut(&mut self, n: &Fmpz, m: &Fmpz) {
+    pub fn mul_mut(&mut self, n: &fmpz, m: &fmpz) {
         unsafe {
-            fmpz_mul(self.as_raw_mut(), n.as_raw(), m.as_raw());
+            fmpz_mul(self.as_raw_mut(), n, m);
         }
     }
 
     /// self = n * m
-    pub fn mul_ui_mut(&mut self, n: &Fmpz, m: c_long) {
+    pub fn mul_ui_mut(&mut self, n: &fmpz, m: c_long) {
         unsafe {
-            fmpz_mul_si(self.as_raw_mut(), n.as_raw(), m);
+            fmpz_mul_si(self.as_raw_mut(), n, m);
         }
     }
 
     /// self = g/h. Rounds up towards infinity.
-    pub fn cdiv_q_mut(&mut self, g: &Fmpz, h: &Fmpz) {
+    pub fn cdiv_q_mut(&mut self, g: &fmpz, h: &fmpz) {
         unsafe {
-            fmpz_cdiv_q(self.as_raw_mut(), g.as_raw(), h.as_raw());
+            fmpz_cdiv_q(self.as_raw_mut(), g, h);
         }
     }
 
@@ -352,9 +352,9 @@ impl Fmpz {
     }
 
     /// self = g/h. Rounds up towards -infinity.
-    pub fn fdiv_q_mut(&mut self, g: &Fmpz, h: &Fmpz) {
+    pub fn fdiv_q_mut(&mut self, g: &fmpz, h: &fmpz) {
         unsafe {
-            fmpz_fdiv_q(self.as_raw_mut(), g.as_raw(), h.as_raw());
+            fmpz_fdiv_q(self.as_raw_mut(), g, h);
         }
     }
 
@@ -365,9 +365,9 @@ impl Fmpz {
     }
 
     /// self = g^exp
-    pub fn pow_ui_mut(&mut self, g: &Fmpz, exp: c_ulong) {
+    pub fn pow_ui_mut(&mut self, g: &fmpz, exp: c_ulong) {
         unsafe {
-            fmpz_pow_ui(self.as_raw_mut(), g.as_raw(), exp);
+            fmpz_pow_ui(self.as_raw_mut(), g, exp);
         }
     }
 
@@ -747,8 +747,8 @@ impl FmpzFactor {
         }
     }
 
-    pub fn factor_mut(&mut self, n: &Fmpz) {
-        unsafe { fmpz_factor(&mut self.factor_struct, n.as_raw()) };
+    pub fn factor_mut(&mut self, n: &fmpz) {
+        unsafe { fmpz_factor(&mut self.factor_struct, n) };
     }
 
     pub fn factor_si_mut(&mut self, n: c_long) {
@@ -758,9 +758,9 @@ impl FmpzFactor {
     }
 
     /// Evaluates an integer in factored form back to n.
-    pub fn factor_expand_iterative(&self, n: &mut Fmpz) {
+    pub fn factor_expand_iterative(&self, n: &mut fmpz) {
         unsafe {
-            fmpz_factor_expand_iterative(n.as_raw_mut(), &self.factor_struct);
+            fmpz_factor_expand_iterative(n, &self.factor_struct);
         }
     }
 
