@@ -440,14 +440,16 @@ mod fmpq_poly {
 
 mod fmpz_mat {
     use flint::fmpz_mat::FmpzMat;
+    use flint::traits::*;
+
     #[test]
     fn test_snf() {
         let mut a = FmpzMat::new(2, 2);
         let mut b = FmpzMat::new(2, 2);
-        b.set_entry_si(0, 0, 2);
-        b.set_entry_si(0, 1, 4);
-        b.set_entry_si(1, 0, 6);
-        b.set_entry_si(1, 1, 12);
+        b.set_entry(0, 0, 2_u64);
+        b.set_entry(0, 1, 4_u64);
+        b.set_entry(1, 0, 6_u64);
+        b.set_entry(1, 1, 12_u64);
         a.snf_mut(&b);
         println!("{}", a);
     }
@@ -457,13 +459,14 @@ mod fmpz_poly {
     use flint::fmpz_poly::*;
     use flint::arith::*;
     use flint::fmpz::Fmpz;
+    use flint::traits::*;
 
     #[test]
     fn test_fmpz_poly() {
         let mut a = FmpzPoly::new();
         let b = ramanujan_tau_series_new(10);
-        a.set_coeff_si(0, 1);
-        a.set_coeff_si(1, -1);
+        a.set_coefficient(0, 1);
+        a.set_coefficient(1, -1);
         let mut c = FmpzPoly::new();
         c.inv_series_mut(&a, 10);
         println!("{}", c);
@@ -482,7 +485,7 @@ mod fmpz_poly {
             let mut tmp = FmpzPoly::new();
             let mut tmp_z: Fmpz = From::from(i);
             tmp_z.set_pow_ui(10);
-            tmp.set_coeff(&tmp_z, 0);
+            tmp.set_coefficient(0, &tmp_z);
             let _ = format!("{}", tmp);
         }
     }

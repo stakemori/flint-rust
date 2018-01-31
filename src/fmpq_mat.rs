@@ -8,6 +8,7 @@ use bindings::*;
 use self::libc::c_long;
 use fmpq::Fmpq;
 use std::fmt;
+use traits::*;
 
 #[derive(Debug)]
 pub struct FmpqMat {
@@ -104,12 +105,6 @@ impl FmpqMat {
         }
     }
 
-    pub fn set_entry(&mut self, r: isize, c: isize, x: &Fmpq) {
-        unsafe {
-            fmpq_set(self.entry_raw_mut(r, c), x.as_raw());
-        }
-    }
-
     pub fn get_entry(&self, r: isize, c: isize, x: &mut Fmpq) {
         unsafe {
             fmpq_set(x.as_raw_mut(), self.entry_raw(r, c));
@@ -168,4 +163,12 @@ impl FmpqMat {
         (x: SelfRef),
         doc = "Call `fmpq_mat_rref(self, x)`"
     );
+}
+
+impl<'a> SetEntry<&'a Fmpq> for FmpqMat {
+    fn set_entry(&mut self, r: isize, c: isize, x: &Fmpq) {
+        unsafe {
+            fmpq_set(self.entry_raw_mut(r, c), x.as_raw());
+        }
+    }
 }

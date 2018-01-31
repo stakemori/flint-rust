@@ -7,6 +7,7 @@ use fmpq::Fmpq;
 use libc::c_long;
 use fmpz_poly::FmpzPoly;
 use fmpz::Fmpz;
+use traits::*;
 
 #[derive(Debug)]
 pub struct FmpqPoly {
@@ -105,9 +106,6 @@ impl FmpqPoly {
     pub fn as_raw_mut(&mut self) -> &mut fmpq_poly_struct {
         &mut self.fmpq_poly
     }
-
-    impl_mut_c_wrapper!(set, fmpq_poly_set, (x: SelfRef), doc = "`self = x`");
-
     pub fn set_fmpz_poly(&mut self, x: &FmpzPoly) {
         unsafe {
             fmpq_poly_set_fmpz_poly(self.as_raw_mut(), x.as_raw());
@@ -156,6 +154,28 @@ impl FmpqPoly {
     pub fn eval_fmpz(&self, res: &mut fmpq, a: &fmpz) {
         unsafe {
             fmpq_poly_evaluate_fmpz(res, self.as_raw(), a);
+        }
+    }
+}
+
+impl<'a> SetSelf<&'a FmpzPoly> for FmpqPoly {
+    fn set(&mut self, x: &FmpzPoly) {
+        self.set_fmpz_poly(x);
+    }
+}
+
+impl<'a> SetSelf<&'a FmpqPoly> for FmpqPoly {
+    fn set(&mut self, x: &FmpqPoly) {
+        unsafe {
+            fmpq_poly_set(self.as_raw_mut(), x.as_raw());
+        }
+    }
+}
+
+impl<'a> SetCoefficient<&'a Fmpq> for FmpqPoly {
+    fn set_coefficient(&mut self, n: i64, x: &Fmpq) {
+        unsafe {
+            fmpq_poly_set_coeff_fmpq(self.as_raw_mut(), n, x.as_raw());
         }
     }
 }

@@ -6,6 +6,7 @@ extern crate gmp;
 
 #[macro_use]
 mod macros;
+pub mod traits;
 pub mod bindings;
 pub mod ulong_extras;
 pub mod fmpz;

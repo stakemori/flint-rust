@@ -9,6 +9,7 @@ use std::cmp::Ordering::{self, Greater, Less, Equal};
 use serde::ser::{Serialize, Serializer};
 use serde::{Deserialize, Deserializer};
 use gmp::mpf::Mpf;
+use traits::*;
 
 #[derive(Debug)]
 pub struct Fmpz {
@@ -285,13 +286,6 @@ impl Fmpz {
             let mut a = Fmpz::uninitialized();
             fmpz_init_set_ui(a.as_mut_ptr(), g);
             Fmpz { fmpz: a }
-        }
-    }
-
-    /// self = val
-    pub fn set(&mut self, val: &fmpz) {
-        unsafe {
-            fmpz_set(self.as_raw_mut(), val);
         }
     }
 
@@ -812,5 +806,41 @@ impl<'de> Deserialize<'de> for Fmpz {
     {
         let a = String::deserialize(deserializer)?;
         Ok(Fmpz::from_str(&a, 32).unwrap())
+    }
+}
+
+impl<'a> SetSelf<&'a Fmpz> for Fmpz {
+    fn set(&mut self, x: &Fmpz) {
+        unsafe {
+            fmpz_set(self.as_raw_mut(), x.as_raw());
+        }
+    }
+}
+
+impl<'a> SetSelf<&'a fmpz> for Fmpz {
+    fn set(&mut self, x: &fmpz) {
+        unsafe {
+            fmpz_set(self.as_raw_mut(), x);
+        }
+    }
+}
+
+impl SetSelf<c_long> for Fmpz {
+    fn set(&mut self, x: c_long) {
+        self.set_si(x);
+    }
+}
+
+impl SetSelf<c_ulong> for Fmpz {
+    fn set(&mut self, x: c_ulong) {
+        self.set_ui(x);
+    }
+}
+
+impl<'a> SetSelf<&'a Mpz> for Fmpz {
+    fn set(&mut self, x: &Mpz) {
+        unsafe {
+            fmpz_set_mpz(self.as_raw_mut(), x.inner());
+        }
     }
 }

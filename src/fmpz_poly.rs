@@ -6,6 +6,7 @@ use std::fmt;
 use std::ffi::{CStr, CString};
 use libc::{c_long, c_ulong, c_void};
 use fmpz::Fmpz;
+use traits::*;
 
 #[derive(Debug)]
 pub struct FmpzPoly {
@@ -144,11 +145,12 @@ impl FmpzPoly {
         doc = "`self[n] = x`"
     );
 
-    pub fn set_coeff(&mut self, n: c_long, x: &Fmpz) {
-        unsafe {
-            fmpz_poly_set_coeff_fmpz(self.as_raw_mut(), n, x.as_raw());
-        }
-    }
+    impl_mut_c_wrapper!(
+        set_coeff,
+        fmpz_poly_set_coeff_fmpz,
+        (n: c_long, x: FmpzRef),
+        doc = "`self[n] = x`"
+    );
 
     impl_mut_c_wrapper!(
         pow_trunc_mut,
@@ -187,5 +189,17 @@ impl FmpzPoly {
         unsafe {
             fmpz_poly_mullow(self.as_raw_mut(), self.as_raw(), other.as_raw(), n);
         }
+    }
+}
+
+impl SetCoefficient<c_long> for FmpzPoly {
+    fn set_coefficient(&mut self, n: c_long, x: c_long) {
+        self.set_coeff_si(n, x);
+    }
+}
+
+impl<'a> SetCoefficient<&'a Fmpz> for FmpzPoly {
+    fn set_coefficient(&mut self, n: c_long, x: &Fmpz) {
+        self.set_coeff(n, x);
     }
 }

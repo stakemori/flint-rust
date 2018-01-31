@@ -7,6 +7,7 @@ use std::cmp::Ordering::{self, Greater, Less, Equal};
 use std::ops::*;
 use serde::ser::{Serialize, Serializer};
 use serde::{Deserialize, Deserializer};
+use traits::*;
 
 
 #[derive(Debug)]
@@ -445,5 +446,31 @@ impl Fmpq {
             let a = fmpq_mod_fmpz(res.as_raw_mut(), self.as_raw(), m.as_raw());
             if a == 1 { Ok(()) } else { Err(InverseNotExist) }
         }
+    }
+}
+
+impl<'a> SetSelf<&'a Fmpq> for Fmpq {
+    fn set(&mut self, x: &Fmpq) {
+        unsafe {
+            fmpq_set(self.as_raw_mut(), x.as_raw());
+        }
+    }
+}
+
+impl SetSelf<(c_long, c_ulong)> for Fmpq {
+    fn set(&mut self, x: (c_long, c_ulong)) {
+        self.set_si(x.0, x.1);
+    }
+}
+
+impl SetSelf<(c_ulong, c_ulong)> for Fmpq {
+    fn set(&mut self, x: (c_ulong, c_ulong)) {
+        self.set_ui(x.0, x.1);
+    }
+}
+
+impl<'a> SetSelf<&'a Fmpz> for Fmpq {
+    fn set(&mut self, x: &Fmpz) {
+        self.set_fmpz(x);
     }
 }

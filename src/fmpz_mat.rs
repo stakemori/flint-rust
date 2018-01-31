@@ -8,6 +8,7 @@ use bindings::*;
 use self::libc::{c_ulong, c_long};
 use fmpz::Fmpz;
 use std::fmt;
+use traits::*;
 
 #[derive(Debug)]
 pub struct FmpzMat {
@@ -133,12 +134,6 @@ impl FmpzMat {
     pub fn set_entry_ui(&mut self, r: isize, c: isize, x: c_ulong) {
         unsafe {
             fmpz_set_ui(self.entry_raw_mut(r, c), x);
-        }
-    }
-
-    pub fn set_entry(&mut self, r: isize, c: isize, x: &fmpz) {
-        unsafe {
-            fmpz_set(self.entry_raw_mut(r, c), x);
         }
     }
 
@@ -353,6 +348,34 @@ impl FmpzMat {
         );
         let r = unsafe { fmpz_mat_nullspace(b.as_raw_mut(), self.as_raw()) };
         b.column_vectors().into_iter().take(r as usize).collect()
+    }
+}
+
+impl<'a> SetEntry<&'a Fmpz> for FmpzMat {
+    fn set_entry(&mut self, r: isize, c: isize, x: &Fmpz) {
+        unsafe {
+            fmpz_set(self.entry_raw_mut(r, c), x.as_raw());
+        }
+    }
+}
+
+impl<'a> SetEntry<&'a fmpz> for FmpzMat {
+    fn set_entry(&mut self, r: isize, c: isize, x: &fmpz) {
+        unsafe {
+            fmpz_set(self.entry_raw_mut(r, c), x);
+        }
+    }
+}
+
+impl SetEntry<c_ulong> for FmpzMat {
+    fn set_entry(&mut self, r: isize, c: isize, x: c_ulong) {
+        self.set_entry_ui(r, c, x);
+    }
+}
+
+impl SetEntry<c_long> for FmpzMat {
+    fn set_entry(&mut self, r: isize, c: isize, x: c_long) {
+        self.set_entry_si(r, c, x);
     }
 }
 
