@@ -358,7 +358,7 @@ impl Fmpz {
         res
     }
 
-    /// self = g^exp
+    /// `self = g^exp`
     pub fn pow_ui_mut(&mut self, g: &fmpz, exp: c_ulong) {
         unsafe {
             fmpz_pow_ui(self.as_raw_mut(), g, exp);

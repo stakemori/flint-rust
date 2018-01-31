@@ -153,7 +153,7 @@ impl FmpqMat {
         transpose_mut,
         fmpq_mat_transpose,
         (x: SelfRef),
-        doc = "self = x^t"
+        doc = "`self = x^t`"
     );
 
     impl_mut_c_wrapper_w_rtype!(
