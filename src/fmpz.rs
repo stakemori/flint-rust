@@ -10,6 +10,7 @@ use serde::ser::{Serialize, Serializer};
 use serde::{Deserialize, Deserializer};
 use gmp::mpf::Mpf;
 use traits::*;
+use serde::de;
 
 #[derive(Debug)]
 pub struct Fmpz {
@@ -805,7 +806,11 @@ impl<'de> Deserialize<'de> for Fmpz {
         D: Deserializer<'de>,
     {
         let a = String::deserialize(deserializer)?;
-        Ok(Fmpz::from_str(&a, 32).unwrap())
+        if let Ok(x) = Fmpz::from_str(&a, 32) {
+            Ok(x)
+        } else {
+            Err(de::Error::custom(format!("invalid 32 base integer: {}", a)))
+        }
     }
 }
 
